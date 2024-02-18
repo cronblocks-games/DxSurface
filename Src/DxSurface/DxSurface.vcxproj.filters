@@ -21,6 +21,9 @@
     <ClInclude Include="Src\InternalInc\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\DxsWin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxSurface.cpp">
