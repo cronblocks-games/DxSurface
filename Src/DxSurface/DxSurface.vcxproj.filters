@@ -24,12 +24,18 @@
     <ClInclude Include="Inc\DxsWinApi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\DxsWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxSurface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DxsWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

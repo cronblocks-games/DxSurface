@@ -165,10 +165,12 @@
   <ItemGroup>
     <ClInclude Include="Inc\DxSurface.h" />
     <ClInclude Include="Inc\DxsWinApi.h" />
+    <ClInclude Include="Inc\DxsWindow.h" />
     <ClInclude Include="Src\InternalInc\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxSurface.cpp" />
+    <ClCompile Include="Src\DxsWindow.cpp" />
     <ClCompile Include="Src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
