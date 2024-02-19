@@ -3,6 +3,14 @@
 
 
 
+namespace CB {
+  namespace DxSurface {
+    class DxSurface {
+
+    };
+  }
+}
+
 
 
 #endif
