@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\DxsEvents.h" />
+    <ClInclude Include="Inc\DxsExceptions.h" />
     <ClInclude Include="Inc\DxsKeyboard.h" />
     <ClInclude Include="Inc\DxsMouse.h" />
     <ClInclude Include="Inc\DxSurface.h" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxsEvents.cpp" />
+    <ClCompile Include="Src\DxsExceptions.cpp" />
     <ClCompile Include="Src\DxsKeyboard.cpp" />
     <ClCompile Include="Src\DxsMouse.cpp" />
     <ClCompile Include="Src\DxSurface.cpp" />
