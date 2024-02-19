@@ -54,10 +54,10 @@
 #  define NOPROXYSTUB
 #  define NOIMAGE
 #  define NOTAPE
+#  define STRICT
+#  define NOMINMAX
 #endif
 
-#define STRICT
-#define NOMINMAX
 
 #include <Windows.h>
 
