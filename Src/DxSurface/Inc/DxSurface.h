@@ -3,6 +3,10 @@
 
 
 
+#include "DxsWinApi.h"
+#include "DxsWindow.h"
+
+
 namespace CB {
   namespace DxSurface {
     class DxSurface {
