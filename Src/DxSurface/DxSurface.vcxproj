@@ -164,7 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\DxSurface.h" />
-    <ClInclude Include="Inc\DxsWin.h" />
+    <ClInclude Include="Inc\DxsWinServices.h" />
     <ClInclude Include="Src\InternalInc\pch.h" />
   </ItemGroup>
   <ItemGroup>

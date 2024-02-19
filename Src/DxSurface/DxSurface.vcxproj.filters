@@ -21,7 +21,7 @@
     <ClInclude Include="Src\InternalInc\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsWin.h">
+    <ClInclude Include="Inc\DxsWinServices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
