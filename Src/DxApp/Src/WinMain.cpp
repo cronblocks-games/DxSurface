@@ -4,7 +4,7 @@
 int WINAPI WinMain(
   HINSTANCE hInstance,
   HINSTANCE hPrevInstance,
-  PSTR pCmdLine,
+  PTSTR pCmdLine,
   int nCmdShow)
 {
   return 0;
