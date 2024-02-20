@@ -2,7 +2,8 @@
 #define _DXSURFACE_PCH_H_
 
 
-
+#include <iostream>
+#include <sstream>
 
 
 #endif
