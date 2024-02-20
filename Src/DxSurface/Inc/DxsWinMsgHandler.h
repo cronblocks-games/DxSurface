@@ -5,7 +5,7 @@
 
 namespace CB {
   namespace DxSurface {
-    class DxsWinMsgHandler {
+    class WinMsgHandler {
 
     };
   }

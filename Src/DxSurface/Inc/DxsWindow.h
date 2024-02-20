@@ -8,7 +8,7 @@
 
 namespace CB {
   namespace DxSurface {
-    class DxsWindow {
+    class Window {
 
     };
   }

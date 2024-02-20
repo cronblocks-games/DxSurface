@@ -8,7 +8,7 @@
 
 namespace CB {
   namespace DxSurface {
-    class DxsException : public std::exception {
+    class Exception : public std::exception {
 
     };
   }

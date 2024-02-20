@@ -5,7 +5,7 @@
 
 namespace CB {
   namespace DxSurface {
-    class DxsTimeoutEvent {
+    class TimeoutEvent {
 
     };
   }
