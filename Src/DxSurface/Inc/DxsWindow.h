@@ -3,14 +3,38 @@
 
 
 
+#include <string>
+
 #include "DxsTypes.h"
 #include "DxsWinApi.h"
 
 
 namespace CB {
   namespace DxSurface {
-    class Window {
 
+    class Window {
+      public:
+        Window() = delete;
+        Window(const std::string& name, int x, int y, int width, int height, bool debugEnabled);
+
+        Window(const Window& other);
+        Window(Window&& other) noexcept;
+        
+        Window& operator=(const Window& other);
+        Window& operator=(Window&& other) noexcept;
+
+        virtual ~Window();
+
+        void Show();
+        void Hide();
+        void RunRendering();
+
+        const std::string& GetName();
+
+      private:
+        int x, y, width, height;
+        bool debugEnabled;
+        mutable std::string name;
     };
   }
 }
