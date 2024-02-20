@@ -3,6 +3,8 @@
 
 
 
+#include "DxsMacros.h"
+
 namespace CB {
   namespace DxSurface {
     //- 
