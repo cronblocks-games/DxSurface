@@ -171,7 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\DxsEvents.h" />
+    <ClInclude Include="Inc\DxsTypes.h" />
     <ClInclude Include="Inc\DxsExceptions.h" />
     <ClInclude Include="Inc\DxsKeyboard.h" />
     <ClInclude Include="Inc\DxsMouse.h" />
@@ -182,7 +182,7 @@
     <ClInclude Include="Src\InternalInc\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\DxsEvents.cpp" />
+    <ClCompile Include="Src\DxsTypes.cpp" />
     <ClCompile Include="Src\DxsExceptions.cpp" />
     <ClCompile Include="Src\DxsKeyboard.cpp" />
     <ClCompile Include="Src\DxsMouse.cpp" />

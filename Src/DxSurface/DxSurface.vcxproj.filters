@@ -36,7 +36,7 @@
     <ClInclude Include="Inc\DxsWinMsgHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsEvents.h">
+    <ClInclude Include="Inc\DxsTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Inc\DxsExceptions.h">
@@ -62,7 +62,7 @@
     <ClCompile Include="Src\DxsWinMsgHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\DxsEvents.cpp">
+    <ClCompile Include="Src\DxsTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\DxsExceptions.cpp">
