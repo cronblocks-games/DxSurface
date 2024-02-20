@@ -62,9 +62,6 @@
     <ClCompile Include="Src\DxsWinMsgHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\DxsTypes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\DxsExceptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

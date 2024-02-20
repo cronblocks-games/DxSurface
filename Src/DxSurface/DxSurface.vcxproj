@@ -182,7 +182,6 @@
     <ClInclude Include="Src\InternalInc\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\DxsTypes.cpp" />
     <ClCompile Include="Src\DxsExceptions.cpp" />
     <ClCompile Include="Src\DxsKeyboard.cpp" />
     <ClCompile Include="Src\DxsMouse.cpp" />
