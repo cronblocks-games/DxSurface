@@ -3,6 +3,8 @@
 
 
 
+#include "DxsTypes.h"
+
 namespace CB {
   namespace DxSurface {
     class Mouse {

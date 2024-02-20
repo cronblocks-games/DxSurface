@@ -3,6 +3,7 @@
 
 
 
+#include "DxsTypes.h"
 #include "DxsWinApi.h"
 #include "DxsWindow.h"
 

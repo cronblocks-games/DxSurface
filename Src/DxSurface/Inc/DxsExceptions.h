@@ -5,6 +5,8 @@
 
 #include <exception>
 
+#include "DxsTypes.h"
+
 
 namespace CB {
   namespace DxSurface {
