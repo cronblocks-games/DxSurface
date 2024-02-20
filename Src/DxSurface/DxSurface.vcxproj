@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\DxsMacros.h" />
     <ClInclude Include="Inc\DxsTypes.h" />
     <ClInclude Include="Inc\DxsExceptions.h" />
     <ClInclude Include="Inc\DxsKeyboard.h" />
