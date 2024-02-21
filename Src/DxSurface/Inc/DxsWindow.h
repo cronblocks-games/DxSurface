@@ -25,11 +25,12 @@ namespace CB {
 
         virtual ~Window();
 
+        bool IsPrimary();
+        const std::string& Name();
+
         void Show();
         void Hide();
         void RunRendering();
-
-        const std::string& GetName();
 
       private:
         int x, y, width, height;

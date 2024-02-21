@@ -60,6 +60,16 @@ Window& Window::operator=(Window&& other) noexcept
   return *this;
 }
 
+bool Window::IsPrimary()
+{
+  return isPrimary;
+}
+
+const std::string& Window::Name()
+{
+  return name;
+}
+
 void Window::Show()
 {
 }
@@ -70,9 +80,4 @@ void Window::Hide()
 
 void Window::RunRendering()
 {
-}
-
-const std::string& Window::GetName()
-{
-  return name;
 }
