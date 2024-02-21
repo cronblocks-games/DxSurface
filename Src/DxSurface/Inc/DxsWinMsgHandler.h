@@ -5,12 +5,12 @@
 
 #include "DxsTypes.h"
 
-namespace CB {
-  namespace DxSurface {
-    class WinMsgHandler {
+namespace CB::DxSurface {
 
-    };
-  }
+  class WinMsgHandler {
+
+  };
+
 }
 
 

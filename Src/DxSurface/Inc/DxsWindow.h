@@ -9,34 +9,33 @@
 #include "DxsWinApi.h"
 
 
-namespace CB {
-  namespace DxSurface {
+namespace CB::DxSurface {
 
-    class Window {
-      public:
-        Window() = delete;
-        Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
-        Window(const Window& other);
-        Window(Window&& other) noexcept;
-        
-        Window& operator=(const Window& other);
-        Window& operator=(Window&& other) noexcept;
+  class Window {
+  public:
+    Window() = delete;
+    Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
+    Window(const Window& other);
+    Window(Window&& other) noexcept;
 
-        virtual ~Window();
+    Window& operator=(const Window& other);
+    Window& operator=(Window&& other) noexcept;
 
-        bool IsPrimary();
-        const std::string& Name();
+    virtual ~Window();
 
-        void Show();
-        void Hide();
-        void RunRendering();
+    bool IsPrimary();
+    const std::string& Name();
 
-      private:
-        int x, y, width, height;
-        bool isPrimary, debugEnabled;
-        mutable std::string name;
-    };
-  }
+    void Show();
+    void Hide();
+    void RunRendering();
+
+  private:
+    int x, y, width, height;
+    bool isPrimary, debugEnabled;
+    mutable std::string name;
+  };
+
 }
 
 

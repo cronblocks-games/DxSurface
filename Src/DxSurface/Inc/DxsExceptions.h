@@ -9,24 +9,23 @@
 #include "DxsTypes.h"
 
 
-namespace CB {
-  namespace DxSurface {
+namespace CB::DxSurface {
 
-    class Exception : public std::exception {
-    public:
-      Exception() = delete;
-      Exception(Exception&) = delete;
-      Exception(Exception&&) = delete;
-      Exception& operator =(Exception&) = delete;
-      Exception& operator =(Exception&&) = delete;
+  class Exception : public std::exception {
+  public:
+    Exception() = delete;
+    Exception(Exception&) = delete;
+    Exception(Exception&&) = delete;
+    Exception& operator =(Exception&) = delete;
+    Exception& operator =(Exception&&) = delete;
 
-      Exception(const char* file, int lineNumber, const char* message);
-      char const* what() const override;
+    Exception(const char* file, int lineNumber, const char* message);
+    char const* what() const override;
 
-    private:
-      mutable std::string m_sMessage;
-    };
-  }
+  private:
+    mutable std::string m_sMessage;
+  };
+
 }
 
 

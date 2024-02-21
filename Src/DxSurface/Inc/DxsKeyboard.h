@@ -5,12 +5,12 @@
 
 #include "DxsTypes.h"
 
-namespace CB {
-  namespace DxSurface {
-    class Keyboard {
+namespace CB::DxSurface {
 
-    };
-  }
+  class Keyboard {
+
+  };
+
 }
 
 

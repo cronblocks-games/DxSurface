@@ -10,33 +10,32 @@
 #include "DxsExceptions.h"
 
 
-namespace CB {
-  namespace DxSurface {
+namespace CB::DxSurface {
 
-    class DxSurface {
+  class DxSurface {
 
-    public:
-      DxSurface();
-      DxSurface(const DxSurfaceOptions& options);
+  public:
+    DxSurface();
+    DxSurface(const DxSurfaceOptions& options);
 
-      DxSurface(const DxSurface&);
-      DxSurface(DxSurface&&) noexcept;
-      DxSurface& operator=(const DxSurface&);
-      DxSurface& operator=(DxSurface&&) noexcept;
+    DxSurface(const DxSurface&);
+    DxSurface(DxSurface&&) noexcept;
+    DxSurface& operator=(const DxSurface&);
+    DxSurface& operator=(DxSurface&&) noexcept;
 
-      ~DxSurface() = default;
+    ~DxSurface() = default;
 
-      Window& CreateNewWindow();
-      Window& CreateNewWindow(const std::string& name, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    Window& CreateNewWindow();
+    Window& CreateNewWindow(const std::string& name, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
-      void Run();
+    void Run();
 
-    private:
-      DxSurfaceOptions m_stOptions;
+  private:
+    DxSurfaceOptions m_stOptions;
 
-      std::vector<Window> m_vWindows;
-    };
-  }
+    std::vector<Window> m_vWindows;
+  };
+
 }
 
 

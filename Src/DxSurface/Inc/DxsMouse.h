@@ -5,12 +5,12 @@
 
 #include "DxsTypes.h"
 
-namespace CB {
-  namespace DxSurface {
-    class Mouse {
+namespace CB::DxSurface {
 
-    };
-  }
+  class Mouse {
+
+  };
+
 }
 
 
