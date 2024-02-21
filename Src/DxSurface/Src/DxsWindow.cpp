@@ -17,6 +17,8 @@ Window::Window(const std::string& name, int x, int y, int width, int height, boo
   this->height = height;
   this->isPrimary = isPrimary;
   this->debugEnabled = debugEnabled;
+
+  Show();
 }
 Window::Window(const Window& other)
 {
