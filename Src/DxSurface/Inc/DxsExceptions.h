@@ -14,10 +14,11 @@ namespace CB::DxSurface {
   class Exception : public std::exception {
   public:
     Exception() = delete;
-    Exception(Exception&) = delete;
+    Exception(const Exception&) = delete;
     Exception(Exception&&) = delete;
-    Exception& operator =(Exception&) = delete;
-    Exception& operator =(Exception&&) = delete;
+
+    Exception& operator=(const Exception&) = delete;
+    Exception& operator=(Exception&&) = delete;
 
     Exception(const char* file, int lineNumber, const char* message);
     char const* what() const override;
