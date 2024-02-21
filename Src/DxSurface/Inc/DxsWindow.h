@@ -16,7 +16,6 @@ namespace CB {
       public:
         Window() = delete;
         Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
-
         Window(const Window& other);
         Window(Window&& other) noexcept;
         
