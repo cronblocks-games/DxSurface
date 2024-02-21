@@ -2,6 +2,7 @@
 #include "DxsWindow.h"
 
 
+using namespace std;
 using namespace CB::DxSurface;
 
 
@@ -114,8 +115,13 @@ void Window::RunRendering()
 //- Window class registration and creation
 //- 
 //------------------------------------------------------------------------
+static mutex reg_class_mutex;
+static map<string, WNDCLASSEX> reg_classes;
+
 HWND Window::RegisterClassAndCreateWindow()
 {
+  const lock_guard<mutex> lock(reg_class_mutex);
+
   DXSURFACE_THROW("Not implemented: RegisterClassAndCreateWindow");
 }
 
