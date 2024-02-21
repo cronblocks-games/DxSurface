@@ -8,8 +8,9 @@ using namespace CB::DxSurface;
 Exception::Exception(const char* file, int lineNumber, const char* message)
 {
   stringstream ss;
-  ss << "Error in \"" << file << "\""
-    << " @ line# " << lineNumber << " - "
+  ss << "Exception (ver " << DXSURFACE_VERSION_STRING << ")"
+    << " in file \"" << file << "\""
+    << " @ line# " << lineNumber << " -- "
     << message;
 
   m_sMessage = ss.str();
