@@ -61,3 +61,14 @@ Window& DxSurface::CreateNewWindow(
   m_vWindows.emplace_back(name, x, y, width, height, isPrimary, debugEnabled);
   return m_vWindows[m_vWindows.size() - 1];
 }
+
+void DxSurface::Run()
+{
+  while (1)
+  {
+    for (auto& w : m_vWindows)
+    {
+      w.RunRendering();
+    }
+  }
+}

@@ -29,6 +29,8 @@ namespace CB {
       Window& CreateNewWindow();
       Window& CreateNewWindow(const std::string& name, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
+      void Run();
+
     private:
       DxSurfaceOptions m_stOptions;
 

@@ -15,7 +15,8 @@ int WINAPI WinMain(
     Window& window = surface.CreateNewWindow("Test Window", 10, 10, 200, 200);
 
     window.Show();
-    window.RunRendering();
+
+    surface.Run();
   }
   catch (Exception& ex)
   {
