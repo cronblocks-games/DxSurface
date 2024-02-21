@@ -36,6 +36,8 @@ namespace CB::DxSurface {
     mutable std::string m_sName;
 
     HWND m_hWnd;
+
+    HWND RegisterClassAndCreateWindow();
   };
 
 }

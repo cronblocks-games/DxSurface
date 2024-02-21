@@ -4,8 +4,6 @@
 
 using namespace CB::DxSurface;
 
-static void register_window_class(Window* w);
-static HWND create_window(Window* w);
 
 Window::~Window()
 {
@@ -23,8 +21,7 @@ Window::Window(const std::string& name, int x, int y, int width, int height, boo
 
   this->m_hWnd = nullptr;
 
-  register_window_class(this);
-  this->m_hWnd = create_window(this);
+  this->m_hWnd = RegisterClassAndCreateWindow();
 
   Show();
 }
@@ -117,14 +114,9 @@ void Window::RunRendering()
 //- Window class registration and creation
 //- 
 //------------------------------------------------------------------------
-static void register_window_class(Window* w)
+HWND Window::RegisterClassAndCreateWindow()
 {
-  DXSURFACE_THROW("Not implemented: register_window_class");
-}
-
-static HWND create_window(Window* w)
-{
-  DXSURFACE_THROW("Not implemented: create_window");
+  DXSURFACE_THROW("Not implemented: RegisterClassAndCreateWindow");
 }
 
 
