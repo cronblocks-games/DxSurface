@@ -31,9 +31,9 @@ namespace CB::DxSurface {
     void RunRendering();
 
   private:
-    int x, y, width, height;
-    bool isPrimary, debugEnabled;
-    mutable std::string name;
+    int m_iX, m_iY, m_iWidth, m_iHeight;
+    bool m_bIsPrimary, m_bIsDebugEnabled;
+    mutable std::string m_sName;
 
     HWND m_hWnd;
   };

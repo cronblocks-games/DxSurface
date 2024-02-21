@@ -10,13 +10,13 @@ Window::~Window()
 
 Window::Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
-  this->name = name;
-  this->x = x;
-  this->y = y;
-  this->width = width;
-  this->height = height;
-  this->isPrimary = isPrimary;
-  this->debugEnabled = debugEnabled;
+  this->m_sName = name;
+  this->m_iX = x;
+  this->m_iY = y;
+  this->m_iWidth = width;
+  this->m_iHeight = height;
+  this->m_bIsPrimary = isPrimary;
+  this->m_bIsDebugEnabled = debugEnabled;
 
   Show();
 }
@@ -31,45 +31,45 @@ Window::Window(Window&& other) noexcept
 
 Window& Window::operator=(const Window& other)
 {
-  this->name = other.name;
-  this->x = other.x;
-  this->y = other.y;
-  this->width = other.width;
-  this->height = other.height;
-  this->isPrimary = other.isPrimary;
-  this->debugEnabled = other.debugEnabled;
+  this->m_sName = other.m_sName;
+  this->m_iX = other.m_iX;
+  this->m_iY = other.m_iY;
+  this->m_iWidth = other.m_iWidth;
+  this->m_iHeight = other.m_iHeight;
+  this->m_bIsPrimary = other.m_bIsPrimary;
+  this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
   return *this;
 }
 
 Window& Window::operator=(Window&& other) noexcept
 {
-  this->name = std::move(other.name);
-  this->x = other.x;
-  this->y = other.y;
-  this->width = other.width;
-  this->height = other.height;
-  this->isPrimary = other.isPrimary;
-  this->debugEnabled = other.debugEnabled;
+  this->m_sName = std::move(other.m_sName);
+  this->m_iX = other.m_iX;
+  this->m_iY = other.m_iY;
+  this->m_iWidth = other.m_iWidth;
+  this->m_iHeight = other.m_iHeight;
+  this->m_bIsPrimary = other.m_bIsPrimary;
+  this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
-  other.x = 0;
-  other.y = 0;
-  other.width = 0;
-  other.height = 0;
-  other.isPrimary = false;
-  other.debugEnabled = false;
+  other.m_iX = 0;
+  other.m_iY = 0;
+  other.m_iWidth = 0;
+  other.m_iHeight = 0;
+  other.m_bIsPrimary = false;
+  other.m_bIsDebugEnabled = false;
 
   return *this;
 }
 
 bool Window::IsPrimary()
 {
-  return isPrimary;
+  return m_bIsPrimary;
 }
 
 const std::string& Window::Name()
 {
-  return name;
+  return m_sName;
 }
 
 void Window::Show()
