@@ -5,13 +5,25 @@
 using namespace std;
 using namespace CB::DxSurface;
 
+static const char* start_of_str(const char* line, const char* str)
+{
+  const char* match = strstr(line, str);
+  return match == nullptr ? line : match;
+}
+
 Exception::Exception(const char* file, int lineNumber, const char* message)
 {
   stringstream ss;
-  ss << "Exception (ver " << DXSURFACE_VERSION_STRING << ")"
-    << " in file \"" << file << "\""
-    << " @ line# " << lineNumber << " -- "
-    << message;
+  ss
+    << "Exception:" << endl
+    << "    -- " << message << endl << endl
+
+    << "File: " << start_of_str(file, "Src\\DxSurface\\Src") << endl
+    << "Line: " << lineNumber << endl
+    << "Ver: " << DXSURFACE_VERSION
+    << " (" << DXSURFACE_VERSION_STRING << ") - "
+    << DXSURFACE_VERSION_RELEASE_DATE_STRING;
+
 
   m_sMessage = ss.str();
 }
