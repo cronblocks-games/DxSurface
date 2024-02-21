@@ -82,10 +82,22 @@ const std::string& Window::Name()
 
 void Window::Show()
 {
+  if (m_hWnd == nullptr)
+  {
+    DXSURFACE_THROW("Cannot show window with invalid handle");
+  }
+
+  ShowWindow(m_hWnd, SW_SHOW);
 }
 
 void Window::Hide()
 {
+  if (m_hWnd == nullptr)
+  {
+    DXSURFACE_THROW("Cannot hide window with invalid handle");
+  }
+
+  ShowWindow(m_hWnd, SW_HIDE);
 }
 
 void Window::RunRendering()
