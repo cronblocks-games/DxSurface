@@ -18,6 +18,8 @@ Window::Window(const std::string& name, int x, int y, int width, int height, boo
   this->m_bIsPrimary = isPrimary;
   this->m_bIsDebugEnabled = debugEnabled;
 
+  this->m_hWnd = nullptr;
+
   Show();
 }
 Window::Window(const Window& other)
@@ -39,6 +41,8 @@ Window& Window::operator=(const Window& other)
   this->m_bIsPrimary = other.m_bIsPrimary;
   this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
+  this->m_hWnd = other.m_hWnd;
+
   return *this;
 }
 
@@ -52,12 +56,16 @@ Window& Window::operator=(Window&& other) noexcept
   this->m_bIsPrimary = other.m_bIsPrimary;
   this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
+  this->m_hWnd = other.m_hWnd;
+
   other.m_iX = 0;
   other.m_iY = 0;
   other.m_iWidth = 0;
   other.m_iHeight = 0;
   other.m_bIsPrimary = false;
   other.m_bIsDebugEnabled = false;
+
+  other.m_hWnd = nullptr;
 
   return *this;
 }
