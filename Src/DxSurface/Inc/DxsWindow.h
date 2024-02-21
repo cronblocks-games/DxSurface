@@ -34,6 +34,8 @@ namespace CB::DxSurface {
     int x, y, width, height;
     bool isPrimary, debugEnabled;
     mutable std::string name;
+
+    HWND m_hWnd;
   };
 
 }
