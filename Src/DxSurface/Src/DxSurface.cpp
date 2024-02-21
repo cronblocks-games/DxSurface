@@ -14,6 +14,33 @@ DxSurface::DxSurface(const DxSurfaceOptions& options)
 {
   m_stOptions = options;
 }
+DxSurface::DxSurface(const DxSurface& other)
+{
+  *this = other;
+}
+DxSurface::DxSurface(DxSurface&& other) noexcept
+{
+  *this = move(other);
+}
+DxSurface& DxSurface::operator=(const DxSurface& other)
+{
+  m_stOptions = other.m_stOptions;
+  m_vWindows.clear();
+  for (auto& w : other.m_vWindows)
+  {
+    m_vWindows.push_back(w);
+  }
+
+  return *this;
+}
+DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
+{
+  m_stOptions = move(other.m_stOptions);
+  m_vWindows.clear();
+  m_vWindows = move(other.m_vWindows);
+
+  return *this;
+}
 
 Window& DxSurface::CreateNewWindow()
 {

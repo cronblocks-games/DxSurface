@@ -19,10 +19,10 @@ namespace CB {
       DxSurface();
       DxSurface(const DxSurfaceOptions& options);
 
-      DxSurface(DxSurface&) = delete;
-      DxSurface(DxSurface&&) = delete;
-      DxSurface& operator=(DxSurface&) = delete;
-      DxSurface& operator=(DxSurface&&) = delete;
+      DxSurface(const DxSurface&);
+      DxSurface(DxSurface&&) noexcept;
+      DxSurface& operator=(const DxSurface&);
+      DxSurface& operator=(DxSurface&&) noexcept;
 
       ~DxSurface() = default;
 
