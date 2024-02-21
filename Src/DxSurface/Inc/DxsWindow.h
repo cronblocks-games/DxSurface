@@ -15,7 +15,7 @@ namespace CB {
     class Window {
       public:
         Window() = delete;
-        Window(const std::string& name, int x, int y, int width, int height, bool debugEnabled);
+        Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
 
         Window(const Window& other);
         Window(Window&& other) noexcept;
@@ -33,7 +33,7 @@ namespace CB {
 
       private:
         int x, y, width, height;
-        bool debugEnabled;
+        bool isPrimary, debugEnabled;
         mutable std::string name;
     };
   }

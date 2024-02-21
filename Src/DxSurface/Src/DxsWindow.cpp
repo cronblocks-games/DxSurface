@@ -8,13 +8,14 @@ Window::~Window()
 {
 }
 
-Window::Window(const std::string& name, int x, int y, int width, int height, bool debugEnabled)
+Window::Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
   this->name = name;
   this->x = x;
   this->y = y;
   this->width = width;
   this->height = height;
+  this->isPrimary = isPrimary;
   this->debugEnabled = debugEnabled;
 }
 Window::Window(const Window& other)
@@ -33,6 +34,7 @@ Window& Window::operator=(const Window& other)
   this->y = other.y;
   this->width = other.width;
   this->height = other.height;
+  this->isPrimary = other.isPrimary;
   this->debugEnabled = other.debugEnabled;
 
   return *this;
@@ -45,12 +47,14 @@ Window& Window::operator=(Window&& other) noexcept
   this->y = other.y;
   this->width = other.width;
   this->height = other.height;
+  this->isPrimary = other.isPrimary;
   this->debugEnabled = other.debugEnabled;
 
   other.x = 0;
   other.y = 0;
   other.width = 0;
   other.height = 0;
+  other.isPrimary = false;
   other.debugEnabled = false;
 
   return *this;

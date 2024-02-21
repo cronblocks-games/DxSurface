@@ -27,7 +27,7 @@ namespace CB {
       ~DxSurface() = default;
 
       Window& CreateNewWindow();
-      Window& CreateNewWindow(const std::string& name, int x, int y, int width, int height, bool debugEnabled = true);
+      Window& CreateNewWindow(const std::string& name, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
     private:
       DxSurfaceOptions m_stOptions;
