@@ -59,16 +59,12 @@ Window& DxSurface::CreateNewWindow(
   bool debugEnabled)
 {
   m_vWindows.emplace_back(title, x, y, width, height, isPrimary, debugEnabled);
+  m_vWindows[m_vWindows.size() - 1].StartRenderingThread();
   return m_vWindows[m_vWindows.size() - 1];
 }
 
 void DxSurface::Run()
 {
-  for (auto& w : m_vWindows)
-  {
-    w.StartRenderingThread();
-  }
-
   while (1)
   {
     
