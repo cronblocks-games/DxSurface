@@ -64,11 +64,13 @@ Window& DxSurface::CreateNewWindow(
 
 void DxSurface::Run()
 {
+  for (auto& w : m_vWindows)
+  {
+    w.StartRenderingThread();
+  }
+
   while (1)
   {
-    for (auto& w : m_vWindows)
-    {
-      w.RunRendering();
-    }
+    
   }
 }

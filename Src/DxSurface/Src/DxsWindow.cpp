@@ -119,7 +119,7 @@ void Window::Hide()
   ShowWindow(m_hWnd, SW_HIDE);
 }
 
-void Window::RunRendering()
+void Window::StartRenderingThread()
 {
 }
 

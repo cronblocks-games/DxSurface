@@ -29,7 +29,8 @@ namespace CB::DxSurface {
 
     void Show();
     void Hide();
-    void RunRendering();
+
+    void StartRenderingThread();
 
   private:
     int m_iX, m_iY, m_iWidth, m_iHeight;
