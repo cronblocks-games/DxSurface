@@ -84,8 +84,19 @@ const std::string& Window::Title()
   return m_sTitle;
 }
 
+const std::string& Window::Title(std::string& title)
 {
   if (m_sTitle == title) return m_sTitle;
+
+  if (m_hWnd == nullptr)
+  {
+    DXSURFACE_THROW("Cannot change title of window with invalid handle");
+  }
+
+  SetWindowText(m_hWnd, title.c_str());
+
+  m_sTitle = title;
+  return m_sTitle;
 }
 
 void Window::Show()
