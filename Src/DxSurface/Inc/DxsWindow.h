@@ -14,7 +14,7 @@ namespace CB::DxSurface {
   class Window {
   public:
     Window() = delete;
-    Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
+    Window(const std::string& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
     Window(const Window& other);
     Window(Window&& other) noexcept;
 
@@ -24,7 +24,7 @@ namespace CB::DxSurface {
     virtual ~Window();
 
     bool IsPrimary();
-    const std::string& Name();
+    const std::string& Title();
 
     void Show();
     void Hide();
@@ -33,7 +33,7 @@ namespace CB::DxSurface {
   private:
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
-    mutable std::string m_sName;
+    mutable std::string m_sTitle;
 
     HWND m_hWnd;
 

@@ -10,9 +10,9 @@ Window::~Window()
 {
 }
 
-Window::Window(const std::string& name, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
+Window::Window(const std::string& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
-  this->m_sName = name;
+  this->m_sTitle = title;
   this->m_iX = x;
   this->m_iY = y;
   this->m_iWidth = width;
@@ -37,7 +37,7 @@ Window::Window(Window&& other) noexcept
 
 Window& Window::operator=(const Window& other)
 {
-  this->m_sName = other.m_sName;
+  this->m_sTitle = other.m_sTitle;
   this->m_iX = other.m_iX;
   this->m_iY = other.m_iY;
   this->m_iWidth = other.m_iWidth;
@@ -52,7 +52,7 @@ Window& Window::operator=(const Window& other)
 
 Window& Window::operator=(Window&& other) noexcept
 {
-  this->m_sName = std::move(other.m_sName);
+  this->m_sTitle = std::move(other.m_sTitle);
   this->m_iX = other.m_iX;
   this->m_iY = other.m_iY;
   this->m_iWidth = other.m_iWidth;
@@ -79,9 +79,13 @@ bool Window::IsPrimary()
   return m_bIsPrimary;
 }
 
-const std::string& Window::Name()
+const std::string& Window::Title()
 {
-  return m_sName;
+  return m_sTitle;
+}
+
+{
+  if (m_sTitle == title) return m_sTitle;
 }
 
 void Window::Show()

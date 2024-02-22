@@ -53,12 +53,12 @@ Window& DxSurface::CreateNewWindow()
     m_stOptions.debugEnabled);
 }
 Window& DxSurface::CreateNewWindow(
-  const string& name,
+  const string& title,
   int x, int y, int width, int height,
   bool isPrimary,
   bool debugEnabled)
 {
-  m_vWindows.emplace_back(name, x, y, width, height, isPrimary, debugEnabled);
+  m_vWindows.emplace_back(title, x, y, width, height, isPrimary, debugEnabled);
   return m_vWindows[m_vWindows.size() - 1];
 }
 
