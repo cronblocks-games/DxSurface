@@ -83,6 +83,12 @@ namespace CB::DxSurface {
     }
   };
 
+  enum class ThreadState
+  {
+    Stopped = 0,
+    Running,
+    Paused
+  };
 }
 
 
