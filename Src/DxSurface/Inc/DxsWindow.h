@@ -25,7 +25,7 @@ namespace CB::DxSurface {
 
     bool IsPrimary();
     const std::string& Title();
-    const std::string& Title(std::string&);
+    const std::string& Title(const std::string&);
 
     void Show();
     void Hide();

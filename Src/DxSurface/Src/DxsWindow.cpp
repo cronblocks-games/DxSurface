@@ -84,7 +84,7 @@ const std::string& Window::Title()
   return m_sTitle;
 }
 
-const std::string& Window::Title(std::string& title)
+const std::string& Window::Title(const string& title)
 {
   if (m_sTitle == title) return m_sTitle;
 
