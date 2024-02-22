@@ -59,7 +59,6 @@ Window& DxSurface::CreateNewWindow(
   bool debugEnabled)
 {
   m_vWindows.emplace_back(title, x, y, width, height, isPrimary, debugEnabled);
-  m_vWindows[m_vWindows.size() - 1].StartRenderingThread();
   return m_vWindows[m_vWindows.size() - 1];
 }
 
@@ -67,6 +66,16 @@ void DxSurface::Run()
 {
   while (1)
   {
+    if (m_vWindows.size() == 0) break;
     
+    for (auto w = m_vWindows.cbegin(); w != m_vWindows.cend();)
+    {
+      if (w->RenderingThreadState() == ThreadState::Exitted)
+      {
+        w = m_vWindows.erase(w);
+      }
+
+      if (w != m_vWindows.cend()) { w++; } // The above removal can make iter at end.
+    }
   }
 }

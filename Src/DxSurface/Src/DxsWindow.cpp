@@ -22,9 +22,9 @@ Window::Window(const std::string& title, int x, int y, int width, int height, bo
 
   this->m_hWnd = nullptr;
 
-  this->m_hWnd = RegisterClassAndCreateWindow();
-
-  Show();
+  this->m_eRenderingThreadState = ThreadState::Init;
+  this->m_eRenderingThreadCommand = ThreadState::Running;
+  this->m_pThread = make_shared<thread>(Window::RenderingThread, this);
 }
 Window::Window(const Window& other)
 {
@@ -45,6 +45,10 @@ Window& Window::operator=(const Window& other)
   this->m_bIsPrimary = other.m_bIsPrimary;
   this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
+  this->m_eRenderingThreadState = other.m_eRenderingThreadState;
+  this->m_eRenderingThreadCommand = other.m_eRenderingThreadCommand;
+  this->m_pThread = other.m_pThread;
+
   this->m_hWnd = other.m_hWnd;
 
   return *this;
@@ -60,6 +64,10 @@ Window& Window::operator=(Window&& other) noexcept
   this->m_bIsPrimary = other.m_bIsPrimary;
   this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
+  this->m_eRenderingThreadState = other.m_eRenderingThreadState;
+  this->m_eRenderingThreadCommand = other.m_eRenderingThreadCommand;
+  this->m_pThread = std::move(m_pThread);
+
   this->m_hWnd = other.m_hWnd;
 
   other.m_iX = 0;
@@ -68,6 +76,9 @@ Window& Window::operator=(Window&& other) noexcept
   other.m_iHeight = 0;
   other.m_bIsPrimary = false;
   other.m_bIsDebugEnabled = false;
+
+  other.m_eRenderingThreadState = ThreadState::Init;
+  other.m_eRenderingThreadCommand = ThreadState::Init;
 
   other.m_hWnd = nullptr;
 
@@ -119,8 +130,31 @@ void Window::Hide()
   ShowWindow(m_hWnd, SW_HIDE);
 }
 
-void Window::StartRenderingThread()
+void Window::PauseRenderingThread()
 {
+  if (m_eRenderingThreadState == ThreadState::Exitted)
+  {
+    DXSURFACE_THROW((m_sTitle + " - Cannot pause an exitted thread").c_str());
+  }
+
+  m_eRenderingThreadCommand = ThreadState::Paused;
+}
+void Window::ResumeRenderingThread()
+{
+  if (m_eRenderingThreadState == ThreadState::Exitted)
+  {
+    DXSURFACE_THROW((m_sTitle + " - Cannot resume an exitted thread").c_str());
+  }
+
+  m_eRenderingThreadCommand = ThreadState::Running;
+}
+void Window::ExitRenderingThread()
+{
+  m_eRenderingThreadCommand = ThreadState::Exitted;
+}
+ThreadState Window::RenderingThreadState() const
+{
+  return m_eRenderingThreadState;
 }
 
 
@@ -135,9 +169,49 @@ static map<string, WNDCLASSEX> reg_classes;
 
 HWND Window::RegisterClassAndCreateWindow()
 {
+  if (m_hWnd != nullptr) return m_hWnd;
+
   const lock_guard<mutex> lock(reg_class_mutex);
 
   DXSURFACE_THROW("Not implemented: RegisterClassAndCreateWindow");
 }
 
 
+
+//------------------------------------------------------------------------
+//- 
+//- Rendering thread
+//- 
+//------------------------------------------------------------------------
+void Window::RenderingThread(Window* w)
+{
+  try
+  {
+    w->m_pThread.get()->detach();
+
+    w->RegisterClassAndCreateWindow();
+    w->Show();
+
+    w->m_eRenderingThreadState = ThreadState::Running;
+
+    while (w->m_eRenderingThreadCommand != ThreadState::Exitted)
+    {
+      //-
+    }
+  }
+  catch (Exception& ex)
+  {
+    MessageBox(nullptr, ex.what(), "Error - DxSurface", 0);
+  }
+  catch (std::exception& ex)
+  {
+    MessageBox(nullptr, ex.what(), "Error", 0);
+  }
+  catch (...)
+  {
+    MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
+  }
+
+  w->m_pThread = nullptr;
+  w->m_eRenderingThreadState = ThreadState::Exitted;
+}

@@ -4,6 +4,8 @@
 
 
 #include <string>
+#include <memory>
+#include <thread>
 
 #include "DxsTypes.h"
 #include "DxsWinApi.h"
@@ -30,16 +32,24 @@ namespace CB::DxSurface {
     void Show();
     void Hide();
 
-    void StartRenderingThread();
+    void PauseRenderingThread();
+    void ResumeRenderingThread();
+    void ExitRenderingThread();
+    ThreadState RenderingThreadState() const;
 
   private:
+    mutable std::string m_sTitle;
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
-    mutable std::string m_sTitle;
+
+    std::shared_ptr<std::thread> m_pThread;
+    volatile ThreadState m_eRenderingThreadState, m_eRenderingThreadCommand;
 
     HWND m_hWnd;
 
     HWND RegisterClassAndCreateWindow();
+
+    static void RenderingThread(Window*);
   };
 
 }
