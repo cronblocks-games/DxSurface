@@ -86,7 +86,7 @@ namespace CB::DxSurface {
   enum class ThreadState
   {
     Init = 0,
-    Stopped,
+    Exitted,
     Running,
     Paused
   };
