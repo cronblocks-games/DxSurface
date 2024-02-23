@@ -91,6 +91,11 @@ namespace CB::DxSurface {
     Paused,
     Exitted,
   };
+  enum class ThreadExitReason
+  {
+    Normal = 0,
+    Exception
+  };
 }
 
 
