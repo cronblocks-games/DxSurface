@@ -85,7 +85,8 @@ namespace CB::DxSurface {
 
   enum class RenderingState
   {
-    Init = 0,
+    NONE = 0,
+    Init,
     Running,
     Paused,
     Exitted,
