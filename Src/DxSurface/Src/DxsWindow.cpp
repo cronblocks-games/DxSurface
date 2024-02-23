@@ -28,8 +28,8 @@ Window::Window(const std::string& title, int x, int y, int width, int height, bo
 
   this->m_hWnd = nullptr;
 
-  this->m_eRenderingState = RenderingState::Init;
-  this->m_eRenderingStateCommand = RenderingState::Init;
+  this->m_eRenderingState = RenderingState::NONE;
+  this->m_eRenderingStateCommand = RenderingState::NONE;
   this->m_pThread = make_shared<thread>(Window::RenderingThread, this);
 }
 Window::Window(const Window& other)
@@ -85,8 +85,8 @@ Window& Window::operator=(Window&& other) noexcept
 
   other.m_hWnd = nullptr;
 
-  other.m_eRenderingState = RenderingState::Init;
-  other.m_eRenderingStateCommand = RenderingState::Init;
+  other.m_eRenderingState = RenderingState::NONE;
+  other.m_eRenderingStateCommand = RenderingState::NONE;
   other.m_pThread = nullptr;
 
   return *this;
