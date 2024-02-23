@@ -47,11 +47,11 @@ Window& Window::operator=(const Window& other)
   this->m_bIsPrimary = other.m_bIsPrimary;
   this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
 
+  this->m_hWnd = nullptr;
+
   this->m_eRenderingThreadState = other.m_eRenderingThreadState;
   this->m_eRenderingThreadCommand = other.m_eRenderingThreadCommand;
-  this->m_pThread = other.m_pThread;
-
-  this->m_hWnd = other.m_hWnd;
+  this->m_pThread = make_shared<thread>(Window::RenderingThread, this);
 
   return *this;
 }
