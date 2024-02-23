@@ -8,7 +8,7 @@ using namespace CB::DxSurface;
 
 Window::~Window()
 {
-  m_eRenderingThreadCommand = ThreadState::Exitted;
+  m_eRenderingStateCommand = RenderingState::Exitted;
 
   if (m_pThread != nullptr)
   {
@@ -28,8 +28,8 @@ Window::Window(const std::string& title, int x, int y, int width, int height, bo
 
   this->m_hWnd = nullptr;
 
-  this->m_eRenderingThreadState = ThreadState::Init;
-  this->m_eRenderingThreadCommand = ThreadState::Running;
+  this->m_eRenderingState = RenderingState::Init;
+  this->m_eRenderingStateCommand = RenderingState::Init;
   this->m_pThread = make_shared<thread>(Window::RenderingThread, this);
 }
 Window::Window(const Window& other)
@@ -53,8 +53,8 @@ Window& Window::operator=(const Window& other)
 
   this->m_hWnd = nullptr;
 
-  this->m_eRenderingThreadState = other.m_eRenderingThreadState;
-  this->m_eRenderingThreadCommand = other.m_eRenderingThreadCommand;
+  this->m_eRenderingState = other.m_eRenderingState;
+  this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
   this->m_pThread = make_shared<thread>(Window::RenderingThread, this);
 
   return *this;
@@ -72,8 +72,8 @@ Window& Window::operator=(Window&& other) noexcept
 
   this->m_hWnd = other.m_hWnd;
 
-  this->m_eRenderingThreadState = other.m_eRenderingThreadState;
-  this->m_eRenderingThreadCommand = other.m_eRenderingThreadCommand;
+  this->m_eRenderingState = other.m_eRenderingState;
+  this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
   this->m_pThread = std::move(m_pThread);
 
   other.m_iX = 0;
@@ -85,8 +85,8 @@ Window& Window::operator=(Window&& other) noexcept
 
   other.m_hWnd = nullptr;
 
-  other.m_eRenderingThreadState = ThreadState::Init;
-  other.m_eRenderingThreadCommand = ThreadState::Init;
+  other.m_eRenderingState = RenderingState::Init;
+  other.m_eRenderingStateCommand = RenderingState::Init;
   other.m_pThread = nullptr;
 
   return *this;
@@ -137,31 +137,31 @@ void Window::Hide()
   ShowWindow(m_hWnd, SW_HIDE);
 }
 
-void Window::PauseRenderingThread()
+void Window::PauseRendering()
 {
-  if (m_eRenderingThreadState == ThreadState::Exitted)
+  if (m_eRenderingState == RenderingState::Exitted)
   {
-    DXSURFACE_THROW((m_sTitle + " - Cannot pause an exitted thread").c_str());
+    DXSURFACE_THROW((m_sTitle + " - Cannot pause rendering when it has exitted").c_str());
   }
 
-  m_eRenderingThreadCommand = ThreadState::Paused;
+  m_eRenderingStateCommand = RenderingState::Paused;
 }
-void Window::ResumeRenderingThread()
+void Window::ResumeRendering()
 {
-  if (m_eRenderingThreadState == ThreadState::Exitted)
+  if (m_eRenderingState == RenderingState::Exitted)
   {
-    DXSURFACE_THROW((m_sTitle + " - Cannot resume an exitted thread").c_str());
+    DXSURFACE_THROW((m_sTitle + " - Cannot resume rendering when it has already exitted").c_str());
   }
 
-  m_eRenderingThreadCommand = ThreadState::Running;
+  m_eRenderingStateCommand = RenderingState::Running;
 }
-void Window::ExitRenderingThread()
+void Window::ExitRendering()
 {
-  m_eRenderingThreadCommand = ThreadState::Exitted;
+  m_eRenderingStateCommand = RenderingState::Exitted;
 }
-ThreadState Window::RenderingThreadState() const
+RenderingState Window::RenderingState() const
 {
-  return m_eRenderingThreadState;
+  return m_eRenderingState;
 }
 
 
@@ -197,9 +197,9 @@ void Window::RenderingThread(Window* w)
     w->RegisterClassAndCreateWindow();
     w->Show();
 
-    w->m_eRenderingThreadState = ThreadState::Running;
+    w->m_eRenderingState = RenderingState::Running;
 
-    while (w->m_eRenderingThreadCommand != ThreadState::Exitted)
+    while (w->m_eRenderingStateCommand != RenderingState::Exitted)
     {
       //-
     }
@@ -217,5 +217,5 @@ void Window::RenderingThread(Window* w)
     MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
   }
 
-  w->m_eRenderingThreadState = ThreadState::Exitted;
+  w->m_eRenderingState = RenderingState::Exitted;
 }

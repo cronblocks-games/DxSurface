@@ -32,10 +32,10 @@ namespace CB::DxSurface {
     void Show();
     void Hide();
 
-    void PauseRenderingThread();
-    void ResumeRenderingThread();
-    void ExitRenderingThread();
-    ThreadState RenderingThreadState() const;
+    void PauseRendering();
+    void ResumeRendering();
+    void ExitRendering();
+    RenderingState RenderingState() const;
 
   private:
     mutable std::string m_sTitle;
@@ -43,7 +43,7 @@ namespace CB::DxSurface {
     bool m_bIsPrimary, m_bIsDebugEnabled;
 
     std::shared_ptr<std::thread> m_pThread;
-    volatile ThreadState m_eRenderingThreadState, m_eRenderingThreadCommand;
+    volatile enum class RenderingState m_eRenderingState, m_eRenderingStateCommand;
 
     HWND m_hWnd;
 

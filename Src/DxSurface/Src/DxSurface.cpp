@@ -70,7 +70,7 @@ void DxSurface::Run()
     
     for (auto w = m_vWindows.cbegin(); w != m_vWindows.cend();)
     {
-      if (w->RenderingThreadState() == ThreadState::Exitted)
+      if (w->RenderingState() == RenderingState::Exitted)
       {
         w = m_vWindows.erase(w);
       }

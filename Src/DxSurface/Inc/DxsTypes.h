@@ -83,12 +83,12 @@ namespace CB::DxSurface {
     }
   };
 
-  enum class ThreadState
+  enum class RenderingState
   {
     Init = 0,
-    Exitted,
     Running,
-    Paused
+    Paused,
+    Exitted,
   };
 }
 
