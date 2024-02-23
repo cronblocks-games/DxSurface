@@ -204,6 +204,7 @@ void Window::OnRenderingStateChanged(
 void Window::RenderingThread(Window* w)
 {
   enum class RenderingState lastRenderingState = RenderingState::NONE;
+  enum class ThreadExitReason threadExitReason = ThreadExitReason::Normal;
 
   try
   {
@@ -289,14 +290,17 @@ void Window::RenderingThread(Window* w)
   catch (Exception& ex)
   {
     MessageBox(nullptr, ex.what(), "Error - DxSurface", 0);
+    threadExitReason = ThreadExitReason::Exception;
   }
   catch (std::exception& ex)
   {
     MessageBox(nullptr, ex.what(), "Error", 0);
+    threadExitReason = ThreadExitReason::Exception;
   }
   catch (...)
   {
     MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
+    threadExitReason = ThreadExitReason::Exception;
   }
 
   //- 
