@@ -8,6 +8,8 @@ using namespace CB::DxSurface;
 
 Window::~Window()
 {
+  m_eRenderingThreadCommand = ThreadState::Exitted;
+  m_pThread.get()->join();
 }
 
 Window::Window(const std::string& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
@@ -187,8 +189,6 @@ void Window::RenderingThread(Window* w)
 {
   try
   {
-    w->m_pThread.get()->detach();
-
     w->RegisterClassAndCreateWindow();
     w->Show();
 
@@ -212,6 +212,5 @@ void Window::RenderingThread(Window* w)
     MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
   }
 
-  w->m_pThread = nullptr;
   w->m_eRenderingThreadState = ThreadState::Exitted;
 }
