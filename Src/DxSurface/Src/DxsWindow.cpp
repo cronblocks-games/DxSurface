@@ -319,6 +319,11 @@ void Window::RenderingThread(Window* w)
   {
     DXSURFACE_ENCLOSE_THROW(w->Hide());
   }
+
+  if (w->IsPrimary())
+  {
+    ExitProcess(threadExitReason == ThreadExitReason::Exception ? -1 : 0);
+  }
 }
 
 void Window::OnRenderingStateInitInternal()
