@@ -203,16 +203,78 @@ void Window::OnRenderingStateChanged(
 
 void Window::RenderingThread(Window* w)
 {
+  enum class RenderingState lastRenderingState = RenderingState::NONE;
+
   try
   {
     w->RegisterClassAndCreateWindow();
     w->Show();
 
-    w->m_eRenderingState = RenderingState::Running;
+    //- Calling Init when doing default construction
+    if (w->m_eRenderingState == w->m_eRenderingStateCommand &&
+      w->m_eRenderingStateCommand == RenderingState::NONE)
+    {
+      w->m_eRenderingState = RenderingState::Init;
+      w->OnRenderingStateInit();
+      w->OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
+    }
 
     while (w->m_eRenderingStateCommand != RenderingState::Exitted)
     {
-      //-
+      //- 
+      //- If there are any state changes commanded?
+      //- 
+
+      switch (w->m_eRenderingStateCommand)
+      {
+      case RenderingState::NONE:
+      case RenderingState::Init:
+      case RenderingState::Running:
+
+        if (w->m_eRenderingState != RenderingState::Running)
+        {
+          lastRenderingState = w->m_eRenderingState;
+          w->m_eRenderingState = RenderingState::Running;
+          w->OnRenderingStateChanged(lastRenderingState, RenderingState::Running);
+        }
+
+        break;
+
+      case RenderingState::Paused:
+
+        if (w->m_eRenderingState != RenderingState::Paused)
+        {
+          lastRenderingState = w->m_eRenderingState;
+          w->m_eRenderingState = RenderingState::Paused;
+          w->OnRenderingStateChanged(lastRenderingState, RenderingState::Paused);
+        }
+
+        break;
+
+      case RenderingState::Exitted:
+        break;
+      }
+
+      //- 
+      //- What to do within a rendering state?
+      //- 
+
+      switch (w->m_eRenderingState)
+      {
+      case RenderingState::NONE:
+      case RenderingState::Init:
+        //- we shouldn't be here - will assert later
+        break;
+
+      case RenderingState::Running:
+        w->OnRenderingStateRunning();
+        break;
+
+      case RenderingState::Paused:
+        break;
+      case RenderingState::Exitted:
+        break;
+      }
     }
   }
   catch (Exception& ex)
@@ -228,5 +290,13 @@ void Window::RenderingThread(Window* w)
     MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
   }
 
-  w->m_eRenderingState = RenderingState::Exitted;
+  //- 
+  //- Exiting
+  //- 
+
+  DXSURFACE_ENCLOSE_THROW(lastRenderingState = w->m_eRenderingState);
+  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateExiting());
+  DXSURFACE_ENCLOSE_THROW(w->m_eRenderingState = RenderingState::Exitted);
+  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
+  DXSURFACE_ENCLOSE_THROW(w->Hide());
 }
