@@ -37,6 +37,14 @@ namespace CB::DxSurface {
     void ExitRendering();
     RenderingState RenderingState() const;
 
+  protected:
+    virtual void OnRenderingStateInit();
+    virtual void OnRenderingStateRunning();
+    virtual void OnRenderingStateExiting();
+    virtual void OnRenderingStateChanged(
+      enum class RenderingState last,
+      enum class RenderingState next);
+
   private:
     mutable std::string m_sTitle;
     int m_iX, m_iY, m_iWidth, m_iHeight;

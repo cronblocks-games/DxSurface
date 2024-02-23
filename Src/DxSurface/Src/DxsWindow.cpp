@@ -190,6 +190,17 @@ HWND Window::RegisterClassAndCreateWindow()
 //- Rendering thread
 //- 
 //------------------------------------------------------------------------
+void Window::OnRenderingStateInit() {}
+void Window::OnRenderingStateRunning() {}
+void Window::OnRenderingStateExiting() {}
+
+void Window::OnRenderingStateChanged(
+  enum class RenderingState last,
+  enum class RenderingState next)
+{
+  //-
+}
+
 void Window::RenderingThread(Window* w)
 {
   try
