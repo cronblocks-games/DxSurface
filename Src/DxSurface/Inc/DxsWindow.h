@@ -50,7 +50,7 @@ namespace CB::DxSurface {
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
 
-    std::shared_ptr<std::thread> m_pThread;
+    std::unique_ptr<std::thread> m_pThread;
     volatile enum class RenderingState m_eRenderingState, m_eRenderingStateCommand;
 
     HWND m_hWnd;
