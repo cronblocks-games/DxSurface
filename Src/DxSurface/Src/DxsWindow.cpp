@@ -267,7 +267,7 @@ void Window::RenderingThread(Window* w)
         break;
 
       case RenderingState::Running:
-        w->OnRenderingStateRunningDefault();
+        w->OnRenderingStateRunningProcedure();
         w->OnRenderingStateRunning();
         break;
 
@@ -302,7 +302,7 @@ void Window::RenderingThread(Window* w)
   DXSURFACE_ENCLOSE_THROW(w->Hide());
 }
 
-void Window::OnRenderingStateRunningDefault()
+void Window::OnRenderingStateRunningProcedure()
 {
   //-
 }
