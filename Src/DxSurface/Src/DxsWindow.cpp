@@ -313,7 +313,11 @@ void Window::RenderingThread(Window* w)
   w->m_eRenderingState = RenderingState::Exitted;
   DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
   DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
-  DXSURFACE_ENCLOSE_THROW(w->Hide());
+
+  if (threadExitReason != ThreadExitReason::Exception)
+  {
+    DXSURFACE_ENCLOSE_THROW(w->Hide());
+  }
 }
 
 void Window::OnRenderingStateInitInternal()
