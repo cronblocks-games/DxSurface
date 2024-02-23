@@ -57,7 +57,13 @@ namespace CB::DxSurface {
 
     HWND RegisterClassAndCreateWindow();
 
-    void OnInternalRenderingStateRunning();
+    void OnRenderingStateInitInternal();
+    void OnRenderingStateRunningInternal();
+    void OnRenderingStateExitingInternal();
+    void OnRenderingStateChangedInternal(
+      enum class RenderingState last,
+      enum class RenderingState next);
+
     static void RenderingThread(Window*);
   };
 

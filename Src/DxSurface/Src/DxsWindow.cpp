@@ -215,7 +215,11 @@ void Window::RenderingThread(Window* w)
       w->m_eRenderingStateCommand == RenderingState::NONE)
     {
       w->m_eRenderingState = RenderingState::Init;
+
+      w->OnRenderingStateInitInternal();
       w->OnRenderingStateInit();
+
+      w->OnRenderingStateChangedInternal(RenderingState::NONE, RenderingState::Init);
       w->OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
     }
 
@@ -235,6 +239,8 @@ void Window::RenderingThread(Window* w)
         {
           lastRenderingState = w->m_eRenderingState;
           w->m_eRenderingState = RenderingState::Running;
+
+          w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Running);
           w->OnRenderingStateChanged(lastRenderingState, RenderingState::Running);
         }
 
@@ -246,6 +252,8 @@ void Window::RenderingThread(Window* w)
         {
           lastRenderingState = w->m_eRenderingState;
           w->m_eRenderingState = RenderingState::Paused;
+
+          w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Paused);
           w->OnRenderingStateChanged(lastRenderingState, RenderingState::Paused);
         }
 
@@ -267,7 +275,7 @@ void Window::RenderingThread(Window* w)
         break;
 
       case RenderingState::Running:
-        w->OnInternalRenderingStateRunning();
+        w->OnRenderingStateRunningInternal();
         w->OnRenderingStateRunning();
         break;
 
@@ -296,13 +304,29 @@ void Window::RenderingThread(Window* w)
   //- 
 
   DXSURFACE_ENCLOSE_THROW(lastRenderingState = w->m_eRenderingState);
+  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateExitingInternal());
   DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateExiting());
   DXSURFACE_ENCLOSE_THROW(w->m_eRenderingState = RenderingState::Exitted);
+  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
   DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
   DXSURFACE_ENCLOSE_THROW(w->Hide());
 }
 
-void Window::OnInternalRenderingStateRunning()
+void Window::OnRenderingStateInitInternal()
+{
+  //-
+}
+void Window::OnRenderingStateRunningInternal()
+{
+  //-
+}
+void Window::OnRenderingStateExitingInternal()
+{
+  //-
+}
+void Window::OnRenderingStateChangedInternal(
+  enum class RenderingState last,
+  enum class RenderingState next)
 {
   //-
 }
