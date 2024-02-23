@@ -9,7 +9,11 @@ using namespace CB::DxSurface;
 Window::~Window()
 {
   m_eRenderingThreadCommand = ThreadState::Exitted;
-  m_pThread.get()->join();
+
+  if (m_pThread != nullptr)
+  {
+    m_pThread.get()->join();
+  }
 }
 
 Window::Window(const std::string& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
@@ -83,6 +87,7 @@ Window& Window::operator=(Window&& other) noexcept
 
   other.m_eRenderingThreadState = ThreadState::Init;
   other.m_eRenderingThreadCommand = ThreadState::Init;
+  other.m_pThread = nullptr;
 
   return *this;
 }
