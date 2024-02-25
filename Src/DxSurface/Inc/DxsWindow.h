@@ -25,7 +25,9 @@ namespace CB::DxSurface {
 
     virtual ~Window();
 
-    bool IsPrimary();
+    bool Primary() const;
+    void Primary(bool isPrimary);
+
     const std::string& Title();
     const std::string& Title(const std::string&);
 

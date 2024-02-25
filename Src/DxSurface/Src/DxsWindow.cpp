@@ -101,9 +101,13 @@ Window& Window::operator=(Window&& other) noexcept
   return *this;
 }
 
-bool Window::IsPrimary()
+bool Window::Primary() const
 {
   return m_bIsPrimary;
+}
+void Window::Primary(bool isPrimary)
+{
+  m_bIsPrimary = isPrimary;
 }
 
 const std::string& Window::Title()
@@ -326,7 +330,7 @@ void Window::RenderingThread(Window* w)
     DXSURFACE_ENCLOSE_THROW(w->Hide());
   }
 
-  if (w->IsPrimary())
+  if (w->Primary())
   {
     ExitProcess(threadExitReason == ThreadExitReason::Exception ? -1 : 0);
   }
