@@ -26,7 +26,7 @@ namespace CB::DxSurface {
     mutable TString m_sMessage;
   };
 
-}
+} //- namespace CB::DxSurface
 
 #define DxsThrow(msg) {throw CB::DxSurface::Exception(__FILE__,__LINE__,msg);}
 #define DxsEncloseThrow(call) {                                                         \

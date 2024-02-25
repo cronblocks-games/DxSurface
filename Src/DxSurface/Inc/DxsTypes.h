@@ -110,7 +110,11 @@ namespace CB::DxSurface {
     Normal = 0,
     Exception
   };
-}
+
+
+
+
+} //- namespace CB::DxSurface
 
 
 

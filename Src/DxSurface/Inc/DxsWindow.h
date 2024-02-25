@@ -71,7 +71,7 @@ namespace CB::DxSurface {
     static void RenderingThread(Window*);
   };
 
-}
+} //- namespace CB::DxSurface
 
 
 

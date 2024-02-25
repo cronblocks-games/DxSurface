@@ -35,7 +35,7 @@ namespace CB::DxSurface {
     std::vector<Window> m_vWindows;
   };
 
-}
+} //- namespace CB::DxSurface
 
 
 

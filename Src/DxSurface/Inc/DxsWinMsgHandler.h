@@ -11,7 +11,7 @@ namespace CB::DxSurface {
 
   };
 
-}
+} //- namespace CB::DxSurface
 
 
 
