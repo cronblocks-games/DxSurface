@@ -37,6 +37,8 @@ namespace CB::DxSurface {
     void ExitRendering();
     RenderingState RenderingState() const;
 
+    void WaitForExit();
+
   protected:
     virtual void OnRenderingStateInit();
     virtual void OnRenderingStateRunning();

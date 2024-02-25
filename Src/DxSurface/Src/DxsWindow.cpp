@@ -164,6 +164,11 @@ RenderingState Window::RenderingState() const
   return m_eRenderingState;
 }
 
+void CB::DxSurface::Window::WaitForExit()
+{
+  m_pThread.get()->join();
+}
+
 
 
 //------------------------------------------------------------------------
