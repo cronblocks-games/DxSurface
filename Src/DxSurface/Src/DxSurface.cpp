@@ -79,5 +79,7 @@ void DxSurface::Run()
         w++;
       }
     }
+
+    Sleep(50);
   }
 }
