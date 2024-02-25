@@ -189,6 +189,7 @@ HWND Window::RegisterClassAndCreateWindow()
 
   const lock_guard<mutex> lock(reg_class_mutex);
 
+  m_eWindowCreationState = WindowCreationState::Fail;
   DXSURFACE_THROW("Not implemented: RegisterClassAndCreateWindow");
 }
 
