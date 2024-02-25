@@ -17,11 +17,11 @@ namespace CB::DxSurface {
   using ConstTCharPtr = const char*;
 #endif
 
-  struct WindowRect
+  struct Rectangle
   {
     int x = 0, y = 0, w = 0, h = 0;
 
-    WindowRect(int _x = 0, int _y = 0, int _w = 0, int _h = 0)
+    Rectangle(int _x = 0, int _y = 0, int _w = 0, int _h = 0)
     {
       x = _x;
       y = _y;
@@ -29,7 +29,7 @@ namespace CB::DxSurface {
       h = _h;
     }
 
-    WindowRect& operator=(const WindowRect& other) noexcept
+    Rectangle& operator=(const Rectangle& other) noexcept
     {
       x = other.x;
       y = other.y;
@@ -38,17 +38,17 @@ namespace CB::DxSurface {
 
       return *this;
     }
-    WindowRect& operator=(WindowRect&& other) noexcept
+    Rectangle& operator=(Rectangle&& other) noexcept
     {
       x = other.x;
       y = other.y;
       w = other.w;
       h = other.h;
 
-      x = 0;
-      y = 0;
-      w = 0;
-      h = 0;
+      other.x = 0;
+      other.y = 0;
+      other.w = 0;
+      other.h = 0;
 
       return *this;
     }
@@ -58,13 +58,13 @@ namespace CB::DxSurface {
   {
     bool debugEnabled = false;
     TString defaultWindowTitle;
-    WindowRect defaultWindowRect;
+    Rectangle defaultWindowRect;
 
     DxSurfaceOptions()
     {
       debugEnabled = true;
       defaultWindowTitle = DxsT("DxSurface");
-      defaultWindowRect = WindowRect(10, 10, 250, 250);
+      defaultWindowRect = Rectangle(10, 10, 250, 250);
     }
     DxSurfaceOptions(const DxSurfaceOptions& options)
     {
