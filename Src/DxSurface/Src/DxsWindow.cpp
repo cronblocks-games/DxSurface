@@ -16,7 +16,7 @@ Window::~Window()
   }
 }
 
-Window::Window(const std::string& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
+Window::Window(const String& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
   this->m_sTitle = title;
   this->m_iX = x;
@@ -110,11 +110,11 @@ void Window::Primary(bool isPrimary)
   m_bIsPrimary = isPrimary;
 }
 
-const std::string& Window::Title() const
+const String& Window::Title() const
 {
   return m_sTitle;
 }
-void Window::Title(const string& title)
+void Window::Title(const String& title)
 {
   if (m_sTitle == title) return;
 
@@ -186,7 +186,7 @@ void Window::WaitForExit() const
 //- 
 //------------------------------------------------------------------------
 static mutex reg_class_mutex;
-static map<string, WNDCLASSEX> reg_classes;
+static map<String, WNDCLASSEX> reg_classes;
 
 HWND Window::RegisterClassAndCreateWindow()
 {

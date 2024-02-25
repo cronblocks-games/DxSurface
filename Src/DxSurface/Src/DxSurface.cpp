@@ -53,7 +53,7 @@ Window& DxSurface::CreateNewWindow()
     m_stOptions.debugEnabled);
 }
 Window& DxSurface::CreateNewWindow(
-  const string& title,
+  const String& title,
   int x, int y, int width, int height,
   bool isPrimary,
   bool debugEnabled)

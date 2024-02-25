@@ -1,7 +1,6 @@
 #ifndef _DXSURFACE_DXSURFACE_H_
 #define _DXSURFACE_DXSURFACE_H_
 
-#include <string>
 #include <vector>
 
 #include "DxsTypes.h"
@@ -26,7 +25,7 @@ namespace CB::DxSurface {
     ~DxSurface() = default;
 
     Window& CreateNewWindow();
-    Window& CreateNewWindow(const std::string& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    Window& CreateNewWindow(const String& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
     void Run();
 

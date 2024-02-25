@@ -9,6 +9,8 @@
 
 namespace CB::DxSurface {
 
+  using String = std::string;
+
   struct WindowRect
   {
     int x = 0, y = 0, w = 0, h = 0;
@@ -49,7 +51,7 @@ namespace CB::DxSurface {
   struct DxSurfaceOptions
   {
     bool debugEnabled = false;
-    std::string defaultWindowTitle;
+    String defaultWindowTitle;
     WindowRect defaultWindowRect;
 
     DxSurfaceOptions()

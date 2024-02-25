@@ -3,7 +3,6 @@
 
 
 
-#include <string>
 #include <exception>
 
 #include "DxsTypes.h"
@@ -24,7 +23,7 @@ namespace CB::DxSurface {
     char const* what() const override;
 
   private:
-    mutable std::string m_sMessage;
+    mutable String m_sMessage;
   };
 
 }

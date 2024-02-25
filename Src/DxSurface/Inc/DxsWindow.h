@@ -3,7 +3,6 @@
 
 
 
-#include <string>
 #include <memory>
 #include <thread>
 
@@ -16,7 +15,7 @@ namespace CB::DxSurface {
   class Window {
   public:
     Window() = delete;
-    Window(const std::string& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
+    Window(const String& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
     Window(const Window& other);
     Window(Window&& other) noexcept;
 
@@ -28,8 +27,8 @@ namespace CB::DxSurface {
     bool Primary() const;
     void Primary(bool isPrimary);
 
-    const std::string& Title() const;
-    void Title(const std::string&);
+    const String& Title() const;
+    void Title(const String&);
 
     void Show();
     void Hide();
@@ -50,7 +49,7 @@ namespace CB::DxSurface {
       enum class RenderingState next);
 
   private:
-    mutable std::string m_sTitle;
+    mutable String m_sTitle;
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
 
