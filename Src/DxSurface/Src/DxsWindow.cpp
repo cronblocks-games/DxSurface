@@ -59,7 +59,6 @@ Window& Window::operator=(const Window& other)
 
   return *this;
 }
-
 Window& Window::operator=(Window&& other) noexcept
 {
   this->m_sTitle = std::move(other.m_sTitle);
@@ -101,7 +100,6 @@ const std::string& Window::Title()
 {
   return m_sTitle;
 }
-
 const std::string& Window::Title(const string& title)
 {
   if (m_sTitle == title) return m_sTitle;
@@ -126,7 +124,6 @@ void Window::Show()
 
   ShowWindow(m_hWnd, SW_SHOW);
 }
-
 void Window::Hide()
 {
   if (m_hWnd == nullptr)
@@ -163,7 +160,6 @@ RenderingState Window::RenderingState() const
 {
   return m_eRenderingState;
 }
-
 void CB::DxSurface::Window::WaitForExit()
 {
   m_pThread.get()->join();
@@ -198,13 +194,7 @@ HWND Window::RegisterClassAndCreateWindow()
 void Window::OnRenderingStateInit() {}
 void Window::OnRenderingStateRunning() {}
 void Window::OnRenderingStateExiting() {}
-
-void Window::OnRenderingStateChanged(
-  enum class RenderingState last,
-  enum class RenderingState next)
-{
-  //-
-}
+void Window::OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next) {}
 
 void Window::RenderingThread(Window* w)
 {
