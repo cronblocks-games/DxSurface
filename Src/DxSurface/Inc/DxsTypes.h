@@ -87,7 +87,7 @@ namespace CB::DxSurface {
   {
     NONE = 0,
     Success,
-    Failed
+    Fail
   };
   enum class RenderingState
   {
