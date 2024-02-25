@@ -6,7 +6,7 @@ using namespace CB::DxSurface;
 int WINAPI WinMain(
   HINSTANCE hInstance,
   HINSTANCE hPrevInstance,
-  PTSTR pCmdLine,
+  PSTR pCmdLine,
   int nCmdShow)
 {
   try
