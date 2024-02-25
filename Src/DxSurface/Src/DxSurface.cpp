@@ -7,7 +7,7 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface()
 {
   m_stOptions.debugEnabled = true;
-  m_stOptions.defaultWindowName = "DxSurface";
+  m_stOptions.defaultWindowTitle = "DxSurface";
   m_stOptions.defaultWindowRect = WindowRect(10, 10, 250, 250);
 }
 DxSurface::DxSurface(const DxSurfaceOptions& options)
@@ -45,7 +45,7 @@ DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
 Window& DxSurface::CreateNewWindow()
 {
   return CreateNewWindow(
-    m_stOptions.defaultWindowName,
+    m_stOptions.defaultWindowTitle,
     m_stOptions.defaultWindowRect.x,
     m_stOptions.defaultWindowRect.y,
     m_stOptions.defaultWindowRect.w,

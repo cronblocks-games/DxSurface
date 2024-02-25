@@ -49,13 +49,13 @@ namespace CB::DxSurface {
   struct DxSurfaceOptions
   {
     bool debugEnabled = false;
-    std::string defaultWindowName;
+    std::string defaultWindowTitle;
     WindowRect defaultWindowRect;
 
     DxSurfaceOptions()
     {
       debugEnabled = true;
-      defaultWindowName = "DxSurface";
+      defaultWindowTitle = "DxSurface";
       defaultWindowRect = WindowRect(10, 10, 250, 250);
     }
     DxSurfaceOptions(const DxSurfaceOptions& options)
@@ -66,7 +66,7 @@ namespace CB::DxSurface {
     DxSurfaceOptions& operator=(const DxSurfaceOptions& other) noexcept
     {
       debugEnabled = other.debugEnabled;
-      defaultWindowName = other.defaultWindowName;
+      defaultWindowTitle = other.defaultWindowTitle;
       defaultWindowRect = other.defaultWindowRect;
 
       return *this;
@@ -76,7 +76,7 @@ namespace CB::DxSurface {
       debugEnabled = other.debugEnabled;
       other.debugEnabled = false;
 
-      defaultWindowName = std::move(other.defaultWindowName);
+      defaultWindowTitle = std::move(other.defaultWindowTitle);
       defaultWindowRect = std::move(other.defaultWindowRect);
 
       return *this;
