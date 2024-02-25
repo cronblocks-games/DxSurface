@@ -110,13 +110,13 @@ void Window::Primary(bool isPrimary)
   m_bIsPrimary = isPrimary;
 }
 
-const std::string& Window::Title()
+const std::string& Window::Title() const
 {
   return m_sTitle;
 }
-const std::string& Window::Title(const string& title)
+void Window::Title(const string& title)
 {
-  if (m_sTitle == title) return m_sTitle;
+  if (m_sTitle == title) return;
 
   if (m_hWnd == nullptr)
   {
@@ -126,7 +126,6 @@ const std::string& Window::Title(const string& title)
   SetWindowText(m_hWnd, title.c_str());
 
   m_sTitle = title;
-  return m_sTitle;
 }
 
 void Window::Show()
@@ -174,7 +173,7 @@ RenderingState Window::RenderingState() const
 {
   return m_eRenderingState;
 }
-void CB::DxSurface::Window::WaitForExit() const
+void Window::WaitForExit() const
 {
   m_pThread.get()->join();
 }
