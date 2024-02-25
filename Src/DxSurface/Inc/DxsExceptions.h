@@ -19,11 +19,11 @@ namespace CB::DxSurface {
     Exception& operator=(const Exception&) = delete;
     Exception& operator=(Exception&&) = delete;
 
-    Exception(const char* file, int lineNumber, CStrCharPtr message);
-    const String& Message() const;
+    Exception(const char* file, int lineNumber, ConstTCharPtr message);
+    const TString& Message() const;
 
   private:
-    mutable String m_sMessage;
+    mutable TString m_sMessage;
   };
 
 }

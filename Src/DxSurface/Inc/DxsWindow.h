@@ -15,7 +15,7 @@ namespace CB::DxSurface {
   class Window {
   public:
     Window() = delete;
-    Window(const String& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
+    Window(const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
     Window(const Window& other);
     Window(Window&& other) noexcept;
 
@@ -27,8 +27,8 @@ namespace CB::DxSurface {
     bool Primary() const;
     void Primary(bool isPrimary);
 
-    const String& Title() const;
-    void Title(const String&);
+    const TString& Title() const;
+    void Title(const TString&);
 
     void Show();
     void Hide();
@@ -49,7 +49,7 @@ namespace CB::DxSurface {
       enum class RenderingState next);
 
   private:
-    mutable String m_sTitle;
+    mutable TString m_sTitle;
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
 

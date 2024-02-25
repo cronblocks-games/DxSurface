@@ -11,7 +11,7 @@ static const char* start_of_str(const char* line, const char* str)
   return match == nullptr ? line : match;
 }
 
-Exception::Exception(const char* file, int lineNumber, CStrCharPtr message)
+Exception::Exception(const char* file, int lineNumber, ConstTCharPtr message)
 {
 #if defined(_UNICODE) || defined(UNICODE)
   wstringstream ss;
@@ -32,7 +32,7 @@ Exception::Exception(const char* file, int lineNumber, CStrCharPtr message)
   m_sMessage = ss.str();
 }
 
-const String& Exception::Message() const
+const TString& Exception::Message() const
 {
   return m_sMessage;
 }

@@ -25,7 +25,7 @@ namespace CB::DxSurface {
     ~DxSurface() = default;
 
     Window& CreateNewWindow();
-    Window& CreateNewWindow(const String& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    Window& CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
     void Run();
 
