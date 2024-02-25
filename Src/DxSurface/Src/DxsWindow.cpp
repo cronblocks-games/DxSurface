@@ -33,7 +33,8 @@ Window::Window(const std::string& title, int x, int y, int width, int height, bo
   this->m_eRenderingStateCommand = RenderingState::NONE;
   this->m_pThread = make_unique<thread>(Window::RenderingThread, this);
 
-  while (this->m_eWindowCreationState == WindowCreationState::NONE);
+  while (this->m_eWindowCreationState == WindowCreationState::NONE &&
+         this->m_eRenderingState != RenderingState::Exitted);
 }
 Window::Window(const Window& other)
 {
@@ -61,7 +62,8 @@ Window& Window::operator=(const Window& other)
   this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
   this->m_pThread = make_unique<thread>(Window::RenderingThread, this);
 
-  while (this->m_eWindowCreationState == WindowCreationState::NONE);
+  while (this->m_eWindowCreationState == WindowCreationState::NONE &&
+         this->m_eRenderingState != RenderingState::Exitted);
 
   return *this;
 }
