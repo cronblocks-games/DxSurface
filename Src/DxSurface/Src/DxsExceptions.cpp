@@ -11,9 +11,13 @@ static const char* start_of_str(const char* line, const char* str)
   return match == nullptr ? line : match;
 }
 
-Exception::Exception(const char* file, int lineNumber, const char* message)
+Exception::Exception(const char* file, int lineNumber, CStrCharPtr message)
 {
+#if defined(_UNICODE) || defined(UNICODE)
+  wstringstream ss;
+#else
   stringstream ss;
+#endif
 
   ss
     << "Exception:" << endl
@@ -28,7 +32,8 @@ Exception::Exception(const char* file, int lineNumber, const char* message)
   m_sMessage = ss.str();
 }
 
-char const* CB::DxSurface::Exception::what() const
+const String& Exception::Message() const
 {
-  return m_sMessage.c_str();
+  return m_sMessage;
 }
+

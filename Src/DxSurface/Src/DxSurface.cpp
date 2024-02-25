@@ -7,7 +7,7 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface()
 {
   m_stOptions.debugEnabled = true;
-  m_stOptions.defaultWindowTitle = "DxSurface";
+  m_stOptions.defaultWindowTitle = DxsT("DxSurface");
   m_stOptions.defaultWindowRect = WindowRect(10, 10, 250, 250);
 }
 DxSurface::DxSurface(const DxSurfaceOptions& options)

@@ -9,7 +9,13 @@
 
 namespace CB::DxSurface {
 
+#if defined(_UNICODE) || defined(UNICODE)
+  using String = std::wstring;
+  using CStrCharPtr = const wchar_t*;
+#else
   using String = std::string;
+  using CStrCharPtr = const char*;
+#endif
 
   struct WindowRect
   {
@@ -57,7 +63,7 @@ namespace CB::DxSurface {
     DxSurfaceOptions()
     {
       debugEnabled = true;
-      defaultWindowTitle = "DxSurface";
+      defaultWindowTitle = DxsT("DxSurface");
       defaultWindowRect = WindowRect(10, 10, 250, 250);
     }
     DxSurfaceOptions(const DxSurfaceOptions& options)

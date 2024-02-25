@@ -120,7 +120,7 @@ void Window::Title(const String& title)
 
   if (m_hWnd == nullptr)
   {
-    DXSURFACE_THROW("Cannot change title of window with invalid handle");
+    DXSURFACE_THROW(DxsT("Cannot change title of window with invalid handle"));
   }
 
   SetWindowText(m_hWnd, title.c_str());
@@ -132,7 +132,7 @@ void Window::Show()
 {
   if (m_hWnd == nullptr)
   {
-    DXSURFACE_THROW("Cannot show window with invalid handle");
+    DXSURFACE_THROW(DxsT("Cannot show window with invalid handle"));
   }
 
   ShowWindow(m_hWnd, SW_SHOW);
@@ -141,7 +141,7 @@ void Window::Hide()
 {
   if (m_hWnd == nullptr)
   {
-    DXSURFACE_THROW("Cannot hide window with invalid handle");
+    DXSURFACE_THROW(DxsT("Cannot hide window with invalid handle"));
   }
 
   ShowWindow(m_hWnd, SW_HIDE);
@@ -151,7 +151,7 @@ void Window::PauseRendering()
 {
   if (m_eRenderingState == RenderingState::Exitted)
   {
-    DXSURFACE_THROW((m_sTitle + " - Cannot pause rendering when it has exitted").c_str());
+    DXSURFACE_THROW((m_sTitle + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
   }
 
   m_eRenderingStateCommand = RenderingState::Paused;
@@ -160,7 +160,7 @@ void Window::ResumeRendering()
 {
   if (m_eRenderingState == RenderingState::Exitted)
   {
-    DXSURFACE_THROW((m_sTitle + " - Cannot resume rendering when it has already exitted").c_str());
+    DXSURFACE_THROW((m_sTitle + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
   }
 
   m_eRenderingStateCommand = RenderingState::Running;
@@ -195,7 +195,7 @@ HWND Window::RegisterClassAndCreateWindow()
   const lock_guard<mutex> lock(reg_class_mutex);
 
   m_eWindowCreationState = WindowCreationState::Fail;
-  DXSURFACE_THROW("Not implemented: RegisterClassAndCreateWindow");
+  DXSURFACE_THROW(DxsT("Not implemented: RegisterClassAndCreateWindow"));
 }
 
 
@@ -298,17 +298,17 @@ void Window::RenderingThread(Window* w)
   }
   catch (Exception& ex)
   {
-    MessageBox(nullptr, ex.what(), "Error - DxSurface", 0);
+    MessageBox(nullptr, ex.Message().c_str(), DxsT("Error - DxSurface"), 0);
     threadExitReason = ThreadExitReason::Exception;
   }
   catch (std::exception& ex)
   {
-    MessageBox(nullptr, ex.what(), "Error", 0);
+    MessageBoxA(nullptr, ex.what(), "Error", 0);
     threadExitReason = ThreadExitReason::Exception;
   }
   catch (...)
   {
-    MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
+    MessageBox(nullptr, DxsT("Unknown error occurred."), DxsT("Error"), 0);
     threadExitReason = ThreadExitReason::Exception;
   }
 

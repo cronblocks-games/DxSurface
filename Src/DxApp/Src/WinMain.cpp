@@ -13,23 +13,23 @@ int WINAPI WinMain(
   {
     DxSurface surface;
 
-    Window& window = surface.CreateNewWindow("Test Window", 10, 10, 200, 200);
+    Window& window = surface.CreateNewWindow(DxsT("Test Window"), 10, 10, 200, 200);
 
     surface.Run();
   }
   catch (Exception& ex)
   {
-    MessageBox(nullptr, ex.what(), "Error - DxSurface", 0);
+    MessageBox(nullptr, ex.Message().c_str(), DxsT("Error - DxSurface"), 0);
     return -1;
   }
   catch (std::exception& ex)
   {
-    MessageBox(nullptr, ex.what(), "Error", 0);
+    MessageBoxA(nullptr, ex.what(), "Error", 0);
     return -1;
   }
   catch ( ... )
   {
-    MessageBox(nullptr, "Unknown error occurred.", "Error", 0);
+    MessageBoxA(nullptr, "Unknown error occurred.", "Error", 0);
     return -1;
   }
 
