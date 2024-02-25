@@ -83,6 +83,12 @@ namespace CB::DxSurface {
     }
   };
 
+  enum class WindowCreationState
+  {
+    NONE = 0,
+    Success,
+    Failed
+  };
   enum class RenderingState
   {
     NONE = 0,
