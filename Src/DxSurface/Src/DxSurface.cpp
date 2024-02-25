@@ -74,8 +74,10 @@ void DxSurface::Run()
       {
         w = m_vWindows.erase(w);
       }
-
-      if (w != m_vWindows.cend()) { w++; } // The above removal can make iter at end.
+      else
+      {
+        w++;
+      }
     }
   }
 }
