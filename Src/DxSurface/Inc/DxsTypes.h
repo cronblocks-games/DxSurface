@@ -17,11 +17,11 @@ namespace CB::DxSurface {
   using ConstTCharPtr = const char*;
 #endif
 
-  struct Rectangle
+  struct WindowRectangle
   {
     int x = 0, y = 0, w = 0, h = 0;
 
-    Rectangle(int _x = 0, int _y = 0, int _w = 0, int _h = 0)
+    WindowRectangle(int _x = 0, int _y = 0, int _w = 0, int _h = 0)
     {
       x = _x;
       y = _y;
@@ -29,7 +29,7 @@ namespace CB::DxSurface {
       h = _h;
     }
 
-    Rectangle& operator=(const Rectangle& other) noexcept
+    WindowRectangle& operator=(const WindowRectangle& other) noexcept
     {
       x = other.x;
       y = other.y;
@@ -38,7 +38,7 @@ namespace CB::DxSurface {
 
       return *this;
     }
-    Rectangle& operator=(Rectangle&& other) noexcept
+    WindowRectangle& operator=(WindowRectangle&& other) noexcept
     {
       x = other.x;
       y = other.y;
@@ -54,24 +54,24 @@ namespace CB::DxSurface {
     }
   };
 
-  struct DxSurfaceOptions
+  struct WindowCreationOptions
   {
     bool debugEnabled = false;
     TString defaultWindowTitle;
-    Rectangle defaultWindowRect;
+    WindowRectangle defaultWindowRect;
 
-    DxSurfaceOptions()
+    WindowCreationOptions()
     {
       debugEnabled = true;
       defaultWindowTitle = DxsT("DxSurface");
-      defaultWindowRect = Rectangle(10, 10, 250, 250);
+      defaultWindowRect = WindowRectangle(10, 10, 250, 250);
     }
-    DxSurfaceOptions(const DxSurfaceOptions& options)
+    WindowCreationOptions(const WindowCreationOptions& options)
     {
       *this = options;
     }
 
-    DxSurfaceOptions& operator=(const DxSurfaceOptions& other) noexcept
+    WindowCreationOptions& operator=(const WindowCreationOptions& other) noexcept
     {
       debugEnabled = other.debugEnabled;
       defaultWindowTitle = other.defaultWindowTitle;
@@ -79,7 +79,7 @@ namespace CB::DxSurface {
 
       return *this;
     }
-    DxSurfaceOptions& operator=(DxSurfaceOptions&& other) noexcept
+    WindowCreationOptions& operator=(WindowCreationOptions&& other) noexcept
     {
       debugEnabled = other.debugEnabled;
       other.debugEnabled = false;

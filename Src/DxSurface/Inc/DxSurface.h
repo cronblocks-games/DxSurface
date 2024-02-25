@@ -15,7 +15,7 @@ namespace CB::DxSurface {
 
   public:
     DxSurface();
-    DxSurface(const DxSurfaceOptions& options);
+    DxSurface(const WindowCreationOptions& options);
 
     DxSurface(const DxSurface&);
     DxSurface(DxSurface&&) noexcept;
@@ -30,7 +30,7 @@ namespace CB::DxSurface {
     void Run();
 
   private:
-    DxSurfaceOptions m_stOptions;
+    WindowCreationOptions m_stOptions;
 
     std::vector<Window> m_vWindows;
   };

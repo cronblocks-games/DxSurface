@@ -8,9 +8,9 @@ DxSurface::DxSurface()
 {
   m_stOptions.debugEnabled = true;
   m_stOptions.defaultWindowTitle = DxsT("DxSurface");
-  m_stOptions.defaultWindowRect = Rectangle(10, 10, 250, 250);
+  m_stOptions.defaultWindowRect = WindowRectangle(10, 10, 250, 250);
 }
-DxSurface::DxSurface(const DxSurfaceOptions& options)
+DxSurface::DxSurface(const WindowCreationOptions& options)
 {
   m_stOptions = options;
 }
