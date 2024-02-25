@@ -28,8 +28,8 @@ namespace CB::DxSurface {
 
 }
 
-#define DXSURFACE_THROW(msg) {throw CB::DxSurface::Exception(__FILE__,__LINE__,msg);}
-#define DXSURFACE_ENCLOSE_THROW(call) {                                                 \
+#define DxsThrow(msg) {throw CB::DxSurface::Exception(__FILE__,__LINE__,msg);}
+#define DxsEncloseThrow(call) {                                                         \
             try {                                                                       \
               call;                                                                     \
             } catch (Exception& ex) {                                                   \

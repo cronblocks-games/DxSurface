@@ -120,7 +120,7 @@ void Window::Title(const String& title)
 
   if (m_hWnd == nullptr)
   {
-    DXSURFACE_THROW(DxsT("Cannot change title of window with invalid handle"));
+    DxsThrow(DxsT("Cannot change title of window with invalid handle"));
   }
 
   SetWindowText(m_hWnd, title.c_str());
@@ -132,7 +132,7 @@ void Window::Show()
 {
   if (m_hWnd == nullptr)
   {
-    DXSURFACE_THROW(DxsT("Cannot show window with invalid handle"));
+    DxsThrow(DxsT("Cannot show window with invalid handle"));
   }
 
   ShowWindow(m_hWnd, SW_SHOW);
@@ -141,7 +141,7 @@ void Window::Hide()
 {
   if (m_hWnd == nullptr)
   {
-    DXSURFACE_THROW(DxsT("Cannot hide window with invalid handle"));
+    DxsThrow(DxsT("Cannot hide window with invalid handle"));
   }
 
   ShowWindow(m_hWnd, SW_HIDE);
@@ -151,7 +151,7 @@ void Window::PauseRendering()
 {
   if (m_eRenderingState == RenderingState::Exitted)
   {
-    DXSURFACE_THROW((m_sTitle + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
+    DxsThrow((m_sTitle + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
   }
 
   m_eRenderingStateCommand = RenderingState::Paused;
@@ -160,7 +160,7 @@ void Window::ResumeRendering()
 {
   if (m_eRenderingState == RenderingState::Exitted)
   {
-    DXSURFACE_THROW((m_sTitle + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
+    DxsThrow((m_sTitle + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
   }
 
   m_eRenderingStateCommand = RenderingState::Running;
@@ -195,7 +195,7 @@ HWND Window::RegisterClassAndCreateWindow()
   const lock_guard<mutex> lock(reg_class_mutex);
 
   m_eWindowCreationState = WindowCreationState::Fail;
-  DXSURFACE_THROW(DxsT("Not implemented: RegisterClassAndCreateWindow"));
+  DxsThrow(DxsT("Not implemented: RegisterClassAndCreateWindow"));
 }
 
 
@@ -317,16 +317,16 @@ void Window::RenderingThread(Window* w)
   //- 
 
   lastRenderingState = w->m_eRenderingState;
-  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateExitingInternal());
-  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateExiting());
+  DxsEncloseThrow(w->OnRenderingStateExitingInternal());
+  DxsEncloseThrow(w->OnRenderingStateExiting());
 
   w->m_eRenderingState = RenderingState::Exitted;
-  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
-  DXSURFACE_ENCLOSE_THROW(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
+  DxsEncloseThrow(w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
+  DxsEncloseThrow(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
 
   if (threadExitReason != ThreadExitReason::Exception)
   {
-    DXSURFACE_ENCLOSE_THROW(w->Hide());
+    DxsEncloseThrow(w->Hide());
   }
 
   if (w->Primary())

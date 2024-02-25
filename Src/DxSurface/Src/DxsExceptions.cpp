@@ -25,9 +25,9 @@ Exception::Exception(const char* file, int lineNumber, CStrCharPtr message)
 
     << "File: " << start_of_str(file, "Src\\DxSurface\\Src") << endl
     << "Line: " << lineNumber << endl
-    << "Ver: " << hex << DXSURFACE_VERSION
-    << " (" << DXSURFACE_VERSION_STRING << ") - "
-    << DXSURFACE_VERSION_RELEASE_DATE_STRING;
+    << "Ver: " << hex << DxsVersion
+    << " (" << DxsVersionString << ") - "
+    << DxsVersionReleaseDateString;
 
   m_sMessage = ss.str();
 }
