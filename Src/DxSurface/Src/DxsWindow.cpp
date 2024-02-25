@@ -28,6 +28,7 @@ Window::Window(const std::string& title, int x, int y, int width, int height, bo
 
   this->m_hWnd = nullptr;
 
+  this->m_eWindowCreationState = WindowCreationState::NONE;
   this->m_eRenderingState = RenderingState::NONE;
   this->m_eRenderingStateCommand = RenderingState::NONE;
   this->m_pThread = make_unique<thread>(Window::RenderingThread, this);
@@ -53,6 +54,7 @@ Window& Window::operator=(const Window& other)
 
   this->m_hWnd = nullptr;
 
+  this->m_eWindowCreationState = WindowCreationState::NONE;
   this->m_eRenderingState = other.m_eRenderingState;
   this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
   this->m_pThread = make_unique<thread>(Window::RenderingThread, this);
@@ -71,6 +73,7 @@ Window& Window::operator=(Window&& other) noexcept
 
   this->m_hWnd = other.m_hWnd;
 
+  this->m_eWindowCreationState = other.m_eWindowCreationState;
   this->m_eRenderingState = other.m_eRenderingState;
   this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
   this->m_pThread = std::move(m_pThread);
@@ -84,6 +87,7 @@ Window& Window::operator=(Window&& other) noexcept
 
   other.m_hWnd = nullptr;
 
+  other.m_eWindowCreationState = WindowCreationState::NONE;
   other.m_eRenderingState = RenderingState::NONE;
   other.m_eRenderingStateCommand = RenderingState::NONE;
   other.m_pThread = nullptr;
