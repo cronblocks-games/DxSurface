@@ -6,7 +6,7 @@
 #include <memory>
 #include <thread>
 
-#include "DxsTypes.h"
+#include "DxsHelpers.h"
 #include "DxsWinApi.h"
 
 

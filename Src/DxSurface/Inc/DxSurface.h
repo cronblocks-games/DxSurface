@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "DxsTypes.h"
+#include "DxsHelpers.h"
 #include "DxsWinApi.h"
 #include "DxsWindow.h"
 #include "DxsExceptions.h"
