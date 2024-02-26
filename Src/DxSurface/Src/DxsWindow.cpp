@@ -241,10 +241,11 @@ void Window::RegisterClassAndCreateWindow()
 
   if (m_hWnd != nullptr)
   {
-    m_eWindowCreationState = WindowCreationState::Success;
-
     MutexLock lock(_mutGlobalData);
     _handle2WindowMap[m_hWnd] = this;
+
+    //- Should be set last so that the waiting thread waits for it to complete
+    m_eWindowCreationState = WindowCreationState::Success;
   }
   else
   {

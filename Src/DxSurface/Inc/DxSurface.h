@@ -24,8 +24,8 @@ namespace CB::DxSurface {
 
     ~DxSurface() = default;
 
-    Window& CreateNewWindow();
-    Window& CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    Window* CreateNewWindow();
+    Window* CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
     void Run();
 
@@ -33,7 +33,7 @@ namespace CB::DxSurface {
     HINSTANCE m_hInstance;
     WindowCreationOptions m_stOptions;
 
-    std::vector<Window> m_vWindows;
+    std::vector<Window*> m_vWindows;
   };
 
 } //- namespace CB::DxSurface

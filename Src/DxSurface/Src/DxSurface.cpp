@@ -56,7 +56,7 @@ DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
   return *this;
 }
 
-Window& DxSurface::CreateNewWindow()
+Window* DxSurface::CreateNewWindow()
 {
   return CreateNewWindow(
     m_stOptions.defaultWindowTitle,
@@ -66,14 +66,15 @@ Window& DxSurface::CreateNewWindow()
     m_stOptions.defaultWindowRect.h,
     m_stOptions.debugEnabled);
 }
-Window& DxSurface::CreateNewWindow(
+Window* DxSurface::CreateNewWindow(
   const TString& title,
   int x, int y, int width, int height,
   bool isPrimary,
   bool debugEnabled)
 {
-  m_vWindows.emplace_back(m_hInstance, title, x, y, width, height, isPrimary, debugEnabled);
-  return m_vWindows[m_vWindows.size() - 1];
+  Window* w = new Window(m_hInstance, title, x, y, width, height, isPrimary, debugEnabled);
+  m_vWindows.push_back(w);
+  return w;
 }
 
 void DxSurface::Run()
@@ -84,7 +85,7 @@ void DxSurface::Run()
     
     for (auto w = m_vWindows.cbegin(); w != m_vWindows.cend();)
     {
-      if (w->RenderingState() == RenderingState::Exitted)
+      if ((*w)->RenderingState() == RenderingState::Exitted)
       {
         w = m_vWindows.erase(w);
       }

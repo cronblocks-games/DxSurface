@@ -13,7 +13,7 @@ int WINAPI WinMain(
   {
     DxSurface surface(hInstance);
 
-    Window& window = surface.CreateNewWindow(DxsT("Test Window"), 10, 10, 200, 200);
+    Window* window1 = surface.CreateNewWindow(DxsT("Test Window 1"), 10, 10, 200, 200);
 
     surface.Run();
   }
