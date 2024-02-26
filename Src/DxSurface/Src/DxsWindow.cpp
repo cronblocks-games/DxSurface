@@ -254,7 +254,8 @@ void Window::UnRegisterClassAndDestroyWindow()
 //- 
 LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  try {
+  try
+  {
     if (_handle2WindowMap.contains(hWnd))
       return _handle2WindowMap[hWnd]->OnWindowsMessage(msg, wParam, lParam);
   } catch (...) {}
