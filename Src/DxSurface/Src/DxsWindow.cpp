@@ -171,7 +171,8 @@ void Window::WaitForExit() const
 
 //------------------------------------------------------------------------
 //- 
-//- Window class registration and creation
+//-   Windows class registration, creation, deletion and
+//- message processing.
 //- 
 //------------------------------------------------------------------------
 static Mutex _mutGlobalData;
