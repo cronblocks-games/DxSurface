@@ -185,14 +185,14 @@ void Window::WaitForExit() const
 //- Window class registration and creation
 //- 
 //------------------------------------------------------------------------
-static mutex reg_class_mutex;
+static Mutex reg_class_mutex;
 static map<TString, WNDCLASSEX> reg_classes;
 
 HWND Window::RegisterClassAndCreateWindow()
 {
   if (m_hWnd != nullptr) return m_hWnd;
 
-  const lock_guard<mutex> lock(reg_class_mutex);
+  MutexLock lock(reg_class_mutex);
 
   m_eWindowCreationState = WindowCreationState::Fail;
   DxsThrow(DxsT("Not implemented: RegisterClassAndCreateWindow"));

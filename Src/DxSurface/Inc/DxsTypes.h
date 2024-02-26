@@ -4,6 +4,7 @@
 
 
 #include <string>
+#include <mutex>
 
 #include "DxsMacros.h"
 
@@ -16,6 +17,9 @@ namespace CB::DxSurface {
   using TString = std::string;
   using ConstTCharPtr = const char*;
 #endif
+
+  using Mutex = std::mutex;
+  using MutexLock = const std::lock_guard<Mutex>;
 
   struct WindowRectangle
   {
