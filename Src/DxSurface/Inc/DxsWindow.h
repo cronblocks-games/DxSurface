@@ -71,6 +71,7 @@ namespace CB::DxSurface {
       enum class RenderingState last,
       enum class RenderingState next);
 
+    void ProcessWindowsMessagesQueue();
     LRESULT OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
 
     static LRESULT WINAPI WindowsMessageProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);

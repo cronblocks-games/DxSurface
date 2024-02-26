@@ -287,6 +287,18 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
 }
+//- 
+//- Windows messages puller
+//- 
+void Window::ProcessWindowsMessagesQueue()
+{
+  MSG message;
+  while (PeekMessage(&message, m_hWnd, 0, 0, PM_REMOVE) != 0)
+  {
+    TranslateMessage(&message);
+    DispatchMessage(&message);
+  }
+}
 
 
 //------------------------------------------------------------------------
@@ -324,6 +336,11 @@ void Window::RenderingThread(Window* w)
 
     while (w->m_eRenderingStateCommand != RenderingState::Exitted)
     {
+      //- 
+      //- Let's see if there are messages available from Windows?
+      //- 
+      w->ProcessWindowsMessagesQueue();
+
       //- 
       //- If there are any state changes commanded?
       //- 
