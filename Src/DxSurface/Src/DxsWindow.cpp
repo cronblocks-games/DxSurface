@@ -246,6 +246,19 @@ void Window::RegisterClassAndCreateWindow()
 
   return;
 }
+void Window::UnRegisterClassAndDestroyWindow()
+{
+  if (m_hWnd == nullptr) return;
+
+  MutexLock lock(_mutGlobalData);
+  
+  _handle2WindowMap.erase(m_hWnd);
+
+  DestroyWindow(m_hWnd);
+  UnregisterClass(m_sClassName.c_str(), GetModuleHandle(nullptr));
+
+  m_hWnd = nullptr;
+}
 
 
 
@@ -373,10 +386,7 @@ void Window::RenderingThread(Window* w)
   DxsEncloseThrow(w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
   DxsEncloseThrow(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
 
-  if (threadExitReason != ThreadExitReason::Exception)
-  {
-    DxsEncloseThrow(w->Hide());
-  }
+  DxsEncloseThrow(w->UnRegisterClassAndDestroyWindow());
 
   if (w->Primary())
   {
