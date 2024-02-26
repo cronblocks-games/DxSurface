@@ -43,6 +43,8 @@ namespace CB::DxSurface {
     bool isDebugEnabled = false;
     TString title;
     WindowRectangle rect;
+
+    unsigned int maxRefreshRateHz;
   };
 
   enum class WindowCreationState

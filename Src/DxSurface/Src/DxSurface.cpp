@@ -12,6 +12,7 @@ DxSurface::DxSurface(HINSTANCE hInstance) noexcept
   m_stOptions.isDebugEnabled = true;
   m_stOptions.title = DxsT("DxSurface");
   m_stOptions.rect = WindowRectangle(10, 10, 250, 250);
+  m_stOptions.maxRefreshRateHz = 30;
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
@@ -30,6 +31,7 @@ DxSurface& DxSurface::operator=(const DxSurface& other)
 {
   m_hInstance = other.m_hInstance;
   m_stOptions = other.m_stOptions;
+
   m_vWindows.clear();
   for (auto& w : other.m_vWindows)
   {
@@ -44,6 +46,7 @@ DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
   other.m_hInstance = nullptr;
 
   m_stOptions = move(other.m_stOptions);
+
   m_vWindows.clear();
   m_vWindows = move(other.m_vWindows);
 
