@@ -366,26 +366,47 @@ void Window::RenderingThread(Window* w)
 
     if (w->m_stOptions.maxRefreshRateHz != 0)
     {
+      const double timePerIterationMSec = 1000.0 / w->m_stOptions.maxRefreshRateHz;
+      TimePoint startTime;
+      TimeDurationMilli timeDuration;
+
       while (w->m_eRenderingStateCommand != RenderingState::Exitted)
       {
-        //- Let's see if there are any messages available from Windows?
-        w->ProcessWindowsMessagesQueue();
+        startTime = Clock::now();
 
-        //- If there are any state changes commanded?
-        switch (w->m_eRenderingStateCommand)
         {
-        case RenderingState::NONE:
-        case RenderingState::Init:
-        case RenderingState::Running:
-          w->RenderingThreadSetRenderingState(RenderingState::Running);
-          break;
-        case RenderingState::Paused:
-          w->RenderingThreadSetRenderingState(RenderingState::Paused);
+          //- Let's see if there are any messages available from Windows?
+          w->ProcessWindowsMessagesQueue();
+
+          //- If there are any state changes commanded?
+          switch (w->m_eRenderingStateCommand)
+          {
+          case RenderingState::NONE:
+          case RenderingState::Init:
+          case RenderingState::Running:
+            w->RenderingThreadSetRenderingState(RenderingState::Running);
+            break;
+          case RenderingState::Paused:
+            w->RenderingThreadSetRenderingState(RenderingState::Paused);
+            break;
+          }
+
+          //- What to do within a rendering state?
+          w->RenderingThreadProcessRenderingState();
+        }
+        
+        timeDuration = Clock::now() - startTime;
+
+        if (w->m_eRenderingStateCommand == RenderingState::Exitted)
+        {
           break;
         }
 
-        //- What to do within a rendering state?
-        w->RenderingThreadProcessRenderingState();
+        if (timeDuration.count() < timePerIterationMSec)
+        {
+          double sleepTime = timePerIterationMSec - timeDuration.count();
+          this_thread::sleep_for(TimeDurationMilli(sleepTime));
+        }
       }
     }
     else
