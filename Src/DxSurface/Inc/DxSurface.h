@@ -2,7 +2,6 @@
 #define _DXSURFACE_DXSURFACE_H_
 
 #include "DxsHelpers.h"
-#include "DxsWinApi.h"
 #include "DxsWindow.h"
 #include "DxsExceptions.h"
 
@@ -22,8 +21,13 @@ namespace CB::DxSurface {
 
     ~DxSurface() = default;
 
+    void UpdateWindowCreationOptions(const WindowCreationOptions&) noexcept;
+
     Ptr<Window> CreateNewWindow();
+    Ptr<Window> CreateNewWindow(const TString& title);
+    Ptr<Window> CreateNewWindow(const TString& title, int x, int y);
     Ptr<Window> CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    Ptr<Window> CreateNewWindow(const WindowCreationOptions&);
 
     void Run();
 

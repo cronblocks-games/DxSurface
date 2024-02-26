@@ -3,11 +3,9 @@
 
 
 
-#include <memory>
 #include <thread>
 
 #include "DxsHelpers.h"
-#include "DxsWinApi.h"
 
 
 namespace CB::DxSurface {
@@ -15,7 +13,7 @@ namespace CB::DxSurface {
   class Window {
   public:
     Window() = delete;
-    Window(HINSTANCE hInstance, const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
+    Window(HINSTANCE hInstance, const WindowCreationOptions& options);
     Window(const Window& other);
     Window(Window&& other) noexcept;
 
@@ -50,16 +48,14 @@ namespace CB::DxSurface {
 
   private:
     HINSTANCE m_hInstance;
+    HWND m_hWnd;
 
-    mutable TString m_sTitle, m_sClassName;
-    int m_iX, m_iY, m_iWidth, m_iHeight;
-    bool m_bIsPrimary, m_bIsDebugEnabled;
+    mutable TString m_sClassName;
+    mutable WindowCreationOptions m_stOptions;
 
-    std::unique_ptr<std::thread> m_pThread;
+    UniquePtr<std::thread> m_pThread;
     volatile enum class WindowCreationState m_eWindowCreationState;
     volatile enum class RenderingState m_eRenderingState, m_eRenderingStateCommand;
-
-    HWND m_hWnd;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();

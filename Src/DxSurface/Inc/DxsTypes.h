@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "DxsMacros.h"
+#include "DxsWinApi.h"
 
 namespace CB::DxSurface {
 
@@ -71,15 +72,17 @@ namespace CB::DxSurface {
 
   struct WindowCreationOptions
   {
-    bool debugEnabled = false;
-    TString defaultWindowTitle;
-    WindowRectangle defaultWindowRect;
+    bool isPrimary;
+    bool isDebugEnabled = false;
+    TString title;
+    WindowRectangle rect;
 
     WindowCreationOptions()
     {
-      debugEnabled = true;
-      defaultWindowTitle = DxsT("DxSurface");
-      defaultWindowRect = WindowRectangle(10, 10, 250, 250);
+      isPrimary = false;
+      isDebugEnabled = true;
+      title = DxsT("DxSurface");
+      rect = WindowRectangle(10, 10, 250, 250);
     }
     WindowCreationOptions(const WindowCreationOptions& options)
     {
@@ -88,19 +91,23 @@ namespace CB::DxSurface {
 
     WindowCreationOptions& operator=(const WindowCreationOptions& other) noexcept
     {
-      debugEnabled = other.debugEnabled;
-      defaultWindowTitle = other.defaultWindowTitle;
-      defaultWindowRect = other.defaultWindowRect;
+      isPrimary = other.isPrimary;
+      isDebugEnabled = other.isDebugEnabled;
+      title = other.title;
+      rect = other.rect;
 
       return *this;
     }
     WindowCreationOptions& operator=(WindowCreationOptions&& other) noexcept
     {
-      debugEnabled = other.debugEnabled;
-      other.debugEnabled = false;
+      isPrimary = other.isPrimary;
+      other.isPrimary = false;
 
-      defaultWindowTitle = std::move(other.defaultWindowTitle);
-      defaultWindowRect = std::move(other.defaultWindowRect);
+      isDebugEnabled = other.isDebugEnabled;
+      other.isDebugEnabled = false;
+
+      title = std::move(other.title);
+      rect = std::move(other.rect);
 
       return *this;
     }

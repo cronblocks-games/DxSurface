@@ -6,31 +6,26 @@ using namespace std;
 using namespace CB::DxSurface;
 
 
-Window::Window(HINSTANCE hInstance, const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
+Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
 {
   if (hInstance == nullptr)
   {
     hInstance = GetModuleHandle(nullptr);
   }
-  this->m_hInstance = hInstance;
-  this->m_sTitle = title;
-  this->m_sClassName = DxsT("");
-  this->m_iX = x;
-  this->m_iY = y;
-  this->m_iWidth = width;
-  this->m_iHeight = height;
-  this->m_bIsPrimary = isPrimary;
-  this->m_bIsDebugEnabled = debugEnabled;
+  
+  m_hInstance = hInstance;
+  m_hWnd = nullptr;
 
-  this->m_hWnd = nullptr;
+  m_sClassName = DxsT("");
+  m_stOptions = options;
 
-  this->m_eWindowCreationState = WindowCreationState::NONE;
-  this->m_eRenderingState = RenderingState::NONE;
-  this->m_eRenderingStateCommand = RenderingState::NONE;
-  this->m_pThread = make_unique<thread>(Window::RenderingThread, this);
+  m_eWindowCreationState = WindowCreationState::NONE;
+  m_eRenderingState = RenderingState::NONE;
+  m_eRenderingStateCommand = RenderingState::NONE;
+  m_pThread = make_unique<thread>(Window::RenderingThread, this);
 
-  while (this->m_eWindowCreationState == WindowCreationState::NONE &&
-         this->m_eRenderingState != RenderingState::Exitted);
+  while (m_eWindowCreationState == WindowCreationState::NONE &&
+         m_eRenderingState != RenderingState::Exitted);
 }
 Window::Window(const Window& other)
 {
@@ -46,61 +41,42 @@ Window::~Window()
 
   if (m_pThread != nullptr)
   {
-    m_pThread.get()->join();
+    m_pThread->join();
   }
 }
 
 Window& Window::operator=(const Window& other)
 {
-  this->m_hInstance = other.m_hInstance;
-  this->m_sTitle = other.m_sTitle;
-  this->m_sClassName = DxsT("");
-  this->m_iX = other.m_iX;
-  this->m_iY = other.m_iY;
-  this->m_iWidth = other.m_iWidth;
-  this->m_iHeight = other.m_iHeight;
-  this->m_bIsPrimary = other.m_bIsPrimary;
-  this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
+  m_hInstance = other.m_hInstance;
+  m_hWnd = nullptr;
 
-  this->m_hWnd = nullptr;
+  m_sClassName = DxsT("");
+  m_stOptions = other.m_stOptions;
 
-  this->m_eWindowCreationState = WindowCreationState::NONE;
-  this->m_eRenderingState = other.m_eRenderingState;
-  this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  this->m_pThread = make_unique<thread>(Window::RenderingThread, this);
+  m_eWindowCreationState = WindowCreationState::NONE;
+  m_eRenderingState = other.m_eRenderingState;
+  m_eRenderingStateCommand = other.m_eRenderingStateCommand;
+  m_pThread = make_unique<thread>(Window::RenderingThread, this);
 
-  while (this->m_eWindowCreationState == WindowCreationState::NONE &&
-         this->m_eRenderingState != RenderingState::Exitted);
+  while (m_eWindowCreationState == WindowCreationState::NONE &&
+         m_eRenderingState != RenderingState::Exitted);
 
   return *this;
 }
 Window& Window::operator=(Window&& other) noexcept
 {
-  this->m_hInstance = other.m_hInstance;
-  this->m_sTitle = std::move(other.m_sTitle);
-  this->m_sClassName = std::move(other.m_sClassName);
-  this->m_iX = other.m_iX;
-  this->m_iY = other.m_iY;
-  this->m_iWidth = other.m_iWidth;
-  this->m_iHeight = other.m_iHeight;
-  this->m_bIsPrimary = other.m_bIsPrimary;
-  this->m_bIsDebugEnabled = other.m_bIsDebugEnabled;
+  m_hInstance = other.m_hInstance;
+  m_hWnd = other.m_hWnd;
 
-  this->m_hWnd = other.m_hWnd;
+  m_sClassName = std::move(other.m_sClassName);
+  m_stOptions = std::move(other.m_stOptions);
 
-  this->m_eWindowCreationState = other.m_eWindowCreationState;
-  this->m_eRenderingState = other.m_eRenderingState;
-  this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  this->m_pThread = std::move(other.m_pThread);
+  m_eWindowCreationState = other.m_eWindowCreationState;
+  m_eRenderingState = other.m_eRenderingState;
+  m_eRenderingStateCommand = other.m_eRenderingStateCommand;
+  m_pThread = std::move(other.m_pThread);
 
   other.m_hInstance = nullptr;
-  other.m_iX = 0;
-  other.m_iY = 0;
-  other.m_iWidth = 0;
-  other.m_iHeight = 0;
-  other.m_bIsPrimary = false;
-  other.m_bIsDebugEnabled = false;
-
   other.m_hWnd = nullptr;
 
   other.m_eWindowCreationState = WindowCreationState::NONE;
@@ -113,36 +89,36 @@ Window& Window::operator=(Window&& other) noexcept
 
 bool Window::Primary() const
 {
-  return m_bIsPrimary;
+  return m_stOptions.isPrimary;
 }
 void Window::Primary(bool isPrimary)
 {
-  m_bIsPrimary = isPrimary;
+  m_stOptions.isPrimary = isPrimary;
 }
 
 const TString& Window::Title() const
 {
-  return m_sTitle;
+  return m_stOptions.title;
 }
 void Window::Title(const TString& title)
 {
-  if (m_sTitle == title) return;
+  if (m_stOptions.title == title) return;
 
   if (m_hWnd == nullptr)
   {
-    DxsThrow(DxsT("Cannot change title of window with invalid handle"));
+    DxsThrow((Title() + DxsT(" - Cannot change title of window with invalid handle")).c_str());
   }
 
   SetWindowText(m_hWnd, title.c_str());
 
-  m_sTitle = title;
+  m_stOptions.title = title;
 }
 
 void Window::Show()
 {
   if (m_hWnd == nullptr)
   {
-    DxsThrow(DxsT("Cannot show window with invalid handle"));
+    DxsThrow((Title() + DxsT(" - Cannot show window with invalid handle")).c_str());
   }
 
   ShowWindow(m_hWnd, SW_SHOW);
@@ -151,7 +127,7 @@ void Window::Hide()
 {
   if (m_hWnd == nullptr)
   {
-    DxsThrow(DxsT("Cannot hide window with invalid handle"));
+    DxsThrow((Title() + DxsT(" - Cannot hide window with invalid handle")).c_str());
   }
 
   ShowWindow(m_hWnd, SW_HIDE);
@@ -161,7 +137,7 @@ void Window::PauseRendering()
 {
   if (m_eRenderingState == RenderingState::Exitted)
   {
-    DxsThrow((m_sTitle + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
+    DxsThrow((Title() + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
   }
 
   m_eRenderingStateCommand = RenderingState::Paused;
@@ -170,7 +146,7 @@ void Window::ResumeRendering()
 {
   if (m_eRenderingState == RenderingState::Exitted)
   {
-    DxsThrow((m_sTitle + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
+    DxsThrow((Title() + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
   }
 
   m_eRenderingStateCommand = RenderingState::Running;
@@ -185,7 +161,7 @@ RenderingState Window::RenderingState() const
 }
 void Window::WaitForExit() const
 {
-  m_pThread.get()->join();
+  m_pThread->join();
 }
 
 
@@ -227,15 +203,16 @@ void Window::RegisterClassAndCreateWindow()
   RegisterClassEx(&wndcls);
 
   m_hWnd = CreateWindowEx(
-    0,                        // dwExStyle
-    m_sClassName.c_str(),     // lpClassName
-    m_sTitle.c_str(),         // lpWindowName
-    0,                        // dwStyle
-    m_iX, m_iY, m_iWidth, m_iHeight,
-    nullptr,                  // hWndParent
-    nullptr,                  // hMenu
-    m_hInstance,              // hInstance
-    nullptr                   // lpParam
+    0,                                      // dwExStyle
+    m_sClassName.c_str(),                   // lpClassName
+    Title().c_str(),                        // lpWindowName
+    0,                                      // dwStyle
+    m_stOptions.rect.x, m_stOptions.rect.y, // x, y
+    m_stOptions.rect.w, m_stOptions.rect.h, // width, height
+    nullptr,                                // hWndParent
+    nullptr,                                // hMenu
+    m_hInstance,                            // hInstance
+    nullptr                                 // lpParam
   );
 
   if (m_hWnd != nullptr)

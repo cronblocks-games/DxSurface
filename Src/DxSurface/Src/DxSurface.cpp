@@ -7,9 +7,11 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
-  m_stOptions.debugEnabled = true;
-  m_stOptions.defaultWindowTitle = DxsT("DxSurface");
-  m_stOptions.defaultWindowRect = WindowRectangle(10, 10, 250, 250);
+
+  m_stOptions.isPrimary = false;
+  m_stOptions.isDebugEnabled = true;
+  m_stOptions.title = DxsT("DxSurface");
+  m_stOptions.rect = WindowRectangle(10, 10, 250, 250);
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
@@ -48,15 +50,30 @@ DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
   return *this;
 }
 
+void DxSurface::UpdateWindowCreationOptions(const WindowCreationOptions& options) noexcept
+{
+  m_stOptions = options;
+}
+
 Ptr<Window> DxSurface::CreateNewWindow()
 {
-  return CreateNewWindow(
-    m_stOptions.defaultWindowTitle,
-    m_stOptions.defaultWindowRect.x,
-    m_stOptions.defaultWindowRect.y,
-    m_stOptions.defaultWindowRect.w,
-    m_stOptions.defaultWindowRect.h,
-    m_stOptions.debugEnabled);
+  return CreateNewWindow(m_stOptions);
+}
+Ptr<Window> DxSurface::CreateNewWindow(const TString& title)
+{
+  WindowCreationOptions op = m_stOptions;
+  op.title = title;
+
+  return CreateNewWindow(op);
+}
+Ptr<Window> DxSurface::CreateNewWindow(const TString& title, int x, int y)
+{
+  WindowCreationOptions op = m_stOptions;
+  op.title = title;
+  op.rect.x = x;
+  op.rect.y = y;
+
+  return CreateNewWindow(op);
 }
 Ptr<Window> DxSurface::CreateNewWindow(
   const TString& title,
@@ -64,7 +81,20 @@ Ptr<Window> DxSurface::CreateNewWindow(
   bool isPrimary,
   bool debugEnabled)
 {
-  Ptr<Window> w = make_shared<Window>(m_hInstance, title, x, y, width, height, isPrimary, debugEnabled);
+  WindowCreationOptions op = m_stOptions;
+  op.title = title;
+  op.rect.x = x;
+  op.rect.y = y;
+  op.rect.w = width;
+  op.rect.h = height;
+  op.isPrimary = isPrimary;
+  op.isDebugEnabled = debugEnabled;
+
+  return CreateNewWindow(op);
+}
+Ptr<Window> DxSurface::CreateNewWindow(const WindowCreationOptions& options)
+{
+  Ptr<Window> w = make_shared<Window>(m_hInstance, options);
   m_vWindows.push_back(w);
   return w;
 }
