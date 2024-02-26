@@ -364,26 +364,33 @@ void Window::RenderingThread(Window* w)
   {
     w->RenderingThreadInit();
 
-    while (w->m_eRenderingStateCommand != RenderingState::Exitted)
+    if (w->m_stOptions.maxRefreshRateHz != 0)
     {
-      //- Let's see if there are any messages available from Windows?
-      w->ProcessWindowsMessagesQueue();
-
-      //- If there are any state changes commanded?
-      switch (w->m_eRenderingStateCommand)
+      while (w->m_eRenderingStateCommand != RenderingState::Exitted)
       {
-      case RenderingState::NONE:
-      case RenderingState::Init:
-      case RenderingState::Running:
-        w->RenderingThreadSetRenderingState(RenderingState::Running);
-        break;
-      case RenderingState::Paused:
-        w->RenderingThreadSetRenderingState(RenderingState::Paused);
-        break;
-      }
+        //- Let's see if there are any messages available from Windows?
+        w->ProcessWindowsMessagesQueue();
 
-      //- What to do within a rendering state?
-      w->RenderingThreadProcessRenderingState();
+        //- If there are any state changes commanded?
+        switch (w->m_eRenderingStateCommand)
+        {
+        case RenderingState::NONE:
+        case RenderingState::Init:
+        case RenderingState::Running:
+          w->RenderingThreadSetRenderingState(RenderingState::Running);
+          break;
+        case RenderingState::Paused:
+          w->RenderingThreadSetRenderingState(RenderingState::Paused);
+          break;
+        }
+
+        //- What to do within a rendering state?
+        w->RenderingThreadProcessRenderingState();
+      }
+    }
+    else
+    {
+      DxsThrow((w->Title() + DxsT(" - Zero (Hz) refresh rate is invalid")).c_str());
     }
   }
   catch (Exception& ex)
