@@ -312,6 +312,24 @@ void Window::OnRenderingStateRunning() {}
 void Window::OnRenderingStateExiting() {}
 void Window::OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next) {}
 
+void Window::RenderingThreadInit(Window* w)
+{
+  w->RegisterClassAndCreateWindow();
+  w->Show();
+
+  //- Calling Init when doing default construction
+  if (w->m_eRenderingState == w->m_eRenderingStateCommand &&
+    w->m_eRenderingStateCommand == RenderingState::NONE)
+  {
+    w->m_eRenderingState = RenderingState::Init;
+
+    w->OnRenderingStateInitInternal();
+    w->OnRenderingStateInit();
+
+    w->OnRenderingStateChangedInternal(RenderingState::NONE, RenderingState::Init);
+    w->OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
+  }
+}
 void Window::RenderingThread(Window* w)
 {
   enum class RenderingState lastRenderingState = RenderingState::NONE;
@@ -319,21 +337,7 @@ void Window::RenderingThread(Window* w)
 
   try
   {
-    w->RegisterClassAndCreateWindow();
-    w->Show();
-
-    //- Calling Init when doing default construction
-    if (w->m_eRenderingState == w->m_eRenderingStateCommand &&
-      w->m_eRenderingStateCommand == RenderingState::NONE)
-    {
-      w->m_eRenderingState = RenderingState::Init;
-
-      w->OnRenderingStateInitInternal();
-      w->OnRenderingStateInit();
-
-      w->OnRenderingStateChangedInternal(RenderingState::NONE, RenderingState::Init);
-      w->OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
-    }
+    RenderingThreadInit(w);
 
     while (w->m_eRenderingStateCommand != RenderingState::Exitted)
     {
