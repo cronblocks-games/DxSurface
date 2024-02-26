@@ -269,9 +269,7 @@ void Window::UnRegisterClassAndDestroyWindow()
 }
 
 //- 
-//- Universal messages handler.
-//-     - Here we are filtering out and only letting the messages through
-//-     that we are interested in.
+//- Universal messages handler
 //- 
 LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -282,7 +280,9 @@ LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 
   return DefWindowProc(hWnd, msg, wParam, lParam);
 }
+//- 
 //- Window specific message handler
+//- 
 LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
