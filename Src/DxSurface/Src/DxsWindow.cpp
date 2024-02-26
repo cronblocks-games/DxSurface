@@ -161,7 +161,10 @@ RenderingState Window::RenderingState() const
 }
 void Window::WaitForExit() const
 {
-  m_pThread->join();
+  if (m_pThread != nullptr)
+  {
+    m_pThread->join();
+  }
 }
 
 
