@@ -188,8 +188,9 @@ void Window::WaitForExit() const
 //- Window class registration and creation
 //- 
 //------------------------------------------------------------------------
-static Mutex reg_class_mutex;
-static int reg_class_num = 0;
+static Mutex _mutGlobalData;
+static int _classRegNum = 0;
+static map<HWND, Window*> _handle2WindowMap;
 
 void Window::RegisterClassAndCreateWindow()
 {
@@ -197,10 +198,10 @@ void Window::RegisterClassAndCreateWindow()
 
   if (m_sClassName == DxsT(""))
   {
-    MutexLock lock(reg_class_mutex);
+    MutexLock lock(_mutGlobalData);
 
     m_sClassName = DxsT("WinClass_");
-    m_sClassName += ++reg_class_num;
+    m_sClassName += ++_classRegNum;
   }
 
   WNDCLASSEX wndcls = { 0 };
@@ -233,6 +234,9 @@ void Window::RegisterClassAndCreateWindow()
   if (m_hWnd != nullptr)
   {
     m_eWindowCreationState = WindowCreationState::Success;
+
+    MutexLock lock(_mutGlobalData);
+    _handle2WindowMap[m_hWnd] = this;
   }
   else
   {
