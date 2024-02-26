@@ -22,8 +22,8 @@ namespace CB::DxSurface {
 
     ~DxSurface() = default;
 
-    SharedPtr<Window> CreateNewWindow();
-    SharedPtr<Window> CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    Ptr<Window> CreateNewWindow();
+    Ptr<Window> CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
     void Run();
 
@@ -31,7 +31,7 @@ namespace CB::DxSurface {
     HINSTANCE m_hInstance;
     WindowCreationOptions m_stOptions;
 
-    Vector<SharedPtr<Window>> m_vWindows;
+    Vector<Ptr<Window>> m_vWindows;
   };
 
 } //- namespace CB::DxSurface

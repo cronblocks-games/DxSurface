@@ -13,7 +13,7 @@ int WINAPI WinMain(
   {
     DxSurface surface(hInstance);
 
-    SharedPtr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 10, 10, 200, 200);
+    Ptr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 10, 10, 200, 200);
 
     surface.Run();
   }

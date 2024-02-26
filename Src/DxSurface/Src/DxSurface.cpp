@@ -56,7 +56,7 @@ DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
   return *this;
 }
 
-SharedPtr<Window> DxSurface::CreateNewWindow()
+Ptr<Window> DxSurface::CreateNewWindow()
 {
   return CreateNewWindow(
     m_stOptions.defaultWindowTitle,
@@ -66,13 +66,13 @@ SharedPtr<Window> DxSurface::CreateNewWindow()
     m_stOptions.defaultWindowRect.h,
     m_stOptions.debugEnabled);
 }
-SharedPtr<Window> DxSurface::CreateNewWindow(
+Ptr<Window> DxSurface::CreateNewWindow(
   const TString& title,
   int x, int y, int width, int height,
   bool isPrimary,
   bool debugEnabled)
 {
-  SharedPtr<Window> w = make_shared<Window>(m_hInstance, title, x, y, width, height, isPrimary, debugEnabled);
+  Ptr<Window> w = make_shared<Window>(m_hInstance, title, x, y, width, height, isPrimary, debugEnabled);
   m_vWindows.push_back(w);
   return w;
 }
