@@ -5,6 +5,8 @@
 
 #include <string>
 #include <mutex>
+#include <memory>
+#include <vector>
 
 #include "DxsMacros.h"
 
@@ -17,6 +19,13 @@ namespace CB::DxSurface {
   using TString = std::string;
   using ConstTCharPtr = const char*;
 #endif
+
+  template <typename T>
+  using SharedPtr = std::shared_ptr<T>;
+  template <typename T>
+  using UniquePtr = std::unique_ptr<T>;
+  template <typename T>
+  using Vector = std::vector<T>;
 
   using Mutex = std::mutex;
   using MutexLock = const std::lock_guard<Mutex>;
