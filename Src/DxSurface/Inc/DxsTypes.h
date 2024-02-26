@@ -25,6 +25,8 @@ namespace CB::DxSurface {
   template <typename T>
   using UniquePtr = std::unique_ptr<T>;
   template <typename T>
+  using Ptr = SharedPtr<T>;
+  template <typename T>
   using Vector = std::vector<T>;
 
   using Mutex = std::mutex;
