@@ -312,99 +312,102 @@ void Window::OnRenderingStateRunning() {}
 void Window::OnRenderingStateExiting() {}
 void Window::OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next) {}
 
-void Window::RenderingThreadInit(Window* w)
+void Window::RenderingThreadInit()
 {
-  w->RegisterClassAndCreateWindow();
-  w->Show();
+  RegisterClassAndCreateWindow();
+  Show();
 
   //- Calling Init when doing default construction
-  if (w->m_eRenderingState == w->m_eRenderingStateCommand &&
-    w->m_eRenderingStateCommand == RenderingState::NONE)
+  if (m_eRenderingState == m_eRenderingStateCommand &&
+      m_eRenderingStateCommand == RenderingState::NONE)
   {
-    w->m_eRenderingState = RenderingState::Init;
+    m_eRenderingState = RenderingState::Init;
 
-    w->OnRenderingStateInitInternal();
-    w->OnRenderingStateInit();
+    OnRenderingStateInitInternal();
+    OnRenderingStateInit();
 
-    w->OnRenderingStateChangedInternal(RenderingState::NONE, RenderingState::Init);
-    w->OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
+    OnRenderingStateChangedInternal(RenderingState::NONE, RenderingState::Init);
+    OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
+  }
+}
+void Window::RenderingThreadExit(enum class ThreadExitReason reason)
+{
+  auto lastRenderingState = m_eRenderingState;
+
+  DxsEncloseThrow(OnRenderingStateExitingInternal());
+  DxsEncloseThrow(OnRenderingStateExiting());
+
+  m_eRenderingState = RenderingState::Exitted;
+
+  DxsEncloseThrow(OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
+  DxsEncloseThrow(OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
+
+  DxsEncloseThrow(UnRegisterClassAndDestroyWindow());
+
+  if (Primary())
+  {
+    ExitProcess(reason == ThreadExitReason::Exception ? -1 : 0);
+  }
+}
+void Window::RenderingThreadSetRenderingState(enum class RenderingState newState)
+{
+  if (m_eRenderingState != newState)
+  {
+    auto last = m_eRenderingState;
+    m_eRenderingState = newState;
+
+    OnRenderingStateChangedInternal(last, newState);
+    OnRenderingStateChanged(last, newState);
+  }
+}
+void Window::RenderingThreadProcessRenderingState()
+{
+  switch (m_eRenderingState)
+  {
+  case RenderingState::NONE:
+  case RenderingState::Init:
+    //- we shouldn't be here - will assert later
+    break;
+
+  case RenderingState::Running:
+    OnRenderingStateRunningInternal();
+    OnRenderingStateRunning();
+    break;
+
+  case RenderingState::Paused:
+    break;
+  case RenderingState::Exitted:
+    break;
   }
 }
 void Window::RenderingThread(Window* w)
 {
-  enum class RenderingState lastRenderingState = RenderingState::NONE;
-  enum class ThreadExitReason threadExitReason = ThreadExitReason::Normal;
+  ThreadExitReason threadExitReason = ThreadExitReason::Normal;
 
   try
   {
-    RenderingThreadInit(w);
+    w->RenderingThreadInit();
 
     while (w->m_eRenderingStateCommand != RenderingState::Exitted)
     {
-      //- 
-      //- Let's see if there are messages available from Windows?
-      //- 
+      //- Let's see if there are any messages available from Windows?
       w->ProcessWindowsMessagesQueue();
 
-      //- 
       //- If there are any state changes commanded?
-      //- 
-
       switch (w->m_eRenderingStateCommand)
       {
       case RenderingState::NONE:
       case RenderingState::Init:
       case RenderingState::Running:
-
-        if (w->m_eRenderingState != RenderingState::Running)
-        {
-          lastRenderingState = w->m_eRenderingState;
-          w->m_eRenderingState = RenderingState::Running;
-
-          w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Running);
-          w->OnRenderingStateChanged(lastRenderingState, RenderingState::Running);
-        }
-
+        w->RenderingThreadSetRenderingState(RenderingState::Running);
         break;
-
       case RenderingState::Paused:
-
-        if (w->m_eRenderingState != RenderingState::Paused)
-        {
-          lastRenderingState = w->m_eRenderingState;
-          w->m_eRenderingState = RenderingState::Paused;
-
-          w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Paused);
-          w->OnRenderingStateChanged(lastRenderingState, RenderingState::Paused);
-        }
-
-        break;
-
-      case RenderingState::Exitted:
+        w->RenderingThreadSetRenderingState(RenderingState::Paused);
         break;
       }
 
-      //- 
       //- What to do within a rendering state?
-      //- 
-
-      switch (w->m_eRenderingState)
-      {
-      case RenderingState::NONE:
-      case RenderingState::Init:
-        //- we shouldn't be here - will assert later
-        break;
-
-      case RenderingState::Running:
-        w->OnRenderingStateRunningInternal();
-        w->OnRenderingStateRunning();
-        break;
-
-      case RenderingState::Paused:
-        break;
-      case RenderingState::Exitted:
-        break;
-      }
+      w->RenderingThreadProcessRenderingState();
     }
   }
   catch (Exception& ex)
@@ -423,24 +426,7 @@ void Window::RenderingThread(Window* w)
     threadExitReason = ThreadExitReason::Exception;
   }
 
-  //- 
-  //- Exiting
-  //- 
-
-  lastRenderingState = w->m_eRenderingState;
-  DxsEncloseThrow(w->OnRenderingStateExitingInternal());
-  DxsEncloseThrow(w->OnRenderingStateExiting());
-
-  w->m_eRenderingState = RenderingState::Exitted;
-  DxsEncloseThrow(w->OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
-  DxsEncloseThrow(w->OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
-
-  DxsEncloseThrow(w->UnRegisterClassAndDestroyWindow());
-
-  if (w->Primary())
-  {
-    ExitProcess(threadExitReason == ThreadExitReason::Exception ? -1 : 0);
-  }
+  w->RenderingThreadExit(threadExitReason);
 }
 
 void Window::OnRenderingStateInitInternal()

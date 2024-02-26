@@ -75,7 +75,11 @@ namespace CB::DxSurface {
     LRESULT OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
 
     static LRESULT WINAPI WindowsMessageProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
-    static void RenderingThreadInit(Window*);
+
+    void RenderingThreadInit();
+    void RenderingThreadExit(enum class ThreadExitReason);
+    void RenderingThreadSetRenderingState(enum class RenderingState);
+    void RenderingThreadProcessRenderingState();
     static void RenderingThread(Window*);
   };
 
