@@ -8,6 +8,7 @@
 #include <memory>
 #include <vector>
 #include <chrono>
+#include <thread>
 
 #include "DxsMacros.h"
 #include "DxsWinApi.h"
@@ -30,6 +31,7 @@ namespace CB::DxSurface {
   using Ptr = SharedPtr<T>;
   template <typename T>
   using Vector = std::vector<T>;
+  using Thread = std::thread;
 
   using Mutex = std::mutex;
   using MutexLock = const std::lock_guard<Mutex>;
