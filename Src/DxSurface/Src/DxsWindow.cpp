@@ -22,7 +22,7 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
   m_eWindowCreationState = WindowCreationState::NONE;
   m_eRenderingState = RenderingState::NONE;
   m_eRenderingStateCommand = RenderingState::NONE;
-  m_pThread = make_unique<thread>(Window::RenderingThread, this);
+  m_pThread = make_shared<thread>(Window::RenderingThread, this);
 
   while (m_eWindowCreationState == WindowCreationState::NONE &&
          m_eRenderingState != RenderingState::Exitted);
@@ -56,7 +56,7 @@ Window& Window::operator=(const Window& other)
   m_eWindowCreationState = WindowCreationState::NONE;
   m_eRenderingState = other.m_eRenderingState;
   m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  m_pThread = make_unique<thread>(Window::RenderingThread, this);
+  m_pThread = make_shared<thread>(Window::RenderingThread, this);
 
   while (m_eWindowCreationState == WindowCreationState::NONE &&
          m_eRenderingState != RenderingState::Exitted);
@@ -74,7 +74,7 @@ Window& Window::operator=(Window&& other) noexcept
   m_eWindowCreationState = other.m_eWindowCreationState;
   m_eRenderingState = other.m_eRenderingState;
   m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  m_pThread = std::move(other.m_pThread);
+  m_pThread = other.m_pThread;
 
   other.m_hInstance = nullptr;
   other.m_hWnd = nullptr;

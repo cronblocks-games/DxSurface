@@ -3,8 +3,6 @@
 
 
 
-#include <thread>
-
 #include "DxsHelpers.h"
 
 
@@ -53,7 +51,7 @@ namespace CB::DxSurface {
     mutable TString m_sClassName;
     mutable WindowCreationOptions m_stOptions;
 
-    UniquePtr<std::thread> m_pThread;
+    Ptr<Thread> m_pThread;
     volatile enum class WindowCreationState m_eWindowCreationState;
     volatile enum class RenderingState m_eRenderingState, m_eRenderingStateCommand;
 
