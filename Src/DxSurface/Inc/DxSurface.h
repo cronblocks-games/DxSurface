@@ -1,8 +1,6 @@
 #ifndef _DXSURFACE_DXSURFACE_H_
 #define _DXSURFACE_DXSURFACE_H_
 
-#include <vector>
-
 #include "DxsHelpers.h"
 #include "DxsWinApi.h"
 #include "DxsWindow.h"
@@ -24,8 +22,8 @@ namespace CB::DxSurface {
 
     ~DxSurface() = default;
 
-    Window* CreateNewWindow();
-    Window* CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
+    SharedPtr<Window> CreateNewWindow();
+    SharedPtr<Window> CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
 
     void Run();
 
@@ -33,7 +31,7 @@ namespace CB::DxSurface {
     HINSTANCE m_hInstance;
     WindowCreationOptions m_stOptions;
 
-    std::vector<Window*> m_vWindows;
+    Vector<SharedPtr<Window>> m_vWindows;
   };
 
 } //- namespace CB::DxSurface
