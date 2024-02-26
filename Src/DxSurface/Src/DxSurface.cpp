@@ -4,14 +4,24 @@
 using namespace std;
 using namespace CB::DxSurface;
 
-DxSurface::DxSurface()
+DxSurface::DxSurface(HINSTANCE hInstance)
 {
+  if (hInstance == nullptr)
+  {
+    DxsThrow(DxsT("Invalid HINSTANCE provided"));
+  }
+  m_hInstance = hInstance;
   m_stOptions.debugEnabled = true;
   m_stOptions.defaultWindowTitle = DxsT("DxSurface");
   m_stOptions.defaultWindowRect = WindowRectangle(10, 10, 250, 250);
 }
-DxSurface::DxSurface(const WindowCreationOptions& options)
+DxSurface::DxSurface(HINSTANCE hInstance, const WindowCreationOptions& options)
 {
+  if (hInstance == nullptr)
+  {
+    DxsThrow(DxsT("Invalid HINSTANCE provided"));
+  }
+  m_hInstance = hInstance;
   m_stOptions = options;
 }
 DxSurface::DxSurface(const DxSurface& other)
@@ -24,6 +34,7 @@ DxSurface::DxSurface(DxSurface&& other) noexcept
 }
 DxSurface& DxSurface::operator=(const DxSurface& other)
 {
+  m_hInstance = other.m_hInstance;
   m_stOptions = other.m_stOptions;
   m_vWindows.clear();
   for (auto& w : other.m_vWindows)
@@ -35,6 +46,9 @@ DxSurface& DxSurface::operator=(const DxSurface& other)
 }
 DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
 {
+  m_hInstance = other.m_hInstance;
+  other.m_hInstance = nullptr;
+
   m_stOptions = move(other.m_stOptions);
   m_vWindows.clear();
   m_vWindows = move(other.m_vWindows);
@@ -58,7 +72,7 @@ Window& DxSurface::CreateNewWindow(
   bool isPrimary,
   bool debugEnabled)
 {
-  m_vWindows.emplace_back(title, x, y, width, height, isPrimary, debugEnabled);
+  m_vWindows.emplace_back(m_hInstance, title, x, y, width, height, isPrimary, debugEnabled);
   return m_vWindows[m_vWindows.size() - 1];
 }
 

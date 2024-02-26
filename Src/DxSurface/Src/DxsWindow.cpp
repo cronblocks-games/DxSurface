@@ -16,8 +16,13 @@ Window::~Window()
   }
 }
 
-Window::Window(const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
+Window::Window(HINSTANCE hInstance, const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
+  if (hInstance == nullptr)
+  {
+    DxsThrow(DxsT("Invalid HINSTANCE provided"));
+  }
+  this->m_hInstance = hInstance;
   this->m_sTitle = title;
   this->m_sClassName = DxsT("");
   this->m_iX = x;
@@ -48,6 +53,7 @@ Window::Window(Window&& other) noexcept
 
 Window& Window::operator=(const Window& other)
 {
+  this->m_hInstance = other.m_hInstance;
   this->m_sTitle = other.m_sTitle;
   this->m_sClassName = DxsT("");
   this->m_iX = other.m_iX;
@@ -71,6 +77,7 @@ Window& Window::operator=(const Window& other)
 }
 Window& Window::operator=(Window&& other) noexcept
 {
+  this->m_hInstance = other.m_hInstance;
   this->m_sTitle = std::move(other.m_sTitle);
   this->m_sClassName = std::move(other.m_sClassName);
   this->m_iX = other.m_iX;
@@ -87,6 +94,7 @@ Window& Window::operator=(Window&& other) noexcept
   this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
   this->m_pThread = std::move(other.m_pThread);
 
+  other.m_hInstance = nullptr;
   other.m_iX = 0;
   other.m_iY = 0;
   other.m_iWidth = 0;
@@ -207,10 +215,10 @@ void Window::RegisterClassAndCreateWindow()
   WNDCLASSEX wndcls = { 0 };
   wndcls.cbSize = sizeof(wndcls);
   wndcls.style = CS_OWNDC;
-  wndcls.lpfnWndProc = DefWindowProc;
+  wndcls.lpfnWndProc = Window::WindowsMessageProc;
   wndcls.cbClsExtra = 0; // extra bytes to allocate following the window-class structure
   wndcls.cbWndExtra = 0; // extra bytes to allocate following the window instance
-  wndcls.hInstance = GetModuleHandle(nullptr);
+  wndcls.hInstance = m_hInstance;
   wndcls.hIcon = nullptr;
   wndcls.hCursor = nullptr;
   wndcls.hbrBackground = nullptr;
@@ -227,7 +235,7 @@ void Window::RegisterClassAndCreateWindow()
     m_iX, m_iY, m_iWidth, m_iHeight,
     nullptr,                  // hWndParent
     nullptr,                  // hMenu
-    GetModuleHandle(nullptr), // hInstance
+    m_hInstance,              // hInstance
     nullptr                   // lpParam
   );
 
@@ -255,11 +263,30 @@ void Window::UnRegisterClassAndDestroyWindow()
   _handle2WindowMap.erase(m_hWnd);
 
   DestroyWindow(m_hWnd);
-  UnregisterClass(m_sClassName.c_str(), GetModuleHandle(nullptr));
+  UnregisterClass(m_sClassName.c_str(), m_hInstance);
 
   m_hWnd = nullptr;
 }
 
+//- 
+//- Universal messages handler.
+//-     - Here we are filtering out and only letting the messages through
+//-     that we are interested in.
+//- 
+LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+  try {
+    if (_handle2WindowMap.contains(hWnd))
+      return _handle2WindowMap[hWnd]->OnWindowsMessage(msg, wParam, lParam);
+  } catch (...) {}
+
+  return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+//- Window specific message handler
+LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
+{
+  return DefWindowProc(m_hWnd, msg, wParam, lParam);
+}
 
 
 //------------------------------------------------------------------------

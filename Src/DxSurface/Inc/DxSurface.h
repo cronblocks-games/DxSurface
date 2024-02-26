@@ -14,8 +14,8 @@ namespace CB::DxSurface {
   class DxSurface {
 
   public:
-    DxSurface();
-    DxSurface(const WindowCreationOptions& options);
+    DxSurface(HINSTANCE hInstance);
+    DxSurface(HINSTANCE hInstance, const WindowCreationOptions& options);
 
     DxSurface(const DxSurface&);
     DxSurface(DxSurface&&) noexcept;
@@ -30,6 +30,7 @@ namespace CB::DxSurface {
     void Run();
 
   private:
+    HINSTANCE m_hInstance;
     WindowCreationOptions m_stOptions;
 
     std::vector<Window> m_vWindows;

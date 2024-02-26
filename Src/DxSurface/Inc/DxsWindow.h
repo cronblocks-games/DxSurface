@@ -15,7 +15,7 @@ namespace CB::DxSurface {
   class Window {
   public:
     Window() = delete;
-    Window(const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
+    Window(HINSTANCE hInstance, const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled);
     Window(const Window& other);
     Window(Window&& other) noexcept;
 
@@ -49,6 +49,8 @@ namespace CB::DxSurface {
       enum class RenderingState next);
 
   private:
+    HINSTANCE m_hInstance;
+
     mutable TString m_sTitle, m_sClassName;
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
@@ -69,6 +71,9 @@ namespace CB::DxSurface {
       enum class RenderingState last,
       enum class RenderingState next);
 
+    LRESULT OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
+
+    static LRESULT WINAPI WindowsMessageProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
     static void RenderingThread(Window*);
   };
 
