@@ -7,6 +7,7 @@
 #include <mutex>
 #include <memory>
 #include <vector>
+#include <chrono>
 
 #include "DxsMacros.h"
 #include "DxsWinApi.h"
@@ -32,6 +33,10 @@ namespace CB::DxSurface {
 
   using Mutex = std::mutex;
   using MutexLock = const std::lock_guard<Mutex>;
+
+  using Clock = std::chrono::high_resolution_clock;
+  using TimePoint = std::chrono::time_point<Clock>;
+  using TimeDurationMilli = std::chrono::duration<double, std::milli>;
 
   struct WindowRectangle
   {
