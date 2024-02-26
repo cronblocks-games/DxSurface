@@ -19,6 +19,7 @@ Window::~Window()
 Window::Window(const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
   this->m_sTitle = title;
+  this->m_sClassName = DxsT("");
   this->m_iX = x;
   this->m_iY = y;
   this->m_iWidth = width;
@@ -48,6 +49,7 @@ Window::Window(Window&& other) noexcept
 Window& Window::operator=(const Window& other)
 {
   this->m_sTitle = other.m_sTitle;
+  this->m_sClassName = DxsT("");
   this->m_iX = other.m_iX;
   this->m_iY = other.m_iY;
   this->m_iWidth = other.m_iWidth;
@@ -70,6 +72,7 @@ Window& Window::operator=(const Window& other)
 Window& Window::operator=(Window&& other) noexcept
 {
   this->m_sTitle = std::move(other.m_sTitle);
+  this->m_sClassName = std::move(other.m_sClassName);
   this->m_iX = other.m_iX;
   this->m_iY = other.m_iY;
   this->m_iWidth = other.m_iWidth;

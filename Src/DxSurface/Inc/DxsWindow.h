@@ -49,7 +49,7 @@ namespace CB::DxSurface {
       enum class RenderingState next);
 
   private:
-    mutable TString m_sTitle;
+    mutable TString m_sTitle, m_sClassName;
     int m_iX, m_iY, m_iWidth, m_iHeight;
     bool m_bIsPrimary, m_bIsDebugEnabled;
 
