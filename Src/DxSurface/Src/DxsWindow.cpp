@@ -189,16 +189,58 @@ void Window::WaitForExit() const
 //- 
 //------------------------------------------------------------------------
 static Mutex reg_class_mutex;
-static map<TString, WNDCLASSEX> reg_classes;
+static int reg_class_num = 0;
 
-HWND Window::RegisterClassAndCreateWindow()
+void Window::RegisterClassAndCreateWindow()
 {
-  if (m_hWnd != nullptr) return m_hWnd;
+  if (m_hWnd != nullptr) return;
 
-  MutexLock lock(reg_class_mutex);
+  if (m_sClassName == DxsT(""))
+  {
+    MutexLock lock(reg_class_mutex);
 
-  m_eWindowCreationState = WindowCreationState::Fail;
-  DxsThrow(DxsT("Not implemented: RegisterClassAndCreateWindow"));
+    m_sClassName = DxsT("WinClass_");
+    m_sClassName += ++reg_class_num;
+  }
+
+  WNDCLASSEX wndcls = { 0 };
+  wndcls.cbSize = sizeof(wndcls);
+  wndcls.style = CS_OWNDC;
+  wndcls.lpfnWndProc = DefWindowProc;
+  wndcls.cbClsExtra = 0; // extra bytes to allocate following the window-class structure
+  wndcls.cbWndExtra = 0; // extra bytes to allocate following the window instance
+  wndcls.hInstance = GetModuleHandle(nullptr);
+  wndcls.hIcon = nullptr;
+  wndcls.hCursor = nullptr;
+  wndcls.hbrBackground = nullptr;
+  wndcls.lpszMenuName = nullptr;
+  wndcls.lpszClassName = m_sClassName.c_str();
+  wndcls.hIconSm = nullptr;
+  RegisterClassEx(&wndcls);
+
+  m_hWnd = CreateWindowEx(
+    0,                        // dwExStyle
+    m_sClassName.c_str(),     // lpClassName
+    m_sTitle.c_str(),         // lpWindowName
+    0,                        // dwStyle
+    m_iX, m_iY, m_iWidth, m_iHeight,
+    nullptr,                  // hWndParent
+    nullptr,                  // hMenu
+    GetModuleHandle(nullptr), // hInstance
+    nullptr                   // lpParam
+  );
+
+  if (m_hWnd != nullptr)
+  {
+    m_eWindowCreationState = WindowCreationState::Success;
+  }
+  else
+  {
+    m_eWindowCreationState = WindowCreationState::Fail;
+    DxsThrow(DxsT("Window creation failed"));
+  }
+
+  return;
 }
 
 
