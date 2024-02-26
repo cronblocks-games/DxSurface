@@ -82,7 +82,7 @@ Window& Window::operator=(Window&& other) noexcept
   this->m_eWindowCreationState = other.m_eWindowCreationState;
   this->m_eRenderingState = other.m_eRenderingState;
   this->m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  this->m_pThread = std::move(m_pThread);
+  this->m_pThread = std::move(other.m_pThread);
 
   other.m_iX = 0;
   other.m_iY = 0;
