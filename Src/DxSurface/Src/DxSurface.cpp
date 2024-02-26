@@ -4,23 +4,15 @@
 using namespace std;
 using namespace CB::DxSurface;
 
-DxSurface::DxSurface(HINSTANCE hInstance)
+DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
-  if (hInstance == nullptr)
-  {
-    DxsThrow(DxsT("Invalid HINSTANCE provided"));
-  }
   m_hInstance = hInstance;
   m_stOptions.debugEnabled = true;
   m_stOptions.defaultWindowTitle = DxsT("DxSurface");
   m_stOptions.defaultWindowRect = WindowRectangle(10, 10, 250, 250);
 }
-DxSurface::DxSurface(HINSTANCE hInstance, const WindowCreationOptions& options)
+DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
-  if (hInstance == nullptr)
-  {
-    DxsThrow(DxsT("Invalid HINSTANCE provided"));
-  }
   m_hInstance = hInstance;
   m_stOptions = options;
 }

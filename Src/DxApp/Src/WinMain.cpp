@@ -11,7 +11,7 @@ int WINAPI WinMain(
 {
   try
   {
-    DxSurface surface(hInstance);
+    DxSurface surface;
 
     Ptr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 10, 10, 200, 200);
 

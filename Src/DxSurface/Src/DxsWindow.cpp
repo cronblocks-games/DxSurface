@@ -6,21 +6,11 @@ using namespace std;
 using namespace CB::DxSurface;
 
 
-Window::~Window()
-{
-  m_eRenderingStateCommand = RenderingState::Exitted;
-
-  if (m_pThread != nullptr)
-  {
-    m_pThread.get()->join();
-  }
-}
-
 Window::Window(HINSTANCE hInstance, const TString& title, int x, int y, int width, int height, bool isPrimary, bool debugEnabled)
 {
   if (hInstance == nullptr)
   {
-    DxsThrow(DxsT("Invalid HINSTANCE provided"));
+    hInstance = GetModuleHandle(nullptr);
   }
   this->m_hInstance = hInstance;
   this->m_sTitle = title;
@@ -49,6 +39,15 @@ Window::Window(const Window& other)
 Window::Window(Window&& other) noexcept
 {
   *this = std::move(other);
+}
+Window::~Window()
+{
+  m_eRenderingStateCommand = RenderingState::Exitted;
+
+  if (m_pThread != nullptr)
+  {
+    m_pThread.get()->join();
+  }
 }
 
 Window& Window::operator=(const Window& other)

@@ -12,8 +12,8 @@ namespace CB::DxSurface {
   class DxSurface {
 
   public:
-    DxSurface(HINSTANCE hInstance);
-    DxSurface(HINSTANCE hInstance, const WindowCreationOptions& options);
+    DxSurface(HINSTANCE hInstance = nullptr) noexcept;
+    DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance = nullptr) noexcept;
 
     DxSurface(const DxSurface&);
     DxSurface(DxSurface&&) noexcept;
