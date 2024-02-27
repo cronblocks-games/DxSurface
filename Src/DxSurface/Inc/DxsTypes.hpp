@@ -1,8 +1,6 @@
 #ifndef _DXSURFACE_DXSTYPES_H_
 #define _DXSURFACE_DXSTYPES_H_
 
-
-
 #include <string>
 #include <mutex>
 #include <memory>
