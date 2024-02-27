@@ -46,10 +46,13 @@ namespace CB::DxSurface {
   };
   struct WindowCreationOptions
   {
+    TString title = DxsT("DxSurface");
+
     bool isPrimary = false;
     bool isDebugEnabled = false;
-    TString title = DxsT("DxSurface");
+
     WindowRectangle rect = WindowRectangle(10, 10, 600, 450);
+
     DWORD dwStyle = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
     DWORD dwExStyle = WS_EX_WINDOWEDGE;
 
