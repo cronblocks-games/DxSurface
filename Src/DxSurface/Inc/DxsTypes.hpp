@@ -33,6 +33,7 @@ namespace CB::DxSurface {
 
   using Mutex = std::mutex;
   using MutexLock = const std::lock_guard<Mutex>;
+  using Lock = MutexLock;
 
   using Clock = std::chrono::high_resolution_clock;
   using TimePoint = std::chrono::time_point<Clock>;
