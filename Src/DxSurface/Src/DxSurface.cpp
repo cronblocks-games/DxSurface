@@ -38,7 +38,6 @@ DxSurface& DxSurface::operator=(const DxSurface& other)
 DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
 {
   m_hInstance = exchange(other.m_hInstance, nullptr);
-
   m_stOptions = move(other.m_stOptions);
 
   m_vWindows.clear();
@@ -96,7 +95,7 @@ Ptr<Window> DxSurface::CreateNewWindow(const WindowCreationOptions& options)
   return w;
 }
 
-void DxSurface::Run()
+void DxSurface::WaitForExit()
 {
   while (1)
   {

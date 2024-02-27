@@ -13,12 +13,10 @@ namespace CB::DxSurface {
   public:
     DxSurface(HINSTANCE hInstance = nullptr) noexcept;
     DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance = nullptr) noexcept;
-
     DxSurface(const DxSurface&);
     DxSurface(DxSurface&&) noexcept;
     DxSurface& operator=(const DxSurface&);
     DxSurface& operator=(DxSurface&&) noexcept;
-
     ~DxSurface() = default;
 
     void UpdateWindowCreationOptions(const WindowCreationOptions&) noexcept;
@@ -29,12 +27,11 @@ namespace CB::DxSurface {
     Ptr<Window> CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
     Ptr<Window> CreateNewWindow(const WindowCreationOptions&);
 
-    void Run();
+    void WaitForExit();
 
   private:
     HINSTANCE m_hInstance;
     WindowCreationOptions m_stOptions;
-
     Vector<Ptr<Window>> m_vWindows;
   };
 

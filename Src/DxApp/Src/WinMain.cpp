@@ -14,7 +14,7 @@ int WINAPI WinMain(
 
     Ptr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 200, 100);
 
-    surface.Run();
+    surface.WaitForExit();
   }
   catch (Exception& ex)
   {
