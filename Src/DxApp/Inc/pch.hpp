@@ -2,7 +2,7 @@
 #define _DXAPP_PCH_H_
 
 
-#include <Windows.h>
+#include "DxSurface.hpp"
 
 
 #endif
