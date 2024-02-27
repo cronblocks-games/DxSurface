@@ -46,12 +46,14 @@ namespace CB::DxSurface {
   };
   struct WindowCreationOptions
   {
-    bool isPrimary;
+    bool isPrimary = false;
     bool isDebugEnabled = false;
-    TString title;
-    WindowRectangle rect;
+    TString title = DxsT("DxSurface");;
+    WindowRectangle rect = WindowRectangle(10, 10, 250, 250);;
+    DWORD dwExStyle = 0;
+    DWORD dwStyle = 0;
 
-    unsigned int maxRefreshRateHz;
+    unsigned int maxRefreshRateHz = 30;
   };
 
   enum class WindowCreationState
