@@ -40,22 +40,22 @@ namespace CB::DxSurface {
   using TimePoint = std::chrono::time_point<Clock>;
   using TimeDurationMilli = std::chrono::duration<double, std::milli>;
 
-  struct WindowRectangle
+  struct WindowRect
   {
     int x = 0, y = 0, w = 0, h = 0;
   };
   struct WindowCreationOptions
   {
-    TString title = DxsT("DxSurface");
-
-    bool isPrimary = false;
-    bool isDebugEnabled = false;
-
-    WindowRectangle rect = WindowRectangle(10, 10, 600, 450);
-
-    DWORD dwStyle = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
-    DWORD dwExStyle = WS_EX_WINDOWEDGE;
-
+    TString      title            = DxsT("DxSurface");
+    bool         isPrimary        = false;
+    bool         isDebugEnabled   = false;
+    HICON        hIcon            = nullptr;
+    HICON        hIconSmall       = nullptr;
+    HCURSOR      hCursor          = nullptr;
+    WindowRect   rect             = WindowRect(10, 10, 600, 450);
+    DWORD        dwStyle          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
+    DWORD        dwExStyle        = WS_EX_WINDOWEDGE;
+    
     unsigned int maxRefreshRateHz = 30;
   };
 
