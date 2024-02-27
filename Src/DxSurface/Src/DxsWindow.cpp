@@ -20,9 +20,11 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
   m_stOptions = options;
 
   m_eWindowCreationState = WindowCreationState::NONE;
-  m_eRenderingState = RenderingState::NONE;
-  m_eRenderingStateCommand = RenderingState::NONE;
-  m_pThread = nullptr;
+  m_eRenderingState = ExecutionState::NONE;
+  m_eProcessingState = ExecutionState::NONE;
+  m_eThreadsStateCommand = ExecutionState::NONE;
+  m_pRenderingThread.reset();
+  m_pProcessingThread.reset();
 }
 Window::Window(const Window& other)
 {
@@ -34,12 +36,17 @@ Window::Window(Window&& other) noexcept
 }
 Window::~Window()
 {
-  m_eRenderingStateCommand = RenderingState::Exitted;
+  m_eThreadsStateCommand = ExecutionState::Exitted;
 
-  if (m_pThread)
+  if (m_pProcessingThread)
   {
-    m_pThread->join();
-    m_pThread = nullptr;
+    m_pProcessingThread->join();
+    m_pProcessingThread.reset();
+  }
+  if (m_pRenderingThread)
+  {
+    m_pRenderingThread->join();
+    m_pRenderingThread.reset();
   }
 }
 
@@ -54,9 +61,11 @@ Window& Window::operator=(const Window& other)
   m_stOptions = other.m_stOptions;
 
   m_eWindowCreationState = WindowCreationState::NONE;
-  m_eRenderingState = RenderingState::NONE;
-  m_eRenderingStateCommand = RenderingState::NONE;
-  m_pThread = nullptr;
+  m_eRenderingState = ExecutionState::NONE;
+  m_eProcessingState = ExecutionState::NONE;
+  m_eThreadsStateCommand = ExecutionState::NONE;
+  m_pRenderingThread.reset();
+  m_pProcessingThread.reset();
 
   return *this;
 }
@@ -72,16 +81,20 @@ Window& Window::operator=(Window&& other) noexcept
 
   m_eWindowCreationState = other.m_eWindowCreationState;
   m_eRenderingState = other.m_eRenderingState;
-  m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  m_pThread = other.m_pThread;
+  m_eProcessingState = other.m_eProcessingState;
+  m_eThreadsStateCommand = other.m_eThreadsStateCommand;
+  m_pRenderingThread = other.m_pRenderingThread;
+  m_pProcessingThread = other.m_pProcessingThread;
 
   other.m_hInstance = nullptr;
   other.m_hWnd = nullptr;
 
   other.m_eWindowCreationState = WindowCreationState::NONE;
-  other.m_eRenderingState = RenderingState::NONE;
-  other.m_eRenderingStateCommand = RenderingState::NONE;
-  other.m_pThread = nullptr;
+  other.m_eRenderingState = ExecutionState::NONE;
+  other.m_eProcessingState = ExecutionState::NONE;
+  other.m_eThreadsStateCommand = ExecutionState::NONE;
+  other.m_pRenderingThread.reset();
+  other.m_pProcessingThread.reset();
 
   return *this;
 }
@@ -92,48 +105,55 @@ void Window::CreateWindowAndRun()
 {
   Lock l(_windowCreationMutex);
 
-  if (m_pThread) return;
+  if (m_pRenderingThread) return;
 
   m_eWindowCreationState = WindowCreationState::NONE;
-  m_eRenderingState = RenderingState::NONE;
-  m_eRenderingStateCommand = RenderingState::NONE;
-  m_pThread = make_shared<thread>(Window::RenderingThread, this);
+  m_eRenderingState = ExecutionState::NONE;
+  m_eProcessingState = ExecutionState::NONE;
+  m_eThreadsStateCommand = ExecutionState::NONE;
+  m_pRenderingThread = make_shared<thread>(Window::RenderingThread, this);
+  m_pProcessingThread = make_shared<thread>(Window::ProcessingThread, this);
 
   while (m_eWindowCreationState == WindowCreationState::NONE &&
-         m_eRenderingState != RenderingState::Exitted);
+         m_eRenderingState != ExecutionState::Exitted);
 }
-RenderingState Window::RenderingState() const
+ExecutionState Window::RenderingState() const
 {
   return m_eRenderingState;
 }
 void Window::Pause()
 {
-  if (m_eRenderingState == RenderingState::Exitted)
+  if (m_eRenderingState == ExecutionState::Exitted)
   {
     DxsThrow((Title() + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
   }
 
-  m_eRenderingStateCommand = RenderingState::Paused;
+  m_eThreadsStateCommand = ExecutionState::Paused;
 }
 void Window::Resume()
 {
-  if (m_eRenderingState == RenderingState::Exitted)
+  if (m_eRenderingState == ExecutionState::Exitted)
   {
     DxsThrow((Title() + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
   }
 
-  m_eRenderingStateCommand = RenderingState::Running;
+  m_eThreadsStateCommand = ExecutionState::Running;
 }
 void Window::Exit()
 {
-  m_eRenderingStateCommand = RenderingState::Exitted;
+  m_eThreadsStateCommand = ExecutionState::Exitted;
 }
 void Window::WaitForExit()
 {
-  if (m_pThread)
+  if (m_pProcessingThread)
   {
-    m_pThread->join();
-    m_pThread = nullptr;
+    m_pProcessingThread->join();
+    m_pProcessingThread.reset();
+  }
+  if (m_pRenderingThread)
+  {
+    m_pRenderingThread->join();
+    m_pRenderingThread.reset();
   }
 }
 
@@ -311,7 +331,7 @@ void Window::ProcessWindowsMessagesQueue()
 void Window::OnRenderingStateInit() {}
 void Window::OnRenderingStateRunning() {}
 void Window::OnRenderingStateExiting() {}
-void Window::OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next) {}
+void Window::OnRenderingStateChanged(ExecutionState last, ExecutionState next) {}
 
 void Window::RenderingThreadDoInit()
 {
@@ -319,16 +339,16 @@ void Window::RenderingThreadDoInit()
   Show();
 
   //- Calling Init when doing default construction
-  if (m_eRenderingState == m_eRenderingStateCommand &&
-      m_eRenderingStateCommand == RenderingState::NONE)
+  if (m_eRenderingState == m_eThreadsStateCommand &&
+      m_eThreadsStateCommand == ExecutionState::NONE)
   {
-    m_eRenderingState = RenderingState::Init;
+    m_eRenderingState = ExecutionState::Init;
 
     OnRenderingStateInitInternal();
     OnRenderingStateInit();
 
-    OnRenderingStateChangedInternal(RenderingState::NONE, RenderingState::Init);
-    OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
+    OnRenderingStateChangedInternal(ExecutionState::NONE, ExecutionState::Init);
+    OnRenderingStateChanged(ExecutionState::NONE, ExecutionState::Init);
   }
 }
 void Window::RenderingThreadDoExit(enum class ThreadExitReason reason)
@@ -338,10 +358,10 @@ void Window::RenderingThreadDoExit(enum class ThreadExitReason reason)
   DxsEncloseThrow(OnRenderingStateExitingInternal());
   DxsEncloseThrow(OnRenderingStateExiting());
 
-  m_eRenderingState = RenderingState::Exitted;
+  m_eRenderingState = ExecutionState::Exitted;
 
-  DxsEncloseThrow(OnRenderingStateChangedInternal(lastRenderingState, RenderingState::Exitted));
-  DxsEncloseThrow(OnRenderingStateChanged(lastRenderingState, RenderingState::Exitted));
+  DxsEncloseThrow(OnRenderingStateChangedInternal(lastRenderingState, ExecutionState::Exitted));
+  DxsEncloseThrow(OnRenderingStateChanged(lastRenderingState, ExecutionState::Exitted));
 
   DxsEncloseThrow(UnRegisterClassAndDestroyWindow());
 
@@ -350,7 +370,7 @@ void Window::RenderingThreadDoExit(enum class ThreadExitReason reason)
     ExitProcess(reason == ThreadExitReason::Exception ? -1 : 0);
   }
 }
-void Window::RenderingThreadDoSetRenderingState(enum class RenderingState newState)
+void Window::RenderingThreadDoSetRenderingState(ExecutionState newState)
 {
   if (m_eRenderingState != newState)
   {
@@ -365,23 +385,23 @@ void Window::RenderingThreadDoProcessRenderingState()
 {
   switch (m_eRenderingState)
   {
-  case RenderingState::NONE:
-  case RenderingState::Init:
+  case ExecutionState::NONE:
+  case ExecutionState::Init:
     //- we shouldn't be here - will assert later
     break;
 
-  case RenderingState::Running:
+  case ExecutionState::Running:
     OnRenderingStateRunningInternal();
     OnRenderingStateRunning();
     break;
 
-  case RenderingState::Paused:
+  case ExecutionState::Paused:
     break;
-  case RenderingState::Exitted:
+  case ExecutionState::Exitted:
     break;
   }
 }
-void Window::RenderingThread(Window* w)
+void Window::RenderingThread(Window* const w)
 {
   ThreadExitReason threadExitReason = ThreadExitReason::Normal;
 
@@ -389,13 +409,13 @@ void Window::RenderingThread(Window* w)
   {
     w->RenderingThreadDoInit();
 
-    if (w->m_stOptions.maxRefreshRateHz != 0)
+    if (w->m_stOptions.maxRenderingThreadRefreshRateHz != 0)
     {
-      const double timePerIterationMSec = 1000.0 / w->m_stOptions.maxRefreshRateHz;
+      const double timePerIterationMSec = 1000.0 / w->m_stOptions.maxRenderingThreadRefreshRateHz;
       TimePoint startTime;
       TimeDurationMilli timeDuration;
 
-      while (w->m_eRenderingStateCommand != RenderingState::Exitted)
+      while (w->m_eThreadsStateCommand != ExecutionState::Exitted)
       {
         startTime = Clock::now();
 
@@ -404,15 +424,15 @@ void Window::RenderingThread(Window* w)
           w->ProcessWindowsMessagesQueue();
 
           //- If there are any state changes commanded?
-          switch (w->m_eRenderingStateCommand)
+          switch (w->m_eThreadsStateCommand)
           {
-          case RenderingState::NONE:
-          case RenderingState::Init:
-          case RenderingState::Running:
-            w->RenderingThreadDoSetRenderingState(RenderingState::Running);
+          case ExecutionState::NONE:
+          case ExecutionState::Init:
+          case ExecutionState::Running:
+            w->RenderingThreadDoSetRenderingState(ExecutionState::Running);
             break;
-          case RenderingState::Paused:
-            w->RenderingThreadDoSetRenderingState(RenderingState::Paused);
+          case ExecutionState::Paused:
+            w->RenderingThreadDoSetRenderingState(ExecutionState::Paused);
             break;
           }
 
@@ -422,7 +442,7 @@ void Window::RenderingThread(Window* w)
         
         timeDuration = Clock::now() - startTime;
 
-        if (w->m_eRenderingStateCommand == RenderingState::Exitted)
+        if (w->m_eThreadsStateCommand == ExecutionState::Exitted)
         {
           break;
         }
@@ -470,9 +490,85 @@ void Window::OnRenderingStateExitingInternal()
 {
   //-
 }
-void Window::OnRenderingStateChangedInternal(
-  enum class RenderingState last,
-  enum class RenderingState next)
+void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState next)
 {
   //-
+}
+
+
+//------------------------------------------------------------------------
+//- 
+//- Processing thread
+//- 
+//------------------------------------------------------------------------
+void Window::ProcessingThread(Window* const w)
+{
+  ThreadExitReason threadExitReason = ThreadExitReason::Normal;
+
+  try
+  {
+    w->m_eProcessingState = ExecutionState::Init;
+
+    if (w->m_stOptions.processingFunc != nullptr)
+    {
+      if (w->m_stOptions.maxProcessingThreadRefreshRateHz != 0)
+      {
+        const double timePerIterationMSec = 1000.0 / w->m_stOptions.maxProcessingThreadRefreshRateHz;
+
+        TimePoint iterationStartTime, lastExecutionTime = Clock::now();
+
+        while (w->m_eThreadsStateCommand != ExecutionState::Exitted &&
+               w->m_eRenderingState != ExecutionState::Exitted)
+        {
+          iterationStartTime = Clock::now();
+
+          //- Run the process and take the timestamp
+          if (w->m_eThreadsStateCommand == ExecutionState::NONE ||
+              w->m_eThreadsStateCommand == ExecutionState::Init ||
+              w->m_eThreadsStateCommand == ExecutionState::Running)
+          {
+            w->m_eProcessingState = ExecutionState::Running;
+            w->m_stOptions.processingFunc(TimeDurationMilli(Clock::now() - lastExecutionTime).count());
+          }
+          else if (w->m_eThreadsStateCommand == ExecutionState::Paused)
+          {
+            w->m_eProcessingState = ExecutionState::Paused;
+          }
+
+          lastExecutionTime = Clock::now();
+
+          //- Exit if commanded, before going to sleep
+          if (w->m_eThreadsStateCommand == ExecutionState::Exitted) { break; }
+
+          //- Sleep if needed
+          double timeTakenInIteration = TimeDurationMilli(Clock::now() - iterationStartTime).count();
+          if (timeTakenInIteration < timePerIterationMSec)
+          {
+            this_thread::sleep_for(TimeDurationMilli(timePerIterationMSec - timeTakenInIteration));
+          }
+        }
+      }
+      else
+      {
+        DxsThrow((w->Title() + DxsT(" - Zero (Hz) processing refresh rate is invalid")).c_str());
+      }
+    }
+  }
+  catch (Exception& ex)
+  {
+    MessageBox(nullptr, ex.Message().c_str(), DxsT("Error - DxSurface"), 0);
+    threadExitReason = ThreadExitReason::Exception;
+  }
+  catch (std::exception& ex)
+  {
+    MessageBoxA(nullptr, ex.what(), "Error", 0);
+    threadExitReason = ThreadExitReason::Exception;
+  }
+  catch (...)
+  {
+    MessageBox(nullptr, DxsT("Unknown error occurred."), DxsT("Error"), 0);
+    threadExitReason = ThreadExitReason::Exception;
+  }
+
+  w->m_eProcessingState = ExecutionState::Exitted;
 }

@@ -97,7 +97,7 @@ Ptr<Window> DxSurface::CreateNewWindow(const WindowCreationOptions& options)
 
 void DxSurface::RunAndWaitForExit()
 {
-  for (auto& w : m_vWindows)
+  for (auto w : m_vWindows)
   {
     w->CreateWindowAndRun();
   }
@@ -108,7 +108,7 @@ void DxSurface::RunAndWaitForExit()
     
     for (auto w = m_vWindows.cbegin(); w != m_vWindows.cend();)
     {
-      if ((*w)->RenderingState() == RenderingState::Exitted)
+      if ((*w)->RenderingState() == ExecutionState::Exitted)
       {
         w = m_vWindows.erase(w);
       }

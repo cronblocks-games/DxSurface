@@ -39,6 +39,8 @@ namespace CB::DxSurface {
   using TimePoint = std::chrono::time_point<Clock>;
   using TimeDurationMilli = std::chrono::duration<double, std::milli>;
 
+  using PtrProcessingFunc = void(*)(double deltaTimeMillis);
+
   struct WindowRect { int x = 0, y = 0, w = 0, h = 0; };
   struct WindowCreationOptions
   {
@@ -52,7 +54,10 @@ namespace CB::DxSurface {
     DWORD        dwStyle          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
     DWORD        dwExStyle        = WS_EX_WINDOWEDGE;
     
-    unsigned int maxRefreshRateHz = 30;
+    unsigned int maxRenderingThreadRefreshRateHz = 30;
+    unsigned int maxProcessingThreadRefreshRateHz = 30;
+
+    PtrProcessingFunc processingFunc = nullptr;
   };
 
   enum class WindowCreationState
@@ -61,7 +66,7 @@ namespace CB::DxSurface {
     Success,
     Fail
   };
-  enum class RenderingState
+  enum class ExecutionState
   {
     NONE = 0,
     Init,

@@ -21,7 +21,7 @@ namespace CB::DxSurface {
     virtual ~Window();
 
     void CreateWindowAndRun();
-    RenderingState RenderingState() const;
+    ExecutionState RenderingState() const;
     void Pause();
     void Resume();
     void Exit();
@@ -40,7 +40,7 @@ namespace CB::DxSurface {
     virtual void OnRenderingStateInit();
     virtual void OnRenderingStateRunning();
     virtual void OnRenderingStateExiting();
-    virtual void OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next);
+    virtual void OnRenderingStateChanged(ExecutionState last, ExecutionState next);
 
   private:
     HINSTANCE m_hInstance;
@@ -49,9 +49,10 @@ namespace CB::DxSurface {
     mutable TString m_sClassName;
     mutable WindowCreationOptions m_stOptions;
 
-    Ptr<Thread> m_pThread;
-    volatile enum class WindowCreationState m_eWindowCreationState;
-    volatile enum class RenderingState m_eRenderingState, m_eRenderingStateCommand;
+    Ptr<Thread> m_pRenderingThread;
+    Ptr<Thread> m_pProcessingThread;
+    volatile WindowCreationState m_eWindowCreationState;
+    volatile ExecutionState m_eRenderingState, m_eProcessingState, m_eThreadsStateCommand;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();
@@ -59,7 +60,7 @@ namespace CB::DxSurface {
     void OnRenderingStateInitInternal();
     void OnRenderingStateRunningInternal();
     void OnRenderingStateExitingInternal();
-    void OnRenderingStateChangedInternal(enum class RenderingState last, enum class RenderingState next);
+    void OnRenderingStateChangedInternal(ExecutionState last, ExecutionState next);
 
     void ProcessWindowsMessagesQueue();
     LRESULT OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
@@ -67,10 +68,11 @@ namespace CB::DxSurface {
     static LRESULT WINAPI WindowsMessageProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
     void RenderingThreadDoInit();
-    void RenderingThreadDoExit(enum class ThreadExitReason);
-    void RenderingThreadDoSetRenderingState(enum class RenderingState);
+    void RenderingThreadDoExit(ThreadExitReason);
+    void RenderingThreadDoSetRenderingState(ExecutionState);
     void RenderingThreadDoProcessRenderingState();
-    static void RenderingThread(Window*);
+    static void RenderingThread(Window* const);
+    static void ProcessingThread(Window* const);
   };
 
 } //- namespace CB::DxSurface
