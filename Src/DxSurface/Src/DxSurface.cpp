@@ -95,7 +95,7 @@ Ptr<Window> DxSurface::CreateNewWindow(const WindowCreationOptions& options)
   return w;
 }
 
-void DxSurface::WaitForExit()
+void DxSurface::RunAndWaitForExit()
 {
   while (1)
   {

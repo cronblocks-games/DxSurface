@@ -27,7 +27,7 @@ namespace CB::DxSurface {
     Ptr<Window> CreateNewWindow(const TString& title, int x, int y, int width, int height, bool isPrimary = false, bool debugEnabled = true);
     Ptr<Window> CreateNewWindow(const WindowCreationOptions&);
 
-    void WaitForExit();
+    void RunAndWaitForExit();
 
   private:
     HINSTANCE m_hInstance;
