@@ -50,7 +50,7 @@ namespace CB::DxSurface {
     bool isDebugEnabled = false;
     TString title = DxsT("DxSurface");
     WindowRectangle rect = WindowRectangle(10, 10, 600, 450);
-    DWORD dwStyle = WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX | WS_SYSMENU;
+    DWORD dwStyle = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
     DWORD dwExStyle = WS_EX_WINDOWEDGE;
 
     unsigned int maxRefreshRateHz = 30;
