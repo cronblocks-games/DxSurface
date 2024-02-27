@@ -20,21 +20,21 @@ namespace CB::DxSurface {
 
     virtual ~Window();
 
-    bool Primary() const;
-    void Primary(bool isPrimary);
+    void CreateWindowAndRun();
+    RenderingState RenderingState() const;
+    void Pause();
+    void Resume();
+    void Exit();
+    void WaitForExit();
 
     const TString& Title() const;
     void Title(const TString&);
 
     void Show();
     void Hide();
-
-    void PauseRendering();
-    void ResumeRendering();
-    void ExitRendering();
-    RenderingState RenderingState() const;
-
-    void WaitForExit() const;
+    
+    bool Primary() const;
+    void Primary(bool isPrimary);
 
   protected:
     virtual void OnRenderingStateInit();

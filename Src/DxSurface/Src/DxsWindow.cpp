@@ -22,10 +22,7 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
   m_eWindowCreationState = WindowCreationState::NONE;
   m_eRenderingState = RenderingState::NONE;
   m_eRenderingStateCommand = RenderingState::NONE;
-  m_pThread = make_shared<thread>(Window::RenderingThread, this);
-
-  while (m_eWindowCreationState == WindowCreationState::NONE &&
-         m_eRenderingState != RenderingState::Exitted);
+  m_pThread = nullptr;
 }
 Window::Window(const Window& other)
 {
@@ -39,32 +36,34 @@ Window::~Window()
 {
   m_eRenderingStateCommand = RenderingState::Exitted;
 
-  if (m_pThread != nullptr)
+  if (m_pThread)
   {
     m_pThread->join();
+    m_pThread = nullptr;
   }
 }
 
 Window& Window::operator=(const Window& other)
 {
+  if (this == &other) return *this;
+
   m_hInstance = other.m_hInstance;
-  m_hWnd = nullptr;
+  m_hWnd = nullptr; // each window object should have its own window and underlying rendering thread
 
   m_sClassName = DxsT("");
   m_stOptions = other.m_stOptions;
 
   m_eWindowCreationState = WindowCreationState::NONE;
-  m_eRenderingState = other.m_eRenderingState;
-  m_eRenderingStateCommand = other.m_eRenderingStateCommand;
-  m_pThread = make_shared<thread>(Window::RenderingThread, this);
-
-  while (m_eWindowCreationState == WindowCreationState::NONE &&
-         m_eRenderingState != RenderingState::Exitted);
+  m_eRenderingState = RenderingState::NONE;
+  m_eRenderingStateCommand = RenderingState::NONE;
+  m_pThread = nullptr;
 
   return *this;
 }
 Window& Window::operator=(Window&& other) noexcept
 {
+  if (this == &other) return *this;
+
   m_hInstance = other.m_hInstance;
   m_hWnd = other.m_hWnd;
 
@@ -87,13 +86,55 @@ Window& Window::operator=(Window&& other) noexcept
   return *this;
 }
 
-bool Window::Primary() const
+static Mutex _windowCreationMutex;
+
+void Window::CreateWindowAndRun()
 {
-  return m_stOptions.isPrimary;
+  Lock l(_windowCreationMutex);
+
+  if (m_pThread) return;
+
+  m_eWindowCreationState = WindowCreationState::NONE;
+  m_eRenderingState = RenderingState::NONE;
+  m_eRenderingStateCommand = RenderingState::NONE;
+  m_pThread = make_shared<thread>(Window::RenderingThread, this);
+
+  while (m_eWindowCreationState == WindowCreationState::NONE &&
+         m_eRenderingState != RenderingState::Exitted);
 }
-void Window::Primary(bool isPrimary)
+RenderingState Window::RenderingState() const
 {
-  m_stOptions.isPrimary = isPrimary;
+  return m_eRenderingState;
+}
+void Window::Pause()
+{
+  if (m_eRenderingState == RenderingState::Exitted)
+  {
+    DxsThrow((Title() + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
+  }
+
+  m_eRenderingStateCommand = RenderingState::Paused;
+}
+void Window::Resume()
+{
+  if (m_eRenderingState == RenderingState::Exitted)
+  {
+    DxsThrow((Title() + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
+  }
+
+  m_eRenderingStateCommand = RenderingState::Running;
+}
+void Window::Exit()
+{
+  m_eRenderingStateCommand = RenderingState::Exitted;
+}
+void Window::WaitForExit()
+{
+  if (m_pThread)
+  {
+    m_pThread->join();
+    m_pThread = nullptr;
+  }
 }
 
 const TString& Window::Title() const
@@ -133,40 +174,14 @@ void Window::Hide()
   ShowWindow(m_hWnd, SW_HIDE);
 }
 
-void Window::PauseRendering()
+bool Window::Primary() const
 {
-  if (m_eRenderingState == RenderingState::Exitted)
-  {
-    DxsThrow((Title() + DxsT(" - Cannot pause rendering when it has exitted")).c_str());
-  }
-
-  m_eRenderingStateCommand = RenderingState::Paused;
+  return m_stOptions.isPrimary;
 }
-void Window::ResumeRendering()
+void Window::Primary(bool isPrimary)
 {
-  if (m_eRenderingState == RenderingState::Exitted)
-  {
-    DxsThrow((Title() + DxsT(" - Cannot resume rendering when it has already exitted")).c_str());
-  }
-
-  m_eRenderingStateCommand = RenderingState::Running;
+  m_stOptions.isPrimary = isPrimary;
 }
-void Window::ExitRendering()
-{
-  m_eRenderingStateCommand = RenderingState::Exitted;
-}
-RenderingState Window::RenderingState() const
-{
-  return m_eRenderingState;
-}
-void Window::WaitForExit() const
-{
-  if (m_pThread != nullptr)
-  {
-    m_pThread->join();
-  }
-}
-
 
 
 //------------------------------------------------------------------------
@@ -185,7 +200,7 @@ void Window::RegisterClassAndCreateWindow()
 
   if (m_sClassName == DxsT(""))
   {
-    MutexLock lock(_mutGlobalData);
+    Lock lock(_mutGlobalData);
 
     m_sClassName = DxsT("WinClass_");
     m_sClassName += ++_classRegNum;
@@ -269,7 +284,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
   switch (msg)
   {
-  case WM_CLOSE: ExitRendering(); break;
+  case WM_CLOSE: Exit(); break;
   }
 
   return DefWindowProc(m_hWnd, msg, wParam, lParam);

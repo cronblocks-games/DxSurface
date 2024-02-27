@@ -97,6 +97,11 @@ Ptr<Window> DxSurface::CreateNewWindow(const WindowCreationOptions& options)
 
 void DxSurface::RunAndWaitForExit()
 {
+  for (auto& w : m_vWindows)
+  {
+    w->CreateWindowAndRun();
+  }
+
   while (1)
   {
     if (m_vWindows.size() == 0) break;
