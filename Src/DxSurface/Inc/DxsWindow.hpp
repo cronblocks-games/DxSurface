@@ -52,7 +52,8 @@ namespace CB::DxSurface {
     Ptr<Thread> m_pRenderingThread;
     Ptr<Thread> m_pProcessingThread;
     volatile WindowCreationState m_eWindowCreationState;
-    volatile ExecutionState m_eRenderingState, m_eProcessingState, m_eThreadsStateCommand;
+    volatile ExecutionState m_eRenderingState, m_eProcessingState;
+    volatile ExecutionCommand m_eThreadsCommand;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();
@@ -68,7 +69,7 @@ namespace CB::DxSurface {
     static LRESULT WINAPI WindowsMessageProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
     void RenderingThreadDoInit();
-    void RenderingThreadDoExit(ThreadExitReason);
+    void RenderingThreadDoExit(ExecutionExitReason);
     void RenderingThreadDoSetRenderingState(ExecutionState);
     void RenderingThreadDoProcessRenderingState();
     static void RenderingThread(Window* const);

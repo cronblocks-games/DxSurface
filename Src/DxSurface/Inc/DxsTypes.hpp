@@ -66,18 +66,17 @@ namespace CB::DxSurface {
     Success,
     Fail
   };
+  enum class ExecutionCommand
+  {
+    Run, Pause, Exit,
+  };
   enum class ExecutionState
   {
-    NONE = 0,
-    Init,
-    Running,
-    Paused,
-    Exitted,
+    NONE = 0, Init, Running, Paused, Exitted,
   };
-  enum class ThreadExitReason
+  enum class ExecutionExitReason
   {
-    Normal = 0,
-    Exception
+    Normal = 0, Exception
   };
 
 
