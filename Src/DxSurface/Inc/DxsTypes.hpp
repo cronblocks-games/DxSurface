@@ -38,10 +38,7 @@ namespace CB::DxSurface {
   using TimePoint = std::chrono::time_point<Clock>;
   using TimeDurationMilli = std::chrono::duration<double, std::milli>;
 
-  struct WindowRect
-  {
-    int x = 0, y = 0, w = 0, h = 0;
-  };
+  struct WindowRect { int x = 0, y = 0, w = 0, h = 0; };
   struct WindowCreationOptions
   {
     TString      title            = DxsT("DxSurface");
