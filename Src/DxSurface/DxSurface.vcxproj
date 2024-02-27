@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\DxsExecutionManager.h" />
     <ClInclude Include="Inc\DxsHelpers.hpp" />
     <ClInclude Include="Inc\DxsMacros.hpp" />
     <ClInclude Include="Inc\DxsTypes.hpp" />
