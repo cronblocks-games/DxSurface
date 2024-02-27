@@ -7,12 +7,7 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
-
-  m_stOptions.isPrimary = false;
   m_stOptions.isDebugEnabled = true;
-  m_stOptions.title = DxsT("DxSurface");
-  m_stOptions.rect = WindowRectangle(10, 10, 250, 250);
-  m_stOptions.maxRefreshRateHz = 30;
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
@@ -42,8 +37,7 @@ DxSurface& DxSurface::operator=(const DxSurface& other)
 }
 DxSurface& DxSurface::operator=(DxSurface&& other) noexcept
 {
-  m_hInstance = other.m_hInstance;
-  other.m_hInstance = nullptr;
+  m_hInstance = exchange(other.m_hInstance, nullptr);
 
   m_stOptions = move(other.m_stOptions);
 
