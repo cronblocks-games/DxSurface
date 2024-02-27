@@ -206,11 +206,13 @@ void Window::RegisterClassAndCreateWindow()
   wndcls.hIconSm = nullptr;
   RegisterClassEx(&wndcls);
 
+  DWORD dwExStyle = 0;
+  DWORD dwStyle = 0;
   m_hWnd = CreateWindowEx(
-    0,                                      // dwExStyle
+    dwExStyle,                              // dwExStyle
     m_sClassName.c_str(),                   // lpClassName
     Title().c_str(),                        // lpWindowName
-    0,                                      // dwStyle
+    dwStyle,                                // dwStyle
     m_stOptions.rect.x, m_stOptions.rect.y, // x, y
     m_stOptions.rect.w, m_stOptions.rect.h, // width, height
     nullptr,                                // hWndParent
