@@ -9,7 +9,7 @@
 
 #include <string.h>
 
-#include "DxsExceptions.h"
+#include "DxsExceptions.hpp"
 
 
 #endif

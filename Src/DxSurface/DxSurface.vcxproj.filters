@@ -15,37 +15,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\DxSurface.h">
+    <ClInclude Include="Inc\DxSurface.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\InternalInc\pch.h">
+    <ClInclude Include="Src\InternalInc\pch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsWinApi.h">
+    <ClInclude Include="Inc\DxsWinApi.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsWindow.h">
+    <ClInclude Include="Inc\DxsWindow.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsKeyboard.h">
+    <ClInclude Include="Inc\DxsKeyboard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsMouse.h">
+    <ClInclude Include="Inc\DxsMouse.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsWinMsgHandler.h">
+    <ClInclude Include="Inc\DxsWinMsgHandler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsTypes.h">
+    <ClInclude Include="Inc\DxsTypes.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsExceptions.h">
+    <ClInclude Include="Inc\DxsExceptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsMacros.h">
+    <ClInclude Include="Inc\DxsMacros.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsHelpers.h">
+    <ClInclude Include="Inc\DxsHelpers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

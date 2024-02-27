@@ -1,5 +1,5 @@
-#include "pch.h"
-#include "DxsWindow.h"
+#include "pch.hpp"
+#include "DxsWindow.hpp"
 
 
 using namespace std;

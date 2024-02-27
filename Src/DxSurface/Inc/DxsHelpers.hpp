@@ -3,7 +3,7 @@
 
 
 
-#include "DxsTypes.h"
+#include "DxsTypes.hpp"
 
 namespace CB::DxSurface {
 

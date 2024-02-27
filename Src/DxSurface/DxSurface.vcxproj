@@ -99,7 +99,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
@@ -119,7 +119,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
@@ -139,7 +139,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
@@ -159,7 +159,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
@@ -171,17 +171,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\DxsHelpers.h" />
-    <ClInclude Include="Inc\DxsMacros.h" />
-    <ClInclude Include="Inc\DxsTypes.h" />
-    <ClInclude Include="Inc\DxsExceptions.h" />
-    <ClInclude Include="Inc\DxsKeyboard.h" />
-    <ClInclude Include="Inc\DxsMouse.h" />
-    <ClInclude Include="Inc\DxSurface.h" />
-    <ClInclude Include="Inc\DxsWinApi.h" />
-    <ClInclude Include="Inc\DxsWindow.h" />
-    <ClInclude Include="Inc\DxsWinMsgHandler.h" />
-    <ClInclude Include="Src\InternalInc\pch.h" />
+    <ClInclude Include="Inc\DxsHelpers.hpp" />
+    <ClInclude Include="Inc\DxsMacros.hpp" />
+    <ClInclude Include="Inc\DxsTypes.hpp" />
+    <ClInclude Include="Inc\DxsExceptions.hpp" />
+    <ClInclude Include="Inc\DxsKeyboard.hpp" />
+    <ClInclude Include="Inc\DxsMouse.hpp" />
+    <ClInclude Include="Inc\DxSurface.hpp" />
+    <ClInclude Include="Inc\DxsWinApi.hpp" />
+    <ClInclude Include="Inc\DxsWindow.hpp" />
+    <ClInclude Include="Inc\DxsWinMsgHandler.hpp" />
+    <ClInclude Include="Src\InternalInc\pch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxsExceptions.cpp" />

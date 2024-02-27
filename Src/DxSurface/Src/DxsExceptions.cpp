@@ -1,5 +1,5 @@
-#include "pch.h"
-#include "DxsExceptions.h"
+#include "pch.hpp"
+#include "DxsExceptions.hpp"
 
 
 using namespace std;

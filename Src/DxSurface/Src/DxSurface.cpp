@@ -1,5 +1,5 @@
-#include "pch.h"
-#include "DxSurface.h"
+#include "pch.hpp"
+#include "DxSurface.hpp"
 
 using namespace std;
 using namespace CB::DxSurface;

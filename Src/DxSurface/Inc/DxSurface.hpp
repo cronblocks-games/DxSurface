@@ -1,9 +1,9 @@
 #ifndef _DXSURFACE_DXSURFACE_H_
 #define _DXSURFACE_DXSURFACE_H_
 
-#include "DxsHelpers.h"
-#include "DxsWindow.h"
-#include "DxsExceptions.h"
+#include "DxsHelpers.hpp"
+#include "DxsWindow.hpp"
+#include "DxsExceptions.hpp"
 
 
 namespace CB::DxSurface {

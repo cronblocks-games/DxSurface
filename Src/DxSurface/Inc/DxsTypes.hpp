@@ -10,8 +10,8 @@
 #include <chrono>
 #include <thread>
 
-#include "DxsMacros.h"
-#include "DxsWinApi.h"
+#include "DxsMacros.hpp"
+#include "DxsWinApi.hpp"
 
 namespace CB::DxSurface {
 
