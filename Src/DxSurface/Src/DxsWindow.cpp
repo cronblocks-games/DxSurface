@@ -267,6 +267,11 @@ LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 //- 
 LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
+  switch (msg)
+  {
+  case WM_CLOSE: ExitRendering(); break;
+  }
+
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
 }
 //- 
