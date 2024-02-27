@@ -313,7 +313,7 @@ void Window::OnRenderingStateRunning() {}
 void Window::OnRenderingStateExiting() {}
 void Window::OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next) {}
 
-void Window::RenderingThreadInit()
+void Window::RenderingThreadDoInit()
 {
   RegisterClassAndCreateWindow();
   Show();
@@ -331,7 +331,7 @@ void Window::RenderingThreadInit()
     OnRenderingStateChanged(RenderingState::NONE, RenderingState::Init);
   }
 }
-void Window::RenderingThreadExit(enum class ThreadExitReason reason)
+void Window::RenderingThreadDoExit(enum class ThreadExitReason reason)
 {
   auto lastRenderingState = m_eRenderingState;
 
@@ -350,7 +350,7 @@ void Window::RenderingThreadExit(enum class ThreadExitReason reason)
     ExitProcess(reason == ThreadExitReason::Exception ? -1 : 0);
   }
 }
-void Window::RenderingThreadSetRenderingState(enum class RenderingState newState)
+void Window::RenderingThreadDoSetRenderingState(enum class RenderingState newState)
 {
   if (m_eRenderingState != newState)
   {
@@ -361,7 +361,7 @@ void Window::RenderingThreadSetRenderingState(enum class RenderingState newState
     OnRenderingStateChanged(last, newState);
   }
 }
-void Window::RenderingThreadProcessRenderingState()
+void Window::RenderingThreadDoProcessRenderingState()
 {
   switch (m_eRenderingState)
   {
@@ -387,7 +387,7 @@ void Window::RenderingThread(Window* w)
 
   try
   {
-    w->RenderingThreadInit();
+    w->RenderingThreadDoInit();
 
     if (w->m_stOptions.maxRefreshRateHz != 0)
     {
@@ -409,15 +409,15 @@ void Window::RenderingThread(Window* w)
           case RenderingState::NONE:
           case RenderingState::Init:
           case RenderingState::Running:
-            w->RenderingThreadSetRenderingState(RenderingState::Running);
+            w->RenderingThreadDoSetRenderingState(RenderingState::Running);
             break;
           case RenderingState::Paused:
-            w->RenderingThreadSetRenderingState(RenderingState::Paused);
+            w->RenderingThreadDoSetRenderingState(RenderingState::Paused);
             break;
           }
 
           //- What to do within a rendering state?
-          w->RenderingThreadProcessRenderingState();
+          w->RenderingThreadDoProcessRenderingState();
         }
         
         timeDuration = Clock::now() - startTime;
@@ -455,7 +455,7 @@ void Window::RenderingThread(Window* w)
     threadExitReason = ThreadExitReason::Exception;
   }
 
-  w->RenderingThreadExit(threadExitReason);
+  w->RenderingThreadDoExit(threadExitReason);
 }
 
 void Window::OnRenderingStateInitInternal()

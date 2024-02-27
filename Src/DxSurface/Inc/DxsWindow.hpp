@@ -40,9 +40,7 @@ namespace CB::DxSurface {
     virtual void OnRenderingStateInit();
     virtual void OnRenderingStateRunning();
     virtual void OnRenderingStateExiting();
-    virtual void OnRenderingStateChanged(
-      enum class RenderingState last,
-      enum class RenderingState next);
+    virtual void OnRenderingStateChanged(enum class RenderingState last, enum class RenderingState next);
 
   private:
     HINSTANCE m_hInstance;
@@ -61,19 +59,17 @@ namespace CB::DxSurface {
     void OnRenderingStateInitInternal();
     void OnRenderingStateRunningInternal();
     void OnRenderingStateExitingInternal();
-    void OnRenderingStateChangedInternal(
-      enum class RenderingState last,
-      enum class RenderingState next);
+    void OnRenderingStateChangedInternal(enum class RenderingState last, enum class RenderingState next);
 
     void ProcessWindowsMessagesQueue();
     LRESULT OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
 
     static LRESULT WINAPI WindowsMessageProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
-    void RenderingThreadInit();
-    void RenderingThreadExit(enum class ThreadExitReason);
-    void RenderingThreadSetRenderingState(enum class RenderingState);
-    void RenderingThreadProcessRenderingState();
+    void RenderingThreadDoInit();
+    void RenderingThreadDoExit(enum class ThreadExitReason);
+    void RenderingThreadDoSetRenderingState(enum class RenderingState);
+    void RenderingThreadDoProcessRenderingState();
     static void RenderingThread(Window*);
   };
 
