@@ -56,7 +56,7 @@ namespace CB::DxSurface {
   }; // class TimedExecutorBase
 
   template <class ClassT>
-  class TimedClassExecutor : TimedExecutorBase {
+  class TimedClassExecutor : public TimedExecutorBase {
   public:
     using FuncTInit = void (ClassT::*)();
     using FuncTRunning = void (ClassT::*)(const double deltaSec);
