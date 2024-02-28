@@ -32,6 +32,29 @@ Exception::Exception(const char* file, int lineNumber, ConstTCharPtr message)
   m_sMessage = ss.str();
 }
 
+Exception::Exception(const Exception& o)
+{
+  if (this == &o) return;
+  *this = o;
+}
+Exception::Exception(Exception&& o) noexcept
+{
+  if (this == &o) return;
+  *this = move(o);
+}
+Exception& Exception::operator=(const Exception& o)
+{
+  if (this == &o) return *this;
+  m_sMessage = o.m_sMessage;
+  return *this;
+}
+Exception& Exception::operator=(Exception&& o) noexcept
+{
+  if (this == &o) return *this;
+  m_sMessage = exchange(o.m_sMessage, DxsT(""));
+  return *this;
+}
+
 const TString& Exception::Message() const
 {
   return m_sMessage;
