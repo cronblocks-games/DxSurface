@@ -45,7 +45,7 @@
     <ClInclude Include="Inc\DxsHelpers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsExecutionManager.h">
+    <ClInclude Include="Inc\DxsTimedExecutor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -69,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\DxsHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DxsTimedExecutor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

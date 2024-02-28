@@ -6,6 +6,7 @@
 #include <sstream>
 #include <map>
 #include <mutex>
+#include <thread>
 
 #include <string.h>
 

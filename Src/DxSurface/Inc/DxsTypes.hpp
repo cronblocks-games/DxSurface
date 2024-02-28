@@ -38,6 +38,7 @@ namespace CB::DxSurface {
   using Clock = std::chrono::high_resolution_clock;
   using TimePoint = std::chrono::time_point<Clock>;
   using TimeDurationMilli = std::chrono::duration<double, std::milli>;
+  using TimeDurationSec = std::chrono::duration<double>;
 
   using PtrProcessingFunc = void(*)(double deltaTimeMillis);
 

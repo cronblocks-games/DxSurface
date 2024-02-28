@@ -171,7 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\DxsExecutionManager.h" />
+    <ClInclude Include="Inc\DxsTimedExecutor.hpp" />
     <ClInclude Include="Inc\DxsHelpers.hpp" />
     <ClInclude Include="Inc\DxsMacros.hpp" />
     <ClInclude Include="Inc\DxsTypes.hpp" />
@@ -188,6 +188,7 @@
     <ClCompile Include="Src\DxsHelpers.cpp" />
     <ClCompile Include="Src\DxsKeyboard.cpp" />
     <ClCompile Include="Src\DxsMouse.cpp" />
+    <ClCompile Include="Src\DxsTimedExecutor.cpp" />
     <ClCompile Include="Src\DxSurface.cpp" />
     <ClCompile Include="Src\DxsWindow.cpp" />
     <ClCompile Include="Src\pch.cpp">
