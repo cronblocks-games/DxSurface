@@ -381,6 +381,11 @@ void Window::OnProcessingStatePausedInternal(const double deltaSec)
 }
 void Window::OnProcessingStateExittedInternal(ExecutionExitReason r, const TString& message)
 {
+  if (m_stOptions.maxProcessingThreadRefreshRateHz != 0 && m_pRenderingExecutor)
+  {
+    m_pRenderingExecutor->Exit();
+  }
+
   OnProcessingStateExitted(r, message);
 }
 void Window::OnProcessingStateChangedInternal(ExecutionState last, ExecutionState next)
