@@ -19,6 +19,9 @@ namespace CB::DxSurface {
 
     virtual ~TimedExecutorBase();
 
+    const TString& GetName() const;
+    unsigned int GetMaxRefreshRateHz() const;
+
     const TimedExecutorBase& operator()();
     void Run();
 
