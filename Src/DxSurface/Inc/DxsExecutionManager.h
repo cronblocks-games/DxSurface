@@ -10,36 +10,36 @@
 namespace CB::DxSurface {
 
   template<class T>
-  class ExecutionManager {
+  class ExecutionManagerBase {
   public:
-    ExecutionManager(TString name, unsigned int maxRefreshRateHz)
+    ExecutionManagerBase(TString name, unsigned int maxRefreshRateHz)
     {
       m_sName = name;
       m_uiMaxRefreshRateHz = maxRefreshRateHz;
     }
-    ExecutionManager(const ExecutionManager& o)
+    ExecutionManagerBase(const ExecutionManagerBase& o)
     {
       if (this == &o) return;
       *this = o;
     }
-    ExecutionManager(ExecutionManager&& o) noexcept
+    ExecutionManagerBase(ExecutionManagerBase&& o) noexcept
     {
       if (this == &o) return;
       *this = std::move(o);
     }
 
-    ExecutionManager& operator=(const ExecutionManager& o)
+    ExecutionManagerBase& operator=(const ExecutionManagerBase& o)
     {
       if (this == &o) return *this;
       //- TODO
     }
-    ExecutionManager& operator=(ExecutionManager&& o) noexcept
+    ExecutionManagerBase& operator=(ExecutionManagerBase&& o) noexcept
     {
       if (this == &o) return *this;
       //- TODO
     }
 
-    virtual ~ExecutionManager()
+    virtual ~ExecutionManagerBase()
     {
       //- TODO
     }
@@ -53,7 +53,7 @@ namespace CB::DxSurface {
     {
       if (m_eState == ExecutionState::Exitted)
       {
-        DxsThrow((m_sName + DxsT(" - ExecutionManager - cannot pause execution when it has already exitted")).c_str());
+        DxsThrow((m_sName + DxsT(" - cannot pause execution when it has already exitted")).c_str());
       }
 
       m_eCommand = ExecutionCommand::Pause;
@@ -62,7 +62,7 @@ namespace CB::DxSurface {
     {
       if (m_eState == ExecutionState::Exitted)
       {
-        DxsThrow((m_sName + DxsT(" - ExecutionManager - cannot resume execution when it has already exitted")).c_str());
+        DxsThrow((m_sName + DxsT(" - cannot resume execution when it has already exitted")).c_str());
       }
 
       m_eCommand = ExecutionCommand::Run;
@@ -81,10 +81,10 @@ namespace CB::DxSurface {
     }
 
   protected:
-    virtual void OnExecutionManagerStateInit() {}
-    virtual void OnExecutionManagerStateRunning() {}
-    virtual void OnExecutionManagerStateExiting() {}
-    virtual void OnExecutionManagerStateChanged(ExecutionState last, ExecutionState next) {}
+    virtual void OnExecutionStateInit() = 0;
+    virtual void OnExecutionStateRunning() = 0;
+    virtual void OnExecutionStateExiting() = 0;
+    virtual void OnExecutionStateChanged(ExecutionState last, ExecutionState next) = 0;
 
   private:
     TString m_sName;
@@ -93,7 +93,13 @@ namespace CB::DxSurface {
     volatile ExecutionState m_eState;
     volatile ExecutionCommand m_eCommand;
 
-    static void ExecutionThread();
+    static void ExecutionThread()
+    {
+      while (m_eCommand != ExecutionCommand::Exit)
+      {
+        ;
+      }
+    }
   };
 
 } //- namespace CB::DxSurface
