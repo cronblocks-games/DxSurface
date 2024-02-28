@@ -11,7 +11,8 @@ TimedExecutorBase::TimedExecutorBase(TString name, unsigned int maxRefreshRateHz
 
   if (maxRefreshRateHz == 0)
   {
-    DxsThrow((m_sName + DxsT(" - Zero (Hz) refresh rate is invalid")).c_str());
+    // DxsThrow((m_sName + DxsT(" - Zero (Hz) refresh rate is invalid")).c_str());
+    //- Not throwing exception to allow for dumb usage ;-)
   }
 
   m_pThread.reset();
