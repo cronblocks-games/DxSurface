@@ -27,11 +27,7 @@ namespace CB::DxSurface {
       if (this == &o) return;
       *this = o;
     }
-    ExecutableObjectBase(ExecutableObjectBase&& o) noexcept
-    {
-      if (this == &o) return;
-      *this = std::move(o);
-    }
+    ExecutableObjectBase(ExecutableObjectBase&& o) = delete;
     ExecutableObjectBase& operator=(const ExecutableObjectBase& o)
     {
       if (this == &o) return *this;
@@ -44,11 +40,7 @@ namespace CB::DxSurface {
       m_eExitReason = ExecutionExitReason::Normal;
       m_eExitMessage = DxsT("");
     }
-    ExecutableObjectBase& operator=(ExecutableObjectBase&& o) noexcept
-    {
-      if (this == &o) return *this;
-      //- TODO
-    }
+    ExecutableObjectBase& operator=(ExecutableObjectBase&& o) = delete;
 
     virtual ~ExecutableObjectBase()
     {
