@@ -55,8 +55,8 @@ namespace CB::DxSurface {
     DWORD        dwStyle          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
     DWORD        dwExStyle        = WS_EX_WINDOWEDGE;
     
-    unsigned int maxRenderingThreadRefreshRateHz = 30;
-    unsigned int maxProcessingThreadRefreshRateHz = 30;
+    unsigned int maxRenderingThreadRefreshRateHz = DxsDefaultThreadRefreshRateHz;
+    unsigned int maxProcessingThreadRefreshRateHz = DxsDefaultThreadRefreshRateHz;
 
     PtrProcessingFunc processingFunc = nullptr;
   };

@@ -21,6 +21,8 @@
 #define DxsVersionString                  DxsT("0.0.0.0" __DxsVersionSuffix)
 #define DxsVersionReleaseDateString       DxsT("FEB/21/2024")
 
+#define DxsDefaultThreadRefreshRateHz     30
+
 
 
 #endif
