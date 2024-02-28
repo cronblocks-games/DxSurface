@@ -88,10 +88,14 @@ namespace CB::DxSurface {
       m_fpOnExittedFunc = onExittedFunc;
       m_fpOnStateChangedFunc = onStateChangedFunc;
     }
-    TimedExecutor(const TimedExecutor& o)
+    explicit TimedExecutor(const TimedExecutor& o) : TimedExecutorBase(o.GetName(), o.GetMaxRefreshRateHz())
     {
-      if (this == &o) return;
-      *this = o;
+      m_pClassPtr = o.m_pClassPtr;
+      m_fpOnInitFunc = o.m_fpOnInitFunc;
+      m_fpOnRunningFunc = o.m_fpOnRunningFunc;
+      m_fpOnPausedFunc = o.m_fpOnPausedFunc;
+      m_fpOnExittedFunc = o.m_fpOnExittedFunc;
+      m_fpOnStateChangedFunc = o.m_fpOnStateChangedFunc;
     }
     TimedExecutor(TimedExecutor&&) = delete;
     TimedExecutor& operator=(const TimedExecutor& o)
