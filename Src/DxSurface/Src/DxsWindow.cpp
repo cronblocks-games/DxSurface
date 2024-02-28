@@ -70,7 +70,7 @@ void Window::CreateWindowAndRun()
 
   m_eWindowCreationState = WindowCreationState::NONE;
 
-  m_pRenderingExecutor = make_shared<TimedClassExecutor<Window>>(
+  m_pRenderingExecutor = make_shared<TimedExecutor<Window>>(
     this,
     m_stOptions.title + DxsT("/RenderingThread"),
     m_stOptions.maxRenderingThreadRefreshRateHz == 0 ? DxsDefaultThreadRefreshRateHz : m_stOptions.maxRenderingThreadRefreshRateHz,
@@ -83,7 +83,7 @@ void Window::CreateWindowAndRun()
 
   if (m_stOptions.maxProcessingThreadRefreshRateHz != 0)
   {
-    m_pProcessingExecutor = make_shared<TimedClassExecutor<Window>>(
+    m_pProcessingExecutor = make_shared<TimedExecutor<Window>>(
       this,
       m_stOptions.title + DxsT("/ProcessingThread"),
       m_stOptions.maxProcessingThreadRefreshRateHz,

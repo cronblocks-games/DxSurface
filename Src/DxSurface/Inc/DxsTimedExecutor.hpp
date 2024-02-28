@@ -56,7 +56,7 @@ namespace CB::DxSurface {
   }; // class TimedExecutorBase
 
   template <class ClassT>
-  class TimedClassExecutor : public TimedExecutorBase {
+  class TimedExecutor : public TimedExecutorBase {
   public:
     using FuncTInit = void (ClassT::*)();
     using FuncTRunning = void (ClassT::*)(const double deltaSec);
@@ -64,7 +64,7 @@ namespace CB::DxSurface {
     using FuncTExitted = void (ClassT::*)(ExecutionExitReason, const TString& message);
     using FuncTStateChanged = void (ClassT::*)(ExecutionState from, ExecutionState to);
 
-    TimedClassExecutor(
+    TimedExecutor(
       ClassT* classPtr,
       TString name, unsigned int maxRefreshRateHz,
       FuncTInit onInitFunc = nullptr,
@@ -75,7 +75,7 @@ namespace CB::DxSurface {
     {
       if (classPtr == nullptr)
       {
-        DxsThrow((name + DxsT(" - TimedClassExecutor - Invalid or nullptr for activated class provided")).c_str());
+        DxsThrow((name + DxsT(" - TimedExecutor - Invalid or nullptr for activated class provided")).c_str());
       }
 
       m_pClassPtr = classPtr;
@@ -85,13 +85,13 @@ namespace CB::DxSurface {
       m_fpOnExittedFunc = onExittedFunc;
       m_fpOnStateChangedFunc = onStateChangedFunc;
     }
-    TimedClassExecutor(const TimedClassExecutor& o)
+    TimedExecutor(const TimedExecutor& o)
     {
       if (this == &o) return;
       *this = o;
     }
-    TimedClassExecutor(TimedClassExecutor&&) = delete;
-    TimedClassExecutor& operator=(const TimedClassExecutor& o)
+    TimedExecutor(TimedExecutor&&) = delete;
+    TimedExecutor& operator=(const TimedExecutor& o)
     {
       if (this == &o) return *this;
 
@@ -104,9 +104,9 @@ namespace CB::DxSurface {
 
       return *this;
     }
-    TimedClassExecutor& operator=(TimedClassExecutor&&) = delete;
+    TimedExecutor& operator=(TimedExecutor&&) = delete;
 
-    ~TimedClassExecutor()
+    ~TimedExecutor()
     {
     }
 
@@ -155,7 +155,7 @@ namespace CB::DxSurface {
     FuncTExitted m_fpOnExittedFunc;
     FuncTStateChanged m_fpOnStateChangedFunc;
 
-  }; // class TimedClassExecutor
+  }; // class TimedExecutor<T>
 
 } //- namespace CB::DxSurface
 
