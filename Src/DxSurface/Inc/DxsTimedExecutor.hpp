@@ -65,7 +65,7 @@ namespace CB::DxSurface {
     using FuncTStateChanged = void (ClassT::*)(ExecutionState from, ExecutionState to);
 
     TimedClassExecutor(
-      Ptr<ClassT> classPtr,
+      ClassT* classPtr,
       TString name, unsigned int maxRefreshRateHz,
       FuncTInit onInitFunc = nullptr,
       FuncTRunning onRunningFunc = nullptr,
@@ -73,9 +73,9 @@ namespace CB::DxSurface {
       FuncTExitted onExittedFunc = nullptr,
       FuncTStateChanged onStateChangedFunc = nullptr) : TimedExecutorBase(name, maxRefreshRateHz)
     {
-      if (!classPtr || classPtr.get() == nullptr)
+      if (classPtr == nullptr)
       {
-        DxsThrow(name + DxsT(" - TimedClassExecutor - Invalid or nullptr for activated class provided"));
+        DxsThrow((name + DxsT(" - TimedClassExecutor - Invalid or nullptr for activated class provided")).c_str());
       }
 
       m_pClassPtr = classPtr;
@@ -88,6 +88,7 @@ namespace CB::DxSurface {
     TimedClassExecutor(const TimedClassExecutor& o)
     {
       if (this == &o) return;
+      *this = o;
     }
     TimedClassExecutor(TimedClassExecutor&&) = delete;
     TimedClassExecutor& operator=(const TimedClassExecutor& o)
@@ -114,40 +115,40 @@ namespace CB::DxSurface {
     {
       if (m_fpOnInitFunc != nullptr)
       {
-        m_pClassPtr->m_fpOnInitFunc();
+        (m_pClassPtr->*m_fpOnInitFunc)();
       }
     }
     void OnExecutionStateRunning(const double deltaSec) override final
     {
       if (m_fpOnRunningFunc != nullptr)
       {
-        m_pClassPtr->m_fpOnRunningFunc(deltaSec);
+        (m_pClassPtr->*m_fpOnRunningFunc)(deltaSec);
       }
     }
     void OnExecutionStatePaused(const double deltaSec) override final
     {
       if (m_fpOnPausedFunc != nullptr)
       {
-        m_pClassPtr->m_fpOnPausedFunc(deltaSec);
+        (m_pClassPtr->*m_fpOnPausedFunc)(deltaSec);
       }
     }
     void OnExecutionStateExitted(ExecutionExitReason r, const TString& message) override final
     {
       if (m_fpOnExittedFunc != nullptr)
       {
-        m_pClassPtr->m_fpOnExittedFunc(r, message);
+        (m_pClassPtr->*m_fpOnExittedFunc)(r, message);
       }
     }
     void OnExecutionStateChanged(ExecutionState last, ExecutionState next) override final
     {
       if (m_fpOnStateChangedFunc != nullptr)
       {
-        m_pClassPtr->m_fpOnStateChangedFunc(last, next);
+        (m_pClassPtr->*m_fpOnStateChangedFunc)(last, next);
       }
     }
 
   private:
-    Ptr<ClassT> m_pClassPtr;
+    ClassT* m_pClassPtr;
     FuncTInit m_fpOnInitFunc;
     FuncTRunning m_fpOnRunningFunc;
     FuncTPaused m_fpOnPausedFunc;
