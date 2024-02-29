@@ -66,17 +66,17 @@ namespace CB::DxSurface {
   class Keyboard;
   class Mouse;
 
-  using RenderingCallbackInit = void(*)(const Window&);
-  using RenderingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
-  using RenderingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
-  using RenderingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionExitReason reason, const TString& message);
-  using RenderingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionState from, const ExecutionState to);
+  using RenderingCallbackInit = void(*)(Window&);
+  using RenderingCallbackRunning = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
+  using RenderingCallbackPaused = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
+  using RenderingCallbackExitted = void(*)(Window&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
+  using RenderingCallbackStateChanged = void(*)(Window&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
-  using ProcessingCallbackInit = void(*)(const Window&);
-  using ProcessingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
-  using ProcessingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
-  using ProcessingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionExitReason reason, const TString& message);
-  using ProcessingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionState from, const ExecutionState to);
+  using ProcessingCallbackInit = void(*)(Window&);
+  using ProcessingCallbackRunning = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
+  using ProcessingCallbackPaused = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
+  using ProcessingCallbackExitted = void(*)(Window&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
+  using ProcessingCallbackStateChanged = void(*)(Window&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
   struct WindowRect { int x = 0, y = 0, w = 0, h = 0; };
   struct WindowCallbacks
