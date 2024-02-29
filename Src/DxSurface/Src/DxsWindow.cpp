@@ -329,16 +329,37 @@ void Window::OnRenderingStateInitInternal()
   Show();
 
   OnRenderingStateInit();
+
+  //- Invoking the externally provided callback
+  RenderingCallbackInit callback = m_stOptions.callbacks.renderingCallbackInit.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this);
+  }
 }
 void Window::OnRenderingStateRunningInternal(const double deltaSec)
 {
   ProcessWindowsMessagesQueue();
   OnRenderingStateRunning(deltaSec);
+
+  //- Invoking the externally provided callback
+  RenderingCallbackRunning callback = m_stOptions.callbacks.renderingCallbackRunning.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, deltaSec);
+  }
 }
 void Window::OnRenderingStatePausedInternal(const double deltaSec)
 {
   ProcessWindowsMessagesQueue();
   OnRenderingStatePaused(deltaSec);
+
+  //- Invoking the externally provided callback
+  RenderingCallbackPaused callback = m_stOptions.callbacks.renderingCallbackPaused.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, deltaSec);
+  }
 }
 void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const TString& message)
 {
@@ -351,6 +372,13 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
 
   OnRenderingStateExitted(reason, message);
 
+  //- Invoking the externally provided callback
+  RenderingCallbackExitted callback = m_stOptions.callbacks.renderingCallbackExitted.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, reason, message);
+  }
+
   if (Primary())
   {
     ExitProcess(reason == ExecutionExitReason::Exception ? -1 : 0);
@@ -359,6 +387,13 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
 void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState next)
 {
   OnRenderingStateChanged(last, next);
+
+  //- Invoking the externally provided callback
+  RenderingCallbackStateChanged callback = m_stOptions.callbacks.renderingCallbackStateChanged.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, last, next);
+  }
 }
 
 
@@ -370,14 +405,35 @@ void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState
 void Window::OnProcessingStateInitInternal()
 {
   OnProcessingStateInit();
+
+  //- Invoking the externally provided callback
+  ProcessingCallbackInit callback = m_stOptions.callbacks.processingCallbackInit.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this);
+  }
 }
 void Window::OnProcessingStateRunningInternal(const double deltaSec)
 {
   OnProcessingStateRunning(deltaSec);
+
+  //- Invoking the externally provided callback
+  ProcessingCallbackRunning callback = m_stOptions.callbacks.processingCallbackRunning.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, deltaSec);
+  }
 }
 void Window::OnProcessingStatePausedInternal(const double deltaSec)
 {
   OnProcessingStatePaused(deltaSec);
+
+  //- Invoking the externally provided callback
+  ProcessingCallbackPaused callback = m_stOptions.callbacks.processingCallbackPaused.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, deltaSec);
+  }
 }
 void Window::OnProcessingStateExittedInternal(ExecutionExitReason r, const TString& message)
 {
@@ -387,10 +443,24 @@ void Window::OnProcessingStateExittedInternal(ExecutionExitReason r, const TStri
   }
 
   OnProcessingStateExitted(r, message);
+
+  //- Invoking the externally provided callback
+  ProcessingCallbackExitted callback = m_stOptions.callbacks.processingCallbackExitted.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, r, message);
+  }
 }
 void Window::OnProcessingStateChangedInternal(ExecutionState last, ExecutionState next)
 {
   OnProcessingStateChanged(last, next);
+
+  //- Invoking the externally provided callback
+  ProcessingCallbackStateChanged callback = m_stOptions.callbacks.processingCallbackStateChanged.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_cKeyboard, m_cMouse, last, next);
+  }
 }
 
 
