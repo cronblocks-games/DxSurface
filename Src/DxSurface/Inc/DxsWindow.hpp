@@ -61,8 +61,8 @@ namespace CB::DxSurface {
 
     volatile WindowCreationState m_eWindowCreationState;
     
-    Ptr<TimedClassExecutor<Window>> m_pRenderingExecutor;
-    Ptr<TimedClassExecutor<Window>> m_pProcessingExecutor;
+    Ptr<TimedExecutor<Window>> m_pRenderingExecutor;
+    Ptr<TimedExecutor<Window>> m_pProcessingExecutor;
 
     Keyboard m_cKeyboard;
     Mouse m_cMouse;

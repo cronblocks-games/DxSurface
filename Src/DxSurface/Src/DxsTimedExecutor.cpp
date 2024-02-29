@@ -38,6 +38,15 @@ TimedExecutorBase::~TimedExecutorBase()
   }
 }
 
+const TString& TimedExecutorBase::GetName() const
+{
+  return m_sName;
+}
+unsigned int TimedExecutorBase::GetMaxRefreshRateHz() const
+{
+  return m_uiMaxRefreshRateHz;
+}
+
 TimedExecutorBase& TimedExecutorBase::operator=(const TimedExecutorBase& o)
 {
   if (this == &o) return *this;

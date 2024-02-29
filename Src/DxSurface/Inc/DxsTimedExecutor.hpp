@@ -19,6 +19,9 @@ namespace CB::DxSurface {
 
     virtual ~TimedExecutorBase();
 
+    const TString& GetName() const;
+    unsigned int GetMaxRefreshRateHz() const;
+
     const TimedExecutorBase& operator()();
     void Run();
 
@@ -56,7 +59,7 @@ namespace CB::DxSurface {
   }; // class TimedExecutorBase
 
   template <class ClassT>
-  class TimedClassExecutor : public TimedExecutorBase {
+  class TimedExecutor : public TimedExecutorBase {
   public:
     using FuncTInit = void (ClassT::*)();
     using FuncTRunning = void (ClassT::*)(const double deltaSec);
@@ -64,7 +67,7 @@ namespace CB::DxSurface {
     using FuncTExitted = void (ClassT::*)(ExecutionExitReason, const TString& message);
     using FuncTStateChanged = void (ClassT::*)(ExecutionState from, ExecutionState to);
 
-    TimedClassExecutor(
+    TimedExecutor(
       ClassT* classPtr,
       TString name, unsigned int maxRefreshRateHz,
       FuncTInit onInitFunc = nullptr,
@@ -75,7 +78,7 @@ namespace CB::DxSurface {
     {
       if (classPtr == nullptr)
       {
-        DxsThrow((name + DxsT(" - TimedClassExecutor - Invalid or nullptr for activated class provided")).c_str());
+        DxsThrow((name + DxsT(" - TimedExecutor<ClassT> - Invalid or nullptr for activated class provided")).c_str());
       }
 
       m_pClassPtr = classPtr;
@@ -85,13 +88,17 @@ namespace CB::DxSurface {
       m_fpOnExittedFunc = onExittedFunc;
       m_fpOnStateChangedFunc = onStateChangedFunc;
     }
-    TimedClassExecutor(const TimedClassExecutor& o)
+    explicit TimedExecutor(const TimedExecutor& o) : TimedExecutorBase(o.GetName(), o.GetMaxRefreshRateHz())
     {
-      if (this == &o) return;
-      *this = o;
+      m_pClassPtr = o.m_pClassPtr;
+      m_fpOnInitFunc = o.m_fpOnInitFunc;
+      m_fpOnRunningFunc = o.m_fpOnRunningFunc;
+      m_fpOnPausedFunc = o.m_fpOnPausedFunc;
+      m_fpOnExittedFunc = o.m_fpOnExittedFunc;
+      m_fpOnStateChangedFunc = o.m_fpOnStateChangedFunc;
     }
-    TimedClassExecutor(TimedClassExecutor&&) = delete;
-    TimedClassExecutor& operator=(const TimedClassExecutor& o)
+    TimedExecutor(TimedExecutor&&) = delete;
+    TimedExecutor& operator=(const TimedExecutor& o)
     {
       if (this == &o) return *this;
 
@@ -104,9 +111,9 @@ namespace CB::DxSurface {
 
       return *this;
     }
-    TimedClassExecutor& operator=(TimedClassExecutor&&) = delete;
+    TimedExecutor& operator=(TimedExecutor&&) = delete;
 
-    ~TimedClassExecutor()
+    ~TimedExecutor()
     {
     }
 
@@ -155,7 +162,102 @@ namespace CB::DxSurface {
     FuncTExitted m_fpOnExittedFunc;
     FuncTStateChanged m_fpOnStateChangedFunc;
 
-  }; // class TimedClassExecutor
+  }; // class TimedExecutor<T>
+
+  class SimpleTimedExecutor : public TimedExecutorBase {
+  public:
+    using FuncTInit = void (*)();
+    using FuncTRunning = void (*)(const double deltaSec);
+    using FuncTPaused = void (*)(const double deltaSec);
+    using FuncTExitted = void (*)(ExecutionExitReason, const TString& message);
+    using FuncTStateChanged = void (*)(ExecutionState from, ExecutionState to);
+
+    SimpleTimedExecutor(
+      TString name, unsigned int maxRefreshRateHz,
+      FuncTInit onInitFunc = nullptr,
+      FuncTRunning onRunningFunc = nullptr,
+      FuncTPaused onPausedFunc = nullptr,
+      FuncTExitted onExittedFunc = nullptr,
+      FuncTStateChanged onStateChangedFunc = nullptr) : TimedExecutorBase(name, maxRefreshRateHz)
+    {
+      m_fpOnInitFunc = onInitFunc;
+      m_fpOnRunningFunc = onRunningFunc;
+      m_fpOnPausedFunc = onPausedFunc;
+      m_fpOnExittedFunc = onExittedFunc;
+      m_fpOnStateChangedFunc = onStateChangedFunc;
+    }
+    explicit SimpleTimedExecutor(const SimpleTimedExecutor& o) : TimedExecutorBase(o.GetName(), o.GetMaxRefreshRateHz())
+    {
+      m_fpOnInitFunc = o.m_fpOnInitFunc;
+      m_fpOnRunningFunc = o.m_fpOnRunningFunc;
+      m_fpOnPausedFunc = o.m_fpOnPausedFunc;
+      m_fpOnExittedFunc = o.m_fpOnExittedFunc;
+      m_fpOnStateChangedFunc = o.m_fpOnStateChangedFunc;
+    }
+    SimpleTimedExecutor(SimpleTimedExecutor&&) = delete;
+    SimpleTimedExecutor& operator=(const SimpleTimedExecutor& o)
+    {
+      if (this == &o) return *this;
+
+      m_fpOnInitFunc = o.m_fpOnInitFunc;
+      m_fpOnRunningFunc = o.m_fpOnRunningFunc;
+      m_fpOnPausedFunc = o.m_fpOnPausedFunc;
+      m_fpOnExittedFunc = o.m_fpOnExittedFunc;
+      m_fpOnStateChangedFunc = o.m_fpOnStateChangedFunc;
+
+      return *this;
+    }
+    SimpleTimedExecutor& operator=(SimpleTimedExecutor&&) = delete;
+
+    ~SimpleTimedExecutor()
+    {
+    }
+
+  protected:
+    void OnExecutionStateInit() override final
+    {
+      if (m_fpOnInitFunc != nullptr)
+      {
+        (*m_fpOnInitFunc)();
+      }
+    }
+    void OnExecutionStateRunning(const double deltaSec) override final
+    {
+      if (m_fpOnRunningFunc != nullptr)
+      {
+        (*m_fpOnRunningFunc)(deltaSec);
+      }
+    }
+    void OnExecutionStatePaused(const double deltaSec) override final
+    {
+      if (m_fpOnPausedFunc != nullptr)
+      {
+        (*m_fpOnPausedFunc)(deltaSec);
+      }
+    }
+    void OnExecutionStateExitted(ExecutionExitReason r, const TString& message) override final
+    {
+      if (m_fpOnExittedFunc != nullptr)
+      {
+        (*m_fpOnExittedFunc)(r, message);
+      }
+    }
+    void OnExecutionStateChanged(ExecutionState last, ExecutionState next) override final
+    {
+      if (m_fpOnStateChangedFunc != nullptr)
+      {
+        (*m_fpOnStateChangedFunc)(last, next);
+      }
+    }
+
+  private:
+    FuncTInit m_fpOnInitFunc;
+    FuncTRunning m_fpOnRunningFunc;
+    FuncTPaused m_fpOnPausedFunc;
+    FuncTExitted m_fpOnExittedFunc;
+    FuncTStateChanged m_fpOnStateChangedFunc;
+
+  }; // class SimpleTimedExecutor
 
 } //- namespace CB::DxSurface
 
