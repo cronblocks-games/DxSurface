@@ -39,6 +39,8 @@ namespace CB::DxSurface {
     bool Primary() const;
     void Primary(bool isPrimary);
 
+    void SetCallbacks(const WindowCallbacks&);
+
   protected:
     virtual void OnRenderingStateInit() {}
     virtual void OnRenderingStateRunning(const double deltaSec) {}

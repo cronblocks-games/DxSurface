@@ -198,6 +198,11 @@ void Window::Primary(bool isPrimary)
   m_stOptions.isPrimary = isPrimary;
 }
 
+void Window::SetCallbacks(const WindowCallbacks& callbacks)
+{
+  m_stOptions.callbacks = callbacks;
+}
+
 
 //------------------------------------------------------------------------
 //- 
