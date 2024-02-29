@@ -302,6 +302,11 @@ LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 //- 
 LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
+  if (m_stOptions.isDebugEnabled)
+  {
+    OutputDebugString(WindowsMessage::ToTString(msg, wParam, lParam).c_str());
+  }
+
   switch (msg)
   {
   case WM_CLOSE: Exit(); break;

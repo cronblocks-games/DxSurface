@@ -3,15 +3,19 @@
 
 
 #include <iostream>
+#include <string>
 #include <sstream>
 #include <map>
+#include <unordered_map>
 #include <mutex>
 #include <thread>
 
 #include <string.h>
 
 #include "DxsExceptions.hpp"
-#include "DxsWinMessages.hpp"
+#include "DxsWinMessage.hpp"
+#include "DxsMacros.hpp"
+#include "DxsTypes.hpp"
 
 
 #endif
