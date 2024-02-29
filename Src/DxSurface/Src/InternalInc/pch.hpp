@@ -13,7 +13,8 @@
 #include <string.h>
 
 #include "DxsExceptions.hpp"
-#include "DxsWinMessage.hpp"
+#include "DxsWinDebug.hpp"
+#include "DxsWinApi.hpp"
 #include "DxsMacros.hpp"
 #include "DxsTypes.hpp"
 

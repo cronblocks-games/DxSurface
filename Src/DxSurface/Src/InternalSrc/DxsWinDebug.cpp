@@ -1,5 +1,5 @@
 #include "pch.hpp"
-#include "DxsWinMessage.hpp"
+#include "DxsWinDebug.hpp"
 
 #define ID_NAME_PAIR(msg)     { msg, DxsT(#msg) }
 
@@ -196,7 +196,7 @@ static MMap _winMessagesMap(
 	});
 
 
-TString WindowsMessage::ToTString(UINT msg, WPARAM wParam, LPARAM lParam) noexcept
+void WinDebug::PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
 #if defined(_UNICODE) || defined(UNICODE)
 	wstringstream ss, tmpss;
@@ -222,5 +222,5 @@ TString WindowsMessage::ToTString(UINT msg, WPARAM wParam, LPARAM lParam) noexce
 	ss << " - wParam (0x" << hex << setfill(DxsT('0')) << setw(8) << wParam << ")";
 	ss << ", lParam (0x" << hex << setfill(DxsT('0')) << setw(8) << lParam << ")" << endl;
 
-	return ss.str();
+	OutputDebugString(ss.str().c_str());
 }

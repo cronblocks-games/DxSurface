@@ -304,7 +304,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
   if (m_stOptions.isDebugEnabled)
   {
-    OutputDebugString(WindowsMessage::ToTString(msg, wParam, lParam).c_str());
+    WinDebug::PrintWindowsMessage(msg, wParam, lParam);
   }
 
   switch (msg)
