@@ -43,21 +43,40 @@ namespace CB::DxSurface {
   using TimeDurationMilli = std::chrono::duration<double, std::milli>;
   using TimeDurationSec = std::chrono::duration<double>;
 
+  enum class WindowCreationState
+  {
+    NONE = 0,
+    Success,
+    Fail
+  };
+  enum class ExecutionCommand
+  {
+    Run, Pause, Exit,
+  };
+  enum class ExecutionState
+  {
+    NONE = 0, Init, Running, Paused, Exitted,
+  };
+  enum class ExecutionExitReason
+  {
+    Normal = 0, Exception
+  };
+
   class Window;
   class Keyboard;
   class Mouse;
 
   using RenderingCallbackInit = void(*)(const Window&);
-  using RenderingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
-  using RenderingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
-  using RenderingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&);
-  using RenderingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&);
+  using RenderingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
+  using RenderingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
+  using RenderingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionExitReason reason, const TString& message);
+  using RenderingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionState from, const ExecutionState to);
 
   using ProcessingCallbackInit = void(*)(const Window&);
-  using ProcessingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
-  using ProcessingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
-  using ProcessingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&);
-  using ProcessingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&);
+  using ProcessingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
+  using ProcessingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, const double deltaTimeSec);
+  using ProcessingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionExitReason reason, const TString& message);
+  using ProcessingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&, const ExecutionState from, const ExecutionState to);
 
   struct WindowRect { int x = 0, y = 0, w = 0, h = 0; };
   struct WindowCallbacks
@@ -160,25 +179,6 @@ namespace CB::DxSurface {
     unsigned int maxProcessingThreadRefreshRateHz = DxsDefaultThreadRefreshRateHz;
 
     WindowCallbacks callbacks = WindowCallbacks();
-  };
-
-  enum class WindowCreationState
-  {
-    NONE = 0,
-    Success,
-    Fail
-  };
-  enum class ExecutionCommand
-  {
-    Run, Pause, Exit,
-  };
-  enum class ExecutionState
-  {
-    NONE = 0, Init, Running, Paused, Exitted,
-  };
-  enum class ExecutionExitReason
-  {
-    Normal = 0, Exception
   };
 
 
