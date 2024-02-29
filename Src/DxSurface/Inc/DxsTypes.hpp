@@ -51,13 +51,13 @@ namespace CB::DxSurface {
   using RenderingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
   using RenderingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
   using RenderingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&);
-  using RenderingCallbackStatusChanged = void(*)(const Window&, const Keyboard&, const Mouse&);
+  using RenderingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&);
 
   using ProcessingCallbackInit = void(*)(const Window&);
   using ProcessingCallbackRunning = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
   using ProcessingCallbackPaused = void(*)(const Window&, const Keyboard&, const Mouse&, double deltaTimeSec);
   using ProcessingCallbackExitted = void(*)(const Window&, const Keyboard&, const Mouse&);
-  using ProcessingCallbackStatusChanged = void(*)(const Window&, const Keyboard&, const Mouse&);
+  using ProcessingCallbackStateChanged = void(*)(const Window&, const Keyboard&, const Mouse&);
 
   struct WindowRect { int x = 0, y = 0, w = 0, h = 0; };
   struct WindowCallbacks
@@ -67,25 +67,25 @@ namespace CB::DxSurface {
       RenderingCallbackRunning renderingCallbackRunning = nullptr,
       RenderingCallbackPaused renderingCallbackPaused = nullptr,
       RenderingCallbackExitted renderingCallbackExitted = nullptr,
-      RenderingCallbackStatusChanged renderingCallbackStatusChanged = nullptr,
+      RenderingCallbackStateChanged renderingCallbackStateChanged = nullptr,
 
       ProcessingCallbackInit processingCallbackInit = nullptr,
       ProcessingCallbackRunning processingCallbackRunning = nullptr,
       ProcessingCallbackPaused processingCallbackPaused = nullptr,
       ProcessingCallbackExitted processingCallbackExitted = nullptr,
-      ProcessingCallbackStatusChanged processingCallbackStatusChanged = nullptr)
+      ProcessingCallbackStateChanged processingCallbackStateChanged = nullptr)
     {
       this->renderingCallbackInit.store(renderingCallbackInit);
       this->renderingCallbackRunning.store(renderingCallbackRunning);
       this->renderingCallbackPaused.store(renderingCallbackPaused);
       this->renderingCallbackExitted.store(renderingCallbackExitted);
-      this->renderingCallbackStatusChanged.store(renderingCallbackStatusChanged);
+      this->renderingCallbackStateChanged.store(renderingCallbackStateChanged);
 
       this->processingCallbackInit.store(processingCallbackInit);
       this->processingCallbackRunning.store(processingCallbackRunning);
       this->processingCallbackPaused.store(processingCallbackPaused);
       this->processingCallbackExitted.store(processingCallbackExitted);
-      this->processingCallbackStatusChanged.store(processingCallbackStatusChanged);
+      this->processingCallbackStateChanged.store(processingCallbackStateChanged);
     }
     WindowCallbacks(const WindowCallbacks& o)
     {
@@ -103,13 +103,13 @@ namespace CB::DxSurface {
         renderingCallbackRunning.store(o.renderingCallbackRunning.load());
         renderingCallbackPaused.store(o.renderingCallbackPaused.load());
         renderingCallbackExitted.store(o.renderingCallbackExitted.load());
-        renderingCallbackStatusChanged.store(o.renderingCallbackStatusChanged.load());
+        renderingCallbackStateChanged.store(o.renderingCallbackStateChanged.load());
 
         processingCallbackInit.store(o.processingCallbackInit.load());
         processingCallbackRunning.store(o.processingCallbackRunning.load());
         processingCallbackPaused.store(o.processingCallbackPaused.load());
         processingCallbackExitted.store(o.processingCallbackExitted.load());
-        processingCallbackStatusChanged.store(o.processingCallbackStatusChanged.load());
+        processingCallbackStateChanged.store(o.processingCallbackStateChanged.load());
       }
       return *this;
     }
@@ -121,13 +121,13 @@ namespace CB::DxSurface {
         renderingCallbackRunning.store(o.renderingCallbackRunning.exchange(nullptr));
         renderingCallbackPaused.store(o.renderingCallbackPaused.exchange(nullptr));
         renderingCallbackExitted.store(o.renderingCallbackExitted.exchange(nullptr));
-        renderingCallbackStatusChanged.store(o.renderingCallbackStatusChanged.exchange(nullptr));
+        renderingCallbackStateChanged.store(o.renderingCallbackStateChanged.exchange(nullptr));
 
         processingCallbackInit.store(o.processingCallbackInit.exchange(nullptr));
         processingCallbackRunning.store(o.processingCallbackRunning.exchange(nullptr));
         processingCallbackPaused.store(o.processingCallbackPaused.exchange(nullptr));
         processingCallbackExitted.store(o.processingCallbackExitted.exchange(nullptr));
-        processingCallbackStatusChanged.store(o.processingCallbackStatusChanged.exchange(nullptr));
+        processingCallbackStateChanged.store(o.processingCallbackStateChanged.exchange(nullptr));
       }
       return *this;
     }
@@ -136,13 +136,13 @@ namespace CB::DxSurface {
     Atomic<RenderingCallbackRunning> renderingCallbackRunning;
     Atomic<RenderingCallbackPaused> renderingCallbackPaused;
     Atomic<RenderingCallbackExitted> renderingCallbackExitted;
-    Atomic<RenderingCallbackStatusChanged> renderingCallbackStatusChanged;
+    Atomic<RenderingCallbackStateChanged> renderingCallbackStateChanged;
 
     Atomic<ProcessingCallbackInit> processingCallbackInit;
     Atomic<ProcessingCallbackRunning> processingCallbackRunning;
     Atomic<ProcessingCallbackPaused> processingCallbackPaused;
     Atomic<ProcessingCallbackExitted> processingCallbackExitted;
-    Atomic<ProcessingCallbackStatusChanged> processingCallbackStatusChanged;
+    Atomic<ProcessingCallbackStateChanged> processingCallbackStateChanged;
   };
   struct WindowCreationOptions
   {
