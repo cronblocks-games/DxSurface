@@ -5,6 +5,8 @@
 
 #include "DxsHelpers.hpp"
 #include "DxsTimedExecutor.hpp"
+#include "DxsKeyboard.hpp"
+#include "DxsMouse.hpp"
 
 
 namespace CB::DxSurface {
@@ -61,6 +63,9 @@ namespace CB::DxSurface {
     
     Ptr<TimedClassExecutor<Window>> m_pRenderingExecutor;
     Ptr<TimedClassExecutor<Window>> m_pProcessingExecutor;
+
+    Keyboard m_cKeyboard;
+    Mouse m_cMouse;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();
