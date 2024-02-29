@@ -48,6 +48,9 @@
     <ClInclude Include="Inc\DxsTimedExecutor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\InternalInc\DxsWinMessages.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxSurface.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\DxsTimedExecutor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\InternalSrc\DxsWinMessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
