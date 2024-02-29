@@ -214,7 +214,7 @@ TString WindowsMessage::ToTString(UINT msg, WPARAM wParam, LPARAM lParam) noexce
 	}
 	else
 	{
-		tmpss << "Unknown (0x" << hex << setfill(DxsT('0')) << setw(8) << msg << ")";
+		tmpss << "Unknown (0x" << hex << setfill(DxsT('0')) << setw(4) << msg << ")";
 		ss << tmpss.str();
 	}
 
