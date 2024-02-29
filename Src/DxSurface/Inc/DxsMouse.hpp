@@ -9,6 +9,8 @@ namespace CB::DxSurface {
 
   class Mouse {
 
+  private:
+    friend class CB::DxSurface::Window;
   };
 
 } //- namespace CB::DxSurface
