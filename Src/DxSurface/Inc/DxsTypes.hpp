@@ -78,7 +78,7 @@ namespace CB::DxSurface {
   using ProcessingCallbackExitted = void(*)(Window&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
   using ProcessingCallbackStateChanged = void(*)(Window&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
-  struct WindowRect { int x = 0, y = 0, w = 0, h = 0; };
+  struct WindowRect { long x = 0, y = 0, w = 0, h = 0; };
   struct WindowCallbacks
   {
     WindowCallbacks(
