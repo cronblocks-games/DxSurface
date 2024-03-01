@@ -7,7 +7,7 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
-  m_stOptions.isKeyboardDebugEnabled = true;
+  m_stOptions.isKeyboardDebugEnabled = false;
   m_stOptions.isMouseDebugEnabled = false;
   m_stOptions.isGraphicsDebugEnabled = true;
 }
