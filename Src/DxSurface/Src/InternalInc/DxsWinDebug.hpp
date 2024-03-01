@@ -9,6 +9,7 @@ namespace CB::DxSurface {
   class WinDebug {
   public:
     static void PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
+    static void PrintKeyStatus(KeyCode, KeyStatus);
   };
 
 } //- namespace CB::DxSurface
