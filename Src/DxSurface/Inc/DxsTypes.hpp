@@ -174,7 +174,7 @@ namespace CB::DxSurface {
     HICON        hIcon                            = nullptr;
     HICON        hIconSmall                       = nullptr;
     HCURSOR      hCursor                          = nullptr;
-    WindowRect   rect                             = WindowRect(10, 10, 600, 450);
+    WindowRect   rect                             = WindowRect(CW_USEDEFAULT, CW_USEDEFAULT, 600, 450);
     DWORD        dwStyle                          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
     DWORD        dwExStyle                        = WS_EX_WINDOWEDGE;
     
