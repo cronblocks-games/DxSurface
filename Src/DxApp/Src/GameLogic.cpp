@@ -12,13 +12,13 @@ void GameRenderingInit(Window& w)
 }
 void GameRenderingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
-  if (k.KeyStatus(KeyCode::Esc) == KeyStatus::Pressed)
+  if (k.GetKeyStatus(KeyCode::Esc) == KeyStatus::Pressed)
   {
     w.Title(DxsT("Exiting"));
     w.Exit();
   }
 
-  if (k.KeyStatus(KeyCode::F1) == KeyStatus::Pressed)
+  if (k.GetKeyStatus(KeyCode::F1) == KeyStatus::Pressed)
   {
     w.Title(DxsT("Help"));
   }

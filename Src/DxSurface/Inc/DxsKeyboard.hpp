@@ -10,12 +10,12 @@ namespace CB::DxSurface {
 
   class Keyboard {
   public:
-    enum class KeyStatus KeyStatus(enum class KeyCode);
+    KeyStatus GetKeyStatus(KeyCode);
 
   private:
-    std::bitset<(1 << (8 * sizeof(enum class KeyCode)))> m_bKeyPressedStatus;
+    std::bitset<(1 << (8 * sizeof(KeyCode)))> m_bKeyPressedStatus;
 
-    void SetKeyStatus(enum class KeyCode, enum class KeyStatus);
+    void SetKeyStatus(KeyCode, KeyStatus);
 
     friend class CB::DxSurface::Window;
   };

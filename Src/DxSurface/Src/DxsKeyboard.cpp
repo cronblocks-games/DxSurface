@@ -5,7 +5,7 @@
 using namespace CB::DxSurface;
 
 
-enum class KeyStatus Keyboard::KeyStatus(enum class KeyCode k)
+KeyStatus Keyboard::GetKeyStatus(KeyCode k)
 {
   if (m_bKeyPressedStatus[(unsigned char)k])
     return KeyStatus::Pressed;
@@ -13,7 +13,7 @@ enum class KeyStatus Keyboard::KeyStatus(enum class KeyCode k)
   return KeyStatus::Released;
 }
 
-void Keyboard::SetKeyStatus(enum class KeyCode k, enum class KeyStatus s)
+void Keyboard::SetKeyStatus(KeyCode k, KeyStatus s)
 {
   if (s == KeyStatus::Pressed)
     m_bKeyPressedStatus[(unsigned char)k] = true;
