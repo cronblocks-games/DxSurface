@@ -14,9 +14,9 @@ namespace CB::DxSurface {
   public:
     Exception() = delete;
     Exception(const char* file, int lineNumber, ConstTCharPtr message);
-
     Exception(const Exception&);
     Exception(Exception&&) noexcept;
+
     Exception& operator=(const Exception&);
     Exception& operator=(Exception&&) noexcept;
 
