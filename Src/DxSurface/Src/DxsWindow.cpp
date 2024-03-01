@@ -310,6 +310,20 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   switch (msg)
   {
   case WM_CLOSE: Exit(); break;
+
+  case WM_KEYDOWN:
+  {
+    KeyCode k = (KeyCode)wParam;
+    WinDebug::PrintKeyStatus(k, KeyStatus::Pressed);
+  }
+  break;
+  
+  case WM_KEYUP:
+  {
+    KeyCode k = (KeyCode)wParam;
+    WinDebug::PrintKeyStatus(k, KeyStatus::Released);
+  }
+  break;
   }
 
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
