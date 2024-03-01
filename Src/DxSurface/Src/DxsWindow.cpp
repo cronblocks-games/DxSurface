@@ -354,6 +354,13 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     m_cMouse.SetPosition(pt);
   }
   break;
+
+  case WM_LBUTTONDOWN: m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Pressed);    break;
+  case WM_RBUTTONDOWN: m_cMouse.SetButtonStatus(MouseButton::Right, KeyStatus::Pressed);   break;
+  case WM_MBUTTONDOWN: m_cMouse.SetButtonStatus(MouseButton::Middle, KeyStatus::Pressed);  break;
+  case WM_LBUTTONUP:   m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Released);   break;
+  case WM_RBUTTONUP:   m_cMouse.SetButtonStatus(MouseButton::Right, KeyStatus::Released);  break;
+  case WM_MBUTTONUP:   m_cMouse.SetButtonStatus(MouseButton::Middle, KeyStatus::Released); break;
   }
 
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
