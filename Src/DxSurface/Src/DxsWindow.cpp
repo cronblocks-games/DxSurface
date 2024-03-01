@@ -241,6 +241,18 @@ void Window::RegisterClassAndCreateWindow()
   wndcls.lpszClassName = m_sClassName.c_str();
   RegisterClassEx(&wndcls);
 
+  RECT winSize(
+    m_stOptions.rect.x,
+    m_stOptions.rect.y,
+    m_stOptions.rect.x + m_stOptions.rect.w,
+    m_stOptions.rect.y + m_stOptions.rect.h);
+
+  AdjustWindowRect(&winSize, m_stOptions.dwStyle, false);
+  m_stOptions.rect.x = winSize.left;
+  m_stOptions.rect.y = winSize.top;
+  m_stOptions.rect.w = winSize.right - winSize.left;
+  m_stOptions.rect.h = winSize.bottom - winSize.top;
+
   m_hWnd = CreateWindowEx(
     m_stOptions.dwExStyle,                  // dwExStyle
     m_sClassName.c_str(),                   // lpClassName
