@@ -18,5 +18,7 @@
 #include "DxsMacros.hpp"
 #include "DxsTypes.hpp"
 
+#include <windowsx.h>
+
 
 #endif
