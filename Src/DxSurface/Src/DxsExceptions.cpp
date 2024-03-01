@@ -81,3 +81,83 @@ TString& Exception::Message() const
   return m_sFinalMessage;
 }
 
+
+
+WindowsException::WindowsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr)
+  : Exception(file, lineNumber, message), m_hr(hr)
+{
+}
+
+WindowsException::WindowsException(const WindowsException& o)
+  : Exception(o), m_hr(o.m_hr)
+{
+}
+
+WindowsException::WindowsException(WindowsException&& o) noexcept
+  : Exception(move(o))
+{
+  m_hr = exchange(o.m_hr, 0);
+}
+
+WindowsException& WindowsException::operator=(const WindowsException& o)
+{
+  if (this == &o) return *this;
+
+  Exception::operator=(o);
+  m_hr = o.m_hr;
+
+  return *this;
+}
+
+WindowsException& WindowsException::operator=(WindowsException&& o) noexcept
+{
+  if (this == &o) return *this;
+
+  Exception::operator=(move(o));
+  m_hr = exchange(o.m_hr, 0);
+
+  return *this;
+}
+
+TString& WindowsException::Message() const
+{
+#if defined(_UNICODE) || defined(UNICODE)
+  wstringstream ss;
+#else
+  stringstream ss;
+#endif
+
+  ss
+    << "Exception:" << endl
+    << "    -- " << m_sProvidedMessage << endl << endl
+    << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
+    << "Line: " << m_iLineNumber << endl
+    << "HR: " << m_hr << endl
+    << "    -- ";
+  
+  TCharPtr winMessage = nullptr;
+  DWORD winMessageLen = FormatMessage(
+    FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, // dwFlags
+    nullptr,                                    // lpSource (optional)
+    m_hr,                                       // dwMessageId
+    MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),  // dwLanguageId
+    reinterpret_cast<LPTSTR>(&winMessage),      // lpBuffer
+    0,                                          // nSize
+    nullptr);                                   // va_list *Arguments
+
+  if (winMessageLen > 0)
+    ss << winMessage;
+  else
+    ss << "Unknown error code";
+
+  LocalFree(winMessage);
+
+  ss
+    << endl
+    << "Ver: " << hex << DxsVersion
+    << " (" << DxsVersionString << ") - "
+    << DxsVersionReleaseDateString;
+
+  m_sFinalMessage = ss.str();
+  return m_sFinalMessage;
+}

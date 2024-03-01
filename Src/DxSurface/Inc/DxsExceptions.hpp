@@ -29,6 +29,22 @@ namespace CB::DxSurface {
     mutable TString m_sFinalMessage;
   }; //- class Exception
 
+  class WindowsException : public Exception {
+  public:
+    WindowsException() = delete;
+    WindowsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr);
+    WindowsException(const WindowsException&);
+    WindowsException(WindowsException&&) noexcept;
+
+    WindowsException& operator=(const WindowsException&);
+    WindowsException& operator=(WindowsException&&) noexcept;
+
+    virtual TString& Message() const override;
+
+  protected:
+    HRESULT m_hr;
+  }; //- class WindowsException
+
 } //- namespace CB::DxSurface
 
 #define DxsThrow(msg) {throw CB::DxSurface::Exception(__FILE__,__LINE__,msg);}
