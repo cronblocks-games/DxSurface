@@ -17,9 +17,11 @@ namespace CB::DxSurface {
 #if defined(_UNICODE) || defined(UNICODE)
   using TString = std::wstring;
   using ConstTCharPtr = const wchar_t*;
+  using TCharPtr = wchar_t*;
 #else
   using TString = std::string;
   using ConstTCharPtr = const char*;
+  using TCharPtr = char*;
 #endif
 
   template <typename T>
