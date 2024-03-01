@@ -536,3 +536,48 @@ void WinDebug::PrintKeyStatus(KeyCode key, KeyStatus status)
 
 	OutputDebugString(ss.str().c_str());
 }
+
+void WinDebug::PrintMouseClientPosition(POINT pt)
+{
+#if defined(_UNICODE) || defined(UNICODE)
+  wstringstream ss;
+#else
+  stringstream ss;
+#endif
+
+  ss << "Mouse: (Client - " << pt.x << ", " << pt.y << ")" << endl;
+
+  OutputDebugString(ss.str().c_str());
+}
+
+void CB::DxSurface::WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeyStatus s)
+{
+#if defined(_UNICODE) || defined(UNICODE)
+  wstringstream ss;
+#else
+  stringstream ss;
+#endif
+
+  ss << "Mouse: ";
+
+  switch (b)
+  {
+  case MouseButton::Left:   ss << "Left";    break;
+  case MouseButton::Right:  ss << "Right";   break;
+  case MouseButton::Middle: ss << "Middle";  break;
+  default:                  ss << "Unknown"; break;
+  }
+
+  ss << " Button ";
+
+  switch (s)
+  {
+  case KeyStatus::Pressed:  ss << "Pressed"; break;
+  case KeyStatus::Released: ss << "Released"; break;
+  default: ss << "Unknown Status"; break;
+  }
+
+  ss << endl;
+
+  OutputDebugString(ss.str().c_str());
+}
