@@ -298,8 +298,15 @@ void Window::UnRegisterClassAndDestroyWindow()
   
   _handle2WindowMap.erase(m_hWnd);
 
-  DestroyWindow(m_hWnd);
-  UnregisterClass(m_sClassName.c_str(), m_hInstance);
+  if (DxsFailed(DestroyWindow(m_hWnd)))
+  {
+    DxsThrowWindows(DxsT("Cleanup failed - window deletion"));
+  }
+
+  if (DxsFailed(UnregisterClass(m_sClassName.c_str(), m_hInstance)))
+  {
+    DxsThrowWindows(DxsT("Cleanup failed - class unregister"));
+  }
 
   m_hWnd = nullptr;
 }
