@@ -165,17 +165,20 @@ namespace CB::DxSurface {
   };
   struct WindowCreationOptions
   {
-    TString      title            = DxsT("DxSurface");
-    bool         isPrimary        = false;
-    bool         isDebugEnabled   = false;
-    HICON        hIcon            = nullptr;
-    HICON        hIconSmall       = nullptr;
-    HCURSOR      hCursor          = nullptr;
-    WindowRect   rect             = WindowRect(10, 10, 600, 450);
-    DWORD        dwStyle          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
-    DWORD        dwExStyle        = WS_EX_WINDOWEDGE;
+    TString      title                            = DxsT("DxSurface");
+    bool         isPrimary                        = false;
+    bool         isGraphicsDebugEnabled           = false;
+    bool         isKeyboardDebugEnabled           = false;
+    bool         isMouseDebugEnabled              = false;
+    bool         isWindowsMessagesDebugEnabled    = false;
+    HICON        hIcon                            = nullptr;
+    HICON        hIconSmall                       = nullptr;
+    HCURSOR      hCursor                          = nullptr;
+    WindowRect   rect                             = WindowRect(10, 10, 600, 450);
+    DWORD        dwStyle                          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
+    DWORD        dwExStyle                        = WS_EX_WINDOWEDGE;
     
-    unsigned int maxRenderingThreadRefreshRateHz = DxsDefaultThreadRefreshRateHz;
+    unsigned int maxRenderingThreadRefreshRateHz  = DxsDefaultThreadRefreshRateHz;
     unsigned int maxProcessingThreadRefreshRateHz = DxsDefaultThreadRefreshRateHz;
 
     WindowCallbacks callbacks = WindowCallbacks();

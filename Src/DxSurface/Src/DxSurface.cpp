@@ -7,7 +7,9 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
-  m_stOptions.isDebugEnabled = true;
+  m_stOptions.isKeyboardDebugEnabled = true;
+  m_stOptions.isMouseDebugEnabled = true;
+  m_stOptions.isGraphicsDebugEnabled = true;
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
@@ -75,7 +77,7 @@ Ptr<Window> DxSurface::CreateNewWindow(
   const TString& title,
   int x, int y, int width, int height,
   bool isPrimary,
-  bool debugEnabled)
+  bool graphicsDebugEnabled)
 {
   WindowCreationOptions op = m_stOptions;
   op.title = title;
@@ -84,7 +86,7 @@ Ptr<Window> DxSurface::CreateNewWindow(
   op.rect.w = width;
   op.rect.h = height;
   op.isPrimary = isPrimary;
-  op.isDebugEnabled = debugEnabled;
+  op.isGraphicsDebugEnabled = graphicsDebugEnabled;
 
   return CreateNewWindow(op);
 }

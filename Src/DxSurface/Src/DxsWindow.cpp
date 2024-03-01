@@ -302,7 +302,7 @@ LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 //- 
 LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  if (m_stOptions.isDebugEnabled)
+  if (m_stOptions.isWindowsMessagesDebugEnabled)
   {
     WinDebug::PrintWindowsMessage(msg, wParam, lParam);
   }
@@ -314,14 +314,22 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   case WM_KEYDOWN:
   {
     KeyCode k = (KeyCode)wParam;
-    WinDebug::PrintKeyStatus(k, KeyStatus::Pressed);
+
+    if (m_stOptions.isKeyboardDebugEnabled)
+    {
+      WinDebug::PrintKeyStatus(k, KeyStatus::Pressed);
+    }
   }
   break;
   
   case WM_KEYUP:
   {
     KeyCode k = (KeyCode)wParam;
-    WinDebug::PrintKeyStatus(k, KeyStatus::Released);
+
+    if (m_stOptions.isKeyboardDebugEnabled)
+    {
+      WinDebug::PrintKeyStatus(k, KeyStatus::Released);
+    }
   }
   break;
   }
