@@ -20,10 +20,13 @@ namespace CB::DxSurface {
     Exception& operator=(const Exception&);
     Exception& operator=(Exception&&) noexcept;
 
-    const TString& Message() const;
+    virtual TString& Message() const;
 
-  private:
-    mutable TString m_sMessage;
+  protected:
+    int m_iLineNumber;
+    std::string m_sFileName;
+    TString m_sProvidedMessage;
+    mutable TString m_sFinalMessage;
   };
 
 } //- namespace CB::DxSurface
