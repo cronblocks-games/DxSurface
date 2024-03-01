@@ -239,7 +239,11 @@ void Window::RegisterClassAndCreateWindow()
   wndcls.hbrBackground = nullptr;
   wndcls.lpszMenuName = nullptr;
   wndcls.lpszClassName = m_sClassName.c_str();
-  RegisterClassEx(&wndcls);
+
+  if (DxsFailed(RegisterClassEx(&wndcls)))
+  {
+    DxsThrowWindows(DxsT("Class registration failed"));
+  }
 
   RECT winSize(
     m_stOptions.rect.x,
@@ -247,7 +251,11 @@ void Window::RegisterClassAndCreateWindow()
     m_stOptions.rect.x + m_stOptions.rect.w,
     m_stOptions.rect.y + m_stOptions.rect.h);
 
-  AdjustWindowRect(&winSize, m_stOptions.dwStyle, false);
+  if (DxsFailed(AdjustWindowRect(&winSize, m_stOptions.dwStyle, false)))
+  {
+    DxsThrowWindows(DxsT("Client area adjustment failed"));
+  }
+
   m_stOptions.rect.x = winSize.left;
   m_stOptions.rect.y = winSize.top;
   m_stOptions.rect.w = winSize.right - winSize.left;
@@ -277,7 +285,7 @@ void Window::RegisterClassAndCreateWindow()
   else
   {
     m_eWindowCreationState = WindowCreationState::Fail;
-    DxsThrow(DxsT("Window creation failed"));
+    DxsThrowWindows(DxsT("Window creation failed"));
   }
 
   return;
