@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "DxSurface.hpp"
 
+#include <string>
+#include <sstream>
+
+using namespace std;
 using namespace CB::DxSurface;
 
 //- 
@@ -21,6 +25,17 @@ void GameRenderingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
   if (k.GetKeyStatus(KeyCode::F1) == KeyStatus::Pressed)
   {
     w.Title(DxsT("Help"));
+  }
+
+  if (k.GetKeyStatus(KeyCode::M) == KeyStatus::Pressed)
+  {
+    POINT pt = m.GetPosition();
+    wstringstream s;
+    s << "(" << pt.x << ", " << pt.y << ") ";
+    if (m.GetButtonStatus(MouseButton::Left) == KeyStatus::Pressed) s << "L";
+    if (m.GetButtonStatus(MouseButton::Middle) == KeyStatus::Pressed) s << "M";
+    if (m.GetButtonStatus(MouseButton::Right) == KeyStatus::Pressed) s << "R";
+    w.Title(s.str());
   }
 }
 void GameRenderingPaused(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
