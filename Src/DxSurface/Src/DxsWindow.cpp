@@ -311,6 +311,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   {
   case WM_CLOSE: Exit(); break;
 
+  //- 
+  //- Keyboard Messages
+  //- 
   case WM_KEYDOWN:
   {
     KeyCode k = (KeyCode)wParam;
@@ -336,6 +339,19 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     {
       WinDebug::PrintKeyStatus(k, s);
     }
+  }
+  break;
+
+  //- 
+  //- Mouse Messages
+  //- 
+  case WM_MOUSEMOVE:
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+
+    m_cMouse.SetPosition(pt);
   }
   break;
   }
