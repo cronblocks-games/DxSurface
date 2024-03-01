@@ -45,7 +45,7 @@ void GameRenderingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason 
 {
   if (reason == ExecutionExitReason::Exception)
   {
-    MessageBox(nullptr, message.c_str(), DxsT("Error"), 0);
+    MessageBox(nullptr, message.c_str(), DxsT("Rendering Error"), 0);
   }
 }
 void GameRenderingStateChanged(Window& w, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
@@ -71,7 +71,7 @@ void GameProcessingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason
 {
   if (reason == ExecutionExitReason::Exception)
   {
-    MessageBox(nullptr, message.c_str(), DxsT("Error"), 0);
+    MessageBox(nullptr, message.c_str(), DxsT("Processing Error"), 0);
   }
 }
 void GameProcessingStateChanged(Window& w, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
