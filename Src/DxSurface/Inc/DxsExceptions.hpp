@@ -27,7 +27,7 @@ namespace CB::DxSurface {
     std::string m_sFileName;
     TString m_sProvidedMessage;
     mutable TString m_sFinalMessage;
-  };
+  }; //- class Exception
 
 } //- namespace CB::DxSurface
 
