@@ -15,7 +15,7 @@ namespace CB::DxSurface {
   private:
     std::bitset<(1 << (8 * sizeof(KeyCode)))> m_bKeyPressedStatus;
 
-    void SetKeyStatus(KeyCode, KeyStatus);
+    void SetKeyStatus(KeyCode, KeyStatus) noexcept;
 
     friend class CB::DxSurface::Window;
   };

@@ -13,7 +13,7 @@ KeyStatus Keyboard::GetKeyStatus(KeyCode k)
   return KeyStatus::Released;
 }
 
-void Keyboard::SetKeyStatus(KeyCode k, KeyStatus s)
+void Keyboard::SetKeyStatus(KeyCode k, KeyStatus s) noexcept
 {
   if (s == KeyStatus::Pressed)
     m_bKeyPressedStatus[(unsigned char)k] = true;
