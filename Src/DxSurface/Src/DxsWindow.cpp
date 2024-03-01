@@ -165,7 +165,10 @@ void Window::Title(const TString& title)
     DxsThrow((Title() + DxsT(" - Cannot change title of window with invalid handle")).c_str());
   }
 
-  SetWindowText(m_hWnd, title.c_str());
+  if (DxsFailed(SetWindowText(m_hWnd, title.c_str())))
+  {
+    DxsThrowWindows((Title() + DxsT(" - Cannot change title")).c_str());
+  }
 
   m_stOptions.title = title;
 }
