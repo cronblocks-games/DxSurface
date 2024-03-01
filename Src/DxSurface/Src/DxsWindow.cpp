@@ -314,10 +314,13 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   case WM_KEYDOWN:
   {
     KeyCode k = (KeyCode)wParam;
+    KeyStatus s = KeyStatus::Pressed;
+
+    m_cKeyboard.SetKeyStatus(k, s);
 
     if (m_stOptions.isKeyboardDebugEnabled)
     {
-      WinDebug::PrintKeyStatus(k, KeyStatus::Pressed);
+      WinDebug::PrintKeyStatus(k, s);
     }
   }
   break;
@@ -325,10 +328,13 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   case WM_KEYUP:
   {
     KeyCode k = (KeyCode)wParam;
+    KeyStatus s = KeyStatus::Released;
+
+    m_cKeyboard.SetKeyStatus(k, s);
 
     if (m_stOptions.isKeyboardDebugEnabled)
     {
-      WinDebug::PrintKeyStatus(k, KeyStatus::Released);
+      WinDebug::PrintKeyStatus(k, s);
     }
   }
   break;
