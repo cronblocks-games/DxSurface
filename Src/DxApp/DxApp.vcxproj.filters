@@ -21,9 +21,15 @@
     <ClCompile Include="Src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\GameLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\pch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameLogic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

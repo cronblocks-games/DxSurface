@@ -1,4 +1,5 @@
 #include "pch.hpp"
+#include "GameLogic.hpp"
 
 using namespace CB::DxSurface;
 
@@ -13,6 +14,17 @@ int WINAPI WinMain(
     DxSurface surface;
 
     Ptr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 200, 100);
+    w1->SetCallbacks(WindowCallbacks(
+      GameRenderingInit,
+      GameRenderingRunning,
+      GameRenderingPaused,
+      GameRenderingExitted,
+      GameRenderingStateChanged,
+      GameProcessingInit,
+      GameProcessingRunning,
+      GameProcessingPaused,
+      GameProcessingExitted,
+      GameProcessingStateChanged));
 
     surface.RunAndWaitForExit();
   }
