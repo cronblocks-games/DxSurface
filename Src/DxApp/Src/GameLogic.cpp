@@ -43,6 +43,10 @@ void GameRenderingPaused(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
 }
 void GameRenderingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
 {
+  if (reason == ExecutionExitReason::Exception)
+  {
+    MessageBox(nullptr, message.c_str(), DxsT("Error"), 0);
+  }
 }
 void GameRenderingStateChanged(Window& w, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
 {
@@ -65,7 +69,10 @@ void GameProcessingPaused(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
 }
 void GameProcessingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
 {
-
+  if (reason == ExecutionExitReason::Exception)
+  {
+    MessageBox(nullptr, message.c_str(), DxsT("Error"), 0);
+  }
 }
 void GameProcessingStateChanged(Window& w, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
 {
