@@ -7,9 +7,10 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
+  m_stOptions.isGraphicsDebugEnabled = true;
+  m_stOptions.isWindowsMessagesDebugEnabled = false;
   m_stOptions.isKeyboardDebugEnabled = false;
   m_stOptions.isMouseDebugEnabled = false;
-  m_stOptions.isGraphicsDebugEnabled = true;
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
