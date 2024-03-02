@@ -47,8 +47,10 @@ namespace CB::DxSurface {
 
 } //- namespace CB::DxSurface
 
-#define DxsThrow(msg) {throw CB::DxSurface::Exception(__FILE__,__LINE__,msg);}
-#define DxsThrowWindows(msg) {throw CB::DxSurface::WindowsException(__FILE__,__LINE__,msg,GetLastError());}
+#define DxsThrow(msg)             { throw CB::DxSurface::Exception(__FILE__, __LINE__, msg);                        }
+#define DxsThrowWindows(msg)      { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, GetLastError()); }
+#define DxsThrowWindowsHr(msg,hr) { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, hr);             }
+
 #define DxsEncloseThrow(call) {                                                         \
             try {                                                                       \
               call;                                                                     \
