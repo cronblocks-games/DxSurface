@@ -506,7 +506,40 @@ namespace CB::DxSurface {
   };
   enum class SystemBitmap : unsigned int
   {
-
+    Close = OBM_CLOSE,
+    UpArrow = OBM_UPARROW,
+    DownArrow = OBM_DNARROW,
+    RightArrow = OBM_RGARROW,
+    LeftArrow = OBM_LFARROW,
+    Reduce = OBM_REDUCE,
+    Zoom = OBM_ZOOM,
+    Restore = OBM_RESTORE,
+    Reduced = OBM_REDUCED,
+    Zoomed = OBM_ZOOMD,
+    Restored = OBM_RESTORED,
+    UpArrowD = OBM_UPARROWD,
+    DownArrowD = OBM_DNARROWD,
+    RightArrowD = OBM_RGARROWD,
+    LeftArrowD = OBM_LFARROWD,
+    MNarrow = OBM_MNARROW,
+    Combo = OBM_COMBO,
+    UpArrowI = OBM_UPARROWI,
+    DownArrowI = OBM_DNARROWI,
+    RightArrowI = OBM_RGARROWI,
+    LeftArrowI = OBM_LFARROWI,
+    Size = OBM_SIZE,
+    BtSize = OBM_BTSIZE,
+    Check = OBM_CHECK,
+    CheckBoxes = OBM_CHECKBOXES,
+    ButtonCorners = OBM_BTNCORNERS,
+    OldClose = OBM_OLD_CLOSE,
+    OldUpArrow = OBM_OLD_UPARROW,
+    OldDownArrow = OBM_OLD_DNARROW,
+    OldRightArrow = OBM_OLD_RGARROW,
+    OldLeftArrow = OBM_OLD_LFARROW,
+    OldReduce = OBM_OLD_REDUCE,
+    OldZoom = OBM_OLD_ZOOM,
+    OldRestore = OBM_OLD_RESTORE,
   };
 
 
