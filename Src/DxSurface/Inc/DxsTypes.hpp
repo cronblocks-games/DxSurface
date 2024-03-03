@@ -477,7 +477,16 @@ namespace CB::DxSurface {
 
   enum class SystemIcon : unsigned int
   {
-
+    Sample = OIC_SAMPLE,
+    Hand = OIC_HAND,
+    Question = OIC_QUES,
+    Bang = OIC_BANG,
+    Note = OIC_NOTE,
+    WinLogo = OIC_WINLOGO,
+    Warning = Bang,
+    Error = Hand,
+    Information = Note,
+    Shield = OIC_SHIELD,
   };
   enum class SystemCursor : unsigned int
   {
