@@ -48,7 +48,8 @@ namespace CB::DxSurface {
   {
   public:
     Icon() = delete;
-    Icon(unsigned int resourceId, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE | LR_SHARED, HINSTANCE hInstance = nullptr);
+    Icon(SystemIcon);
+    Icon(unsigned int resourceId, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
     Icon(TString filepath, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE | LR_LOADFROMFILE);
     Icon(const Icon&);
     Icon(Icon&&) noexcept;
@@ -62,7 +63,8 @@ namespace CB::DxSurface {
   {
   public:
     Cursor() = delete;
-    Cursor(unsigned int resourceId, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE | LR_SHARED, HINSTANCE hInstance = nullptr);
+    Cursor(SystemCursor);
+    Cursor(unsigned int resourceId, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
     Cursor(TString filepath, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE | LR_LOADFROMFILE);
     Cursor(const Cursor&);
     Cursor(Cursor&&) noexcept;
@@ -76,6 +78,7 @@ namespace CB::DxSurface {
   {
   public:
     Bitmap() = delete;
+    Bitmap(SystemBitmap);
     Bitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = LR_SHARED, HINSTANCE hInstance = nullptr);
     Bitmap(TString filepath, int prefWidth, int prefHeight, UINT loadFlags = LR_LOADFROMFILE);
     Bitmap(const Bitmap&);

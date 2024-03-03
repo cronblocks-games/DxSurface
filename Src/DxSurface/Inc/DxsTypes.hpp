@@ -475,6 +475,19 @@ namespace CB::DxSurface {
     Pressed, Released
   };
 
+  enum class SystemIcon
+  {
+
+  };
+  enum class SystemCursor
+  {
+
+  };
+  enum class SystemBitmap
+  {
+
+  };
+
 
 
 
