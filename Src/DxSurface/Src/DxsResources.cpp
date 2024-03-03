@@ -135,3 +135,54 @@ unsigned int WinImageResource::DecrementHandleCount(HANDLE rh)
 
   return s_mapResourceCount[rh];
 }
+
+Icon::Icon(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
+  : WinImageResource((unsigned int)si, prefWidth, prefHeight, loadFlags, ResourceType::Icon, Source::System)
+{
+}
+
+Icon::Icon(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+  : WinImageResource(resourceId, prefWidth, prefHeight, loadFlags, ResourceType::Icon, Source::ExeEmbedded, hInstance)
+{
+}
+
+Icon::Icon(TString filepath, int prefWidth, int prefHeight, UINT loadFlags)
+  : WinImageResource(filepath, prefWidth, prefHeight, loadFlags, ResourceType::Icon, Source::File)
+{
+}
+
+Icon::Icon(const Icon& o)
+  : WinImageResource(o)
+{
+}
+
+Icon::Icon(Icon&& o) noexcept
+  : WinImageResource(move(o))
+{
+}
+
+Icon::~Icon()
+{
+  unsigned int count = DecrementHandleCount(m_hResource);
+
+  if (m_eSource != Source::System)
+  {
+    DestroyIcon((HICON)m_hResource);
+  }
+
+  m_hResource = nullptr;
+}
+
+Icon& Icon::operator=(const Icon& o)
+{
+  if (this == &o) return *this;
+  WinImageResource::operator=(o);
+  return *this;
+}
+
+Icon& CB::DxSurface::Icon::operator=(Icon&& o) noexcept
+{
+  if (this == &o) return *this;
+  WinImageResource::operator=(move(o));
+  return *this;
+}
