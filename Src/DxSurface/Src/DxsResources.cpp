@@ -9,6 +9,9 @@ WinImageResource::WinImageResource(
   UINT type, int cx, int cy, UINT flags,
   ResourceType r, Source s, HINSTANCE hInstance)
 {
+  assert(r != ResourceType::NONE);
+  assert(s != Source::NONE);
+
   if (s == Source::ExeEmbedded && hInstance == nullptr)
   {
     hInstance = GetModuleHandle(nullptr);
