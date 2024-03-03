@@ -21,10 +21,12 @@ namespace CB::DxSurface {
   class WinImageResource
   {
   protected:
-    enum class ResourceType { Icon, Cursor, Bitmap };
+    enum class ResourceType { NONE, Icon, Cursor, Bitmap };
+    enum class Source { NONE, System, ExeEmbedded, File };
+
     WinImageResource() = delete;
-    WinImageResource(unsigned int resourceId, UINT type, int cx, int cy, UINT fuLoad, ResourceType, HINSTANCE hInstance = nullptr);
-    WinImageResource(TString filepath, UINT type, int cx, int cy, UINT fuLoad, ResourceType);
+    WinImageResource(unsigned int resourceId, UINT type, int cx, int cy, UINT flags, ResourceType, Source, HINSTANCE hInstance = nullptr);
+    WinImageResource(TString filepath, UINT type, int cx, int cy, UINT flags, ResourceType, Source);
     WinImageResource(const WinImageResource&);
     WinImageResource(WinImageResource&&) noexcept;
     WinImageResource& operator=(const WinImageResource&);
@@ -34,6 +36,9 @@ namespace CB::DxSurface {
     static unsigned int DecrementHandleCount(); // Returns updated count
 
     HANDLE m_hResource = nullptr;
+    ResourceType m_eResourceType;
+    Source m_eSource;
+
   private:
     static Mutex s_mutResourceCount;
     static std::map<HANDLE, unsigned int> s_mapResourceCount;
