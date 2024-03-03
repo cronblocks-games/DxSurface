@@ -23,7 +23,7 @@
 
 #define DxsDefaultThreadRefreshRateHz     30
 
-#define DxsFailed(expr) (expr == 0)
+#define DxsFailed(expr) ((expr) == 0)
 
 
 
