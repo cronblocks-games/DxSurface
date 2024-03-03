@@ -15,7 +15,18 @@ namespace CB::DxSurface {
 
   class Resources
   {
-
+  public:
+    static Ptr<Icon> LoadIconResource(SystemIcon, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE);
+    static Ptr<Icon> LoadIconResource(unsigned int resourceId, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
+    static Ptr<Icon> LoadIconResource(const TString& filepath, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE);
+    
+    static Ptr<Cursor> LoadCursorResource(SystemCursor, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
+    static Ptr<Cursor> LoadCursorResource(unsigned int resourceId, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
+    static Ptr<Cursor> LoadCursorResource(const TString& filepath, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
+    
+    static Ptr<Bitmap> LoadBitmapResource(SystemBitmap, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = 0);
+    static Ptr<Bitmap> LoadBitmapResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = 0, HINSTANCE hInstance = nullptr);
+    static Ptr<Bitmap> LoadBitmapResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags = 0);
   }; // class Resources
 
   class WinImageResource
