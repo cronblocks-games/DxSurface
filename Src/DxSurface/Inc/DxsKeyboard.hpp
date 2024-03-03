@@ -3,7 +3,7 @@
 
 
 
-#include "DxsHelpers.hpp"
+#include "DxsTypes.hpp"
 #include <bitset>
 
 namespace CB::DxSurface {

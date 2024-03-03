@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\DxsTimedExecutor.hpp" />
-    <ClInclude Include="Inc\DxsHelpers.hpp" />
+    <ClInclude Include="Inc\DxsResources.hpp" />
     <ClInclude Include="Inc\DxsSettings.hpp" />
     <ClInclude Include="Inc\DxsTypes.hpp" />
     <ClInclude Include="Inc\DxsExceptions.hpp" />
@@ -186,7 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxsExceptions.cpp" />
-    <ClCompile Include="Src\DxsHelpers.cpp" />
+    <ClCompile Include="Src\DxsResources.cpp" />
     <ClCompile Include="Src\DxsKeyboard.cpp" />
     <ClCompile Include="Src\DxsMouse.cpp" />
     <ClCompile Include="Src\DxsTimedExecutor.cpp" />

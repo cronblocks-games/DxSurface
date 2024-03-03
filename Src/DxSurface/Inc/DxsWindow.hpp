@@ -3,7 +3,8 @@
 
 
 
-#include "DxsHelpers.hpp"
+#include "DxsTypes.hpp"
+#include "DxsResources.hpp"
 #include "DxsTimedExecutor.hpp"
 #include "DxsKeyboard.hpp"
 #include "DxsMouse.hpp"

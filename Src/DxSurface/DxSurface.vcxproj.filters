@@ -42,7 +42,7 @@
     <ClInclude Include="Inc\DxsSettings.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsHelpers.hpp">
+    <ClInclude Include="Inc\DxsResources.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Inc\DxsTimedExecutor.hpp">
@@ -71,7 +71,7 @@
     <ClCompile Include="Src\DxsExceptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\DxsHelpers.cpp">
+    <ClCompile Include="Src\DxsResources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\DxsTimedExecutor.cpp">

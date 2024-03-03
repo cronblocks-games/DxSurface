@@ -1,7 +1,8 @@
 #ifndef _DXSURFACE_DXSURFACE_H_
 #define _DXSURFACE_DXSURFACE_H_
 
-#include "DxsHelpers.hpp"
+#include "DxsTypes.hpp"
+#include "DxsResources.hpp"
 #include "DxsWindow.hpp"
 #include "DxsExceptions.hpp"
 

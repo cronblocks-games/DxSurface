@@ -5,7 +5,7 @@
 
 #include <exception>
 
-#include "DxsHelpers.hpp"
+#include "DxsTypes.hpp"
 
 
 namespace CB::DxSurface {
