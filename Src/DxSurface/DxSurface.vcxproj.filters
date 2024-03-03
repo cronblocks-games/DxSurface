@@ -39,7 +39,7 @@
     <ClInclude Include="Inc\DxsExceptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\DxsMacros.hpp">
+    <ClInclude Include="Inc\DxsSettings.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Inc\DxsHelpers.hpp">

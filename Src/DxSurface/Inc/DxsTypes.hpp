@@ -9,7 +9,7 @@
 #include <chrono>
 #include <thread>
 
-#include "DxsMacros.hpp"
+#include "DxsSettings.hpp"
 #include "DxsWinApi.hpp"
 
 namespace CB::DxSurface {

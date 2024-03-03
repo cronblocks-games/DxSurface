@@ -15,7 +15,7 @@
 #include "DxsExceptions.hpp"
 #include "DxsWinDebug.hpp"
 #include "DxsWinApi.hpp"
-#include "DxsMacros.hpp"
+#include "DxsSettings.hpp"
 #include "DxsTypes.hpp"
 
 #include <windowsx.h>
