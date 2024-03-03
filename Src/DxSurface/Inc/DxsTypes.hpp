@@ -475,15 +475,15 @@ namespace CB::DxSurface {
     Pressed, Released
   };
 
-  enum class SystemIcon
+  enum class SystemIcon : unsigned int
   {
 
   };
-  enum class SystemCursor
+  enum class SystemCursor : unsigned int
   {
 
   };
-  enum class SystemBitmap
+  enum class SystemBitmap : unsigned int
   {
 
   };
