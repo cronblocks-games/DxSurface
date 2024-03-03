@@ -55,6 +55,7 @@ WinImageResource::WinImageResource(TString filepath, int cx, int cy, UINT flags,
   m_eSource = s;
 
   flags |= LR_LOADFROMFILE; // we are only loading from a file in this constructor
+  flags &= ~LR_SHARED; // Windows API recommends to unset this flag when loading from file
 
   UINT type;
   switch (r)
