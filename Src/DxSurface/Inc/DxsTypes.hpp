@@ -490,7 +490,19 @@ namespace CB::DxSurface {
   };
   enum class SystemCursor : unsigned int
   {
-
+    Normal = OCR_NORMAL,
+    IBeam = OCR_IBEAM,
+    Wait = OCR_WAIT,
+    Cross = OCR_CROSS,
+    Up = OCR_UP,
+    SizeNWSE = OCR_SIZENWSE,
+    SizeNESW = OCR_SIZENESW,
+    SizeWE = OCR_SIZEWE,
+    SizeNS = OCR_SIZENS,
+    SizeAll = OCR_SIZEALL,
+    No = OCR_NO,
+    Hand = OCR_HAND,
+    AppStarting = OCR_APPSTARTING,
   };
   enum class SystemBitmap : unsigned int
   {
