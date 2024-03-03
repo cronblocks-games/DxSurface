@@ -11,8 +11,8 @@ DxSurface::DxSurface(HINSTANCE hInstance) noexcept
   m_stOptions.isWindowsMessagesDebugEnabled = false;
   m_stOptions.isKeyboardDebugEnabled = false;
   m_stOptions.isMouseDebugEnabled = false;
-  m_stOptions.icon = Resources::LoadIconResource(SystemIcon::Shield, 32, 32);
-  m_stOptions.iconSmall = Resources::LoadIconResource(SystemIcon::Shield, 16, 16);
+  m_stOptions.icon = Resources::LoadIconResource(SystemIcon::Note, 32, 32);
+  m_stOptions.iconSmall = Resources::LoadIconResource(SystemIcon::Note, 16, 16);
   m_stOptions.cursor = Resources::LoadCursorResource(SystemCursor::Cross);
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
