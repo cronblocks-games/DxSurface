@@ -5,8 +5,57 @@ using namespace std;
 using namespace CB::DxSurface;
 
 //- 
+//- Resources
+//- 
+Ptr<Icon> Resources::LoadIconResource(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  return make_shared<Icon>(si, prefWidth, prefHeight, loadFlags);
+}
+Ptr<Icon> Resources::LoadIconResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+{
+  return make_shared<Icon>(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+}
+Ptr<Icon> Resources::LoadIconResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  return make_shared<Icon>(filepath, prefWidth, prefHeight, loadFlags);
+}
+
+Ptr<Cursor> Resources::LoadCursorResource(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  return make_shared<Cursor>(sc, prefWidth, prefHeight, loadFlags);
+}
+Ptr<Cursor> Resources::LoadCursorResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+{
+  return make_shared<Cursor>(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+}
+Ptr<Cursor> Resources::LoadCursorResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  return make_shared<Cursor>(filepath, prefWidth, prefHeight, loadFlags);
+}
+
+Ptr<Bitmap> Resources::LoadBitmapResource(SystemBitmap sb, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  return make_shared<Bitmap>(sb, prefWidth, prefHeight, loadFlags);
+}
+Ptr<Bitmap> Resources::LoadBitmapResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+{
+  return make_shared<Bitmap>(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+}
+Ptr<Bitmap> Resources::LoadBitmapResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  return make_shared<Bitmap>(filepath, prefWidth, prefHeight, loadFlags);
+}
+
+
+
+//- 
 //- WinImageResource
 //- 
+
+static Mutex _mutWinImageResourceCount;
+static std::map<HANDLE, unsigned int> _mapWinImageResourceCount;
+static unsigned int WinImageIncrementHandleCount(HANDLE rh) noexcept; // Returns updated count
+static unsigned int WinImageDecrementHandleCount(HANDLE rh); // Returns updated count
 
 WinImageResource::WinImageResource(
   unsigned int resourceId,
@@ -46,7 +95,7 @@ WinImageResource::WinImageResource(
     DxsThrowWindows(DxsT("Cannot load the specified resource"));
   }
 
-  IncrementHandleCount(m_hResource);
+  WinImageIncrementHandleCount(m_hResource);
 }
 
 WinImageResource::WinImageResource(const TString& filepath, int cx, int cy, UINT flags, ResourceType r, Source s)
@@ -75,7 +124,7 @@ WinImageResource::WinImageResource(const TString& filepath, int cx, int cy, UINT
     DxsThrowWindows((TString(DxsT("Cannot load the specified resource from file ")) + filepath).c_str());
   }
 
-  IncrementHandleCount(m_hResource);
+  WinImageIncrementHandleCount(m_hResource);
 }
 
 WinImageResource::WinImageResource(const WinImageResource& o)
@@ -83,7 +132,7 @@ WinImageResource::WinImageResource(const WinImageResource& o)
   if (this == &o) return;
   m_hResource = o.m_hResource;
   m_eSource = o.m_eSource;
-  IncrementHandleCount(m_hResource);
+  WinImageIncrementHandleCount(m_hResource);
 }
 
 WinImageResource::WinImageResource(WinImageResource&& o) noexcept
@@ -95,7 +144,7 @@ WinImageResource::WinImageResource(WinImageResource&& o) noexcept
 
 WinImageResource::~WinImageResource()
 {
-  assert(m_hResource != nullptr); // Child class should do the freeing of resource
+  assert(m_hResource == nullptr); // Child class should do the freeing of resource
 }
 
 WinImageResource& WinImageResource::operator=(const WinImageResource& o)
@@ -112,32 +161,32 @@ WinImageResource& WinImageResource::operator=(WinImageResource&& o) noexcept
   return *this;
 }
 
-unsigned int WinImageResource::IncrementHandleCount(HANDLE rh) noexcept
+unsigned int WinImageIncrementHandleCount(HANDLE rh) noexcept
 {
-  Lock l(s_mutResourceCount);
+  Lock l(_mutWinImageResourceCount);
 
-  if (s_mapResourceCount.contains(rh))
+  if (_mapWinImageResourceCount.contains(rh))
   {
-    s_mapResourceCount[rh] += 1;
+    _mapWinImageResourceCount[rh] += 1;
   }
   else
   {
-    s_mapResourceCount[rh] = 1;
+    _mapWinImageResourceCount[rh] = 1;
   }
 
-  return s_mapResourceCount[rh];
+  return _mapWinImageResourceCount[rh];
 }
 
-unsigned int WinImageResource::DecrementHandleCount(HANDLE rh)
+unsigned int WinImageDecrementHandleCount(HANDLE rh)
 {
-  Lock l(s_mutResourceCount);
+  Lock l(_mutWinImageResourceCount);
 
-  assert(s_mapResourceCount.contains(rh));
-  assert(s_mapResourceCount[rh] > 0);
+  assert(_mapWinImageResourceCount.contains(rh));
+  assert(_mapWinImageResourceCount[rh] > 0);
 
-  s_mapResourceCount[rh] -= 1;
+  _mapWinImageResourceCount[rh] -= 1;
 
-  return s_mapResourceCount[rh];
+  return _mapWinImageResourceCount[rh];
 }
 
 
@@ -173,7 +222,7 @@ Icon::Icon(Icon&& o) noexcept
 
 Icon::~Icon()
 {
-  unsigned int count = DecrementHandleCount(m_hResource);
+  unsigned int count = WinImageDecrementHandleCount(m_hResource);
 
   if (m_eSource != Source::System && count == 0)
   {
@@ -230,7 +279,7 @@ Cursor::Cursor(Cursor&& o) noexcept
 
 Cursor::~Cursor()
 {
-  unsigned int count = DecrementHandleCount(m_hResource);
+  unsigned int count = WinImageDecrementHandleCount(m_hResource);
 
   if (m_eSource != Source::System && count == 0)
   {
@@ -287,7 +336,7 @@ Bitmap::Bitmap(Bitmap&& o) noexcept
 
 Bitmap::~Bitmap()
 {
-  unsigned int count = DecrementHandleCount(m_hResource);
+  unsigned int count = WinImageDecrementHandleCount(m_hResource);
 
   if (m_eSource != Source::System && count == 0)
   {
