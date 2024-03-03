@@ -13,6 +13,8 @@ WinImageResource::WinImageResource(
   assert(s != Source::NONE);
   assert(s != Source::File);
 
+  m_eSource = s;
+
   flags &= ~LR_LOADFROMFILE; // we are not loading from a file in this constructor
 
   if (s == Source::ExeEmbedded && hInstance == nullptr)
@@ -44,11 +46,12 @@ WinImageResource::WinImageResource(
 
 WinImageResource::WinImageResource(TString filepath, int cx, int cy, UINT flags, ResourceType r, Source s)
 {
-
   assert(r != ResourceType::NONE);
   assert(s != Source::NONE);
   assert(s != Source::System);
   assert(s != Source::ExeEmbedded);
+
+  m_eSource = s;
 
   flags |= LR_LOADFROMFILE; // we are only loading from a file in this constructor
 
@@ -73,6 +76,7 @@ WinImageResource::WinImageResource(const WinImageResource& o)
 {
   if (this == &o) return;
   m_hResource = o.m_hResource;
+  m_eSource = o.m_eSource;
   IncrementHandleCount(m_hResource);
 }
 
@@ -80,20 +84,20 @@ WinImageResource::WinImageResource(WinImageResource&& o) noexcept
 {
   if (this == &o) return;
   m_hResource = exchange(o.m_hResource, nullptr);
+  m_eSource = exchange(o.m_eSource, Source::NONE);
 }
 
 WinImageResource& WinImageResource::operator=(const WinImageResource& o)
 {
   if (this == &o) return *this;
-  m_hResource = o.m_hResource;
-  IncrementHandleCount(m_hResource);
+  *this = WinImageResource(o);
   return *this;
 }
 
 WinImageResource& WinImageResource::operator=(WinImageResource&& o) noexcept
 {
   if (this == &o) return *this;
-  m_hResource = exchange(o.m_hResource, nullptr);
+  *this = WinImageResource(move(o));
   return *this;
 }
 
