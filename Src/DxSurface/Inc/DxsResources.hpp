@@ -26,7 +26,7 @@ namespace CB::DxSurface {
 
     WinImageResource() = delete;
     WinImageResource(unsigned int resourceId, int cx, int cy, UINT flags, ResourceType, Source, HINSTANCE hInstance = nullptr);
-    WinImageResource(TString filepath, int cx, int cy, UINT flags, ResourceType, Source);
+    WinImageResource(const TString& filepath, int cx, int cy, UINT flags, ResourceType, Source);
     WinImageResource(const WinImageResource&);
     WinImageResource(WinImageResource&&) noexcept;
     virtual ~WinImageResource();
@@ -50,7 +50,7 @@ namespace CB::DxSurface {
     Icon() = delete;
     Icon(SystemIcon, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE);
     Icon(unsigned int resourceId, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
-    Icon(TString filepath, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE);
+    Icon(const TString& filepath, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE);
     Icon(const Icon&);
     Icon(Icon&&) noexcept;
     ~Icon();
@@ -65,7 +65,7 @@ namespace CB::DxSurface {
     Cursor() = delete;
     Cursor(SystemCursor, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
     Cursor(unsigned int resourceId, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
-    Cursor(TString filepath, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
+    Cursor(const TString& filepath, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
     Cursor(const Cursor&);
     Cursor(Cursor&&) noexcept;
     ~Cursor();
@@ -80,7 +80,7 @@ namespace CB::DxSurface {
     Bitmap() = delete;
     Bitmap(SystemBitmap, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = 0);
     Bitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = 0, HINSTANCE hInstance = nullptr);
-    Bitmap(TString filepath, int prefWidth, int prefHeight, UINT loadFlags = 0);
+    Bitmap(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags = 0);
     Bitmap(const Bitmap&);
     Bitmap(Bitmap&&) noexcept;
     ~Bitmap();

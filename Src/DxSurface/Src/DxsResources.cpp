@@ -45,7 +45,7 @@ WinImageResource::WinImageResource(
   IncrementHandleCount(m_hResource);
 }
 
-WinImageResource::WinImageResource(TString filepath, int cx, int cy, UINT flags, ResourceType r, Source s)
+WinImageResource::WinImageResource(const TString& filepath, int cx, int cy, UINT flags, ResourceType r, Source s)
 {
   assert(r != ResourceType::NONE);
   assert(s != Source::NONE);
@@ -146,7 +146,7 @@ Icon::Icon(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlag
 {
 }
 
-Icon::Icon(TString filepath, int prefWidth, int prefHeight, UINT loadFlags)
+Icon::Icon(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
   : WinImageResource(filepath, prefWidth, prefHeight, loadFlags, ResourceType::Icon, Source::File)
 {
 }
@@ -165,7 +165,7 @@ Icon::~Icon()
 {
   unsigned int count = DecrementHandleCount(m_hResource);
 
-  if (m_eSource != Source::System)
+  if (m_eSource != Source::System && count == 0)
   {
     DestroyIcon((HICON)m_hResource);
   }
@@ -181,6 +181,57 @@ Icon& Icon::operator=(const Icon& o)
 }
 
 Icon& CB::DxSurface::Icon::operator=(Icon&& o) noexcept
+{
+  if (this == &o) return *this;
+  WinImageResource::operator=(move(o));
+  return *this;
+}
+
+Cursor::Cursor(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
+  : WinImageResource((unsigned int)sc, prefWidth, prefHeight, loadFlags, ResourceType::Cursor, Source::System)
+{
+}
+
+Cursor::Cursor(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+  : WinImageResource(resourceId, prefWidth, prefHeight, loadFlags, ResourceType::Cursor, Source::ExeEmbedded, hInstance)
+{
+}
+
+Cursor::Cursor(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
+  : WinImageResource(filepath, prefWidth, prefHeight, loadFlags, ResourceType::Cursor, Source::File)
+{
+}
+
+Cursor::Cursor(const Cursor& o)
+  : WinImageResource(o)
+{
+}
+
+Cursor::Cursor(Cursor&& o) noexcept
+  : WinImageResource(move(o))
+{
+}
+
+Cursor::~Cursor()
+{
+  unsigned int count = DecrementHandleCount(m_hResource);
+
+  if (m_eSource != Source::System && count == 0)
+  {
+    DestroyCursor((HCURSOR)m_hResource);
+  }
+
+  m_hResource = nullptr;
+}
+
+Cursor& Cursor::operator=(const Cursor& o)
+{
+  if (this == &o) return *this;
+  WinImageResource::operator=(o);
+  return *this;
+}
+
+Cursor& Cursor::operator=(Cursor&& o) noexcept
 {
   if (this == &o) return *this;
   WinImageResource::operator=(move(o));
