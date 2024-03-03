@@ -79,7 +79,7 @@ namespace CB::DxSurface {
   public:
     Bitmap() = delete;
     Bitmap(SystemBitmap);
-    Bitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = LR_SHARED, HINSTANCE hInstance = nullptr);
+    Bitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = 0, HINSTANCE hInstance = nullptr);
     Bitmap(TString filepath, int prefWidth, int prefHeight, UINT loadFlags = LR_LOADFROMFILE);
     Bitmap(const Bitmap&);
     Bitmap(Bitmap&&) noexcept;
