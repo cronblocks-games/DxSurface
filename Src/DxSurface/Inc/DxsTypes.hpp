@@ -67,6 +67,9 @@ namespace CB::DxSurface {
   class Window;
   class Keyboard;
   class Mouse;
+  class Icon;
+  class Cursor;
+  class Bitmap;
 
   using RenderingCallbackInit = void(*)(Window&);
   using RenderingCallbackRunning = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
@@ -173,9 +176,9 @@ namespace CB::DxSurface {
     bool         isKeyboardDebugEnabled           = false;
     bool         isMouseDebugEnabled              = false;
     bool         isWindowsMessagesDebugEnabled    = false;
-    HICON        hIcon                            = nullptr;
-    HICON        hIconSmall                       = nullptr;
-    HCURSOR      hCursor                          = nullptr;
+    Ptr<Icon>    icon;
+    Ptr<Icon>    iconSmall;
+    Ptr<Cursor>  cursor;
     WindowRect   rect                             = WindowRect(CW_USEDEFAULT, CW_USEDEFAULT, 600, 450);
     DWORD        dwStyle                          = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
     DWORD        dwExStyle                        = WS_EX_WINDOWEDGE;

@@ -236,9 +236,9 @@ void Window::RegisterClassAndCreateWindow()
   wndcls.cbClsExtra = 0; // extra bytes to allocate following the window-class structure
   wndcls.cbWndExtra = 0; // extra bytes to allocate following the window instance
   wndcls.hInstance = m_hInstance;
-  wndcls.hIcon = m_stOptions.hIcon;
-  wndcls.hIconSm = m_stOptions.hIconSmall;
-  wndcls.hCursor = m_stOptions.hCursor;
+  wndcls.hIcon = (m_stOptions.icon && m_stOptions.icon.get() != nullptr) ? *m_stOptions.icon : nullptr;
+  wndcls.hIconSm = (m_stOptions.iconSmall && m_stOptions.iconSmall.get() != nullptr) ? *m_stOptions.iconSmall : nullptr;
+  wndcls.hCursor = (m_stOptions.cursor && m_stOptions.cursor.get() != nullptr) ? *m_stOptions.cursor : nullptr;
   wndcls.hbrBackground = nullptr;
   wndcls.lpszMenuName = nullptr;
   wndcls.lpszClassName = m_sClassName.c_str();
