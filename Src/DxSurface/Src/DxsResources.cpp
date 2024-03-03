@@ -87,6 +87,11 @@ WinImageResource::WinImageResource(WinImageResource&& o) noexcept
   m_eSource = exchange(o.m_eSource, Source::NONE);
 }
 
+WinImageResource::~WinImageResource()
+{
+  assert(m_hResource != nullptr); // Child class should do the freeing of resource
+}
+
 WinImageResource& WinImageResource::operator=(const WinImageResource& o)
 {
   if (this == &o) return *this;

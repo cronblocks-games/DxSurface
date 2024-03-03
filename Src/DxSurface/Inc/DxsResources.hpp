@@ -29,6 +29,7 @@ namespace CB::DxSurface {
     WinImageResource(TString filepath, int cx, int cy, UINT flags, ResourceType, Source);
     WinImageResource(const WinImageResource&);
     WinImageResource(WinImageResource&&) noexcept;
+    virtual ~WinImageResource();
     WinImageResource& operator=(const WinImageResource&);
     WinImageResource& operator=(WinImageResource&&) noexcept;
     
