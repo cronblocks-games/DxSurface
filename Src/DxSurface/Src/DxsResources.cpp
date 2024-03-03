@@ -5,50 +5,6 @@ using namespace std;
 using namespace CB::DxSurface;
 
 //- 
-//- Resources
-//- 
-Ptr<Icon> Resources::LoadIconResource(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
-{
-  return make_shared<Icon>(si, prefWidth, prefHeight, loadFlags);
-}
-Ptr<Icon> Resources::LoadIconResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
-{
-  return make_shared<Icon>(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
-}
-Ptr<Icon> Resources::LoadIconResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
-{
-  return make_shared<Icon>(filepath, prefWidth, prefHeight, loadFlags);
-}
-
-Ptr<Cursor> Resources::LoadCursorResource(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
-{
-  return make_shared<Cursor>(sc, prefWidth, prefHeight, loadFlags);
-}
-Ptr<Cursor> Resources::LoadCursorResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
-{
-  return make_shared<Cursor>(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
-}
-Ptr<Cursor> Resources::LoadCursorResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
-{
-  return make_shared<Cursor>(filepath, prefWidth, prefHeight, loadFlags);
-}
-
-Ptr<Bitmap> Resources::LoadBitmapResource(SystemBitmap sb, int prefWidth, int prefHeight, UINT loadFlags)
-{
-  return make_shared<Bitmap>(sb, prefWidth, prefHeight, loadFlags);
-}
-Ptr<Bitmap> Resources::LoadBitmapResource(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
-{
-  return make_shared<Bitmap>(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
-}
-Ptr<Bitmap> Resources::LoadBitmapResource(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
-{
-  return make_shared<Bitmap>(filepath, prefWidth, prefHeight, loadFlags);
-}
-
-
-
-//- 
 //- WinImageResource
 //- 
 
