@@ -35,9 +35,7 @@ namespace CB::DxSurface {
     static unsigned int IncrementHandleCount() noexcept; // Returns updated count
     static unsigned int DecrementHandleCount(); // Returns updated count
 
-    HANDLE m_hResource = nullptr;
-    ResourceType m_eResourceType;
-    Source m_eSource;
+    HANDLE m_hResource;
 
   private:
     static Mutex s_mutResourceCount;
