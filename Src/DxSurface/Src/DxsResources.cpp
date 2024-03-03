@@ -4,6 +4,10 @@
 using namespace std;
 using namespace CB::DxSurface;
 
+//- 
+//- WinImageResource
+//- 
+
 WinImageResource::WinImageResource(
   unsigned int resourceId,
   int cx, int cy, UINT flags,
@@ -136,6 +140,12 @@ unsigned int WinImageResource::DecrementHandleCount(HANDLE rh)
   return s_mapResourceCount[rh];
 }
 
+
+
+//- 
+//- Icon
+//- 
+
 Icon::Icon(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
   : WinImageResource((unsigned int)si, prefWidth, prefHeight, loadFlags, ResourceType::Icon, Source::System)
 {
@@ -180,12 +190,18 @@ Icon& Icon::operator=(const Icon& o)
   return *this;
 }
 
-Icon& CB::DxSurface::Icon::operator=(Icon&& o) noexcept
+Icon& Icon::operator=(Icon&& o) noexcept
 {
   if (this == &o) return *this;
   WinImageResource::operator=(move(o));
   return *this;
 }
+
+
+
+//- 
+//- Cursor
+//- 
 
 Cursor::Cursor(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
   : WinImageResource((unsigned int)sc, prefWidth, prefHeight, loadFlags, ResourceType::Cursor, Source::System)
@@ -237,3 +253,63 @@ Cursor& Cursor::operator=(Cursor&& o) noexcept
   WinImageResource::operator=(move(o));
   return *this;
 }
+
+
+
+//- 
+//- Bitmap
+//- 
+
+Bitmap::Bitmap(SystemBitmap sb, int prefWidth, int prefHeight, UINT loadFlags)
+  : WinImageResource((unsigned int)sb, prefWidth, prefHeight, loadFlags, ResourceType::Bitmap, Source::System)
+{
+}
+
+Bitmap::Bitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+  : WinImageResource(resourceId, prefWidth, prefHeight, loadFlags, ResourceType::Bitmap, Source::ExeEmbedded, hInstance)
+{
+}
+
+Bitmap::Bitmap(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
+  : WinImageResource(filepath, prefWidth, prefHeight, loadFlags, ResourceType::Bitmap, Source::File)
+{
+}
+
+Bitmap::Bitmap(const Bitmap& o)
+  : WinImageResource(o)
+{
+}
+
+Bitmap::Bitmap(Bitmap&& o) noexcept
+  : WinImageResource(move(o))
+{
+}
+
+Bitmap::~Bitmap()
+{
+  unsigned int count = DecrementHandleCount(m_hResource);
+
+  if (m_eSource != Source::System && count == 0)
+  {
+    DeleteObject((HGDIOBJ)m_hResource);
+  }
+
+  m_hResource = nullptr;
+}
+
+Bitmap& Bitmap::operator=(const Bitmap& o)
+{
+  if (this == &o) return *this;
+  WinImageResource::operator=(o);
+  return *this;
+}
+
+Bitmap& Bitmap::operator=(Bitmap&& o) noexcept
+{
+  if (this == &o) return *this;
+  WinImageResource::operator=(move(o));
+  return *this;
+}
+
+
+
