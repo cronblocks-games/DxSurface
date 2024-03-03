@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <mutex>
 #include <thread>
+#include <cassert>
 
 #include <string.h>
 
