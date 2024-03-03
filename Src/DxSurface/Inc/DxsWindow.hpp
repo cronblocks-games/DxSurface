@@ -31,14 +31,14 @@ namespace CB::DxSurface {
     void Exit();
     void WaitForExit();
 
-    const TString& Title() const;
-    void Title(const TString&);
+    const TString& GetTitle() const;
+    void SetTitle(const TString&);
 
     void Show();
     void Hide();
     
-    bool Primary() const;
-    void Primary(bool isPrimary);
+    bool GetPrimary() const;
+    void SetPrimary(bool isPrimary);
 
     void SetCallbacks(const WindowCallbacks&);
 

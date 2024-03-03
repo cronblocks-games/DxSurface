@@ -18,13 +18,13 @@ void GameRenderingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
   if (k.GetKeyStatus(KeyCode::Esc) == KeyStatus::Pressed)
   {
-    w.Title(DxsT("Exiting"));
+    w.SetTitle(DxsT("Exiting"));
     w.Exit();
   }
 
   if (k.GetKeyStatus(KeyCode::F1) == KeyStatus::Pressed)
   {
-    w.Title(DxsT("Help"));
+    w.SetTitle(DxsT("Help"));
   }
 
   if (k.GetKeyStatus(KeyCode::M) == KeyStatus::Pressed)
@@ -35,7 +35,7 @@ void GameRenderingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
     if (m.GetButtonStatus(MouseButton::Left) == KeyStatus::Pressed) s << "L";
     if (m.GetButtonStatus(MouseButton::Middle) == KeyStatus::Pressed) s << "M";
     if (m.GetButtonStatus(MouseButton::Right) == KeyStatus::Pressed) s << "R";
-    w.Title(s.str());
+    w.SetTitle(s.str());
   }
 }
 void GameRenderingPaused(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)

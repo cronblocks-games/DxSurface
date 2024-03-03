@@ -113,7 +113,7 @@ void Window::Pause()
   }
   else
   {
-    DxsThrow((Title() + DxsT(" - Cannot pause when rendering isn't initialized")).c_str());
+    DxsThrow((GetTitle() + DxsT(" - Cannot pause when rendering isn't initialized")).c_str());
   }
 }
 void Window::Resume()
@@ -124,7 +124,7 @@ void Window::Resume()
   }
   else
   {
-    DxsThrow((Title() + DxsT(" - Cannot resume when rendering isn't initialized")).c_str());
+    DxsThrow((GetTitle() + DxsT(" - Cannot resume when rendering isn't initialized")).c_str());
   }
 }
 void Window::Exit()
@@ -152,22 +152,22 @@ void Window::WaitForExit()
   }
 }
 
-const TString& Window::Title() const
+const TString& Window::GetTitle() const
 {
   return m_stOptions.title;
 }
-void Window::Title(const TString& title)
+void Window::SetTitle(const TString& title)
 {
   if (m_stOptions.title == title) return;
 
   if (m_hWnd == nullptr)
   {
-    DxsThrow((Title() + DxsT(" - Cannot change title of window with invalid handle")).c_str());
+    DxsThrow((GetTitle() + DxsT(" - Cannot change title of window with invalid handle")).c_str());
   }
 
   if (DxsFailed(SetWindowText(m_hWnd, title.c_str())))
   {
-    DxsThrowWindows((Title() + DxsT(" - Cannot change title")).c_str());
+    DxsThrowWindows((GetTitle() + DxsT(" - Cannot change title")).c_str());
   }
 
   m_stOptions.title = title;
@@ -177,7 +177,7 @@ void Window::Show()
 {
   if (m_hWnd == nullptr)
   {
-    DxsThrow((Title() + DxsT(" - Cannot show window with invalid handle")).c_str());
+    DxsThrow((GetTitle() + DxsT(" - Cannot show window with invalid handle")).c_str());
   }
 
   ShowWindow(m_hWnd, SW_SHOW);
@@ -186,17 +186,17 @@ void Window::Hide()
 {
   if (m_hWnd == nullptr)
   {
-    DxsThrow((Title() + DxsT(" - Cannot hide window with invalid handle")).c_str());
+    DxsThrow((GetTitle() + DxsT(" - Cannot hide window with invalid handle")).c_str());
   }
 
   ShowWindow(m_hWnd, SW_HIDE);
 }
 
-bool Window::Primary() const
+bool Window::GetPrimary() const
 {
   return m_stOptions.isPrimary;
 }
-void Window::Primary(bool isPrimary)
+void Window::SetPrimary(bool isPrimary)
 {
   m_stOptions.isPrimary = isPrimary;
 }
@@ -267,7 +267,7 @@ void Window::RegisterClassAndCreateWindow()
   m_hWnd = CreateWindowEx(
     m_stOptions.dwExStyle,                  // dwExStyle
     m_sClassName.c_str(),                   // lpClassName
-    Title().c_str(),                        // lpWindowName
+    GetTitle().c_str(),                     // lpWindowName
     m_stOptions.dwStyle,                    // dwStyle
     m_stOptions.rect.x, m_stOptions.rect.y, // x, y
     m_stOptions.rect.w, m_stOptions.rect.h, // width, height
@@ -496,7 +496,7 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
     (*callback)(*this, m_cKeyboard, m_cMouse, reason, message);
   }
 
-  if (Primary())
+  if (GetPrimary())
   {
     ExitProcess(reason == ExecutionExitReason::Exception ? -1 : 0);
   }
