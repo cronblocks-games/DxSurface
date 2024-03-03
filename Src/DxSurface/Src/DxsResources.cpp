@@ -25,6 +25,7 @@ WinImageResource::WinImageResource(
   if (s == Source::System)
   {
     hInstance = nullptr;
+    flags |= LR_SHARED;
   }
 
   UINT type;
