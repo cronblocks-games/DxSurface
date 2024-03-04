@@ -366,6 +366,17 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   }
   break;
 
+  case WM_CHAR:
+  {
+    TChar c = (TChar)wParam;
+
+    m_cKeyboard.InsertChar(c);
+
+    if (m_stOptions.isKeyboardDebugEnabled)
+      WinDebug::PrintCharReceived(c);
+  }
+  break;
+
   //- 
   //- Mouse Messages
   //- 
