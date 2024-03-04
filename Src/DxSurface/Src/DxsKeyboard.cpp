@@ -13,6 +13,11 @@ KeyStatus Keyboard::GetKeyStatus(KeyCode k)
   return KeyStatus::Released;
 }
 
+bool Keyboard::IsGettingText()
+{
+  return m_bIsGettingText;
+}
+
 void Keyboard::StartGettingText(unsigned int maxLength, bool stopOnEnterKey, const TString& initialText)
 {
   Lock l(m_mutText);
