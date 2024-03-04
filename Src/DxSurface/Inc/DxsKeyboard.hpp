@@ -11,7 +11,7 @@ namespace CB::DxSurface {
   class Keyboard {
   public:
     KeyStatus GetKeyStatus(KeyCode);
-    void StartGettingText(unsigned int maxLength = 50, bool stopOnEnterKey = true);
+    void StartGettingText(const TString& initialText = DxsT(""), unsigned int maxLength = 50, bool stopOnEnterKey = true);
     void StopGettingText();
     TString GetCurrentText();
 
