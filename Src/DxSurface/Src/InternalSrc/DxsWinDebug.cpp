@@ -537,6 +537,19 @@ void WinDebug::PrintKeyStatus(KeyCode key, KeyStatus status)
 	OutputDebugString(ss.str().c_str());
 }
 
+void WinDebug::PrintCharReceived(TChar ch)
+{
+#if defined(_UNICODE) || defined(UNICODE)
+  wstringstream ss;
+#else
+  stringstream ss;
+#endif
+
+  ss << "Keyboard: Char '" << ch << "'" << endl;
+
+  OutputDebugString(ss.str().c_str());
+}
+
 void WinDebug::PrintMouseClientPosition(POINT pt)
 {
 #if defined(_UNICODE) || defined(UNICODE)

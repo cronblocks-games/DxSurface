@@ -10,6 +10,7 @@ namespace CB::DxSurface {
   public:
     static void PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam);
     static void PrintKeyStatus(KeyCode, KeyStatus);
+    static void PrintCharReceived(TChar);
     static void PrintMouseClientPosition(POINT);
     static void PrintMouseClientButtonStatus(MouseButton, KeyStatus);
   };
