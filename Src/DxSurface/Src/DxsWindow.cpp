@@ -303,7 +303,8 @@ void Window::UnRegisterClassAndDestroyWindow()
 
   if (DxsFailed(DestroyWindow(m_hWnd)))
   {
-    DxsThrowWindows(DxsT("Cleanup failed - window deletion"));
+    //- To continue cleanup we are not throwing exception
+    // DxsThrowWindows(DxsT("Cleanup failed - window deletion"));
   }
 
   if (DxsFailed(UnregisterClass(m_sClassName.c_str(), m_hInstance)))
@@ -549,7 +550,7 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
     m_pProcessingExecutor->Exit();
   }
 
-  DxsEncloseThrow(UnRegisterClassAndDestroyWindow());
+  DxsEncloseThrowNoMessage(UnRegisterClassAndDestroyWindow());
 
   OnRenderingStateExitted(reason, message);
 
