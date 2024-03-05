@@ -23,6 +23,7 @@ namespace CB::DxSurface {
     unsigned int m_uiMaxTextLength;
     TString m_sText = DxsT("");
 
+    void ResetKeysStatus() noexcept;
     void SetKeyStatus(KeyCode, KeyStatus) noexcept;
     void InsertChar(const TChar);
 

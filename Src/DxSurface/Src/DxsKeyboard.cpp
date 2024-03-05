@@ -39,6 +39,11 @@ TString Keyboard::GetCurrentText()
   return m_sText;
 }
 
+void Keyboard::ResetKeysStatus() noexcept
+{
+  m_bKeyPressedStatus.reset();
+}
+
 void Keyboard::SetKeyStatus(KeyCode k, KeyStatus s) noexcept
 {
   if (s == KeyStatus::Pressed)
