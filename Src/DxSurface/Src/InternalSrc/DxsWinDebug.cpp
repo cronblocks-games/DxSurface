@@ -563,7 +563,7 @@ void WinDebug::PrintMouseClientPosition(POINT pt)
   OutputDebugString(ss.str().c_str());
 }
 
-void CB::DxSurface::WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeyStatus s)
+void WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeyStatus s, POINT pt)
 {
 #if defined(_UNICODE) || defined(UNICODE)
   wstringstream ss;
@@ -590,7 +590,7 @@ void CB::DxSurface::WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeySta
   default: ss << "Unknown Status"; break;
   }
 
-  ss << endl;
+  ss << " (" << pt.x << ", " << pt.y << ")" << endl;
 
   OutputDebugString(ss.str().c_str());
 }

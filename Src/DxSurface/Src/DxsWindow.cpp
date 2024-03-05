@@ -402,43 +402,86 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   //- Button down
 
   case WM_LBUTTONDOWN:
-    m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Pressed);
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+
+    m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Pressed, pt);
+
     if (m_stOptions.isMouseDebugEnabled)
-      WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, KeyStatus::Pressed);
-    break;
+      WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, KeyStatus::Pressed, pt);
+  }
+  break;
 
   case WM_MBUTTONDOWN:
-    m_cMouse.SetButtonStatus(MouseButton::Middle, KeyStatus::Pressed);
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+
+    m_cMouse.SetButtonStatus(MouseButton::Middle, KeyStatus::Pressed, pt);
+
     if (m_stOptions.isMouseDebugEnabled)
-      WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, KeyStatus::Pressed);
-    break;
+      WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, KeyStatus::Pressed, pt);
+  }
+  break;
 
   case WM_RBUTTONDOWN:
-    m_cMouse.SetButtonStatus(MouseButton::Right, KeyStatus::Pressed);
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+
+    m_cMouse.SetButtonStatus(MouseButton::Right, KeyStatus::Pressed, pt);
+    
     if (m_stOptions.isMouseDebugEnabled)
-      WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, KeyStatus::Pressed);
-    break;
+      WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, KeyStatus::Pressed, pt);
+  }
+  break;
 
   //- Button Up
 
   case WM_LBUTTONUP:
-    m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Released);
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+
+    m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Released, pt);
+    
     if (m_stOptions.isMouseDebugEnabled)
-      WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, KeyStatus::Released);
-    break;
+      WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, KeyStatus::Released, pt);
+  }
+  break;
 
   case WM_MBUTTONUP:
-    m_cMouse.SetButtonStatus(MouseButton::Middle, KeyStatus::Released);
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+    
+    m_cMouse.SetButtonStatus(MouseButton::Middle, KeyStatus::Released, pt);
+
     if (m_stOptions.isMouseDebugEnabled)
-      WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, KeyStatus::Released);
-    break;
+      WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, KeyStatus::Released, pt);
+  }
+  break;
 
   case WM_RBUTTONUP:
-    m_cMouse.SetButtonStatus(MouseButton::Right, KeyStatus::Released);
+  {
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+
+    m_cMouse.SetButtonStatus(MouseButton::Right, KeyStatus::Released, pt);
+    
     if (m_stOptions.isMouseDebugEnabled)
-      WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, KeyStatus::Released);
-    break;
+      WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, KeyStatus::Released, pt);
   }
+  break;
+
+  } //- switch (msg)
 
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
 }
