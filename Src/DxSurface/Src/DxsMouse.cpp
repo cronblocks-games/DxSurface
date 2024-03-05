@@ -5,7 +5,6 @@ using namespace CB::DxSurface;
 
 Mouse::Mouse()
 {
-  m_bIsValid = false;
   m_ptPosition =
     m_ptLeftButtonDownPosition = m_ptRightButtonDownPosition = m_ptMiddleButtonDownPosition =
     m_ptLeftButtonUpPosition = m_ptRightButtonUpPosition = m_ptMiddleButtonUpPosition = { 0 };

@@ -16,7 +16,6 @@ namespace CB::DxSurface {
     KeyStatus GetButtonStatus(MouseButton) const noexcept;
 
   private:
-    bool m_bIsValid;
     POINT m_ptPosition,
       m_ptLeftButtonDownPosition, m_ptRightButtonDownPosition, m_ptMiddleButtonDownPosition,
       m_ptLeftButtonUpPosition,   m_ptRightButtonUpPosition,   m_ptMiddleButtonUpPosition;
