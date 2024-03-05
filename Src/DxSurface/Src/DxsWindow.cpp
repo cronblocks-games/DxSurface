@@ -346,6 +346,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   //- Keyboard Messages
   //- 
   case WM_KEYDOWN:
+  case WM_SYSKEYDOWN:
   {
     KeyCode k = (KeyCode)wParam;
     KeyStatus s = KeyStatus::Pressed;
@@ -358,6 +359,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   break;
   
   case WM_KEYUP:
+  case WM_SYSKEYUP:
   {
     KeyCode k = (KeyCode)wParam;
     KeyStatus s = KeyStatus::Released;
