@@ -399,7 +399,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   }
   break;
 
-  //- Button down
+  //- Button Down
 
   case WM_LBUTTONDOWN:
   {
