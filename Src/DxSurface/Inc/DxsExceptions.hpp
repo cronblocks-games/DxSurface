@@ -64,6 +64,7 @@ namespace CB::DxSurface {
             } catch (...) {                                                             \
               MessageBoxA(nullptr, "Unknown error occurred.", "Error", 0);              \
             }}
+#define DxsEncloseThrowNoMessage(call) {try { call; } catch (...) {}}
 
 
 
