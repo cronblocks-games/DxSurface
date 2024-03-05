@@ -19,6 +19,7 @@ namespace CB::DxSurface {
     POINT m_ptPosition;
     KeyStatus m_eLeftButtonStatus, m_eRightButtonStatus, m_eMiddleButtonStatus;
 
+    void ResetKeysStatus() noexcept;
     void SetPosition(POINT) noexcept;
     void SetButtonStatus(MouseButton, KeyStatus) noexcept;
 
