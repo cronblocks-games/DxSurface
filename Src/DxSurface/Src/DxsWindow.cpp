@@ -338,6 +338,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   switch (msg)
   {
   case WM_CLOSE: Exit(); break;
+  case WM_KILLFOCUS:
+    m_cKeyboard.ResetKeysStatus();
+    break;
 
   //- 
   //- Keyboard Messages
