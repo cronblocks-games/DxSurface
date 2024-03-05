@@ -399,6 +399,8 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   }
   break;
 
+  //- Button down
+
   case WM_LBUTTONDOWN:
     m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Pressed);
     if (m_stOptions.isMouseDebugEnabled)
@@ -416,6 +418,8 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     if (m_stOptions.isMouseDebugEnabled)
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, KeyStatus::Pressed);
     break;
+
+  //- Button Up
 
   case WM_LBUTTONUP:
     m_cMouse.SetButtonStatus(MouseButton::Left, KeyStatus::Released);
