@@ -9,6 +9,7 @@ Mouse::Mouse()
     m_ptLeftButtonDownPosition = m_ptRightButtonDownPosition = m_ptMiddleButtonDownPosition =
     m_ptLeftButtonUpPosition = m_ptRightButtonUpPosition = m_ptMiddleButtonUpPosition = { 0 };
   m_eLeftButtonStatus = m_eRightButtonStatus = m_eMiddleButtonStatus = KeyStatus::Released;
+  m_stScrollStatus = { 0 };
 }
 
 POINT Mouse::GetPosition() const noexcept
@@ -51,6 +52,16 @@ KeyStatus Mouse::GetButtonStatus(MouseButton b) const noexcept
   case MouseButton::Right: return m_eRightButtonStatus;
   case MouseButton::Middle: return m_eMiddleButtonStatus;
   }
+}
+
+Mouse::ScrollStatus Mouse::GetScrollStatus() const noexcept
+{
+  return m_stScrollStatus;
+}
+
+void Mouse::ResetScrollStatus() noexcept
+{
+  m_stScrollStatus = { 0 };
 }
 
 void Mouse::ResetButtonsStatus() noexcept
@@ -96,4 +107,10 @@ void Mouse::SetButtonStatus(MouseButton b, KeyStatus s, POINT pt) noexcept
     }
     break;
   }
+}
+
+void Mouse::SetScrollStatus(long scroll, POINT pt) noexcept
+{
+  m_stScrollStatus.scrollValue += scroll;
+  m_stScrollStatus.lastScrollPosition = pt;
 }

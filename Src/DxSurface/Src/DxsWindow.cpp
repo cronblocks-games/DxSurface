@@ -562,6 +562,8 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     pt.y = GET_Y_LPARAM(lParam);
     ScreenToClient(m_hWnd, &pt);
 
+    m_cMouse.SetScrollStatus(delta, pt);
+
     if (m_stOptions.isMouseDebugEnabled)
       WinDebug::PrintMouseWheelStatus(delta, pt);
   }
