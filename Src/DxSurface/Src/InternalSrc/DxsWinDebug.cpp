@@ -594,3 +594,16 @@ void WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeyStatus s, POINT pt
 
   OutputDebugString(ss.str().c_str());
 }
+
+void WinDebug::PrintMouseWheelStatus(short delta, POINT pt)
+{
+#if defined(_UNICODE) || defined(UNICODE)
+  wstringstream ss;
+#else
+  stringstream ss;
+#endif
+
+  ss << "Mouse: Wheel " << delta << " (" << pt.x << ", " << pt.y << ")" << endl;
+
+  OutputDebugString(ss.str().c_str());
+}

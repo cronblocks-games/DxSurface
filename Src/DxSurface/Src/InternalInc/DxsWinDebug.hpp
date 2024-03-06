@@ -13,6 +13,7 @@ namespace CB::DxSurface {
     static void PrintCharReceived(TChar);
     static void PrintMouseClientPosition(POINT);
     static void PrintMouseClientButtonStatus(MouseButton, KeyStatus, POINT);
+    static void PrintMouseWheelStatus(short, POINT);
   };
 
 } //- namespace CB::DxSurface
