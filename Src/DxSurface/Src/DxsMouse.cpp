@@ -53,7 +53,7 @@ KeyStatus Mouse::GetButtonStatus(MouseButton b) const noexcept
   }
 }
 
-void Mouse::ResetKeysStatus() noexcept
+void Mouse::ResetButtonsStatus() noexcept
 {
   m_eLeftButtonStatus = m_eRightButtonStatus = m_eMiddleButtonStatus = KeyStatus::Released;
   m_ptLeftButtonDownPosition = m_ptRightButtonDownPosition = m_ptMiddleButtonDownPosition =
