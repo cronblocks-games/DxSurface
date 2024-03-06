@@ -34,6 +34,10 @@ namespace CB::DxSurface {
     const TString& GetTitle() const;
     void SetTitle(const TString&);
 
+    void SetCursor(SystemCursor, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
+    void SetCursor(unsigned int resourceId, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
+    void SetCursor(const TString& filepath, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = LR_DEFAULTSIZE);
+
     void Show();
     void Hide();
     

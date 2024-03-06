@@ -173,6 +173,22 @@ void Window::SetTitle(const TString& title)
   m_stOptions.title = title;
 }
 
+void Window::SetCursor(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  m_stOptions.cursor = Resources::LoadCursorResource(sc, prefWidth, prefHeight, loadFlags);
+  ::SetCursor(*m_stOptions.cursor);
+}
+void Window::SetCursor(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
+{
+  m_stOptions.cursor = Resources::LoadCursorResource(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+  ::SetCursor(*m_stOptions.cursor);
+}
+void Window::SetCursor(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
+{
+  m_stOptions.cursor = Resources::LoadCursorResource(filepath, prefWidth, prefHeight, loadFlags);
+  ::SetCursor(*m_stOptions.cursor);
+}
+
 void Window::Show()
 {
   if (m_hWnd == nullptr)
@@ -238,7 +254,7 @@ void Window::RegisterClassAndCreateWindow()
   wndcls.hInstance = m_hInstance;
   wndcls.hIcon = (m_stOptions.icon && m_stOptions.icon.get() != nullptr) ? *m_stOptions.icon : nullptr;
   wndcls.hIconSm = (m_stOptions.iconSmall && m_stOptions.iconSmall.get() != nullptr) ? *m_stOptions.iconSmall : nullptr;
-  wndcls.hCursor = (m_stOptions.cursor && m_stOptions.cursor.get() != nullptr) ? *m_stOptions.cursor : nullptr;
+  wndcls.hCursor = nullptr; // Not setting the cursor here as it keeps restoring the overridden cursor when mouse moves
   wndcls.hbrBackground = nullptr;
   wndcls.lpszMenuName = nullptr;
   wndcls.lpszClassName = m_sClassName.c_str();
@@ -289,6 +305,11 @@ void Window::RegisterClassAndCreateWindow()
   {
     m_eWindowCreationState = WindowCreationState::Fail;
     DxsThrowWindows(DxsT("Window creation failed"));
+  }
+
+  if (m_stOptions.cursor && m_stOptions.cursor.get() != nullptr)
+  {
+    ::SetCursor(*m_stOptions.cursor);
   }
 
   return;
