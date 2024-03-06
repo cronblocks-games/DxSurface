@@ -488,7 +488,6 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, KeyStatus::Pressed, pt);
   }
   break;
-
   case WM_MBUTTONDOWN:
   {
     POINT pt;
@@ -501,7 +500,6 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, KeyStatus::Pressed, pt);
   }
   break;
-
   case WM_RBUTTONDOWN:
   {
     POINT pt;
@@ -529,7 +527,6 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, KeyStatus::Released, pt);
   }
   break;
-
   case WM_MBUTTONUP:
   {
     POINT pt;
@@ -542,7 +539,6 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, KeyStatus::Released, pt);
   }
   break;
-
   case WM_RBUTTONUP:
   {
     POINT pt;
