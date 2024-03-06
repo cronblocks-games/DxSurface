@@ -482,6 +482,21 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   }
   break;
 
+  //- Mouse Wheel
+
+  case WM_MOUSEWHEEL:
+  {
+    short delta = GET_WHEEL_DELTA_WPARAM(wParam);
+    POINT pt;
+    pt.x = GET_X_LPARAM(lParam);
+    pt.y = GET_Y_LPARAM(lParam);
+    ScreenToClient(m_hWnd, &pt);
+
+    if (m_stOptions.isMouseDebugEnabled)
+      WinDebug::PrintMouseWheelStatus(delta, pt);
+  }
+  break;
+
   } //- switch (msg)
 
   return DefWindowProc(m_hWnd, msg, wParam, lParam);
