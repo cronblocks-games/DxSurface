@@ -412,9 +412,11 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   {
   case WM_CLOSE: Exit(); break;
   case WM_KILLFOCUS:
+  {
     m_cKeyboard.ResetKeysStatus();
     m_cMouse.ResetButtonsStatus();
-    break;
+  }
+  break;
 
   //- 
   //- Keyboard Messages
