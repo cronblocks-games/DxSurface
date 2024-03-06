@@ -552,7 +552,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   }
   break;
 
-  //- Mouse Wheel
+  //- Scroll Wheel
 
   case WM_MOUSEWHEEL:
   {
