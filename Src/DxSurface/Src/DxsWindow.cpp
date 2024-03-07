@@ -18,6 +18,7 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
 
   m_sClassName = DxsT("");
   m_stOptions = options;
+  m_stWindowRect = { 0 };
   m_stClientRect = { 0 };
 
   m_eWindowCreationState = WindowCreationState::NONE;
@@ -53,6 +54,7 @@ Window& Window::operator=(const Window& other)
 
   m_sClassName = DxsT("");
   m_stOptions = other.m_stOptions;
+  m_stWindowRect = { 0 };
   m_stClientRect = { 0 };
 
   m_eWindowCreationState = WindowCreationState::NONE;
@@ -177,7 +179,7 @@ void Window::SetTitle(const TString& title)
 
 WindowRect Window::GetWindowRect() const
 {
-  return m_stOptions.rect;
+  return m_stWindowRect;
 }
 ClientRect Window::GetClientRect() const
 {
@@ -337,18 +339,18 @@ void Window::RegisterClassAndCreateWindow()
     DxsThrowWindows(DxsT("Client area adjustment failed"));
   }
 
-  m_stOptions.rect.x = winSize.left;
-  m_stOptions.rect.y = winSize.top;
-  m_stOptions.rect.w = winSize.right - winSize.left;
-  m_stOptions.rect.h = winSize.bottom - winSize.top;
+  m_stWindowRect.x = winSize.left;
+  m_stWindowRect.y = winSize.top;
+  m_stWindowRect.w = winSize.right - winSize.left;
+  m_stWindowRect.h = winSize.bottom - winSize.top;
 
   m_hWnd = CreateWindowEx(
     m_stOptions.dwExStyle,                  // dwExStyle
     m_sClassName.c_str(),                   // lpClassName
     GetTitle().c_str(),                     // lpWindowName
     m_stOptions.dwStyle,                    // dwStyle
-    m_stOptions.rect.x, m_stOptions.rect.y, // x, y
-    m_stOptions.rect.w, m_stOptions.rect.h, // width, height
+    m_stWindowRect.x, m_stWindowRect.y,     // x, y
+    m_stWindowRect.w, m_stWindowRect.h,     // width, height
     nullptr,                                // hWndParent
     nullptr,                                // hMenu
     m_hInstance,                            // hInstance
@@ -437,10 +439,10 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       DxsThrowWindows(DxsT("Getting window area failed upon moving"));
     }
 
-    m_stOptions.rect.x = winRect.left;
-    m_stOptions.rect.y = winRect.top;
-    m_stOptions.rect.w = winRect.right - winRect.left;
-    m_stOptions.rect.h = winRect.bottom - winRect.top;
+    m_stWindowRect.x = winRect.left;
+    m_stWindowRect.y = winRect.top;
+    m_stWindowRect.w = winRect.right - winRect.left;
+    m_stWindowRect.h = winRect.bottom - winRect.top;
 
     m_stClientRect.x = (long)(short)LOWORD(lParam);
     m_stClientRect.y = (long)(short)HIWORD(lParam);
@@ -457,10 +459,10 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       DxsThrowWindows(DxsT("Getting window area failed upon size change"));
     }
 
-    m_stOptions.rect.x = winRect.left;
-    m_stOptions.rect.y = winRect.top;
-    m_stOptions.rect.w = winRect.right - winRect.left;
-    m_stOptions.rect.h = winRect.bottom - winRect.top;
+    m_stWindowRect.x = winRect.left;
+    m_stWindowRect.y = winRect.top;
+    m_stWindowRect.w = winRect.right - winRect.left;
+    m_stWindowRect.h = winRect.bottom - winRect.top;
 
     m_stClientRect.w = LOWORD(lParam);
     m_stClientRect.h = HIWORD(lParam);
@@ -645,24 +647,24 @@ void Window::ProcessWindowsMessagesQueue()
 //------------------------------------------------------------------------
 void Window::OnWindowPositionChangedInternal()
 {
-  OnWindowPositionChanged(m_stOptions.rect, m_stClientRect);
+  OnWindowPositionChanged(m_stWindowRect, m_stClientRect);
 
   //- Invoking the externally provided callback
   WindowCallbackPositionChanged callback = m_stOptions.callbacks.windowCallbackPositionChanged.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, m_stOptions.rect, m_stClientRect);
+    (*callback)(*this, m_stWindowRect, m_stClientRect);
   }
 }
 void Window::OnWindowSizeChangedInternal()
 {
-  OnWindowSizeChanged(m_stOptions.rect, m_stClientRect);
+  OnWindowSizeChanged(m_stWindowRect, m_stClientRect);
 
   //- Invoking the externally provided callback
   WindowCallbackSizeChanged callback = m_stOptions.callbacks.windowCallbackSizeChanged.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, m_stOptions.rect, m_stClientRect);
+    (*callback)(*this, m_stWindowRect, m_stClientRect);
   }
 }
 

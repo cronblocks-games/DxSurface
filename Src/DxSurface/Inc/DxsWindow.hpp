@@ -83,6 +83,7 @@ namespace CB::DxSurface {
 
     TString m_sClassName;
     WindowCreationOptions m_stOptions;
+    WindowRect m_stWindowRect;
     ClientRect m_stClientRect;
 
     volatile WindowCreationState m_eWindowCreationState;
