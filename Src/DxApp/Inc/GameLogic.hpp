@@ -5,6 +5,9 @@
 #include <DxSurface.hpp>
 
 
+void GameWindowPositionChanged(CB::DxSurface::Window&, CB::DxSurface::WindowRect&, CB::DxSurface::ClientRect&);
+void GameWindowSizeChanged(CB::DxSurface::Window&, CB::DxSurface::WindowRect&, CB::DxSurface::ClientRect&);
+
 void GameRenderingInit(CB::DxSurface::Window&);
 void GameRenderingRunning(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
 void GameRenderingPaused(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);

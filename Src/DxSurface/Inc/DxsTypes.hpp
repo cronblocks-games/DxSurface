@@ -73,6 +73,12 @@ namespace CB::DxSurface {
   class Cursor;
   class Bitmap;
 
+  struct WindowRect { long x = 0, y = 0, w = 0, h = 0; };
+  struct ClientRect { long x = 0, y = 0, w = 0, h = 0; };
+
+  using WindowCallbackPositionChanged = void(*)(Window&, WindowRect&, ClientRect&);
+  using WindowCallbackSizeChanged = void(*)(Window&, WindowRect&, ClientRect&);
+
   using RenderingCallbackInit = void(*)(Window&);
   using RenderingCallbackRunning = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
   using RenderingCallbackPaused = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
@@ -85,11 +91,12 @@ namespace CB::DxSurface {
   using ProcessingCallbackExitted = void(*)(Window&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
   using ProcessingCallbackStateChanged = void(*)(Window&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
-  struct WindowRect { long x = 0, y = 0, w = 0, h = 0; };
-  struct ClientRect { long x = 0, y = 0, w = 0, h = 0; };
   struct WindowCallbacks
   {
     WindowCallbacks(
+      WindowCallbackPositionChanged windowCallbackPositionChanged = nullptr,
+      WindowCallbackSizeChanged windowCallbackSizeChanged = nullptr,
+
       RenderingCallbackInit renderingCallbackInit = nullptr,
       RenderingCallbackRunning renderingCallbackRunning = nullptr,
       RenderingCallbackPaused renderingCallbackPaused = nullptr,
@@ -102,6 +109,9 @@ namespace CB::DxSurface {
       ProcessingCallbackExitted processingCallbackExitted = nullptr,
       ProcessingCallbackStateChanged processingCallbackStateChanged = nullptr)
     {
+      this->windowCallbackPositionChanged.store(windowCallbackPositionChanged);
+      this->windowCallbackSizeChanged.store(windowCallbackSizeChanged);
+
       this->renderingCallbackInit.store(renderingCallbackInit);
       this->renderingCallbackRunning.store(renderingCallbackRunning);
       this->renderingCallbackPaused.store(renderingCallbackPaused);
@@ -126,6 +136,9 @@ namespace CB::DxSurface {
     {
       if (this != &o)
       {
+        windowCallbackPositionChanged.store(o.windowCallbackPositionChanged.load());
+        windowCallbackSizeChanged.store(o.windowCallbackSizeChanged.load());
+
         renderingCallbackInit.store(o.renderingCallbackInit.load());
         renderingCallbackRunning.store(o.renderingCallbackRunning.load());
         renderingCallbackPaused.store(o.renderingCallbackPaused.load());
@@ -144,6 +157,9 @@ namespace CB::DxSurface {
     {
       if (this != &o)
       {
+        windowCallbackPositionChanged.store(o.windowCallbackPositionChanged.exchange(nullptr));
+        windowCallbackSizeChanged.store(o.windowCallbackSizeChanged.exchange(nullptr));
+
         renderingCallbackInit.store(o.renderingCallbackInit.exchange(nullptr));
         renderingCallbackRunning.store(o.renderingCallbackRunning.exchange(nullptr));
         renderingCallbackPaused.store(o.renderingCallbackPaused.exchange(nullptr));
@@ -158,6 +174,9 @@ namespace CB::DxSurface {
       }
       return *this;
     }
+
+    Atomic<WindowCallbackPositionChanged> windowCallbackPositionChanged;
+    Atomic<WindowCallbackSizeChanged> windowCallbackSizeChanged;
 
     Atomic<RenderingCallbackInit> renderingCallbackInit;
     Atomic<RenderingCallbackRunning> renderingCallbackRunning;

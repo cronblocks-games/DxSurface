@@ -444,6 +444,8 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_stClientRect.x = (long)(short)LOWORD(lParam);
     m_stClientRect.y = (long)(short)HIWORD(lParam);
+
+    OnWindowPositionChangedInternal();
   }
   break;
   case WM_SIZE:
@@ -462,6 +464,8 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_stClientRect.w = LOWORD(lParam);
     m_stClientRect.h = HIWORD(lParam);
+
+    OnWindowSizeChangedInternal();
   }
   break;
 
@@ -630,6 +634,35 @@ void Window::ProcessWindowsMessagesQueue()
   {
     TranslateMessage(&message);
     DispatchMessage(&message);
+  }
+}
+
+
+//------------------------------------------------------------------------
+//- 
+//- Window events
+//- 
+//------------------------------------------------------------------------
+void Window::OnWindowPositionChangedInternal()
+{
+  OnWindowPositionChanged(m_stOptions.rect, m_stClientRect);
+
+  //- Invoking the externally provided callback
+  WindowCallbackPositionChanged callback = m_stOptions.callbacks.windowCallbackPositionChanged.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_stOptions.rect, m_stClientRect);
+  }
+}
+void Window::OnWindowSizeChangedInternal()
+{
+  OnWindowSizeChanged(m_stOptions.rect, m_stClientRect);
+
+  //- Invoking the externally provided callback
+  WindowCallbackSizeChanged callback = m_stOptions.callbacks.windowCallbackSizeChanged.load();
+  if (callback != nullptr)
+  {
+    (*callback)(*this, m_stOptions.rect, m_stClientRect);
   }
 }
 

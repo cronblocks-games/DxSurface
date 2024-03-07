@@ -15,6 +15,8 @@ int WINAPI WinMain(
 
     Ptr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 200, 100);
     w1->SetCallbacks(WindowCallbacks(
+      GameWindowPositionChanged,
+      GameWindowSizeChanged,
       GameRenderingInit,
       GameRenderingRunning,
       GameRenderingPaused,

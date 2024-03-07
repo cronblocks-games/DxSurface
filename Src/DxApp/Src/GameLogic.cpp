@@ -8,6 +8,16 @@ using namespace std;
 using namespace CB::DxSurface;
 
 //- 
+//- Window Changes
+//- 
+void GameWindowPositionChanged(Window& w, WindowRect& wr, ClientRect& cr)
+{
+}
+void GameWindowSizeChanged(Window& w, WindowRect& wr, ClientRect& cr)
+{
+}
+
+//- 
 //- Rendering
 //- 
 void GameRenderingInit(Window& w)

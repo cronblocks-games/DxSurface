@@ -62,6 +62,9 @@ namespace CB::DxSurface {
     void SetCallbacks(const WindowCallbacks&);
 
   protected:
+    virtual void OnWindowPositionChanged(WindowRect&, ClientRect&) {}
+    virtual void OnWindowSizeChanged(WindowRect&, ClientRect&) {}
+
     virtual void OnRenderingStateInit() {}
     virtual void OnRenderingStateRunning(const double deltaSec) {}
     virtual void OnRenderingStatePaused(const double deltaSec) {}
@@ -92,6 +95,9 @@ namespace CB::DxSurface {
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();
+
+    void OnWindowPositionChangedInternal();
+    void OnWindowSizeChangedInternal();
 
     void OnRenderingStateInitInternal();
     void OnRenderingStateRunningInternal(const double deltaSec);
