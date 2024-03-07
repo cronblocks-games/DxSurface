@@ -76,8 +76,8 @@ namespace CB::DxSurface {
     HINSTANCE m_hInstance;
     HWND m_hWnd;
 
-    mutable TString m_sClassName;
-    mutable WindowCreationOptions m_stOptions;
+    TString m_sClassName;
+    WindowCreationOptions m_stOptions;
 
     volatile WindowCreationState m_eWindowCreationState;
     
