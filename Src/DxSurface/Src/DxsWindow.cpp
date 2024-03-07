@@ -173,6 +173,15 @@ void Window::SetTitle(const TString& title)
   m_stOptions.title = title;
 }
 
+WindowRect Window::GetWindowRect() const
+{
+  return m_stOptions.rect;
+}
+WindowRect Window::GetClientRect() const
+{
+  return m_stClientRect;
+}
+
 void Window::SetIcon(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
 {
   m_stOptions.icon = m_stOptions.iconSmall = Resources::LoadIconResource(si, prefWidth, prefHeight, loadFlags);
@@ -415,6 +424,42 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   {
     m_cKeyboard.ResetKeysStatus();
     m_cMouse.ResetButtonsStatus();
+  }
+  break;
+  case WM_MOVE:
+  {
+    RECT winRect = { 0 };
+
+    if (DxsFailed(::GetWindowRect(m_hWnd, &winRect)))
+    {
+      DxsThrowWindows(DxsT("Getting window area failed upon moving"));
+    }
+
+    m_stOptions.rect.x = winRect.left;
+    m_stOptions.rect.y = winRect.top;
+    m_stOptions.rect.w = winRect.right - winRect.left;
+    m_stOptions.rect.h = winRect.bottom - winRect.top;
+
+    m_stClientRect.x = (long)(short)LOWORD(lParam);
+    m_stClientRect.y = (long)(short)HIWORD(lParam);
+  }
+  break;
+  case WM_SIZE:
+  {
+    RECT winRect = { 0 };
+
+    if (DxsFailed(::GetWindowRect(m_hWnd, &winRect)))
+    {
+      DxsThrowWindows(DxsT("Getting window area failed upon size change"));
+    }
+
+    m_stOptions.rect.x = winRect.left;
+    m_stOptions.rect.y = winRect.top;
+    m_stOptions.rect.w = winRect.right - winRect.left;
+    m_stOptions.rect.h = winRect.bottom - winRect.top;
+
+    m_stClientRect.w = LOWORD(lParam);
+    m_stClientRect.h = HIWORD(lParam);
   }
   break;
 
