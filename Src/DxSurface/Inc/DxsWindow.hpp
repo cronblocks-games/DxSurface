@@ -35,7 +35,7 @@ namespace CB::DxSurface {
     void SetTitle(const TString&);
 
     WindowRect GetWindowRect() const;
-    WindowRect GetClientRect() const;
+    ClientRect GetClientRect() const;
 
     void SetIcon(SystemIcon, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE);
     void SetIcon(unsigned int resourceId, int prefWidth = 32, int prefHeight = 32, UINT loadFlags = LR_DEFAULTSIZE, HINSTANCE hInstance = nullptr);
@@ -80,7 +80,7 @@ namespace CB::DxSurface {
 
     TString m_sClassName;
     WindowCreationOptions m_stOptions;
-    WindowRect m_stClientRect;
+    ClientRect m_stClientRect;
 
     volatile WindowCreationState m_eWindowCreationState;
     

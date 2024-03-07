@@ -86,6 +86,7 @@ namespace CB::DxSurface {
   using ProcessingCallbackStateChanged = void(*)(Window&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
   struct WindowRect { long x = 0, y = 0, w = 0, h = 0; };
+  struct ClientRect { long x = 0, y = 0, w = 0, h = 0; };
   struct WindowCallbacks
   {
     WindowCallbacks(

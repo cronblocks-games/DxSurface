@@ -18,6 +18,7 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
 
   m_sClassName = DxsT("");
   m_stOptions = options;
+  m_stClientRect = { 0 };
 
   m_eWindowCreationState = WindowCreationState::NONE;
   m_pRenderingExecutor.reset();
@@ -52,6 +53,7 @@ Window& Window::operator=(const Window& other)
 
   m_sClassName = DxsT("");
   m_stOptions = other.m_stOptions;
+  m_stClientRect = { 0 };
 
   m_eWindowCreationState = WindowCreationState::NONE;
   m_pRenderingExecutor.reset();
@@ -177,7 +179,7 @@ WindowRect Window::GetWindowRect() const
 {
   return m_stOptions.rect;
 }
-WindowRect Window::GetClientRect() const
+ClientRect Window::GetClientRect() const
 {
   return m_stClientRect;
 }
