@@ -160,13 +160,13 @@ void TimedExecutorBase::ExecutionThread(TimedExecutorBase* const b)
 
     if (true)
     {
-      const double timePerIterationMSec = 1000.0 / b->m_uiMaxRefreshRateHz;
+      const double ITER_TIME_REQUIRED_MSEC = 1000.0 / b->m_uiMaxRefreshRateHz;
 
-      TimePoint iterationStartTime, lastExecutionTime = Clock::now();
+      TimePoint tpIterStart, tpExecLast = Clock::now();
 
       while (b->m_eCommand != ExecutionCommand::Exit)
       {
-        iterationStartTime = Clock::now(); // timestamp
+        tpIterStart = Clock::now(); // timestamp
 
         //- Setting the state if changed
         switch (b->m_eCommand)
@@ -174,29 +174,30 @@ void TimedExecutorBase::ExecutionThread(TimedExecutorBase* const b)
         case ExecutionCommand::Run:
           if (b->SetExecutionState(ExecutionState::Running))
           {
-            lastExecutionTime = Clock::now();
+            tpExecLast = Clock::now();
           }
           break;
         case ExecutionCommand::Pause:
           if (b->SetExecutionState(ExecutionState::Paused))
           {
-            lastExecutionTime = Clock::now();
+            tpExecLast = Clock::now();
           }
           break;
         }
 
         //- Processing the state as needed
-        b->ProcessExecutionState(TimeDurationSec(Clock::now() - lastExecutionTime).count());
-        lastExecutionTime = Clock::now(); // timestamp
+        auto tpTemp = tpExecLast;
+        tpExecLast = Clock::now();
+        b->ProcessExecutionState(TimeDurationSec(tpExecLast - tpTemp).count());
 
         //- Exit if commanded, before going to sleep
         if (b->m_eCommand == ExecutionCommand::Exit) { break; }
 
         //- Sleep if needed
-        double timeTakenInIteration = TimeDurationMilli(Clock::now() - iterationStartTime).count();
-        if (timeTakenInIteration < timePerIterationMSec)
+        double tdIter = TimeDurationMilli(Clock::now() - tpIterStart).count();
+        if (tdIter < ITER_TIME_REQUIRED_MSEC)
         {
-          this_thread::sleep_for(TimeDurationMilli(timePerIterationMSec - timeTakenInIteration));
+          this_thread::sleep_for(TimeDurationMilli(ITER_TIME_REQUIRED_MSEC - tdIter));
         }
       }
     }
