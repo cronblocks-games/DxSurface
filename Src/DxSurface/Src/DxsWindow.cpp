@@ -427,11 +427,16 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   case WM_KILLFOCUS:
   {
     m_cKeyboard.ResetKeysStatus();
+
+    //-   Releasing capture before calling ResetButtonsStatus because it also
+    //- resets the capture flag.
     if (m_cMouse.IsCaptured())
     {
       ReleaseCapture();
       m_cMouse.SetCaptured(false);
     }
+
+    //- Calling after processing the capture flag because this function resets the flag.
     m_cMouse.ResetButtonsStatus();
   }
   break;
