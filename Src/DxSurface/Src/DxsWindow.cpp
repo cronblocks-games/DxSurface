@@ -427,6 +427,11 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   case WM_KILLFOCUS:
   {
     m_cKeyboard.ResetKeysStatus();
+    if (m_cMouse.IsCaptured())
+    {
+      ReleaseCapture();
+      m_cMouse.SetCaptured(false);
+    }
     m_cMouse.ResetButtonsStatus();
   }
   break;
@@ -521,6 +526,17 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     pt.y = GET_Y_LPARAM(lParam);
 
     m_cMouse.SetPosition(pt);
+
+    if (m_cMouse.IsAnyButtonPressed() && !m_cMouse.IsCaptured())
+    {
+      SetCapture(m_hWnd);
+      m_cMouse.SetCaptured(true);
+    }
+    else if (!m_cMouse.IsAnyButtonPressed() && m_cMouse.IsCaptured())
+    {
+      ReleaseCapture();
+      m_cMouse.SetCaptured(false);
+    }
 
     if (m_stOptions.isMouseDebugEnabled)
       WinDebug::PrintMouseClientPosition(pt);

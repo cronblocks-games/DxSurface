@@ -20,6 +20,7 @@ namespace CB::DxSurface {
     POINT GetPosition() const noexcept;
     POINT GetPositionAtButtonStatus(MouseButton, KeyStatus) const noexcept;
     KeyStatus GetButtonStatus(MouseButton) const noexcept;
+    bool IsAnyButtonPressed() const noexcept;
     ScrollStatus GetScrollStatus() const noexcept;
     void ResetScrollStatus() noexcept;
 
@@ -29,11 +30,14 @@ namespace CB::DxSurface {
       m_ptLeftButtonUpPosition,   m_ptRightButtonUpPosition,   m_ptMiddleButtonUpPosition;
     KeyStatus m_eLeftButtonStatus, m_eRightButtonStatus, m_eMiddleButtonStatus;
     ScrollStatus m_stScrollStatus;
+    bool m_bIsCaptured;
 
     void ResetButtonsStatus() noexcept;
     void SetPosition(POINT) noexcept;
     void SetButtonStatus(MouseButton, KeyStatus, POINT) noexcept;
     void SetScrollStatus(long, POINT) noexcept;
+    bool IsCaptured() noexcept;
+    void SetCaptured(bool) noexcept;
 
     friend class CB::DxSurface::Window;
   };
