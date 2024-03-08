@@ -11,8 +11,8 @@ namespace CB::DxSurface {
   public:
     struct ScrollStatus
     {
-      long scrollValue; // -ve => Scroll Down (towards user), +ve => Scroll Up (away from user)
-      POINT lastScrollPosition; // Position in client area
+      long value;     // -ve => Scroll Down (towards user), +ve => Scroll Up (away from user)
+      POINT position; // Last point's position w.r.t. client's origin where scroll happened
     };
 
     Mouse();

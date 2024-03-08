@@ -111,6 +111,6 @@ void Mouse::SetButtonStatus(MouseButton b, KeyStatus s, POINT pt) noexcept
 
 void Mouse::SetScrollStatus(long scroll, POINT pt) noexcept
 {
-  m_stScrollStatus.scrollValue += scroll;
-  m_stScrollStatus.lastScrollPosition = pt;
+  m_stScrollStatus.value += scroll;
+  m_stScrollStatus.position = pt;
 }
