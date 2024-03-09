@@ -20,7 +20,7 @@ namespace CB::DxSurface {
     std::bitset<(1 << (8 * sizeof(KeyCode)))> m_bKeyPressedStatus;
     Mutex m_mutText;
     bool m_bIsGettingText = false, m_bTextStopOnEnterKey = true;
-    unsigned int m_uiMaxTextLength;
+    unsigned int m_uiMaxTextLength = 50;
     TString m_sText = DxsT("");
 
     void ResetKeysStatus() noexcept;
