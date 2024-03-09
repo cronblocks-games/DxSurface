@@ -130,7 +130,7 @@ void Mouse::SetScrollStatus(long scroll, POINT pt) noexcept
   m_stScrollStatus.position = pt;
 }
 
-bool Mouse::IsCaptured() noexcept
+bool Mouse::IsCaptured() const noexcept
 {
   return m_bIsCaptured;
 }

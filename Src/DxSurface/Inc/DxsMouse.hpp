@@ -36,7 +36,7 @@ namespace CB::DxSurface {
     void SetPosition(POINT) noexcept;
     void SetButtonStatus(MouseButton, KeyStatus, POINT) noexcept;
     void SetScrollStatus(long, POINT) noexcept;
-    bool IsCaptured() noexcept;
+    bool IsCaptured() const noexcept;
     void SetCaptured(bool) noexcept;
 
     friend class CB::DxSurface::Window;
