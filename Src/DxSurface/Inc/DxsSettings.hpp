@@ -25,6 +25,7 @@
 
 #define DxsTimingModelContinuous          0
 #define DxsTimingModelDebuggable          1
+#define DxsTimingModelNoSleep             2
 #ifndef DxsTimingModel
 #  define DxsTimingModel DxsTimingModelContinuous
 #endif
