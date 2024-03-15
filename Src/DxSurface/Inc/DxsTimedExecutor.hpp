@@ -11,7 +11,10 @@ namespace CB::DxSurface {
 
   class TimedExecutorBase {
   public:
-    TimedExecutorBase(TString name, unsigned int maxRefreshRateHz);
+    TimedExecutorBase(
+      TString name, /* The name of the executor */
+      unsigned int maxRefreshRateHz /* Zero value doesn't terminate execution in timing model DxsTimingModelNoSleep */
+    );
     TimedExecutorBase(const TimedExecutorBase&);
     TimedExecutorBase(TimedExecutorBase&&) = delete;
     TimedExecutorBase& operator=(const TimedExecutorBase&);
@@ -44,7 +47,7 @@ namespace CB::DxSurface {
 
   private:
     TString m_sName;
-    unsigned int m_uiMaxRefreshRateHz;
+    unsigned int m_uiMaxRefreshRateHz; // Zero value doesn't terminate execution in timing model DxsTimingModelNoSleep
     Ptr<Thread> m_pThread;
     volatile ExecutionState m_eState;
     volatile ExecutionCommand m_eCommand;

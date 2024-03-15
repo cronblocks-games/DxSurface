@@ -158,9 +158,16 @@ void TimedExecutorBase::ExecutionThread(TimedExecutorBase* const b)
     b->SetExecutionState(ExecutionState::Init);
     b->ProcessExecutionState(0.0);
 
+#if   DxsTimingModel == DxsTimingModelSleep
     if (b->m_uiMaxRefreshRateHz > 0)
     {
       const double ITER_TIME_REQUIRED_MSEC = 1000.0 / b->m_uiMaxRefreshRateHz;
+#elif DxsTimingModel == DxsTimingModelNoSleep
+    if (true)
+    {
+#else
+#  error "No timing model specified"
+#endif
 
       TimePoint tpIterStart, tpExecLast = Clock::now();
 
@@ -193,12 +200,16 @@ void TimedExecutorBase::ExecutionThread(TimedExecutorBase* const b)
         //- Exit if commanded, before going to sleep
         if (b->m_eCommand == ExecutionCommand::Exit) { break; }
 
+#if   DxsTimingModel == DxsTimingModelSleep
         //- Sleep if needed
         double tdIter = TimeDurationMilli(Clock::now() - tpIterStart).count();
         if (tdIter < ITER_TIME_REQUIRED_MSEC)
         {
           this_thread::sleep_for(TimeDurationMilli(ITER_TIME_REQUIRED_MSEC - tdIter));
         }
+#elif DxsTimingModel == DxsTimingModelNoSleep
+        //- Nothing to be done here
+#endif
       }
     }
     else
