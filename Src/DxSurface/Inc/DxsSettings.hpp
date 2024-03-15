@@ -23,6 +23,12 @@
 
 #define DxsDefaultThreadRefreshRateHz     30
 
+#define DxsTimingModelContinuous          0
+#define DxsTimingModelDebuggable          1
+#ifndef DxsTimingModel
+#  define DxsTimingModel DxsTimingModelContinuous
+#endif
+
 
 
 #endif
