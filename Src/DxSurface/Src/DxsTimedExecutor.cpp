@@ -158,7 +158,7 @@ void TimedExecutorBase::ExecutionThread(TimedExecutorBase* const b)
     b->SetExecutionState(ExecutionState::Init);
     b->ProcessExecutionState(0.0);
 
-    if (true)
+    if (b->m_uiMaxRefreshRateHz > 0)
     {
       const double ITER_TIME_REQUIRED_MSEC = 1000.0 / b->m_uiMaxRefreshRateHz;
 
