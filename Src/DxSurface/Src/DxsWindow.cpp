@@ -526,7 +526,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   //- 
   case WM_MOUSEMOVE:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
 
@@ -552,7 +552,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
   case WM_LBUTTONDOWN:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
 
@@ -564,7 +564,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   break;
   case WM_MBUTTONDOWN:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
 
@@ -576,7 +576,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   break;
   case WM_RBUTTONDOWN:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
 
@@ -591,7 +591,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
   case WM_LBUTTONUP:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
 
@@ -603,7 +603,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   break;
   case WM_MBUTTONUP:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
     
@@ -615,7 +615,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   break;
   case WM_RBUTTONUP:
   {
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
 
@@ -631,7 +631,7 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
   case WM_MOUSEWHEEL:
   {
     short delta = GET_WHEEL_DELTA_WPARAM(wParam);
-    POINT pt;
+    POINT pt{ 0 };
     pt.x = GET_X_LPARAM(lParam);
     pt.y = GET_Y_LPARAM(lParam);
     ScreenToClient(m_hWnd, &pt);

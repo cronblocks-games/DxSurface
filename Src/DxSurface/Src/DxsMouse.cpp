@@ -28,18 +28,21 @@ POINT Mouse::GetPositionAtButtonStatus(MouseButton b, KeyStatus s) const noexcep
     case KeyStatus::Pressed: return m_ptLeftButtonDownPosition;
     case KeyStatus::Released: return m_ptLeftButtonUpPosition;
     }
+    break;
   case MouseButton::Right:
     switch (s)
     {
     case KeyStatus::Pressed: return m_ptRightButtonDownPosition;
     case KeyStatus::Released: return m_ptRightButtonUpPosition;
     }
+    break;
   case MouseButton::Middle:
     switch (s)
     {
     case KeyStatus::Pressed: return m_ptMiddleButtonDownPosition;
     case KeyStatus::Released: return m_ptMiddleButtonUpPosition;
     }
+    break;
   }
 
   return { 0 };
@@ -53,6 +56,8 @@ KeyStatus Mouse::GetButtonStatus(MouseButton b) const noexcept
   case MouseButton::Right: return m_eRightButtonStatus;
   case MouseButton::Middle: return m_eMiddleButtonStatus;
   }
+
+  return KeyStatus::Released;
 }
 
 bool Mouse::IsAnyButtonPressed() const noexcept
@@ -125,7 +130,7 @@ void Mouse::SetScrollStatus(long scroll, POINT pt) noexcept
   m_stScrollStatus.position = pt;
 }
 
-bool Mouse::IsCaptured() noexcept
+bool Mouse::IsCaptured() const noexcept
 {
   return m_bIsCaptured;
 }
