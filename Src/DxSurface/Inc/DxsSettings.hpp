@@ -23,13 +23,6 @@
 
 #define DxsDefaultThreadRefreshRateHz     30
 
-#define DxsTimingModelContinuous          0 /* Don't stop time counting when user-code is stopped by debugger */
-#define DxsTimingModelDebuggable          1 /* Stop time counting when user-code is stopped by debugger */
-#define DxsTimingModelNoSleep             2 /* Run at full speed */
-#ifndef DxsTimingModel
-#  define DxsTimingModel DxsTimingModelContinuous
-#endif
-
 
 
 #endif
