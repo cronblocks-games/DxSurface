@@ -24,7 +24,7 @@
 #define DxsDefaultThreadRefreshRateHz     30
 
 #define DxsTimingModelSleep               0 /* Allow sleep when execution iteration completes earlier than time limit */
-#define DxsTimingModelNoSleep             1 /* Run as fast as the processor allows */
+#define DxsTimingModelNoSleep             1 /* Run iteration loops as fast as underlying processor allows */
 #ifndef DxsTimingModel
 #  define DxsTimingModel  DxsTimingModelSleep
 #endif
