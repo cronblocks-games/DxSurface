@@ -11,7 +11,7 @@ namespace CB::DxSurface {
   public:
 
   private:
-    Graphics(HWND);
+    Graphics(HWND, bool isDebugEnabled);
 
     HWND m_hWnd;
 
