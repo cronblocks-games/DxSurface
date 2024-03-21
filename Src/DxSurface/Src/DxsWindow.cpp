@@ -710,7 +710,7 @@ void Window::OnRenderingStateInitInternal()
   RenderingCallbackInit callback = m_stOptions.callbacks.renderingCallbackInit.load();
   if (callback != nullptr)
   {
-    (*callback)(*this);
+    (*callback)(*this, *m_pGraphics);
   }
 }
 void Window::OnRenderingStateRunningInternal(const double deltaSec)
@@ -722,7 +722,7 @@ void Window::OnRenderingStateRunningInternal(const double deltaSec)
   RenderingCallbackRunning callback = m_stOptions.callbacks.renderingCallbackRunning.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, m_cKeyboard, m_cMouse, deltaSec);
+    (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, deltaSec);
   }
 }
 void Window::OnRenderingStatePausedInternal(const double deltaSec)
@@ -734,7 +734,7 @@ void Window::OnRenderingStatePausedInternal(const double deltaSec)
   RenderingCallbackPaused callback = m_stOptions.callbacks.renderingCallbackPaused.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, m_cKeyboard, m_cMouse, deltaSec);
+    (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, deltaSec);
   }
 }
 void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const TString& message)
@@ -752,7 +752,7 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
   RenderingCallbackExitted callback = m_stOptions.callbacks.renderingCallbackExitted.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, m_cKeyboard, m_cMouse, reason, message);
+    (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, reason, message);
   }
 
   if (GetPrimary())
@@ -768,7 +768,7 @@ void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState
   RenderingCallbackStateChanged callback = m_stOptions.callbacks.renderingCallbackStateChanged.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, m_cKeyboard, m_cMouse, last, next);
+    (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, last, next);
   }
 }
 

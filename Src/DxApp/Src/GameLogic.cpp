@@ -20,11 +20,11 @@ void GameWindowSizeChanged(Window& w, WindowRect& wr, ClientRect& cr)
 //- 
 //- Rendering
 //- 
-void GameRenderingInit(Window& w)
+void GameRenderingInit(Window& w, Graphics& gfx)
 {
 
 }
-void GameRenderingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
+void GameRenderingRunning(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
   if (k.GetKeyStatus(KeyCode::Esc) == KeyStatus::Pressed)
   {
@@ -48,17 +48,17 @@ void GameRenderingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
     w.SetTitle(s.str());
   }
 }
-void GameRenderingPaused(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
+void GameRenderingPaused(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
 }
-void GameRenderingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
+void GameRenderingExitted(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
 {
   if (reason == ExecutionExitReason::Exception)
   {
     MessageBox(nullptr, message.c_str(), DxsT("Rendering Error"), 0);
   }
 }
-void GameRenderingStateChanged(Window& w, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
+void GameRenderingStateChanged(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
 {
 }
 

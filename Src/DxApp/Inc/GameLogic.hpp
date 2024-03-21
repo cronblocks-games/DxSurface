@@ -8,11 +8,11 @@
 void GameWindowPositionChanged(CB::DxSurface::Window&, CB::DxSurface::WindowRect&, CB::DxSurface::ClientRect&);
 void GameWindowSizeChanged(CB::DxSurface::Window&, CB::DxSurface::WindowRect&, CB::DxSurface::ClientRect&);
 
-void GameRenderingInit(CB::DxSurface::Window&);
-void GameRenderingRunning(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
-void GameRenderingPaused(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
-void GameRenderingExitted(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionExitReason reason, const CB::DxSurface::TString& message);
-void GameRenderingStateChanged(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionState from, CB::DxSurface::ExecutionState to);
+void GameRenderingInit(CB::DxSurface::Window&, CB::DxSurface::Graphics&);
+void GameRenderingRunning(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
+void GameRenderingPaused(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
+void GameRenderingExitted(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionExitReason reason, const CB::DxSurface::TString& message);
+void GameRenderingStateChanged(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionState from, CB::DxSurface::ExecutionState to);
 
 void GameProcessingInit(CB::DxSurface::Window&);
 void GameProcessingRunning(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);

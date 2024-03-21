@@ -67,6 +67,7 @@ namespace CB::DxSurface {
   };
 
   class Window;
+  class Graphics;
   class Keyboard;
   class Mouse;
   class Icon;
@@ -79,11 +80,11 @@ namespace CB::DxSurface {
   using WindowCallbackPositionChanged = void(*)(Window&, WindowRect&, ClientRect&);
   using WindowCallbackSizeChanged = void(*)(Window&, WindowRect&, ClientRect&);
 
-  using RenderingCallbackInit = void(*)(Window&);
-  using RenderingCallbackRunning = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
-  using RenderingCallbackPaused = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
-  using RenderingCallbackExitted = void(*)(Window&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
-  using RenderingCallbackStateChanged = void(*)(Window&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
+  using RenderingCallbackInit = void(*)(Window&, Graphics&);
+  using RenderingCallbackRunning = void(*)(Window&, Graphics&, Keyboard&, Mouse&, double deltaTimeSec);
+  using RenderingCallbackPaused = void(*)(Window&, Graphics&, Keyboard&, Mouse&, double deltaTimeSec);
+  using RenderingCallbackExitted = void(*)(Window&, Graphics&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
+  using RenderingCallbackStateChanged = void(*)(Window&, Graphics&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
   using ProcessingCallbackInit = void(*)(Window&);
   using ProcessingCallbackRunning = void(*)(Window&, Keyboard&, Mouse&, double deltaTimeSec);
