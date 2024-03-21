@@ -706,6 +706,8 @@ void Window::OnRenderingStateInitInternal()
   RegisterClassAndCreateWindow();
   Show();
 
+  m_pGraphics->StartFrame(); //- Graphics Frame Start
+
   OnRenderingStateInit();
 
   //- Invoking the externally provided callback
@@ -714,10 +716,15 @@ void Window::OnRenderingStateInitInternal()
   {
     (*callback)(*this, *m_pGraphics);
   }
+
+  m_pGraphics->EndFrame(); //- Graphics Frame End
 }
 void Window::OnRenderingStateRunningInternal(const double deltaSec)
 {
   ProcessWindowsMessagesQueue();
+
+  m_pGraphics->StartFrame(); //- Graphics Frame Start
+
   OnRenderingStateRunning(deltaSec);
 
   //- Invoking the externally provided callback
@@ -726,10 +733,15 @@ void Window::OnRenderingStateRunningInternal(const double deltaSec)
   {
     (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, deltaSec);
   }
+
+  m_pGraphics->EndFrame(); //- Graphics Frame End
 }
 void Window::OnRenderingStatePausedInternal(const double deltaSec)
 {
   ProcessWindowsMessagesQueue();
+
+  m_pGraphics->StartFrame(); //- Graphics Frame Start
+
   OnRenderingStatePaused(deltaSec);
 
   //- Invoking the externally provided callback
@@ -738,6 +750,8 @@ void Window::OnRenderingStatePausedInternal(const double deltaSec)
   {
     (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, deltaSec);
   }
+
+  m_pGraphics->EndFrame(); //- Graphics Frame End
 }
 void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const TString& message)
 {
@@ -764,6 +778,8 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
 }
 void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState next)
 {
+  m_pGraphics->StartFrame(); //- Graphics Frame Start
+
   OnRenderingStateChanged(last, next);
 
   //- Invoking the externally provided callback
@@ -772,6 +788,8 @@ void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState
   {
     (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, last, next);
   }
+
+  m_pGraphics->EndFrame(); //- Graphics Frame End
 }
 
 
