@@ -386,6 +386,8 @@ void Window::UnRegisterClassAndDestroyWindow()
 {
   if (m_hWnd == nullptr) return;
 
+  m_pGraphics.reset();
+
   MutexLock lock(_mutGlobalData);
   
   _handle2WindowMap.erase(m_hWnd);
