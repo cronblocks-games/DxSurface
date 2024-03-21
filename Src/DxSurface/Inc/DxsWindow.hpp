@@ -8,6 +8,7 @@
 #include "DxsTimedExecutor.hpp"
 #include "DxsKeyboard.hpp"
 #include "DxsMouse.hpp"
+#include "DxsGraphics.hpp"
 
 
 namespace CB::DxSurface {
@@ -93,6 +94,7 @@ namespace CB::DxSurface {
 
     Keyboard m_cKeyboard;
     Mouse m_cMouse;
+    Ptr<Graphics> m_pGraphics;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();

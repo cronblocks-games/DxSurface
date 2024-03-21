@@ -24,6 +24,7 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
   m_eWindowCreationState = WindowCreationState::NONE;
   m_pRenderingExecutor.reset();
   m_pProcessingExecutor.reset();
+  m_pGraphics.reset();
 }
 Window::Window(const Window& other)
 {
@@ -60,6 +61,7 @@ Window& Window::operator=(const Window& other)
   m_eWindowCreationState = WindowCreationState::NONE;
   m_pRenderingExecutor.reset();
   m_pProcessingExecutor.reset();
+  m_pGraphics.reset();
 
   return *this;
 }
