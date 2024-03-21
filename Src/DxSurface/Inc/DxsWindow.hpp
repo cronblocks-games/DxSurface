@@ -94,7 +94,7 @@ namespace CB::DxSurface {
 
     Keyboard m_cKeyboard;
     Mouse m_cMouse;
-    Ptr<Graphics> m_pGraphics;
+    PtrUnique<Graphics> m_pGraphics;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();
