@@ -10,11 +10,12 @@ namespace CB::DxSurface {
   class Graphics {
   public:
     Graphics(HWND, bool isDebugEnabled);
+    ~Graphics();
+
     Graphics(const Graphics&) = delete;
     Graphics(Graphics&&) noexcept = delete;
     Graphics& operator =(const Graphics&) = delete;
     Graphics& operator =(Graphics&&) noexcept = delete;
-    ~Graphics();
 
   private:
     HWND m_hWnd;
