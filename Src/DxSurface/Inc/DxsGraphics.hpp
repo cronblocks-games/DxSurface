@@ -9,10 +9,9 @@ namespace CB::DxSurface {
 
   class Graphics {
   public:
-
-  private:
     Graphics(HWND, bool isDebugEnabled);
 
+  private:
     HWND m_hWnd;
 
     friend class CB::DxSurface::Window;
