@@ -361,6 +361,8 @@ void Window::RegisterClassAndCreateWindow()
 
   if (m_hWnd != nullptr)
   {
+    m_pGraphics = make_shared<Graphics>(m_hWnd);
+
     MutexLock lock(_mutGlobalData);
     _handle2WindowMap[m_hWnd] = this;
 
