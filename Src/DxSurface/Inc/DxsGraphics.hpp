@@ -13,6 +13,7 @@ namespace CB::DxSurface {
 
   private:
     HWND m_hWnd;
+    bool m_bIsDebugEnabled;
 
     friend class CB::DxSurface::Window;
   };
