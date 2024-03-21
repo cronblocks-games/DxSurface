@@ -1,0 +1,8 @@
+#include "pch.hpp"
+#include "DxsGraphics.hpp"
+
+using namespace CB::DxSurface;
+
+Graphics::Graphics(HWND hWnd)
+{
+}

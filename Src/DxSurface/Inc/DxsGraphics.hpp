@@ -1,0 +1,25 @@
+#ifndef _DXSURFACE_DXSGRAPHICS_H_
+#define _DXSURFACE_DXSGRAPHICS_H_
+
+
+
+#include "DxsTypes.hpp"
+
+namespace CB::DxSurface {
+
+  class Graphics {
+  public:
+
+  private:
+    Graphics(HWND);
+
+    HWND m_hWnd;
+
+    friend class CB::DxSurface::Window;
+  };
+
+} //- namespace CB::DxSurface
+
+
+
+#endif

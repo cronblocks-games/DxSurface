@@ -51,6 +51,9 @@
     <ClInclude Include="Src\InternalInc\DxsWinDebug.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\DxsGraphics.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DxSurface.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\InternalSrc\DxsWinDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DxsGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
