@@ -11,7 +11,7 @@ void GameWindowSizeChanged(CB::DxSurface::Window&, CB::DxSurface::WindowRect&, C
 void GameRenderingInit(CB::DxSurface::Window&, CB::DxSurface::Graphics&);
 void GameRenderingRunning(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
 void GameRenderingPaused(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, double deltaTimeSec);
-void GameRenderingExitted(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionExitReason reason, const CB::DxSurface::TString& message);
+void GameRenderingExitted(CB::DxSurface::Window&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionExitReason reason, const CB::DxSurface::TString& message);
 void GameRenderingStateChanged(CB::DxSurface::Window&, CB::DxSurface::Graphics&, CB::DxSurface::Keyboard&, CB::DxSurface::Mouse&, CB::DxSurface::ExecutionState from, CB::DxSurface::ExecutionState to);
 
 void GameProcessingInit(CB::DxSurface::Window&);

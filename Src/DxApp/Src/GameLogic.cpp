@@ -51,7 +51,7 @@ void GameRenderingRunning(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, doubl
 void GameRenderingPaused(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
 }
-void GameRenderingExitted(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
+void GameRenderingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
 {
   if (reason == ExecutionExitReason::Exception)
   {

@@ -754,7 +754,7 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
   RenderingCallbackExitted callback = m_stOptions.callbacks.renderingCallbackExitted.load();
   if (callback != nullptr)
   {
-    (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, reason, message);
+    (*callback)(*this, m_cKeyboard, m_cMouse, reason, message);
   }
 
   if (GetPrimary())
