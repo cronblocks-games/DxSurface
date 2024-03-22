@@ -22,7 +22,6 @@ void GameWindowSizeChanged(Window& w, WindowRect& wr, ClientRect& cr)
 //- 
 void GameRenderingInit(Window& w, Graphics& gfx)
 {
-
 }
 void GameRenderingRunning(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
@@ -67,15 +66,12 @@ void GameRenderingStateChanged(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, 
 //- 
 void GameProcessingInit(Window& w)
 {
-
 }
 void GameProcessingRunning(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
-
 }
 void GameProcessingPaused(Window& w, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
-
 }
 void GameProcessingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason reason, const TString& message)
 {
@@ -86,6 +82,5 @@ void GameProcessingExitted(Window& w, Keyboard& k, Mouse& m, ExecutionExitReason
 }
 void GameProcessingStateChanged(Window& w, Keyboard& k, Mouse& m, ExecutionState from, ExecutionState to)
 {
-
 }
 
