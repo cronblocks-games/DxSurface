@@ -29,6 +29,8 @@ namespace CB::DxSurface {
     mutable TString m_sFinalMessage;
   }; //- class Exception
 
+
+
   class WindowsException : public Exception {
   public:
     WindowsException() = delete;
@@ -47,8 +49,8 @@ namespace CB::DxSurface {
 
 } //- namespace CB::DxSurface
 
-#define DxsFailed(expr) ((expr) == 0)
-#define DxsFailedNZ(expr) ((expr) != 0)
+#define DxsFailed(expr)    ((expr) == 0)
+#define DxsFailedNZ(expr)  ((expr) != 0)
 #define DxsFailedPtr(expr) ((expr) == nullptr)
 
 #define DxsThrow(msg)             { throw CB::DxSurface::Exception(__FILE__, __LINE__, msg);                        }
