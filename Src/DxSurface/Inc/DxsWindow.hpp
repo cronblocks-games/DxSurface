@@ -63,6 +63,10 @@ namespace CB::DxSurface {
     void SetCallbacks(const WindowCallbacks&);
 
   protected:
+    Keyboard m_cKeyboard;
+    Mouse m_cMouse;
+    PtrUnique<Graphics> m_pGraphics;
+
     virtual void OnWindowPositionChanged(WindowRect&, ClientRect&) {}
     virtual void OnWindowSizeChanged(WindowRect&, ClientRect&) {}
 
@@ -91,10 +95,6 @@ namespace CB::DxSurface {
     
     Ptr<TimedExecutor<Window>> m_pRenderingExecutor;
     Ptr<TimedExecutor<Window>> m_pProcessingExecutor;
-
-    Keyboard m_cKeyboard;
-    Mouse m_cMouse;
-    PtrUnique<Graphics> m_pGraphics;
 
     void RegisterClassAndCreateWindow();
     void UnRegisterClassAndDestroyWindow();
