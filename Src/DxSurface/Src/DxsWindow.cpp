@@ -320,7 +320,7 @@ void Window::RegisterClassAndCreateWindow()
   wndcls.hInstance = m_hInstance;
   wndcls.hIcon = (m_stOptions.icon && m_stOptions.icon.get() != nullptr) ? *m_stOptions.icon : nullptr;
   wndcls.hIconSm = (m_stOptions.iconSmall && m_stOptions.iconSmall.get() != nullptr) ? *m_stOptions.iconSmall : nullptr;
-  wndcls.hCursor = nullptr; // Not setting the cursor here as it keeps restoring the overridden cursor when mouse moves
+  wndcls.hCursor = (m_stOptions.cursor && m_stOptions.cursor.get() != nullptr) ? *m_stOptions.cursor : nullptr;
   wndcls.hbrBackground = nullptr;
   wndcls.lpszMenuName = nullptr;
   wndcls.lpszClassName = m_sClassName.c_str();
@@ -373,11 +373,6 @@ void Window::RegisterClassAndCreateWindow()
   {
     m_eWindowCreationState = WindowCreationState::Fail;
     DxsThrowWindows(DxsT("Window creation failed"));
-  }
-
-  if (m_stOptions.cursor && m_stOptions.cursor.get() != nullptr)
-  {
-    ::SetCursor(*m_stOptions.cursor);
   }
 
   return;
