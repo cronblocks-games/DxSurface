@@ -242,16 +242,19 @@ void Window::SetIconSmall(const TString& filepath, int prefWidth, int prefHeight
 void Window::SetCursor(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
 {
   m_stOptions.cursor = Resources::LoadCursorResource(sc, prefWidth, prefHeight, loadFlags);
+  SetClassLongPtrA(m_hWnd, GCLP_HCURSOR, (LONG_PTR)((HCURSOR)*m_stOptions.cursor));
   ::SetCursor(*m_stOptions.cursor);
 }
 void Window::SetCursor(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
 {
   m_stOptions.cursor = Resources::LoadCursorResource(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+  SetClassLongPtrA(m_hWnd, GCLP_HCURSOR, (LONG_PTR)((HCURSOR)*m_stOptions.cursor));
   ::SetCursor(*m_stOptions.cursor);
 }
 void Window::SetCursor(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
 {
   m_stOptions.cursor = Resources::LoadCursorResource(filepath, prefWidth, prefHeight, loadFlags);
+  SetClassLongPtrA(m_hWnd, GCLP_HCURSOR, (LONG_PTR)((HCURSOR)*m_stOptions.cursor));
   ::SetCursor(*m_stOptions.cursor);
 }
 
