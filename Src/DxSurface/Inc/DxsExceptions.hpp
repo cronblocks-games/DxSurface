@@ -47,6 +47,24 @@ namespace CB::DxSurface {
     HRESULT m_hr;
   }; //- class WindowsException
 
+
+
+  class GraphicsException : public Exception {
+  public:
+    GraphicsException() = delete;
+    GraphicsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr);
+    GraphicsException(const GraphicsException&);
+    GraphicsException(GraphicsException&&) noexcept;
+
+    GraphicsException& operator=(const GraphicsException&);
+    GraphicsException& operator=(GraphicsException&&) noexcept;
+
+    virtual TString& Message() const override;
+
+  protected:
+    HRESULT m_hr;
+  }; //- class GraphicsException
+
 } //- namespace CB::DxSurface
 
 #define DxsFailed(expr)    ((expr) == 0)
