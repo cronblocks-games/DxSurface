@@ -23,7 +23,6 @@ Exception::Exception(const char* file, int lineNumber, ConstTCharPtr message)
   m_sProvidedMessage = message;
   m_sFinalMessage = DxsT("");
 }
-
 Exception::Exception(const Exception& o)
 {
   if (this == &o) return;
@@ -93,17 +92,14 @@ TString& Exception::Message() const
 
 WindowsException::WindowsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr)
   : Exception(file, lineNumber, message), m_hr(hr) {}
-
 WindowsException::WindowsException(const WindowsException& o)
   : Exception(o), m_hr(o.m_hr) {}
-
 WindowsException::WindowsException(WindowsException&& o) noexcept
   : Exception(move(o))
 {
   if (this == &o) return;
   m_hr = exchange(o.m_hr, 0);
 }
-
 WindowsException& WindowsException::operator=(const WindowsException& o)
 {
   if (this == &o) return *this;
@@ -113,7 +109,6 @@ WindowsException& WindowsException::operator=(const WindowsException& o)
 
   return *this;
 }
-
 WindowsException& WindowsException::operator=(WindowsException&& o) noexcept
 {
   if (this == &o) return *this;
@@ -174,17 +169,14 @@ TString& WindowsException::Message() const
 
 GraphicsException::GraphicsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr)
   : Exception(file, lineNumber, message), m_hr(hr) {}
-
 GraphicsException::GraphicsException(const GraphicsException& o)
   : Exception(o), m_hr(o.m_hr) {}
-
 GraphicsException::GraphicsException(GraphicsException&& o) noexcept
   : Exception(move(o))
 {
   if (this == &o) return;
   m_hr = exchange(o.m_hr, 0);
 }
-
 GraphicsException& GraphicsException::operator=(const GraphicsException& o)
 {
   if (this == &o) return *this;
@@ -194,7 +186,6 @@ GraphicsException& GraphicsException::operator=(const GraphicsException& o)
 
   return *this;
 }
-
 GraphicsException& GraphicsException::operator=(GraphicsException&& o) noexcept
 {
   if (this == &o) return *this;
