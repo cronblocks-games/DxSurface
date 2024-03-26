@@ -18,6 +18,10 @@ namespace CB::DxSurface {
     Graphics& operator =(Graphics&&) noexcept = delete;
 
   private:
+    Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
+    Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pContext;
+
     void StartFrame();
     void EndFrame();
 
