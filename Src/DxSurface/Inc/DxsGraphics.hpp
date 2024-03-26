@@ -18,9 +18,6 @@ namespace CB::DxSurface {
     Graphics& operator =(Graphics&&) noexcept = delete;
 
   private:
-    HWND m_hWnd;
-    bool m_bIsDebugEnabled;
-
     void StartFrame();
     void EndFrame();
 
