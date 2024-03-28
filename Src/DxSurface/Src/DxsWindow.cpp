@@ -753,26 +753,22 @@ void Window::OnRenderingStatePausedInternal(const double deltaSec)
 }
 void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const TString& message)
 {
-  if (m_pProcessingExecutor)
-  {
-    m_pProcessingExecutor->Exit();
-  }
-
-  DxsEncloseThrowNoMessage(UnRegisterClassAndDestroyWindow());
+  m_pGraphics->StartFrame(); //- Graphics Frame Start
 
   OnRenderingStateExitted(reason, message);
 
   //- Invoking the externally provided callback
   RenderingCallbackExitted callback = m_stOptions.callbacks.renderingCallbackExitted.load();
-  if (callback != nullptr)
-  {
-    (*callback)(*this, m_cKeyboard, m_cMouse, reason, message);
-  }
+  if (callback != nullptr) { (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, reason, message); }
 
-  if (GetPrimary())
-  {
-    ExitProcess(reason == ExecutionExitReason::Exception ? -1 : 0);
-  }
+  m_pGraphics->EndFrame(); //- Graphics Frame End
+
+  //- Exit processing as well
+  if (m_pProcessingExecutor) { m_pProcessingExecutor->Exit(); }
+
+  DxsEncloseThrowNoMessage(UnRegisterClassAndDestroyWindow());
+
+  if (GetPrimary()) { ExitProcess(reason == ExecutionExitReason::Exception ? -1 : 0); }
 }
 void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState next)
 {

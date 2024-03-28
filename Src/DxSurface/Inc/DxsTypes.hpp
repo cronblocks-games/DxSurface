@@ -83,7 +83,7 @@ namespace CB::DxSurface {
   using RenderingCallbackInit = void(*)(Window&, Graphics&);
   using RenderingCallbackRunning = void(*)(Window&, Graphics&, Keyboard&, Mouse&, double deltaTimeSec);
   using RenderingCallbackPaused = void(*)(Window&, Graphics&, Keyboard&, Mouse&, double deltaTimeSec);
-  using RenderingCallbackExitted = void(*)(Window&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
+  using RenderingCallbackExitted = void(*)(Window&, Graphics&, Keyboard&, Mouse&, ExecutionExitReason reason, const TString& message);
   using RenderingCallbackStateChanged = void(*)(Window&, Graphics&, Keyboard&, Mouse&, ExecutionState from, ExecutionState to);
 
   using ProcessingCallbackInit = void(*)(Window&);
