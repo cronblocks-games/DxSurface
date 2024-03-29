@@ -20,9 +20,9 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled)
   scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UINT;
   scd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
   scd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-  scd.SampleDesc.Count = 0;
+  scd.SampleDesc.Count = 1;
   scd.SampleDesc.Quality = 0;
-  scd.BufferUsage = DXGI_USAGE_BACK_BUFFER;
+  scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
   scd.BufferCount = 2;
   scd.OutputWindow = hWnd;
   scd.Windowed = TRUE;
