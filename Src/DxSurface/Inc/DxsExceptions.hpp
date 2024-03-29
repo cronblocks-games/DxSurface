@@ -67,8 +67,11 @@ namespace CB::DxSurface {
 
 } //- namespace CB::DxSurface
 
+// Failed when the returned value is ZERO
 #define DxsFailed(expr)    ((expr) == 0)
+// Failed when the returned value is NOT ZERO
 #define DxsFailedNz(expr)  ((expr) != 0)
+// Failed when the pointer returned is NULL
 #define DxsFailedPtr(expr) ((expr) == nullptr)
 
 #define DxsThrow(msg)              { throw CB::DxSurface::Exception(__FILE__, __LINE__, msg);                        }
