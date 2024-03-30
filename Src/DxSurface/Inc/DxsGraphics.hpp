@@ -18,6 +18,7 @@ namespace CB::DxSurface {
     Graphics& operator =(Graphics&&) noexcept = delete;
 
     void SetBackground(float bgR, float bgG, float bgB, float bgA = 1.0);
+    void SetBackgroundAndClearFrame(float bgR, float bgG, float bgB, float bgA = 1.0);
 
   private:
     Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;

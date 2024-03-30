@@ -70,6 +70,12 @@ void Graphics::SetBackground(float bgR, float bgG, float bgB, float bgA)
   m_bgR = bgR; m_bgG = bgG; m_bgB = bgB; m_bgA = bgA;
 }
 
+void Graphics::SetBackgroundAndClearFrame(float bgR, float bgG, float bgB, float bgA)
+{
+  m_bgR = bgR; m_bgG = bgG; m_bgB = bgB; m_bgA = bgA;
+  StartFrame();
+}
+
 void Graphics::StartFrame()
 {
   float bg[] = { m_bgR, m_bgG, m_bgB, m_bgA };
