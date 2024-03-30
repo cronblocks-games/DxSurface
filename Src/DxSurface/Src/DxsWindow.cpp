@@ -753,7 +753,7 @@ void Window::OnRenderingStatePausedInternal(const double deltaSec)
 }
 void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const TString& message)
 {
-  m_pGraphics->StartFrame(); //- Graphics Frame Start
+  if (m_pGraphics) m_pGraphics->StartFrame(); //- Graphics Frame Start
 
   OnRenderingStateExitted(reason, message);
 
@@ -761,7 +761,7 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
   RenderingCallbackExitted callback = m_stOptions.callbacks.renderingCallbackExitted.load();
   if (callback != nullptr) { (*callback)(*this, *m_pGraphics, m_cKeyboard, m_cMouse, reason, message); }
 
-  m_pGraphics->EndFrame(); //- Graphics Frame End
+  if (m_pGraphics) m_pGraphics->EndFrame(); //- Graphics Frame End
 
   //- Exit processing as well
   if (m_pProcessingExecutor) { m_pProcessingExecutor->Exit(); }
@@ -772,6 +772,12 @@ void Window::OnRenderingStateExittedInternal(ExecutionExitReason reason, const T
 }
 void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState next)
 {
+  if (last == ExecutionState::NONE || next == ExecutionState::Init || !m_pGraphics)
+  {
+    // Till this time we have not got window created
+    return;
+  }
+
   m_pGraphics->StartFrame(); //- Graphics Frame Start
 
   OnRenderingStateChanged(last, next);
