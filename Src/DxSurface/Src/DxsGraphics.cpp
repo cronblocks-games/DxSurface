@@ -10,7 +10,8 @@ using namespace CB::DxSurface;
 using namespace Microsoft::WRL;
 
 
-Graphics::Graphics(HWND hWnd, bool isDebugEnabled)
+Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float bgB, float bgA)
+  : m_bgR(bgR), m_bgG(bgG), m_bgB(bgB), m_bgA(bgA)
 {
   DXGI_SWAP_CHAIN_DESC scd = { 0 };
   scd.BufferDesc.Width = 0;
@@ -66,6 +67,8 @@ Graphics::~Graphics()
 
 void Graphics::StartFrame()
 {
+  float bg[] = { m_bgR, m_bgG, m_bgB, m_bgA };
+  m_pContext->ClearRenderTargetView(m_pRenderTargetView.Get(), bg);
 }
 
 void Graphics::EndFrame()

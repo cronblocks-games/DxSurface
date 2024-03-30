@@ -9,7 +9,7 @@ namespace CB::DxSurface {
 
   class Graphics {
   public:
-    Graphics(HWND, bool isDebugEnabled);
+    Graphics(HWND, bool isDebugEnabled, float bgR = 0.0, float bgG = 0.0, float bgB = 0.0, float bgA = 1.0);
     ~Graphics();
 
     Graphics(const Graphics&) = delete;
@@ -22,6 +22,8 @@ namespace CB::DxSurface {
     Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pContext;
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_pRenderTargetView;
+
+    float m_bgR, m_bgG, m_bgB, m_bgA;
 
     void StartFrame();
     void EndFrame();
