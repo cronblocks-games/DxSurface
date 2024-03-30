@@ -55,4 +55,5 @@ void Graphics::StartFrame()
 
 void Graphics::EndFrame()
 {
+  m_pSwapChain->Present(1, 0);
 }
