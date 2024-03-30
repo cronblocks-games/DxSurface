@@ -17,6 +17,8 @@ namespace CB::DxSurface {
     Graphics& operator =(const Graphics&) = delete;
     Graphics& operator =(Graphics&&) noexcept = delete;
 
+    void SetBackground(float bgR, float bgG, float bgB, float bgA = 1.0);
+
   private:
     Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
     Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
