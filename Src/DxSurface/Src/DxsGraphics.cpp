@@ -43,6 +43,21 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled)
       nullptr,                  // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
     ), DxsT("Failed creating device and swap chain"));
+
+  ComPtr<ID3D11Resource> backBuffer;
+  DxCall(
+    m_pSwapChain->GetBuffer(
+      0,                        // Buffer
+      __uuidof(ID3D11Resource), // REFIID
+      &backBuffer               // ppSurface
+  ), DxsT("Failed getting back buffer from swap chain"));
+
+  DxCall(
+    m_pDevice->CreateRenderTargetView(
+      backBuffer.Get(),    // pResource
+      nullptr,             // pDesc
+      &m_pRenderTargetView // ppRTView
+    ), DxsT("Failed creating Render Target View"));
 }
 
 Graphics::~Graphics()
