@@ -44,7 +44,7 @@ namespace CB::DxSurface {
     virtual TString& Message() const override;
 
   protected:
-    bool m_isGraphics;
+    bool m_isGraphicsException;
     HRESULT m_hr;
   }; //- class WindowsException
 
