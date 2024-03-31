@@ -35,7 +35,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float b
       nullptr,                  // pAdapter
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
-      isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG  | D3D11_CREATE_DEVICE_DEBUGGABLE : 0, // Flags
+      isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_DEBUGGABLE : 0, // Flags
       nullptr, 0,               // pFeatureLevels, FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
