@@ -212,7 +212,22 @@ TString& GraphicsException::Message() const
     << "HR: " << m_hr << endl
     << "    -- ";
 
-  ss << "Unknown error code";
+  TCharPtr winMessage = nullptr;
+  DWORD winMessageLen = FormatMessage(
+    FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, // dwFlags
+    nullptr,                                    // lpSource (optional)
+    m_hr,                                       // dwMessageId
+    MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),  // dwLanguageId
+    reinterpret_cast<LPTSTR>(&winMessage),      // lpBuffer
+    0,                                          // nSize
+    nullptr);                                   // va_list *Arguments
+
+  if (winMessageLen > 0)
+    ss << winMessage;
+  else
+    ss << "Unknown error code";
+
+  LocalFree(winMessage);
 
   ss
     << endl
