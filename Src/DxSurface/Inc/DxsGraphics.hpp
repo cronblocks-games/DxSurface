@@ -25,6 +25,7 @@ namespace CB::DxSurface {
     Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pContext;
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_pRenderTargetView;
+    D3D_FEATURE_LEVEL m_eFeatureLevel;
 
     float m_bgR, m_bgG, m_bgB, m_bgA;
 

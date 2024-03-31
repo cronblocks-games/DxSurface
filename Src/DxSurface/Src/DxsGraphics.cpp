@@ -41,7 +41,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float b
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
       &m_pDevice,               // ppDevice
-      nullptr,                  // pFeatureLevel (created)
+      &m_eFeatureLevel,         // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
     ), DxsT("Failed creating device and swap chain"));
 
