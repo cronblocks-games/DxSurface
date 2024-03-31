@@ -131,7 +131,7 @@ TString& WindowsException::Message() const
 #endif
 
   ss
-    << (m_isGraphics ? "Graphics Exception:" : "Windows Exception:") << endl
+    << (m_isGraphics ? "Graphics" : "Windows") << " Exception:" << endl
     << "    -- " << m_sProvidedMessage << endl << endl
     << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
     << "Line: " << m_iLineNumber << endl
