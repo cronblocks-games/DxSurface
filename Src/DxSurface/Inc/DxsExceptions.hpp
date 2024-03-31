@@ -44,12 +44,13 @@ namespace CB::DxSurface {
     virtual TString& Message() const override;
 
   protected:
+    bool m_isGraphics;
     HRESULT m_hr;
   }; //- class WindowsException
 
 
 
-  class GraphicsException : public Exception {
+  class GraphicsException : public WindowsException {
   public:
     GraphicsException() = delete;
     GraphicsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr);
@@ -58,11 +59,6 @@ namespace CB::DxSurface {
 
     GraphicsException& operator=(const GraphicsException&);
     GraphicsException& operator=(GraphicsException&&) noexcept;
-
-    virtual TString& Message() const override;
-
-  protected:
-    HRESULT m_hr;
   }; //- class GraphicsException
 
 } //- namespace CB::DxSurface
