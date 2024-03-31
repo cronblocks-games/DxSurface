@@ -10,6 +10,7 @@
 
 namespace CB::DxSurface {
 
+  // A base / simple exception in this library
   class Exception : public std::exception {
   public:
     Exception() = delete;
@@ -31,6 +32,7 @@ namespace CB::DxSurface {
 
 
 
+  // Identifies an exception resulting from an HRESULT returned from a Windows API call
   class WindowsException : public Exception {
   public:
     WindowsException() = delete;
@@ -50,6 +52,7 @@ namespace CB::DxSurface {
 
 
 
+  // Identifies a Graphics exception
   class GraphicsException : public WindowsException {
   public:
     GraphicsException() = delete;
@@ -79,6 +82,8 @@ namespace CB::DxSurface {
 // Throws a Graphics exception with a given message, returned HRESULT, filename and the line number
 #define DxsThrowGraphicsHr(msg,hr) { throw CB::DxSurface::GraphicsException(__FILE__, __LINE__, msg, hr); }
 
+// Encloses a statement and doesn't allow the thrown exception to propagate through,
+// and displays the appropriate error message
 #define DxsEncloseThrow(call) {                                                         \
             try {                                                                       \
               call;                                                                     \
@@ -89,6 +94,8 @@ namespace CB::DxSurface {
             } catch (...) {                                                             \
               MessageBoxA(nullptr, "Unknown error occurred.", "Error", 0);              \
             }}
+// Encloses a statement and doesn't allow the thrown exception to propagate through,
+// and does not display any error message
 #define DxsEncloseThrowNoMessage(call) {try { call; } catch (...) {}}
 
 
