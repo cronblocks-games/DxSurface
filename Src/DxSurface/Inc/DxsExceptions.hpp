@@ -14,7 +14,7 @@ namespace CB::DxSurface {
   class Exception : public std::exception {
   public:
     Exception() = delete;
-    Exception(const char* file, int lineNumber, ConstTCharPtr message);
+    Exception(const char* file, int lineNumber, TCCharPtr message);
     Exception(const Exception&);
     Exception(Exception&&) noexcept;
 
@@ -36,7 +36,7 @@ namespace CB::DxSurface {
   class WindowsException : public Exception {
   public:
     WindowsException() = delete;
-    WindowsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr);
+    WindowsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr);
     WindowsException(const WindowsException&);
     WindowsException(WindowsException&&) noexcept;
 
@@ -56,7 +56,7 @@ namespace CB::DxSurface {
   class GraphicsException : public WindowsException {
   public:
     GraphicsException() = delete;
-    GraphicsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr);
+    GraphicsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr);
     GraphicsException(const GraphicsException&);
     GraphicsException(GraphicsException&&) noexcept;
 

@@ -16,7 +16,7 @@ static const char* start_of_str(const char* line, const char* str)
   return match == nullptr ? line : match;
 }
 
-Exception::Exception(const char* file, int lineNumber, ConstTCharPtr message)
+Exception::Exception(const char* file, int lineNumber, TCCharPtr message)
 {
   m_sFileName = file;
   m_iLineNumber = lineNumber;
@@ -90,7 +90,7 @@ TString& Exception::Message() const
 // WindowsException
 // -----------------------------------------------------------------------------
 
-WindowsException::WindowsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr)
+WindowsException::WindowsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr)
   : Exception(file, lineNumber, message), m_hr(hr), m_isGraphicsException(false) {}
 WindowsException::WindowsException(const WindowsException& o)
   : Exception(o), m_hr(o.m_hr), m_isGraphicsException(false) {}
@@ -170,7 +170,7 @@ TString& WindowsException::Message() const
 // GraphicsException
 // -----------------------------------------------------------------------------
 
-GraphicsException::GraphicsException(const char* file, int lineNumber, ConstTCharPtr message, HRESULT hr)
+GraphicsException::GraphicsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr)
   : WindowsException(file, lineNumber, message, hr)
 {
   m_isGraphicsException = true;
