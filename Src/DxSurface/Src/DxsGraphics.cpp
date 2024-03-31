@@ -18,7 +18,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float b
   scd.BufferDesc.Height = 0;
   scd.BufferDesc.RefreshRate.Numerator = 0;
   scd.BufferDesc.RefreshRate.Denominator = 0;
-  scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UINT;
+  scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
   scd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
   scd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
   scd.SampleDesc.Count = 1;
