@@ -70,10 +70,14 @@ namespace CB::DxSurface {
 // Failed when the pointer returned is NULL
 #define DxsFailedPtr(expr) ((expr) == nullptr)
 
-#define DxsThrow(msg)              { throw CB::DxSurface::Exception(__FILE__, __LINE__, msg);                        }
-#define DxsThrowWindows(msg)       { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, GetLastError()); }
-#define DxsThrowWindowsHr(msg,hr)  { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, hr);             }
-#define DxsThrowGraphicsHr(msg,hr) { throw CB::DxSurface::GraphicsException(__FILE__, __LINE__, msg, hr);            }
+// Throws a generic exception with a given message, filename and the line number
+#define DxsThrow(msg) { throw CB::DxSurface::Exception(__FILE__, __LINE__, msg); }
+// Throws a Windows exception with a given message, filename and the line number
+#define DxsThrowWindows(msg) { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, GetLastError()); }
+// Throws a Windows exception with a given message, returned HRESULT, filename and the line number
+#define DxsThrowWindowsHr(msg,hr) { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, hr); }
+// Throws a Graphics exception with a given message, returned HRESULT, filename and the line number
+#define DxsThrowGraphicsHr(msg,hr) { throw CB::DxSurface::GraphicsException(__FILE__, __LINE__, msg, hr); }
 
 #define DxsEncloseThrow(call) {                                                         \
             try {                                                                       \
