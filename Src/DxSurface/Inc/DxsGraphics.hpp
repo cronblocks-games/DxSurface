@@ -9,7 +9,7 @@ namespace CB::DxSurface {
 
   class Graphics {
   public:
-    Graphics(HWND, bool isDebugEnabled, float bgR = 0.88, float bgG = 0.88, float bgB = 0.88, float bgA = 1.0);
+    Graphics(HWND, bool isDebugEnabled, float clrR = 0.88, float clrG = 0.88, float clrB = 0.88, float clrA = 1.0);
     ~Graphics();
 
     Graphics(const Graphics&) = delete;
@@ -17,8 +17,8 @@ namespace CB::DxSurface {
     Graphics& operator =(const Graphics&) = delete;
     Graphics& operator =(Graphics&&) noexcept = delete;
 
-    void SetBackground(float bgR, float bgG, float bgB, float bgA = 1.0);
-    void SetBackgroundAndClearFrame(float bgR, float bgG, float bgB, float bgA = 1.0);
+    void SetClearColor(float clrR, float clrG, float clrB, float clrA = 1.0);
+    void SetClearColorAndStartFrame(float clrR, float clrG, float clrB, float clrA = 1.0);
 
   private:
     Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
@@ -27,7 +27,7 @@ namespace CB::DxSurface {
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_pRenderTargetView;
     D3D_FEATURE_LEVEL m_eFeatureLevel;
 
-    float m_bgR, m_bgG, m_bgB, m_bgA;
+    float m_clrR, m_clrG, m_clrB, m_clrA;
 
     void StartFrame();
     void EndFrame();

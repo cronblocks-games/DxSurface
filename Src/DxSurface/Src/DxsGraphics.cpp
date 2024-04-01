@@ -10,8 +10,8 @@ using namespace CB::DxSurface;
 using namespace Microsoft::WRL;
 
 
-Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float bgB, float bgA)
-  : m_bgR(bgR), m_bgG(bgG), m_bgB(bgB), m_bgA(bgA)
+Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float clrB, float clrA)
+  : m_clrR(clrR), m_clrG(clrG), m_clrB(clrB), m_clrA(clrA)
 {
   DXGI_SWAP_CHAIN_DESC scd = { 0 };
   scd.BufferDesc.Width = 0;
@@ -65,21 +65,21 @@ Graphics::~Graphics()
 {
 }
 
-void Graphics::SetBackground(float bgR, float bgG, float bgB, float bgA)
+void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
 {
-  m_bgR = bgR; m_bgG = bgG; m_bgB = bgB; m_bgA = bgA;
+  m_clrR = clrR; m_clrG = clrG; m_clrB = clrB; m_clrA = clrA;
 }
 
-void Graphics::SetBackgroundAndClearFrame(float bgR, float bgG, float bgB, float bgA)
+void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, float clrA)
 {
-  m_bgR = bgR; m_bgG = bgG; m_bgB = bgB; m_bgA = bgA;
+  m_clrR = clrR; m_clrG = clrG; m_clrB = clrB; m_clrA = clrA;
   StartFrame();
 }
 
 void Graphics::StartFrame()
 {
-  float bg[] = { m_bgR, m_bgG, m_bgB, m_bgA };
-  m_pContext->ClearRenderTargetView(m_pRenderTargetView.Get(), bg);
+  float clr[] = { m_clrR, m_clrG, m_clrB, m_clrA };
+  m_pContext->ClearRenderTargetView(m_pRenderTargetView.Get(), clr);
 }
 
 void Graphics::EndFrame()
