@@ -43,7 +43,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float b
       &m_pDevice,               // ppDevice
       &m_eFeatureLevel,         // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
-    ), DxsT("Failed creating device and swap chain, check if you have SDK installed and enable debug"));
+    ), DxsT("Failed creating device and swap chain, check if you have SDK installed and enable debugging"));
 
   ComPtr<ID3D11Resource> backBuffer;
   DxCall(
