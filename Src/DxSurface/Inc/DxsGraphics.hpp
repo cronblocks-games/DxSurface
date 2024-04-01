@@ -20,6 +20,8 @@ namespace CB::DxSurface {
     void SetClearColor(float clrR, float clrG, float clrB, float clrA = 1.0);
     void SetClearColorAndStartFrame(float clrR, float clrG, float clrB, float clrA = 1.0);
 
+    D3D_FEATURE_LEVEL GetFeatureLevel();
+
   private:
     Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
     Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;

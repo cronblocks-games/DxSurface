@@ -76,6 +76,11 @@ void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, fl
   StartFrame();
 }
 
+D3D_FEATURE_LEVEL Graphics::GetFeatureLevel()
+{
+  return m_eFeatureLevel;
+}
+
 void Graphics::StartFrame()
 {
   float clr[] = { m_clrR, m_clrG, m_clrB, m_clrA };
