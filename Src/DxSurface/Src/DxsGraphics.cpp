@@ -50,7 +50,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       &m_pDevice,               // ppDevice
       &m_eFeatureLevel,         // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
-    ), DxsT("Failed creating device and swap chain"));
+    ), DxsT("Failed creating device and swap chain. If you have enabled the debug flag, check debugger output window for more details."));
 
   ComPtr<ID3D11Resource> backBuffer;
   DxCall(
