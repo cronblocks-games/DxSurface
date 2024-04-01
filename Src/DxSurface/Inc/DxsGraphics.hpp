@@ -9,7 +9,7 @@ namespace CB::DxSurface {
 
   class Graphics {
   public:
-    Graphics(HWND, bool isDebugEnabled, float bgR = 0.0, float bgG = 0.0, float bgB = 0.0, float bgA = 1.0);
+    Graphics(HWND, bool isDebugEnabled, float bgR = 0.88, float bgG = 0.88, float bgB = 0.88, float bgA = 1.0);
     ~Graphics();
 
     Graphics(const Graphics&) = delete;
