@@ -102,7 +102,7 @@ void Graphics::EndFrame()
 
   if (hr == DXGI_ERROR_DEVICE_REMOVED)
   {
-    DxsThrowGraphicsHr(DxsT("DXGI_ERROR_DEVICE_REMOVED"), hr);
+    DxsThrowGraphicsHr(DxsT("DXGI_ERROR_DEVICE_REMOVED"), m_pDevice->GetDeviceRemovedReason());
   }
   else
   {
