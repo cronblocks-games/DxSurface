@@ -51,7 +51,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float bgR, float bgG, float b
       0,                        // Buffer
       __uuidof(ID3D11Resource), // REFIID
       &backBuffer               // ppSurface
-  ), DxsT("Failed getting back buffer from swap chain"));
+  ), DxsT("Failed getting back buffer from the swap chain"));
 
   DxCall(
     m_pDevice->CreateRenderTargetView(
