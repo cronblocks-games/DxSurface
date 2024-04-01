@@ -41,7 +41,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       nullptr,                  // pAdapter
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
-      isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0,   // Flags
+      (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
       prefFL,                                           // pFeatureLevels
       sizeof(prefFL) / sizeof(D3D_FEATURE_LEVEL),       // FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
@@ -50,7 +50,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       &m_pDevice,               // ppDevice
       &m_eFeatureLevel,         // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
-    ), DxsT("Failed creating device and swap chain, check if you have SDK installed and enable debugging"));
+    ), DxsT("Failed creating device and swap chain"));
 
   ComPtr<ID3D11Resource> backBuffer;
   DxCall(
