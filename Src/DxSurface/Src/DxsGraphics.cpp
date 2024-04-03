@@ -49,13 +49,13 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       &m_pDevice,               // ppDevice
       &m_eFeatureLevel,         // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
-    ), DxsT("Failed creating device and swap chain. If you have enabled the debug flag, check debugger output window for more details."));
+    ), DxsT("Device creation failed, if debug flag is set, check debugger output window for more details."));
 
   ComPtr<ID3D11Resource> backBuffer;
   DxCall(
     m_pSwapChain->GetBuffer(
       0, __uuidof(ID3D11Resource), &backBuffer  // Buffer, REFIID, ppSurface
-    ), DxsT("Failed getting back buffer from the swap chain"));
+    ), DxsT("Failed getting back buffer from swap chain"));
 
   DxCall(
     m_pDevice->CreateRenderTargetView(
