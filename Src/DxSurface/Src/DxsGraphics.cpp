@@ -93,13 +93,11 @@ void Graphics::EndFrame()
 {
   HRESULT hr = m_pSwapChain->Present(1, 0);
 
-  if (hr == S_OK) return;
-
   if (hr == DXGI_ERROR_DEVICE_REMOVED)
   {
     DxsThrowGraphicsHr(DxsT("DXGI_ERROR_DEVICE_REMOVED"), m_pDevice->GetDeviceRemovedReason());
   }
-  else
+  else if (hr != S_OK)
   {
     DxsThrowGraphicsHr(DxsT("Failure during frame presentation"), hr);
   }
