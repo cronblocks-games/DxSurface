@@ -41,9 +41,8 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       nullptr,                  // pAdapter
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
-      (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
-      prefFL,                                           // pFeatureLevels
-      sizeof(prefFL) / sizeof(D3D_FEATURE_LEVEL),       // FeatureLevels
+      (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0),   // Flags
+      prefFL, sizeof(prefFL) / sizeof(D3D_FEATURE_LEVEL), // pFeatureLevels, FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
@@ -55,16 +54,12 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
   ComPtr<ID3D11Resource> backBuffer;
   DxCall(
     m_pSwapChain->GetBuffer(
-      0,                        // Buffer
-      __uuidof(ID3D11Resource), // REFIID
-      &backBuffer               // ppSurface
-  ), DxsT("Failed getting back buffer from the swap chain"));
+      0, __uuidof(ID3D11Resource), &backBuffer  // Buffer, REFIID, ppSurface
+    ), DxsT("Failed getting back buffer from the swap chain"));
 
   DxCall(
     m_pDevice->CreateRenderTargetView(
-      backBuffer.Get(),    // pResource
-      nullptr,             // pDesc
-      &m_pRenderTargetView // ppRTView
+      backBuffer.Get(), nullptr, &m_pRenderTargetView  // pResource, pDesc, ppRTView
     ), DxsT("Failed creating Render Target View"));
 }
 
