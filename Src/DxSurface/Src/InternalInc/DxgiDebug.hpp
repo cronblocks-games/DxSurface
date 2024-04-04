@@ -17,7 +17,7 @@ namespace CB::DxSurface {
 		DxgiDebug& operator=(DxgiDebug&&) noexcept = delete;
 
 		void Mark() noexcept;
-		Vector<TString> GetMessages() const;
+		TString GetMessages() const;
 
 	private:
 		bool m_bIsDebuggingEnabled;
