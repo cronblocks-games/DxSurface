@@ -10,6 +10,7 @@
 #include <mutex>
 #include <thread>
 #include <cassert>
+#include <memory>
 
 #include <string.h>
 
