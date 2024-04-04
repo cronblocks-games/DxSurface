@@ -20,6 +20,7 @@ namespace CB::DxSurface {
 		Vector<TString> GetMessages() const;
 
 	private:
+		bool m_bIsDebuggingEnabled;
 		unsigned long long m_uCount;
 		PtrCom<DxDXGIInfoQueue> m_pInfoQueue;
   };

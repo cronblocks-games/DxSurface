@@ -6,6 +6,7 @@
 using namespace CB::DxSurface;
 
 DxgiDebug::DxgiDebug(bool isDebuggingEnabled)
+  : m_bIsDebuggingEnabled(isDebuggingEnabled)
 {
   m_uCount = 0;
 }
