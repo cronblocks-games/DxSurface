@@ -50,10 +50,10 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       &m_pContext               // ppImmediateContext
     ), DxsT("Device creation failed, if debug flag is set, check debugger output window for more details."));
 
-  PtrCom<ID3D11Resource> backBuffer;
+  PtrCom<DxResource> backBuffer;
   DxCall(
     m_pSwapChain->GetBuffer(
-      0, __uuidof(ID3D11Resource), &backBuffer  // Buffer, REFIID, ppSurface
+      0, __uuidof(DxResource), &backBuffer  // Buffer, REFIID, ppSurface
     ), DxsT("Failed getting back buffer from swap chain"));
 
   DxCall(
@@ -77,11 +77,11 @@ void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, fl
   StartFrame();
 }
 
-D3D_FEATURE_LEVEL Graphics::GetFeatureLevel()                  { return m_eFeatureLevel;     }
-PtrCom<ID3D11Device> Graphics::GetDevice()                     { return m_pDevice;           }
-PtrCom<IDXGISwapChain> Graphics::GetSwapChain()                { return m_pSwapChain;        }
-PtrCom<ID3D11DeviceContext> Graphics::GetContext()             { return m_pContext;          }
-PtrCom<ID3D11RenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
+D3D_FEATURE_LEVEL Graphics::GetFeatureLevel()              { return m_eFeatureLevel;     }
+PtrCom<DxDevice> Graphics::GetDevice()                     { return m_pDevice;           }
+PtrCom<DxSwapChain> Graphics::GetSwapChain()               { return m_pSwapChain;        }
+PtrCom<DxDeviceContext> Graphics::GetContext()             { return m_pContext;          }
+PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
 
 void Graphics::StartFrame()
 {
