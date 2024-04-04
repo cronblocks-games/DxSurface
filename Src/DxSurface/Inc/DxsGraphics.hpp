@@ -28,8 +28,8 @@ namespace CB::DxSurface {
 
   private:
     PtrCom<DxDevice> m_pDevice;
+    PtrCom<DxDeviceContext> m_pDeviceContext;
     PtrCom<DxSwapChain> m_pSwapChain;
-    PtrCom<DxDeviceContext> m_pContext;
     PtrCom<DxRenderTargetView> m_pRenderTargetView;
     DxFeatureLevel m_eFeatureLevel;
 

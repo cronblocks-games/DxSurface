@@ -48,7 +48,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       &m_pSwapChain,            // ppSwapChain
       &m_pDevice,               // ppDevice
       reinterpret_cast<D3D_FEATURE_LEVEL*>(&m_eFeatureLevel), // pFeatureLevel (created device's feature level)
-      &m_pContext               // ppImmediateContext
+      &m_pDeviceContext         // ppImmediateContext
     ), DxsT("Device creation failed, if debug flag is set, check debugger output window for more details."));
 
   PtrCom<DxResource> backBuffer;
@@ -80,14 +80,14 @@ void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, fl
 
 DxFeatureLevel             Graphics::GetFeatureLevel()     { return m_eFeatureLevel;     }
 PtrCom<DxDevice>           Graphics::GetDevice()           { return m_pDevice;           }
-PtrCom<DxDeviceContext>    Graphics::GetDeviceContext()    { return m_pContext;          }
+PtrCom<DxDeviceContext>    Graphics::GetDeviceContext()    { return m_pDeviceContext;    }
 PtrCom<DxSwapChain>        Graphics::GetSwapChain()        { return m_pSwapChain;        }
 PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
 
 void Graphics::StartFrame()
 {
   float clr[] = { m_clrR, m_clrG, m_clrB, m_clrA };
-  m_pContext->ClearRenderTargetView(m_pRenderTargetView.Get(), clr);
+  m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView.Get(), clr);
 }
 
 void Graphics::EndFrame()
