@@ -1,5 +1,5 @@
 #include "pch.hpp"
-#include "DxsWinDebug.hpp"
+#include "WinDebug.hpp"
 
 using namespace std;
 using namespace CB::DxSurface;

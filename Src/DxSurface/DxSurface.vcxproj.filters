@@ -48,7 +48,7 @@
     <ClInclude Include="Inc\DxsTimedExecutor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\InternalInc\DxsWinDebug.hpp">
+    <ClInclude Include="Src\InternalInc\WinDebug.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Inc\DxsGraphics.hpp">
@@ -80,7 +80,7 @@
     <ClCompile Include="Src\DxsTimedExecutor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\InternalSrc\DxsWinDebug.cpp">
+    <ClCompile Include="Src\InternalSrc\WinDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\DxsGraphics.cpp">

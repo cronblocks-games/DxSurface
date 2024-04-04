@@ -14,10 +14,11 @@
 #include <string.h>
 
 #include "DxsExceptions.hpp"
-#include "DxsWinDebug.hpp"
 #include "DxsWinApi.hpp"
 #include "DxsSettings.hpp"
 #include "DxsTypes.hpp"
+
+#include "WinDebug.hpp"
 
 #include <windowsx.h>
 
