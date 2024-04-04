@@ -182,6 +182,7 @@
     <ClInclude Include="Inc\DxSurface.hpp" />
     <ClInclude Include="Inc\DxsWinApi.hpp" />
     <ClInclude Include="Inc\DxsWindow.hpp" />
+    <ClInclude Include="Src\InternalInc\DxgiDebug.hpp" />
     <ClInclude Include="Src\InternalInc\WinDebug.hpp" />
     <ClInclude Include="Src\InternalInc\pch.hpp" />
   </ItemGroup>
@@ -194,6 +195,7 @@
     <ClCompile Include="Src\DxsTimedExecutor.cpp" />
     <ClCompile Include="Src\DxSurface.cpp" />
     <ClCompile Include="Src\DxsWindow.cpp" />
+    <ClCompile Include="Src\InternalSrc\DxgiDebug.cpp" />
     <ClCompile Include="Src\InternalSrc\WinDebug.cpp" />
     <ClCompile Include="Src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

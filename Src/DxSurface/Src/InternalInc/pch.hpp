@@ -19,6 +19,7 @@
 #include "DxsTypes.hpp"
 
 #include "WinDebug.hpp"
+#include "DxgiDebug.hpp"
 
 #include <windowsx.h>
 
