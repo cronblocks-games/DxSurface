@@ -33,6 +33,8 @@ namespace CB::DxSurface {
   template <typename T>
   using PtrUnique = std::unique_ptr<T>;
   template <typename T>
+  using PtrCom = Microsoft::WRL::ComPtr<T>;
+  template <typename T>
   using Ptr = PtrShared<T>;
   template <typename T>
   using Vector = std::vector<T>;
