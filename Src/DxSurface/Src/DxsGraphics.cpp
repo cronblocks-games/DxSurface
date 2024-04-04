@@ -42,12 +42,12 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       nullptr,                  // Software
       (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
       reinterpret_cast<D3D_FEATURE_LEVEL*>(prefFL), // pFeatureLevels
-      sizeof(prefFL) / sizeof(DxFeatureLevel), // FeatureLevels
+      sizeof(prefFL) / sizeof(DxFeatureLevel),      // FeatureLevels (elements in pFeatureLevels)
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
       &m_pDevice,               // ppDevice
-      reinterpret_cast<D3D_FEATURE_LEVEL*>(&m_eFeatureLevel), // pFeatureLevel (created)
+      reinterpret_cast<D3D_FEATURE_LEVEL*>(&m_eFeatureLevel), // pFeatureLevel (created device's feature level)
       &m_pContext               // ppImmediateContext
     ), DxsT("Device creation failed, if debug flag is set, check debugger output window for more details."));
 
