@@ -91,7 +91,6 @@ void Graphics::StartFrame()
 {
   m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView.Get(), m_aClearColor);
 }
-
 void Graphics::EndFrame()
 {
   HRESULT hr = m_pSwapChain->Present(1, 0);
@@ -102,6 +101,6 @@ void Graphics::EndFrame()
   }
   else if (hr != S_OK)
   {
-    DxsThrowGraphicsHr(DxsT("Failure during frame presentation"), hr);
+    DxsThrowGraphicsHr(DxsT("Failure in presenting frame"), hr);
   }
 }
