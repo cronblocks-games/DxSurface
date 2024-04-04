@@ -8,7 +8,7 @@ namespace CB::DxSurface {
 
   class DxgiDebug {
 	public:
-		DxgiDebug();
+		DxgiDebug(bool isDebuggingEnabled);
 		~DxgiDebug() = default;
 
 		DxgiDebug(const DxgiDebug&) = delete;
