@@ -39,7 +39,8 @@ namespace CB::DxSurface {
     void EndFrame();
 
     friend class CB::DxSurface::Window;
-  };
+
+  }; //- class Graphics
 
 } //- namespace CB::DxSurface
 
