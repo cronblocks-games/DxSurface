@@ -30,9 +30,9 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
   scd.Flags = 0;
 
   DxFeatureLevel prefFL[] = {
-    D3D_FEATURE_LEVEL_11_1,  D3D_FEATURE_LEVEL_11_0,
-    D3D_FEATURE_LEVEL_10_1,  D3D_FEATURE_LEVEL_10_0,
-    D3D_FEATURE_LEVEL_9_3,   D3D_FEATURE_LEVEL_9_2,  D3D_FEATURE_LEVEL_9_1,
+    DxFeatureLevel::_11_1,  DxFeatureLevel::_11_0,
+    DxFeatureLevel::_10_1,  DxFeatureLevel::_10_0,
+    DxFeatureLevel::_9_3,   DxFeatureLevel::_9_2,  DxFeatureLevel::_9_1
   };
 
   DxCall(
@@ -41,12 +41,13 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
       (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
-      prefFL, sizeof(prefFL) / sizeof(DxFeatureLevel),  // pFeatureLevels, FeatureLevels
+      reinterpret_cast<D3D_FEATURE_LEVEL*>(prefFL), // pFeatureLevels
+      sizeof(prefFL) / sizeof(DxFeatureLevel), // FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
       &m_pDevice,               // ppDevice
-      &m_eFeatureLevel,         // pFeatureLevel (created)
+      reinterpret_cast<D3D_FEATURE_LEVEL*>(&m_eFeatureLevel), // pFeatureLevel (created)
       &m_pContext               // ppImmediateContext
     ), DxsT("Device creation failed, if debug flag is set, check debugger output window for more details."));
 

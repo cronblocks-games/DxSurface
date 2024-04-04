@@ -42,7 +42,16 @@ namespace CB::DxSurface {
   using DxDeviceContext = ID3D11DeviceContext;
   using DxRenderTargetView = ID3D11RenderTargetView;
   using DxResource = ID3D11Resource;
-  using DxFeatureLevel = D3D_FEATURE_LEVEL;
+  enum class DxFeatureLevel : int
+  {
+    _11_1 = D3D_FEATURE_LEVEL_11_1,
+    _11_0 = D3D_FEATURE_LEVEL_11_0,
+    _10_1 = D3D_FEATURE_LEVEL_10_1,
+    _10_0 = D3D_FEATURE_LEVEL_10_0,
+    _9_3  = D3D_FEATURE_LEVEL_9_3,
+    _9_2  = D3D_FEATURE_LEVEL_9_2,
+    _9_1  = D3D_FEATURE_LEVEL_9_1
+  };
 
   using Thread = std::thread;
   using Mutex = std::mutex;
