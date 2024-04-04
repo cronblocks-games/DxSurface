@@ -33,7 +33,7 @@ namespace CB::DxSurface {
     PtrCom<DxRenderTargetView> m_pRenderTargetView;
     DxFeatureLevel m_eFeatureLevel;
 
-    float m_clrR, m_clrG, m_clrB, m_clrA;
+    float m_aClearColor[4];
 
     void StartFrame();
     void EndFrame();

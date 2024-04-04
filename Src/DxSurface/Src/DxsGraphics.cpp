@@ -10,8 +10,9 @@ using namespace CB::DxSurface;
 
 
 Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float clrB, float clrA)
-  : m_clrR(clrR), m_clrG(clrG), m_clrB(clrB), m_clrA(clrA)
 {
+  SetClearColor(clrR, clrG, clrB, clrA);
+
   DXGI_SWAP_CHAIN_DESC scd = { 0 };
   scd.BufferDesc.Width = 0;
   scd.BufferDesc.Height = 0;
@@ -69,12 +70,14 @@ Graphics::~Graphics()
 
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
 {
-  m_clrR = clrR; m_clrG = clrG; m_clrB = clrB; m_clrA = clrA;
+  m_aClearColor[0] = clrR;
+  m_aClearColor[1] = clrG;
+  m_aClearColor[2] = clrB;
+  m_aClearColor[3] = clrA;
 }
-
 void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, float clrA)
 {
-  m_clrR = clrR; m_clrG = clrG; m_clrB = clrB; m_clrA = clrA;
+  SetClearColor(clrR, clrG, clrB, clrA);
   StartFrame();
 }
 
@@ -86,8 +89,7 @@ PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTar
 
 void Graphics::StartFrame()
 {
-  float clr[] = { m_clrR, m_clrG, m_clrB, m_clrA };
-  m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView.Get(), clr);
+  m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView.Get(), m_aClearColor);
 }
 
 void Graphics::EndFrame()
