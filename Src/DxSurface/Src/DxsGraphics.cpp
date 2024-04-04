@@ -29,7 +29,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
   scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
   scd.Flags = 0;
 
-  D3D_FEATURE_LEVEL prefFL[] = {
+  DxFeatureLevel prefFL[] = {
     D3D_FEATURE_LEVEL_11_1,  D3D_FEATURE_LEVEL_11_0,
     D3D_FEATURE_LEVEL_10_1,  D3D_FEATURE_LEVEL_10_0,
     D3D_FEATURE_LEVEL_9_3,   D3D_FEATURE_LEVEL_9_2,  D3D_FEATURE_LEVEL_9_1,
@@ -40,8 +40,8 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       nullptr,                  // pAdapter
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
-      (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0),   // Flags
-      prefFL, sizeof(prefFL) / sizeof(D3D_FEATURE_LEVEL), // pFeatureLevels, FeatureLevels
+      (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
+      prefFL, sizeof(prefFL) / sizeof(DxFeatureLevel),  // pFeatureLevels, FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
@@ -77,7 +77,7 @@ void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, fl
   StartFrame();
 }
 
-D3D_FEATURE_LEVEL Graphics::GetFeatureLevel()              { return m_eFeatureLevel;     }
+DxFeatureLevel Graphics::GetFeatureLevel()                 { return m_eFeatureLevel;     }
 PtrCom<DxDevice> Graphics::GetDevice()                     { return m_pDevice;           }
 PtrCom<DxSwapChain> Graphics::GetSwapChain()               { return m_pSwapChain;        }
 PtrCom<DxDeviceContext> Graphics::GetContext()             { return m_pContext;          }

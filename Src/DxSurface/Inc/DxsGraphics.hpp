@@ -20,7 +20,7 @@ namespace CB::DxSurface {
     void SetClearColor(float clrR, float clrG, float clrB, float clrA = 1.0);
     void SetClearColorAndStartFrame(float clrR, float clrG, float clrB, float clrA = 1.0);
 
-    D3D_FEATURE_LEVEL GetFeatureLevel();
+    DxFeatureLevel GetFeatureLevel();
     PtrCom<DxDevice> GetDevice();
     PtrCom<DxSwapChain> GetSwapChain();
     PtrCom<DxDeviceContext> GetContext();
@@ -31,7 +31,7 @@ namespace CB::DxSurface {
     PtrCom<DxSwapChain> m_pSwapChain;
     PtrCom<DxDeviceContext> m_pContext;
     PtrCom<DxRenderTargetView> m_pRenderTargetView;
-    D3D_FEATURE_LEVEL m_eFeatureLevel;
+    DxFeatureLevel m_eFeatureLevel;
 
     float m_clrR, m_clrG, m_clrB, m_clrA;
 
