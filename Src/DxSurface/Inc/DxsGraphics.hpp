@@ -21,16 +21,16 @@ namespace CB::DxSurface {
     void SetClearColorAndStartFrame(float clrR, float clrG, float clrB, float clrA = 1.0);
 
     D3D_FEATURE_LEVEL GetFeatureLevel();
-    Microsoft::WRL::ComPtr<ID3D11Device> GetDevice();
-    Microsoft::WRL::ComPtr<IDXGISwapChain> GetSwapChain();
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetContext();
-    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> GetRenderTargetView();
+    PtrCom<ID3D11Device> GetDevice();
+    PtrCom<IDXGISwapChain> GetSwapChain();
+    PtrCom<ID3D11DeviceContext> GetContext();
+    PtrCom<ID3D11RenderTargetView> GetRenderTargetView();
 
   private:
-    Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
-    Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwapChain;
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pContext;
-    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_pRenderTargetView;
+    PtrCom<ID3D11Device> m_pDevice;
+    PtrCom<IDXGISwapChain> m_pSwapChain;
+    PtrCom<ID3D11DeviceContext> m_pContext;
+    PtrCom<ID3D11RenderTargetView> m_pRenderTargetView;
     D3D_FEATURE_LEVEL m_eFeatureLevel;
 
     float m_clrR, m_clrG, m_clrB, m_clrA;
