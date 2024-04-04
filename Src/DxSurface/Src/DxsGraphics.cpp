@@ -78,10 +78,11 @@ void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, fl
   StartFrame();
 }
 
-D3D_FEATURE_LEVEL Graphics::GetFeatureLevel()
-{
-  return m_eFeatureLevel;
-}
+D3D_FEATURE_LEVEL Graphics::GetFeatureLevel()                  { return m_eFeatureLevel;     }
+ComPtr<ID3D11Device> Graphics::GetDevice()                     { return m_pDevice;           }
+ComPtr<IDXGISwapChain> Graphics::GetSwapChain()                { return m_pSwapChain;        }
+ComPtr<ID3D11DeviceContext> Graphics::GetContext()             { return m_pContext;          }
+ComPtr<ID3D11RenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
 
 void Graphics::StartFrame()
 {
