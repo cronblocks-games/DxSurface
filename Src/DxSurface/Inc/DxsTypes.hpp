@@ -42,6 +42,7 @@ namespace CB::DxSurface {
   using DxDeviceContext = ID3D11DeviceContext;
   using DxRenderTargetView = ID3D11RenderTargetView;
   using DxResource = ID3D11Resource;
+  using DxDXGIInfoQueue = IDXGIInfoQueue;
   enum class DxFeatureLevel : int
   {
     _11_1 = D3D_FEATURE_LEVEL_11_1,
