@@ -22,8 +22,8 @@ namespace CB::DxSurface {
 
     DxFeatureLevel GetFeatureLevel();
     PtrCom<DxDevice> GetDevice();
+    PtrCom<DxDeviceContext> GetDeviceContext();
     PtrCom<DxSwapChain> GetSwapChain();
-    PtrCom<DxDeviceContext> GetContext();
     PtrCom<DxRenderTargetView> GetRenderTargetView();
 
   private:

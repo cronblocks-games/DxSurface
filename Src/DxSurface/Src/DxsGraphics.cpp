@@ -80,8 +80,8 @@ void Graphics::SetClearColorAndStartFrame(float clrR, float clrG, float clrB, fl
 
 DxFeatureLevel             Graphics::GetFeatureLevel()     { return m_eFeatureLevel;     }
 PtrCom<DxDevice>           Graphics::GetDevice()           { return m_pDevice;           }
+PtrCom<DxDeviceContext>    Graphics::GetDeviceContext()    { return m_pContext;          }
 PtrCom<DxSwapChain>        Graphics::GetSwapChain()        { return m_pSwapChain;        }
-PtrCom<DxDeviceContext>    Graphics::GetContext()          { return m_pContext;          }
 PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
 
 void Graphics::StartFrame()
