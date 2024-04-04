@@ -40,6 +40,10 @@ DxgiDebug::DxgiDebug(bool isDebuggingEnabled)
 
 void DxgiDebug::Mark() noexcept
 {
+	if (m_bIsDebuggingEnabled && m_pInfoQueue)
+	{
+		m_uCount = m_pInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
+	}
 }
 
 Vector<TString> DxgiDebug::GetMessages() const
