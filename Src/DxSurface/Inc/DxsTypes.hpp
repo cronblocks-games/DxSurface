@@ -27,8 +27,6 @@ namespace CB::DxSurface {
 #endif
 
   template <typename T>
-  using Atomic = std::atomic<T>;
-  template <typename T>
   using PtrShared = std::shared_ptr<T>;
   template <typename T>
   using PtrUnique = std::unique_ptr<T>;
@@ -48,6 +46,8 @@ namespace CB::DxSurface {
   using Mutex = std::mutex;
   using MutexLock = const std::lock_guard<Mutex>;
   using Lock = MutexLock;
+  template <typename T>
+  using Atomic = std::atomic<T>;
 
   using Clock = std::chrono::high_resolution_clock;
   using TimePoint = std::chrono::time_point<Clock>;
