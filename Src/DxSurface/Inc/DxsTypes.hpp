@@ -38,8 +38,13 @@ namespace CB::DxSurface {
   using Ptr = PtrShared<T>;
   template <typename T>
   using Vector = std::vector<T>;
-  using Thread = std::thread;
+  
+  using DxDevice = ID3D11Device;
+  using DxSwapChain = IDXGISwapChain;
+  using DxDeviceContext = ID3D11DeviceContext;
+  using DxRenderTargetView = ID3D11RenderTargetView;
 
+  using Thread = std::thread;
   using Mutex = std::mutex;
   using MutexLock = const std::lock_guard<Mutex>;
   using Lock = MutexLock;
