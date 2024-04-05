@@ -27,6 +27,8 @@ namespace CB::DxSurface {
     PtrCom<DxRenderTargetView> GetRenderTargetView();
 
   private:
+    PtrUnique<void> m_pDebugIface;
+
     PtrCom<DxDevice> m_pDevice;
     PtrCom<DxDeviceContext> m_pDeviceContext;
     PtrCom<DxSwapChain> m_pSwapChain;
