@@ -55,8 +55,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
       (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
-      reinterpret_cast<D3D_FEATURE_LEVEL*>(prefFeatureLevels), // pFeatureLevels
-      prefFeatureLevelsCount,                                  // FeatureLevels (elements in pFeatureLevels)
+      (D3D_FEATURE_LEVEL*)(prefFeatureLevels), prefFeatureLevelsCount, // pFeatureLevels, FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
