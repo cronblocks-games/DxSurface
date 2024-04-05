@@ -7,29 +7,27 @@ using namespace CB::DxSurface;
 using namespace std;
 
 
-using IfcFunc = HRESULT(WINAPI*)(REFIID, void**);
+using DbgIfcFunc = HRESULT(WINAPI*)(REFIID, void**);
 
 
-DxgiDebugInterface::DxgiDebugInterface()
-  : m_uCount(0)
+DxgiDebugInterface::DxgiDebugInterface() : m_uCount(0)
 {
-  //- Let's load the library
-	const HMODULE dll = LoadLibraryEx(DxsT("dxgidebug.dll"), nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
-	if (dll == nullptr)
+	const HMODULE lib = LoadLibraryEx(DxsT("dxgidebug.dll"), nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
+	if (lib == nullptr)
 	{
-		DxsThrowWindows(DxsT("Cannot load the DXGI debug library"));
+		DxsThrowWindows(DxsT("Cannot load the DXGI debug library \"dxgidebug.dll\""));
 	}
 
-	const IfcFunc ifcFunc = reinterpret_cast<IfcFunc>(GetProcAddress(dll, "DXGIGetDebugInterface"));
-	if (ifcFunc == nullptr)
+	const DbgIfcFunc func = reinterpret_cast<DbgIfcFunc>(GetProcAddress(lib, "DXGIGetDebugInterface"));
+	if (func == nullptr)
 	{
-		DxsThrowWindows(DxsT("Cannot locate DXGI debug interface function from the loaded library"));
+		DxsThrowWindows(DxsT("Cannot locate DXGI debug interface provider function from \"dxgidebug.dll\""));
 	}
 
-	HRESULT hr = ifcFunc(__uuidof(DxDXGIInfoQueue), &m_pInfoQueue);
+	HRESULT hr = func(__uuidof(DxDXGIInfoQueue), &m_pInfoQueue);
 	if (hr != S_OK)
 	{
-		DxsThrowGraphicsHr(DxsT("Cannot get DXGI Info Queue"), hr);
+		DxsThrowGraphicsHr(DxsT("Failed getting interface to DXGI Info Queue"), hr);
 	}
 }
 
