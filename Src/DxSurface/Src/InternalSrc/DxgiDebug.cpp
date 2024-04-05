@@ -10,14 +10,9 @@ using namespace std;
 using IfcFunc = HRESULT(WINAPI*)(REFIID, void**);
 
 
-DxgiDebug::DxgiDebug(bool isDebuggingEnabled)
-  : m_bIsDebuggingEnabled(isDebuggingEnabled)
+DxgiDebug::DxgiDebug()
+  : m_uCount(0)
 {
-  m_uCount = 0;
-
-  //- No need to load library when debugging is not enabled
-  if (!m_bIsDebuggingEnabled) return;
-
   //- Let's load the library
 	const HMODULE lib = LoadLibraryEx(DxsT("dxgidebug.dll"), nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
 	if (lib == nullptr)
@@ -41,7 +36,7 @@ DxgiDebug::DxgiDebug(bool isDebuggingEnabled)
 
 void DxgiDebug::Mark() noexcept
 {
-	if (m_bIsDebuggingEnabled && m_pInfoQueue)
+	if (m_pInfoQueue)
 	{
 		m_uCount = m_pInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
 	}
@@ -49,7 +44,7 @@ void DxgiDebug::Mark() noexcept
 
 TString DxgiDebug::GetMessages() const
 {
-	if (m_bIsDebuggingEnabled && m_pInfoQueue)
+	if (m_pInfoQueue)
 	{
 #if defined(_UNICODE) || defined(UNICODE)
 		wstringstream ss;

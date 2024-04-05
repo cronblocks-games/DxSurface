@@ -8,7 +8,7 @@ namespace CB::DxSurface {
 
   class DxgiDebug {
 	public:
-		DxgiDebug(bool isDebuggingEnabled);
+		DxgiDebug();
 		~DxgiDebug() = default;
 
 		DxgiDebug(const DxgiDebug&) = delete;
@@ -20,7 +20,6 @@ namespace CB::DxSurface {
 		TString GetMessages() const;
 
 	private:
-		bool m_bIsDebuggingEnabled;
 		unsigned long long m_uCount;
 		PtrCom<DxDXGIInfoQueue> m_pInfoQueue;
   };
