@@ -4,6 +4,7 @@
 
 
 #include "DxsTypes.hpp"
+#include "DxsDxgiDebug.hpp"
 
 namespace CB::DxSurface {
 
@@ -27,7 +28,7 @@ namespace CB::DxSurface {
     PtrCom<DxRenderTargetView> GetRenderTargetView();
 
   private:
-    PtrUnique<void> m_pDebugIface;
+    PtrUnique<DxgiDebug> m_pDebugIface;
 
     PtrCom<DxDevice> m_pDevice;
     PtrCom<DxDeviceContext> m_pDeviceContext;

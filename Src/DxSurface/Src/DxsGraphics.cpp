@@ -3,14 +3,26 @@
 
 #pragma comment(lib, "d3d11.lib")
 
-#define DxCall(call,fail_msg) { HRESULT hr = call; if (hr != S_OK) DxsThrowGraphicsHr(fail_msg,hr); }
+#define DxCall(call,ndbg_fail_msg) { HRESULT hr;                 \
+            if (m_pDebugIface) { m_pDebugIface->Mark(); }        \
+            hr = call;                                           \
+            if (hr != S_OK) {                                    \
+              if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); } \
+              else { DxsThrowGraphicsHr(ndbg_fail_msg, hr); }    \
+            }}
 
 
 using namespace CB::DxSurface;
+using namespace std;
 
 
 Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float clrB, float clrA)
 {
+  if (isDebugEnabled)
+  {
+    m_pDebugIface = make_unique<DxgiDebug>();
+  }
+
   SetClearColor(clrR, clrG, clrB, clrA);
 
   DXGI_SWAP_CHAIN_DESC scd = { 0 };
@@ -50,7 +62,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       &m_pDevice,               // ppDevice
       reinterpret_cast<D3D_FEATURE_LEVEL*>(&m_eFeatureLevel), // pFeatureLevel (created device's feature level)
       &m_pDeviceContext         // ppImmediateContext
-    ), DxsT("Device creation failed, if debug flag is set, check debugger output window for more details."));
+    ), DxsT("Device creation failed, set debug flag for more details."));
 
   PtrCom<DxResource> backBuffer;
   DxCall(
