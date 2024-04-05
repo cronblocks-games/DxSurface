@@ -15,6 +15,13 @@
 using namespace CB::DxSurface;
 using namespace std;
 
+static DxFeatureLevel prefFeatureLevels[] = {
+    DxFeatureLevel::_11_1,  DxFeatureLevel::_11_0,
+    DxFeatureLevel::_10_1,  DxFeatureLevel::_10_0,
+    DxFeatureLevel::_9_3,   DxFeatureLevel::_9_2,  DxFeatureLevel::_9_1
+};
+static unsigned int prefFeatureLevelsCount = sizeof(prefFeatureLevels) / sizeof(DxFeatureLevel);
+
 
 Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float clrB, float clrA)
 {
@@ -42,20 +49,14 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
   scd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
   scd.Flags = 0;
 
-  DxFeatureLevel prefFL[] = {
-    DxFeatureLevel::_11_1,  DxFeatureLevel::_11_0,
-    DxFeatureLevel::_10_1,  DxFeatureLevel::_10_0,
-    DxFeatureLevel::_9_3,   DxFeatureLevel::_9_2,  DxFeatureLevel::_9_1
-  };
-
   DxCall(
     D3D11CreateDeviceAndSwapChain(
       nullptr,                  // pAdapter
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
       (isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0), // Flags
-      reinterpret_cast<D3D_FEATURE_LEVEL*>(prefFL), // pFeatureLevels
-      sizeof(prefFL) / sizeof(DxFeatureLevel),      // FeatureLevels (elements in pFeatureLevels)
+      reinterpret_cast<D3D_FEATURE_LEVEL*>(prefFeatureLevels), // pFeatureLevels
+      prefFeatureLevelsCount,                                  // FeatureLevels (elements in pFeatureLevels)
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
       &m_pSwapChain,            // ppSwapChain
