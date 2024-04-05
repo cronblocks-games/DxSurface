@@ -54,7 +54,7 @@
     <ClInclude Include="Inc\DxsGraphics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\InternalInc\DxgiDebug.hpp">
+    <ClInclude Include="Inc\DxsDxgiDebug.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -89,7 +89,7 @@
     <ClCompile Include="Src\DxsGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\InternalSrc\DxgiDebug.cpp">
+    <ClCompile Include="Src\DxsDxgiDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

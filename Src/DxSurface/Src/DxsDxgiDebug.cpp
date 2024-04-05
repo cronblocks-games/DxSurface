@@ -1,5 +1,5 @@
 #include "pch.hpp"
-#include "DxgiDebug.hpp"
+#include "DxsDxgiDebug.hpp"
 
 #pragma comment(lib, "dxguid.lib")
 
