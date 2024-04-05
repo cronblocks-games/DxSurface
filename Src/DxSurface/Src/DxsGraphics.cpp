@@ -36,10 +36,10 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
   scd.SampleDesc.Count = 1;
   scd.SampleDesc.Quality = 0;
   scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-  scd.BufferCount = 1;
+  scd.BufferCount = 2;
   scd.OutputWindow = hWnd;
   scd.Windowed = TRUE;
-  scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+  scd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
   scd.Flags = 0;
 
   DxFeatureLevel prefFL[] = {
