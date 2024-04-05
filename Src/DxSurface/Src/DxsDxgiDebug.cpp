@@ -58,25 +58,27 @@ TString DxgiDebug::GetMessages() const
 		for (unsigned long long i = m_uCount; i < currCount; i++)
 		{
 			hr = m_pInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &msgLen);
-			if (hr != S_OK)
+			if (hr == S_FALSE)
+			{
+				PtrUnique<unsigned char[]> buff = make_unique<unsigned char[]>(msgLen);
+				DXGI_INFO_QUEUE_MESSAGE* message = reinterpret_cast<DXGI_INFO_QUEUE_MESSAGE*>(buff.get());
+
+				hr = m_pInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, message, &msgLen);
+				if (hr != S_OK)
+				{
+					DxsThrowGraphicsHr(DxsT("Cannot get message from DXGI Info Queue"), hr);
+				}
+
+				ss << message->pDescription;
+
+				if (i < currCount - 1)
+				{
+					ss << endl << endl;
+				}
+			}
+			else
 			{
 				DxsThrowGraphicsHr(DxsT("Cannot get message length from DXGI Info Queue"), hr);
-			}
-
-			PtrUnique<unsigned char[]> buff = make_unique<unsigned char[]>(msgLen);
-			DXGI_INFO_QUEUE_MESSAGE* message = reinterpret_cast<DXGI_INFO_QUEUE_MESSAGE*>(buff.get());
-
-			hr = m_pInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, message, &msgLen);
-			if (hr != S_OK)
-			{
-				DxsThrowGraphicsHr(DxsT("Cannot get message from DXGI Info Queue"), hr);
-			}
-
-			ss << message->pDescription;
-
-			if (i < currCount - 1)
-			{
-				ss << endl;
 			}
 		}
 
