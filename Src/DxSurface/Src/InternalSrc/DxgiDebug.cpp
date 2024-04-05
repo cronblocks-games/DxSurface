@@ -14,13 +14,13 @@ DxgiDebug::DxgiDebug()
   : m_uCount(0)
 {
   //- Let's load the library
-	const HMODULE lib = LoadLibraryEx(DxsT("dxgidebug.dll"), nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
-	if (lib == nullptr)
+	const HMODULE dll = LoadLibraryEx(DxsT("dxgidebug.dll"), nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
+	if (dll == nullptr)
 	{
 		DxsThrowWindows(DxsT("Cannot load the DXGI debug library"));
 	}
 
-	const IfcFunc ifcFunc = reinterpret_cast<IfcFunc>(GetProcAddress(lib, "DXGIGetDebugInterface"));
+	const IfcFunc ifcFunc = reinterpret_cast<IfcFunc>(GetProcAddress(dll, "DXGIGetDebugInterface"));
 
 	if (ifcFunc == nullptr)
 	{
