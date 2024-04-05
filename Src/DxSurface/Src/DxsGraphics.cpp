@@ -20,7 +20,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
 {
   if (isDebugEnabled)
   {
-    m_pDebugIface = make_unique<DxgiDebug>();
+    m_pDebugIface = make_unique<DxgiDebugInterface>();
   }
 
   SetClearColor(clrR, clrG, clrB, clrA);

@@ -1,5 +1,5 @@
 #include "pch.hpp"
-#include "DxsDxgiDebug.hpp"
+#include "DxsDxgiDebugInterface.hpp"
 
 #pragma comment(lib, "dxguid.lib")
 
@@ -10,7 +10,7 @@ using namespace std;
 using IfcFunc = HRESULT(WINAPI*)(REFIID, void**);
 
 
-DxgiDebug::DxgiDebug()
+DxgiDebugInterface::DxgiDebugInterface()
   : m_uCount(0)
 {
   //- Let's load the library
@@ -33,7 +33,7 @@ DxgiDebug::DxgiDebug()
 	}
 }
 
-void DxgiDebug::Mark() noexcept
+void DxgiDebugInterface::Mark() noexcept
 {
 	if (m_pInfoQueue)
 	{
@@ -41,7 +41,7 @@ void DxgiDebug::Mark() noexcept
 	}
 }
 
-TString DxgiDebug::GetMessages() const
+TString DxgiDebugInterface::GetMessages() const
 {
 	if (m_pInfoQueue)
 	{
