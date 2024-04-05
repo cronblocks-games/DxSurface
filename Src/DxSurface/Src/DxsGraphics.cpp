@@ -105,6 +105,8 @@ void Graphics::StartFrame()
 }
 void Graphics::EndFrame()
 {
+  if (m_pDebugIface) { m_pDebugIface->Mark(); }
+
   HRESULT hr = m_pSwapChain->Present(1, 0);
 
   if (hr == DXGI_ERROR_DEVICE_REMOVED)
@@ -113,6 +115,7 @@ void Graphics::EndFrame()
   }
   else if (hr != S_OK)
   {
-    DxsThrowGraphicsHr(DxsT("Failure in presenting frame"), hr);
+    if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); }
+    else { DxsThrowGraphicsHr(DxsT("Failure in presenting frame"), hr); }
   }
 }
