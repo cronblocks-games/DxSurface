@@ -21,7 +21,6 @@ DxgiDebug::DxgiDebug()
 	}
 
 	const IfcFunc ifcFunc = reinterpret_cast<IfcFunc>(GetProcAddress(dll, "DXGIGetDebugInterface"));
-
 	if (ifcFunc == nullptr)
 	{
 		DxsThrowWindows(DxsT("Cannot locate DXGI debug interface function from the loaded library"));
