@@ -3,13 +3,21 @@
 
 #pragma comment(lib, "d3d11.lib")
 
-#define DxCall(call,ndbg_fail_msg) { HRESULT hr;                 \
+
+#if defined(NDEBUG) || defined(_NDEBUG)
+#  define DxCall(call,ndbg_fail_msg) { HRESULT hr = call;        \
+            if (hr != S_OK) {                                    \
+              DxsThrowGraphicsHr(ndbg_fail_msg, hr);             \
+            }}
+#else
+#  define DxCall(call,ndbg_fail_msg) { HRESULT hr;               \
             if (m_pDebugIface) { m_pDebugIface->Mark(); }        \
             hr = call;                                           \
             if (hr != S_OK) {                                    \
               if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); } \
               else { DxsThrowGraphicsHr(ndbg_fail_msg, hr); }    \
             }}
+#endif
 
 
 using namespace CB::DxSurface;
