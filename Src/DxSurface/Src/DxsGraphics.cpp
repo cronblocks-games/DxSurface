@@ -5,9 +5,9 @@
 
 
 #if defined(NDEBUG) || defined(_NDEBUG)
-#  define DxCall(call,ndbg_fail_msg) { HRESULT hr = call;        \
+#  define DxCall(call,fail_msg) { HRESULT hr = call;             \
             if (hr != S_OK) {                                    \
-              DxsThrowGraphicsHr(ndbg_fail_msg, hr);             \
+              DxsThrowGraphicsHr(fail_msg DxsT(" Enable debug version and debug flag for more information"), hr); \
             }}
 #else
 #  define DxCall(call,ndbg_fail_msg) { HRESULT hr;               \
