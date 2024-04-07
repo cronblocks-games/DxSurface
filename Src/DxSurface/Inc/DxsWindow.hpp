@@ -63,6 +63,9 @@ namespace CB::DxSurface {
     void SetCallbacks(const WindowCallbacks&);
 
   protected:
+    HINSTANCE m_hInstance;
+    HWND m_hWnd;
+
     Keyboard m_cKeyboard;
     Mouse m_cMouse;
     PtrUnique<Graphics> m_pGraphics;
@@ -83,9 +86,6 @@ namespace CB::DxSurface {
     virtual void OnProcessingStateChanged(ExecutionState last, ExecutionState next) {}
 
   private:
-    HINSTANCE m_hInstance;
-    HWND m_hWnd;
-
     TString m_sClassName;
     WindowCreationOptions m_stOptions;
     WindowRect m_stWindowRect;
