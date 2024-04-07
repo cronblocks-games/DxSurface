@@ -7,19 +7,11 @@ using namespace CB::DxSurface;
 
 
 Window::Window(const WindowCreationOptions& options, HINSTANCE hInstance) :
-  m_hWnd(nullptr),
-  m_stOptions(options),
-  m_sClassName(DxsT("")), m_stWindowRect({ 0 }), m_stClientRect({ 0 }),
+  m_hWnd(nullptr), m_sClassName(DxsT("")), m_stOptions(options),
+  m_hInstance(hInstance == nullptr ? GetModuleHandle(nullptr) : hInstance),
+  m_stWindowRect({ 0 }), m_stClientRect({ 0 }),
   m_eWindowCreationState(WindowCreationState::NotInitiated)
 {
-  if (hInstance == nullptr)
-  {
-    m_hInstance = GetModuleHandle(nullptr);
-  }
-  else
-  {
-    m_hInstance = hInstance;
-  }
 }
 Window::Window(const Window& other)
 {
