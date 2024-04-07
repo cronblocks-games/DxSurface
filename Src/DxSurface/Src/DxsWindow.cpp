@@ -66,7 +66,8 @@ void Window::CreateWindowAndRun()
   m_pRenderingExecutor = make_shared<TimedExecutor<Window>>(
     this,
     m_stOptions.title + DxsT("/RenderingThread"),
-    m_stOptions.maxRenderingThreadRefreshRateHz == 0 ? DxsDefaultThreadRefreshRateHz : m_stOptions.maxRenderingThreadRefreshRateHz,
+    m_stOptions.maxRenderingThreadRefreshRateHz == 0 ?
+        DxsDefaultThreadRefreshRateHz : m_stOptions.maxRenderingThreadRefreshRateHz,
     &Window::OnRenderingStateInitInternal,
     &Window::OnRenderingStateRunningInternal,
     &Window::OnRenderingStatePausedInternal,
