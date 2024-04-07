@@ -6,7 +6,7 @@ using namespace std;
 using namespace CB::DxSurface;
 
 
-Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
+Window::Window(const WindowCreationOptions& options, HINSTANCE hInstance)
 {
   if (hInstance == nullptr)
   {

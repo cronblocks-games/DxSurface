@@ -16,7 +16,7 @@ namespace CB::DxSurface {
   class Window {
   public:
     Window() = delete;
-    Window(HINSTANCE hInstance, const WindowCreationOptions& options);
+    Window(const WindowCreationOptions& options, HINSTANCE hInstance = nullptr);
     Window(const Window& other);
     Window(Window&&) = delete;
 

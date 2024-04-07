@@ -96,7 +96,7 @@ Ptr<Window> DxSurface::CreateNewWindow(
 }
 Ptr<Window> DxSurface::CreateNewWindow(const WindowCreationOptions& options)
 {
-  Ptr<Window> w = make_shared<Window>(m_hInstance, options);
+  Ptr<Window> w = make_shared<Window>(options, m_hInstance);
   m_vWindows.push_back(w);
   return w;
 }
