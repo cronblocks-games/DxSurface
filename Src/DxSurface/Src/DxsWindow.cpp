@@ -21,7 +21,7 @@ Window::Window(HINSTANCE hInstance, const WindowCreationOptions& options)
   m_stWindowRect = { 0 };
   m_stClientRect = { 0 };
 
-  m_eWindowCreationState = WindowCreationState::NONE;
+  m_eWindowCreationState = WindowCreationState::NotInitiated;
   m_pRenderingExecutor.reset();
   m_pProcessingExecutor.reset();
   m_pGraphics.reset();
@@ -58,7 +58,7 @@ Window& Window::operator=(const Window& other)
   m_stWindowRect = { 0 };
   m_stClientRect = { 0 };
 
-  m_eWindowCreationState = WindowCreationState::NONE;
+  m_eWindowCreationState = WindowCreationState::NotInitiated;
   m_pRenderingExecutor.reset();
   m_pProcessingExecutor.reset();
   m_pGraphics.reset();
@@ -74,7 +74,7 @@ void Window::CreateWindowAndRun()
 
   if (m_pRenderingExecutor) return;
 
-  m_eWindowCreationState = WindowCreationState::NONE;
+  m_eWindowCreationState = WindowCreationState::NotInitiated;
 
   m_pRenderingExecutor = make_shared<TimedExecutor<Window>>(
     this,
@@ -101,8 +101,8 @@ void Window::CreateWindowAndRun()
     m_pProcessingExecutor->Run();
   }
 
-  while (m_eWindowCreationState == WindowCreationState::NONE &&
-    m_pRenderingExecutor->GetState() != ExecutionState::Exitted);
+  while (m_eWindowCreationState == WindowCreationState::NotInitiated &&
+         m_pRenderingExecutor->GetState() != ExecutionState::Exitted);
 }
 ExecutionState Window::RenderingState() const
 {

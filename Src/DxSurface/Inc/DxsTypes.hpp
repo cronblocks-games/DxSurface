@@ -68,9 +68,7 @@ namespace CB::DxSurface {
 
   enum class WindowCreationState
   {
-    NONE = 0,
-    Successful,
-    Failed
+    NotInitiated = 0, Successful, Failed
   };
   enum class ExecutionCommand
   {
