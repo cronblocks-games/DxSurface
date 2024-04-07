@@ -5,11 +5,16 @@
 
 
 #if defined(NDEBUG) || defined(_NDEBUG)
+
+/* Debug version(s) */
 #  define DxCall(call,fail_msg) { HRESULT hr = call;             \
             if (hr != S_OK) {                                    \
               DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
             }}
+
 #else
+
+/* Release version(s) */
 #  define DxCall(call,ndbg_fail_msg) { HRESULT hr;               \
             if (m_pDebugIface) { m_pDebugIface->Mark(); }        \
             hr = call;                                           \
@@ -17,6 +22,7 @@
               if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); } \
               else { DxsThrowGraphicsHr(ndbg_fail_msg, hr); }    \
             }}
+
 #endif
 
 
