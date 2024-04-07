@@ -3,6 +3,9 @@
 
 #pragma comment(lib, "d3d11.lib")
 
+using namespace CB::DxSurface;
+using namespace std;
+
 
 #if defined(NDEBUG) || defined(_NDEBUG)
 
@@ -25,9 +28,6 @@
 
 #endif
 
-
-using namespace CB::DxSurface;
-using namespace std;
 
 static DxFeatureLevel prefFeatureLevels[] = {
     DxFeatureLevel::_11_1,  DxFeatureLevel::_11_0,
