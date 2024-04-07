@@ -10,10 +10,13 @@ Window::Window(const WindowCreationOptions& options, HINSTANCE hInstance)
 {
   if (hInstance == nullptr)
   {
-    hInstance = GetModuleHandle(nullptr);
+    m_hInstance = GetModuleHandle(nullptr);
+  }
+  else
+  {
+    m_hInstance = hInstance;
   }
   
-  m_hInstance = hInstance;
   m_hWnd = nullptr;
 
   m_sClassName = DxsT("");
