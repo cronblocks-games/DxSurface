@@ -370,11 +370,11 @@ void Window::RegisterClassAndCreateWindow()
     _handle2WindowMap[m_hWnd] = this;
 
     //- Should be set last so that the waiting thread waits for it to complete
-    m_eWindowCreationState = WindowCreationState::Success;
+    m_eWindowCreationState = WindowCreationState::Successful;
   }
   else
   {
-    m_eWindowCreationState = WindowCreationState::Fail;
+    m_eWindowCreationState = WindowCreationState::Failed;
     DxsThrowWindows(DxsT("Window creation failed"));
   }
 
