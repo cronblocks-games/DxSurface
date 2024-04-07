@@ -6,7 +6,11 @@ using namespace std;
 using namespace CB::DxSurface;
 
 
-Window::Window(const WindowCreationOptions& options, HINSTANCE hInstance)
+Window::Window(const WindowCreationOptions& options, HINSTANCE hInstance) :
+  m_hWnd(nullptr),
+  m_stOptions(options),
+  m_sClassName(DxsT("")), m_stWindowRect({ 0 }), m_stClientRect({ 0 }),
+  m_eWindowCreationState(WindowCreationState::NotInitiated)
 {
   if (hInstance == nullptr)
   {
@@ -16,18 +20,6 @@ Window::Window(const WindowCreationOptions& options, HINSTANCE hInstance)
   {
     m_hInstance = hInstance;
   }
-  
-  m_hWnd = nullptr;
-
-  m_sClassName = DxsT("");
-  m_stOptions = options;
-  m_stWindowRect = { 0 };
-  m_stClientRect = { 0 };
-
-  m_eWindowCreationState = WindowCreationState::NotInitiated;
-  m_pRenderingExecutor.reset();
-  m_pProcessingExecutor.reset();
-  m_pGraphics.reset();
 }
 Window::Window(const Window& other)
 {
