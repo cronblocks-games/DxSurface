@@ -11,7 +11,7 @@ namespace CB::DxSurface {
   class Graphics {
   public:
     Graphics(HWND, bool isDebugEnabled, float clrR = 0.96, float clrG = 0.92, float clrB = 0.96, float clrA = 1.0);
-    ~Graphics();
+    ~Graphics() = default;
 
     Graphics(const Graphics&) = delete;
     Graphics(Graphics&&) noexcept = delete;

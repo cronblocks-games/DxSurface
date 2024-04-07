@@ -91,10 +91,6 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
     ), DxsT("Failed creating Render Target View."));
 }
 
-Graphics::~Graphics()
-{
-}
-
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
 {
   m_aClearColor[0] = clrR;
