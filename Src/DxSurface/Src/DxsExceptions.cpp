@@ -135,9 +135,7 @@ TString& WindowsException::Message() const
 
   ss
     << (m_isGraphicsException ? "Graphics" : "Windows") << " Exception:" << endl
-    << "    -- " << m_sProvidedMessage << endl << endl
-    << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
-    << "Line: " << m_iLineNumber << endl;
+    << "    -- " << m_sProvidedMessage << endl << endl;
 
   if (!m_isGraphicsException || m_isValidGraphicsHR)
   {
@@ -156,15 +154,16 @@ TString& WindowsException::Message() const
       nullptr);                                   // va_list *Arguments
 
     if (winMessageLen > 0)
-      ss << winMessage;
+      ss << winMessage << endl << endl;
     else
-      ss << "Unknown error code";
+      ss << "Unknown error code" << endl << endl;
 
     LocalFree(winMessage);
   }
 
   ss
-    << endl
+    << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
+    << "Line: " << m_iLineNumber << endl
     << "Ver: " << hex << DxsVersion
     << " (" << DxsVersionString << ") - "
     << DxsVersionReleaseDateString;
