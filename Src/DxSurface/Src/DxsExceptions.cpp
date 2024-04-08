@@ -91,15 +91,16 @@ TString& Exception::Message() const
 // -----------------------------------------------------------------------------
 
 WindowsException::WindowsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr)
-  : Exception(file, lineNumber, message), m_hr(hr), m_isGraphicsException(false) {}
+  : Exception(file, lineNumber, message), m_hr(hr), m_isGraphicsException(false), m_isValidGraphicsHR(false) {}
 WindowsException::WindowsException(const WindowsException& o)
-  : Exception(o), m_hr(o.m_hr), m_isGraphicsException(false) {}
+  : Exception(o), m_hr(o.m_hr), m_isGraphicsException(false), m_isValidGraphicsHR(false) {}
 WindowsException::WindowsException(WindowsException&& o) noexcept
   : Exception(move(o))
 {
   if (this == &o) return;
   m_hr = exchange(o.m_hr, 0);
   m_isGraphicsException = exchange(o.m_isGraphicsException, false);
+  m_isValidGraphicsHR = exchange(o.m_isValidGraphicsHR, false);
 }
 WindowsException& WindowsException::operator=(const WindowsException& o)
 {
@@ -108,6 +109,7 @@ WindowsException& WindowsException::operator=(const WindowsException& o)
   Exception::operator=(o);
   m_hr = o.m_hr;
   m_isGraphicsException = o.m_isGraphicsException;
+  m_isValidGraphicsHR = o.m_isValidGraphicsHR;
 
   return *this;
 }
@@ -118,6 +120,7 @@ WindowsException& WindowsException::operator=(WindowsException&& o) noexcept
   Exception::operator=(move(o));
   m_hr = exchange(o.m_hr, 0);
   m_isGraphicsException = exchange(o.m_isGraphicsException, false);
+  m_isValidGraphicsHR = exchange(o.m_isValidGraphicsHR, false);
 
   return *this;
 }
@@ -134,26 +137,31 @@ TString& WindowsException::Message() const
     << (m_isGraphicsException ? "Graphics" : "Windows") << " Exception:" << endl
     << "    -- " << m_sProvidedMessage << endl << endl
     << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
-    << "Line: " << m_iLineNumber << endl
-    << "HR: " << m_hr << endl
-    << "    -- ";
-  
-  TCharPtr winMessage = nullptr;
-  DWORD winMessageLen = FormatMessage(
-    FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, // dwFlags
-    nullptr,                                    // lpSource (optional)
-    m_hr,                                       // dwMessageId
-    MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),  // dwLanguageId
-    reinterpret_cast<LPTSTR>(&winMessage),      // lpBuffer
-    0,                                          // nSize
-    nullptr);                                   // va_list *Arguments
+    << "Line: " << m_iLineNumber << endl;
 
-  if (winMessageLen > 0)
-    ss << winMessage;
-  else
-    ss << "Unknown error code";
+  if (!m_isGraphicsException || m_isValidGraphicsHR)
+  {
+    ss
+      << "HR: " << m_hr << endl
+      << "    -- ";
 
-  LocalFree(winMessage);
+    TCharPtr winMessage = nullptr;
+    DWORD winMessageLen = FormatMessage(
+      FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, // dwFlags
+      nullptr,                                    // lpSource (optional)
+      m_hr,                                       // dwMessageId
+      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),  // dwLanguageId
+      reinterpret_cast<LPTSTR>(&winMessage),      // lpBuffer
+      0,                                          // nSize
+      nullptr);                                   // va_list *Arguments
+
+    if (winMessageLen > 0)
+      ss << winMessage;
+    else
+      ss << "Unknown error code";
+
+    LocalFree(winMessage);
+  }
 
   ss
     << endl
@@ -170,21 +178,30 @@ TString& WindowsException::Message() const
 // GraphicsException
 // -----------------------------------------------------------------------------
 
+GraphicsException::GraphicsException(const char* file, int lineNumber, TCCharPtr message)
+  : WindowsException(file, lineNumber, message, 0)
+{
+  m_isGraphicsException = true;
+  m_isValidGraphicsHR = false;
+}
 GraphicsException::GraphicsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr)
   : WindowsException(file, lineNumber, message, hr)
 {
   m_isGraphicsException = true;
+  m_isValidGraphicsHR = true;
 }
 GraphicsException::GraphicsException(const GraphicsException& o)
   : WindowsException(o)
 {
   m_isGraphicsException = true;
+  m_isValidGraphicsHR = o.m_isValidGraphicsHR;
 }
 GraphicsException::GraphicsException(GraphicsException&& o) noexcept
   : WindowsException(move(o))
 {
   if (this == &o) return;
   m_isGraphicsException = true;
+  m_isValidGraphicsHR = exchange(o.m_isValidGraphicsHR, false);
 }
 GraphicsException& GraphicsException::operator=(const GraphicsException& o)
 {
@@ -192,6 +209,7 @@ GraphicsException& GraphicsException::operator=(const GraphicsException& o)
 
   WindowsException::operator=(o);
   m_isGraphicsException = true;
+  m_isValidGraphicsHR = o.m_isValidGraphicsHR;
 
   return *this;
 }
@@ -201,6 +219,7 @@ GraphicsException& GraphicsException::operator=(GraphicsException&& o) noexcept
 
   WindowsException::operator=(move(o));
   m_isGraphicsException = true;
+  m_isValidGraphicsHR = exchange(o.m_isValidGraphicsHR, false);
 
   return *this;
 }

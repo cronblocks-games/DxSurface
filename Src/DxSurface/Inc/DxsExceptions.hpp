@@ -47,6 +47,7 @@ namespace CB::DxSurface {
 
   protected:
     bool m_isGraphicsException;
+    bool m_isValidGraphicsHR;
     HRESULT m_hr;
   }; //- class WindowsException
 
@@ -56,6 +57,7 @@ namespace CB::DxSurface {
   class GraphicsException : public WindowsException {
   public:
     GraphicsException() = delete;
+    GraphicsException(const char* file, int lineNumber, TCCharPtr message);
     GraphicsException(const char* file, int lineNumber, TCCharPtr message, HRESULT hr);
     GraphicsException(const GraphicsException&);
     GraphicsException(GraphicsException&&) noexcept;
@@ -79,6 +81,8 @@ namespace CB::DxSurface {
 #define DxsThrowWindows(msg) { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, GetLastError()); }
 // Throws a Windows exception with a given message, returned HRESULT, filename and the line number
 #define DxsThrowWindowsHr(msg,hr) { throw CB::DxSurface::WindowsException(__FILE__, __LINE__, msg, hr); }
+// Throws a Graphics exception with a given message, filename and the line number
+#define DxsThrowGraphics(msg) { throw CB::DxSurface::GraphicsException(__FILE__, __LINE__, msg); }
 // Throws a Graphics exception with a given message, returned HRESULT, filename and the line number
 #define DxsThrowGraphicsHr(msg,hr) { throw CB::DxSurface::GraphicsException(__FILE__, __LINE__, msg, hr); }
 
