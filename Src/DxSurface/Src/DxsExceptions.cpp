@@ -140,7 +140,7 @@ TString& WindowsException::Message() const
   if (!m_isGraphicsException || m_isValidGraphicsHR)
   {
     ss
-      << "HR: " << m_hr << endl
+      << "HRESULT: " << m_hr << endl
       << "    -- ";
 
     TCharPtr winMessage = nullptr;
