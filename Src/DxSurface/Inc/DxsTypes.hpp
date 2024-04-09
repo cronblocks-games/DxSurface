@@ -509,11 +509,15 @@ namespace CB::DxSurface {
     PA1 = VK_PA1,                                    // 0xFD - PA1 key
     OEM_Clear = VK_OEM_CLEAR,                        // 0xFE - Clear key
   };
+  enum class KeyStatus
+  {
+    Pressed, Released
+  };
   enum class MouseButton
   {
     Left, Right, Middle
   };
-  enum class KeyStatus
+  enum class ButtonStatus
   {
     Pressed, Released
   };
