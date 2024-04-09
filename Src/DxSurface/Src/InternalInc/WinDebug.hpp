@@ -19,7 +19,7 @@ namespace CB::DxSurface {
     // Prints provided point as mouse position within client region to the attached debug console.
     static void PrintMouseClientPosition(POINT);
     // Prints provided mouse button, its status and point to the attached debug console.
-    static void PrintMouseClientButtonStatus(MouseButton, KeyStatus, POINT);
+    static void PrintMouseClientButtonStatus(MouseButton, ButtonStatus, POINT);
     // Prints provided mouse wheel status and point to the attached debug console.
     static void PrintMouseWheelStatus(short, POINT);
   };

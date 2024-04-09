@@ -563,7 +563,7 @@ void WinDebug::PrintMouseClientPosition(POINT pt)
   OutputDebugString(ss.str().c_str());
 }
 
-void WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeyStatus s, POINT pt)
+void WinDebug::PrintMouseClientButtonStatus(MouseButton b, ButtonStatus s, POINT pt)
 {
 #if defined(_UNICODE) || defined(UNICODE)
   wstringstream ss;
@@ -585,8 +585,8 @@ void WinDebug::PrintMouseClientButtonStatus(MouseButton b, KeyStatus s, POINT pt
 
   switch (s)
   {
-  case KeyStatus::Pressed:  ss << "Pressed"; break;
-  case KeyStatus::Released: ss << "Released"; break;
+  case ButtonStatus::Pressed:  ss << "Pressed"; break;
+  case ButtonStatus::Released: ss << "Released"; break;
   default: ss << "Unknown Status"; break;
   }
 

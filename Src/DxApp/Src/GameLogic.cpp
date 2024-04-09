@@ -41,9 +41,9 @@ void GameRenderingRunning(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, doubl
     POINT pt = m.GetPosition();
     wstringstream s;
     s << "(" << pt.x << ", " << pt.y << ") ";
-    if (m.GetButtonStatus(MouseButton::Left) == KeyStatus::Pressed) s << "L";
-    if (m.GetButtonStatus(MouseButton::Middle) == KeyStatus::Pressed) s << "M";
-    if (m.GetButtonStatus(MouseButton::Right) == KeyStatus::Pressed) s << "R";
+    if (m.GetButtonStatus(MouseButton::Left) == ButtonStatus::Pressed) s << "L";
+    if (m.GetButtonStatus(MouseButton::Middle) == ButtonStatus::Pressed) s << "M";
+    if (m.GetButtonStatus(MouseButton::Right) == ButtonStatus::Pressed) s << "R";
     w.SetTitle(s.str());
   }
 }
