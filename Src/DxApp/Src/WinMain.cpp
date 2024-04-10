@@ -13,7 +13,7 @@ int WINAPI WinMain(
   {
     DxSurface surface;
 
-    Ptr<Window> w1 = surface.CreateNewWindow(DxsT("Test Window 1"), 200, 100);
+    Ptr<Window> w1 = surface.CreateNewWindow(DxsT("DxSurface App"), 200, 100);
     w1->SetCallbacks(WindowCallbacks(
       GameWindowPositionChanged,
       GameWindowSizeChanged,
