@@ -1,18 +1,12 @@
 #include "pch.hpp"
 #include "DxsResources.hpp"
 
-#pragma comment(lib, "D3D11.lib")
-#pragma comment(lib, "D3DCompiler.lib")
-
 using namespace std;
 using namespace CB::DxSurface;
 
 //- 
 //- Resources
 //- 
-#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-   PtrUnique<DxgiDebugInterface> Resources::m_pDebugIface = make_unique<DxgiDebugInterface>();
-#endif
 
 //- Icons
 Ptr<Icon> Resources::GetIcon(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
@@ -56,19 +50,6 @@ Ptr<Bitmap> Resources::GetBitmap(const TString& filepath, int prefWidth, int pre
   return make_shared<Bitmap>(filepath, prefWidth, prefHeight, loadFlags);
 }
 
-//- Shaders
-PtrCom<DxVertexShader> Resources::GetVertexShaderFromHlsl(const TString& filePath)
-{
-  return nullptr;
-}
-PtrCom<DxVertexShader> Resources::GetVertexShaderFromCso(const TString& filePath)
-{
-  return nullptr;
-}
-PtrCom<DxVertexShader> Resources::GetVertexShaderFromText(const TString& shaderText)
-{
-  return nullptr;
-}
 
 
 

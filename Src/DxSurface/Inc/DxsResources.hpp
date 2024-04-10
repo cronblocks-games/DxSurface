@@ -4,7 +4,6 @@
 
 
 #include "DxsTypes.hpp"
-#include "DxsDxgiDebugInterface.hpp"
 
 namespace CB::DxSurface {
 
@@ -26,15 +25,6 @@ namespace CB::DxSurface {
     static Ptr<Bitmap> GetBitmap(SystemBitmap, int prefWidth = 0, int prefHeight = 0, UINT loadFlags = 0);
     static Ptr<Bitmap> GetBitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = 0, HINSTANCE hInstance = nullptr);
     static Ptr<Bitmap> GetBitmap(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags = 0);
-
-    static PtrCom<DxVertexShader> GetVertexShaderFromHlsl(const TString& filePath);
-    static PtrCom<DxVertexShader> GetVertexShaderFromCso(const TString& filePath);
-    static PtrCom<DxVertexShader> GetVertexShaderFromText(const TString& shaderText);
-
-#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-  private:
-    static PtrUnique<DxgiDebugInterface> m_pDebugIface;
-#endif
   }; // class Resources
 
   class WinImageResource
