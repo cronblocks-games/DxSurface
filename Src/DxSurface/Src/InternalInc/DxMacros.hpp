@@ -30,7 +30,7 @@
 #  define DxCall(call,fail_msg) {   \
             HRESULT hr = call;      \
             if (hr != S_OK) {       \
-              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
+              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with DxsGraphicsDebugEnabled set to DxsTRUE for more information."), hr); \
             }}
 
 #endif
