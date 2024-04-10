@@ -43,6 +43,7 @@ namespace CB::DxSurface {
   using DxVertexShader = ID3D11VertexShader;
   using DxRenderTargetView = ID3D11RenderTargetView;
   using DxResource = ID3D11Resource;
+  using DxBlob = ID3DBlob;
   using DxDXGIInfoQueue = IDXGIInfoQueue;
   enum class DxFeatureLevel : int
   {
