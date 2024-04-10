@@ -26,18 +26,23 @@
 #endif
 
 
+
+#if defined(_UNICODE) || defined(UNICODE)
+#  define __DxsVersionSuffix  "_UC"
+#  define DxsUnicodeBuild
+#  undef  DxsMultiByteBuild
+#else
+#  define __DxsVersionSuffix  "_MB"
+#  define DxsMultiByteBuild
+#  undef  DxsUnicodeBuild
+#endif
+
 #ifndef DxsT
-#  if defined(_UNICODE) || defined(UNICODE)
+#  ifdef DxsUnicodeBuild
 #    define DxsT(str_literal) L##str_literal
 #  else
 #    define DxsT(str_literal) str_literal
 #  endif
-#endif
-
-#if defined(_UNICODE) || defined(UNICODE)
-#  define __DxsVersionSuffix  "_UC"
-#else
-#  define __DxsVersionSuffix  "_MB"
 #endif
 
 #define DxsVersion                        0x00'00'00'00ul
