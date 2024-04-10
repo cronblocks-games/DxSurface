@@ -57,7 +57,7 @@
     <ClInclude Include="Inc\DxsDxgiDebugInterface.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\InternalInc\DxMacros.hpp">
+    <ClInclude Include="Src\InternalInc\Macros.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

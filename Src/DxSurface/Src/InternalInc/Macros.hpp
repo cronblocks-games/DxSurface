@@ -1,5 +1,5 @@
-#ifndef _DXSURFACE_DXSDXMACROS_H_
-#define _DXSURFACE_DXSDXMACROS_H_
+#ifndef _DXSURFACE_DXSMACROS_H_
+#define _DXSURFACE_DXSMACROS_H_
 
 
 #include "DxsSettings.hpp"

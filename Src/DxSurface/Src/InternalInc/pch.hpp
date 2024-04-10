@@ -20,7 +20,7 @@
 #include "DxsTypes.hpp"
 
 #include "WinDebug.hpp"
-#include "DxMacros.hpp"
+#include "Macros.hpp"
 
 #include <windowsx.h>
 #include <d3dcompiler.h>
