@@ -1,8 +1,6 @@
 #include "pch.hpp"
 #include "DxsResources.hpp"
 
-#include <d3dcompiler.h>
-
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
 
@@ -14,21 +12,6 @@ using namespace CB::DxSurface;
 //- 
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
    PtrUnique<DxgiDebugInterface> Resources::m_pDebugIface = make_unique<DxgiDebugInterface>();
-#  define DxCall(call,ndbg_fail_msg) {                                      \
-            m_pDebugIface->Mark();                                          \
-            HRESULT hr = call;                                              \
-            if (hr != S_OK) {                                               \
-              DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); \
-            }}
-
-#else
-
-#  define DxCall(call,fail_msg) {   \
-            HRESULT hr = call;      \
-            if (hr != S_OK) {       \
-              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
-            }}
-
 #endif
 
 //- Icons
