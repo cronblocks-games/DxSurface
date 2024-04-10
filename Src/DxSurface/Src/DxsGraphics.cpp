@@ -128,6 +128,7 @@ void Graphics::SetVertexShaderFromCso(const TString& filename)
   DxCall(
     m_pDevice->CreateVertexShader(
       blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pVertexShader));
+  m_pDeviceContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 }
 
 
