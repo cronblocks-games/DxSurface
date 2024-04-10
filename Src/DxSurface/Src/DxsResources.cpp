@@ -13,7 +13,22 @@ using namespace CB::DxSurface;
 //- Resources
 //- 
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-PtrUnique<DxgiDebugInterface> Resources::m_pDebugIface = make_unique<DxgiDebugInterface>();
+   PtrUnique<DxgiDebugInterface> Resources::m_pDebugIface = make_unique<DxgiDebugInterface>();
+#  define DxCall(call,ndbg_fail_msg) {                                      \
+            m_pDebugIface->Mark();                                          \
+            HRESULT hr = call;                                              \
+            if (hr != S_OK) {                                               \
+              DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); \
+            }}
+
+#else
+
+#  define DxCall(call,fail_msg) {   \
+            HRESULT hr = call;      \
+            if (hr != S_OK) {       \
+              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
+            }}
+
 #endif
 
 //- Icons
