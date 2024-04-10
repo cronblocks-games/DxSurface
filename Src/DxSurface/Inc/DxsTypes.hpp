@@ -40,6 +40,7 @@ namespace CB::DxSurface {
   using DxDevice = ID3D11Device;
   using DxSwapChain = IDXGISwapChain;
   using DxDeviceContext = ID3D11DeviceContext;
+  using DxVertexShader = ID3D11VertexShader;
   using DxRenderTargetView = ID3D11RenderTargetView;
   using DxResource = ID3D11Resource;
   using DxDXGIInfoQueue = IDXGIInfoQueue;
