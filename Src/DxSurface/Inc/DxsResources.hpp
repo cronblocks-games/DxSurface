@@ -5,8 +5,6 @@
 
 #include "DxsTypes.hpp"
 
-#include <map>
-
 namespace CB::DxSurface {
 
   class Icon;
