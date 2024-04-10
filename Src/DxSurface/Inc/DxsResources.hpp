@@ -4,6 +4,7 @@
 
 
 #include "DxsTypes.hpp"
+#include "DxsDxgiDebugInterface.hpp"
 
 namespace CB::DxSurface {
 
@@ -29,6 +30,11 @@ namespace CB::DxSurface {
     static PtrCom<DxVertexShader> GetVertexShaderFromHlsl(const TString& filepath);
     static PtrCom<DxVertexShader> GetVertexShaderFromCso(const TString& filepath);
     static PtrCom<DxVertexShader> GetVertexShaderFromText(const TString& shaderText);
+
+  private:
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
+    static PtrUnique<DxgiDebugInterface> m_pDebugIface;
+#endif
   }; // class Resources
 
   class WinImageResource

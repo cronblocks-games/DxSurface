@@ -12,6 +12,9 @@ using namespace CB::DxSurface;
 //- 
 //- Resources
 //- 
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
+PtrUnique<DxgiDebugInterface> Resources::m_pDebugIface = make_unique<DxgiDebugInterface>();
+#endif
 
 //- Icons
 Ptr<Icon> Resources::GetIcon(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
