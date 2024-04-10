@@ -66,7 +66,7 @@ Exception& Exception::operator=(Exception&& o) noexcept
 
 TString& Exception::Message() const
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   wstringstream ss;
 #else
   stringstream ss;
@@ -127,7 +127,7 @@ WindowsException& WindowsException::operator=(WindowsException&& o) noexcept
 
 TString& WindowsException::Message() const
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   wstringstream ss;
 #else
   stringstream ss;

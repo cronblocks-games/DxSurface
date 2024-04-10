@@ -14,7 +14,7 @@
 
 namespace CB::DxSurface {
 
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   using TString = std::wstring;
   using TChar = wchar_t;
   using TCCharPtr = const wchar_t*;

@@ -482,7 +482,7 @@ static KMap _keyCodesMap(
 
 void WinDebug::PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
 	wstringstream ss, tmpss;
 #else
 	stringstream ss, tmpss;
@@ -511,7 +511,7 @@ void WinDebug::PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
 void WinDebug::PrintKeyStatus(KeyCode key, KeyStatus status)
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
 	wstringstream ss;
 #else
 	stringstream ss;
@@ -539,7 +539,7 @@ void WinDebug::PrintKeyStatus(KeyCode key, KeyStatus status)
 
 void WinDebug::PrintCharReceived(TChar ch)
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   wstringstream ss;
 #else
   stringstream ss;
@@ -552,7 +552,7 @@ void WinDebug::PrintCharReceived(TChar ch)
 
 void WinDebug::PrintMouseClientPosition(POINT pt)
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   wstringstream ss;
 #else
   stringstream ss;
@@ -565,7 +565,7 @@ void WinDebug::PrintMouseClientPosition(POINT pt)
 
 void WinDebug::PrintMouseClientButtonStatus(MouseButton b, ButtonStatus s, POINT pt)
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   wstringstream ss;
 #else
   stringstream ss;
@@ -597,7 +597,7 @@ void WinDebug::PrintMouseClientButtonStatus(MouseButton b, ButtonStatus s, POINT
 
 void WinDebug::PrintMouseWheelStatus(short delta, POINT pt)
 {
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
   wstringstream ss;
 #else
   stringstream ss;

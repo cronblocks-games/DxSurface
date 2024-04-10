@@ -43,7 +43,7 @@ TString DxgiDebugInterface::GetMessages() const
 {
 	if (m_pInfoQueue)
 	{
-#if defined(_UNICODE) || defined(UNICODE)
+#ifdef DxsUnicodeBuild
 		wstringstream ss;
 #else
 		stringstream ss;
