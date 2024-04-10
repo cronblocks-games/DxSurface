@@ -31,8 +31,8 @@ namespace CB::DxSurface {
     static PtrCom<DxVertexShader> GetVertexShaderFromCso(const TString& filepath);
     static PtrCom<DxVertexShader> GetVertexShaderFromText(const TString& shaderText);
 
-  private:
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
+  private:
     static PtrUnique<DxgiDebugInterface> m_pDebugIface;
 #endif
   }; // class Resources
