@@ -113,3 +113,17 @@ void Graphics::EndFrame()
 #endif
   }
 }
+
+//- 
+//- Shaders
+//- 
+void Graphics::SetVertexShaderFromCso(const TString& filename)
+{
+  PtrCom<DxBlob> blob;
+
+  wstringstream ss;
+  ss << filename;
+
+  DxCall(D3DReadFileToBlob(ss.str().c_str(), &blob));
+  DxCall(m_pDevice->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pVertexShader));
+}
