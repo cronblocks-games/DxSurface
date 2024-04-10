@@ -218,8 +218,8 @@ namespace CB::DxSurface {
     Ptr<Icon>    iconSmall;
     Ptr<Cursor>  cursor;
     WindowRect   windowRectangle                  = WindowRect(CW_USEDEFAULT, CW_USEDEFAULT, 600, 450);
-    DWORD        windowsStyle                     = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
-    DWORD        windowsExStyle                   = WS_EX_WINDOWEDGE;
+    DWORD        windowStyle                      = WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SIZEBOX;
+    DWORD        windowExStyle                    = WS_EX_WINDOWEDGE;
     
     unsigned int maxRenderingThreadRefreshRateHz  = DxsDefaultThreadRefreshRateHz;
     unsigned int maxProcessingThreadRefreshRateHz = DxsDefaultThreadRefreshRateHz;

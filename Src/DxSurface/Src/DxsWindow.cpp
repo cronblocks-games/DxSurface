@@ -327,7 +327,7 @@ void Window::RegisterClassAndCreateWindow()
     m_stOptions.windowRectangle.x + m_stOptions.windowRectangle.w,
     m_stOptions.windowRectangle.y + m_stOptions.windowRectangle.h);
 
-  if (DxsFailed(AdjustWindowRect(&winSize, m_stOptions.windowsStyle, false)))
+  if (DxsFailed(AdjustWindowRect(&winSize, m_stOptions.windowStyle, false)))
   {
     DxsThrowWindows(DxsT("Client area adjustment failed"));
   }
@@ -338,10 +338,10 @@ void Window::RegisterClassAndCreateWindow()
   m_stWindowRect.h = winSize.bottom - winSize.top;
 
   m_hWnd = CreateWindowEx(
-    m_stOptions.windowsExStyle,             // dwExStyle
+    m_stOptions.windowExStyle,              // dwExStyle
     m_sClassName.c_str(),                   // lpClassName
     GetTitle().c_str(),                     // lpWindowName
-    m_stOptions.windowsStyle,               // dwStyle
+    m_stOptions.windowStyle,                // dwStyle
     m_stWindowRect.x, m_stWindowRect.y,     // x, y
     m_stWindowRect.w, m_stWindowRect.h,     // width, height
     nullptr,                                // hWndParent
