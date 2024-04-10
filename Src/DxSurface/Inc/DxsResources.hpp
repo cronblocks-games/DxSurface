@@ -27,8 +27,8 @@ namespace CB::DxSurface {
     static Ptr<Bitmap> GetBitmap(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags = 0, HINSTANCE hInstance = nullptr);
     static Ptr<Bitmap> GetBitmap(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags = 0);
 
-    static PtrCom<DxVertexShader> GetVertexShaderFromHlsl(const TString& filepath);
-    static PtrCom<DxVertexShader> GetVertexShaderFromCso(const TString& filepath);
+    static PtrCom<DxVertexShader> GetVertexShaderFromHlsl(const TString& filePath);
+    static PtrCom<DxVertexShader> GetVertexShaderFromCso(const TString& filePath);
     static PtrCom<DxVertexShader> GetVertexShaderFromText(const TString& shaderText);
 
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE

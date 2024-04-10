@@ -57,11 +57,11 @@ Ptr<Bitmap> Resources::GetBitmap(const TString& filepath, int prefWidth, int pre
 }
 
 //- Shaders
-PtrCom<DxVertexShader> Resources::GetVertexShaderFromHlsl(const TString& filepath)
+PtrCom<DxVertexShader> Resources::GetVertexShaderFromHlsl(const TString& filePath)
 {
   return nullptr;
 }
-PtrCom<DxVertexShader> Resources::GetVertexShaderFromCso(const TString& filepath)
+PtrCom<DxVertexShader> Resources::GetVertexShaderFromCso(const TString& filePath)
 {
   return nullptr;
 }
