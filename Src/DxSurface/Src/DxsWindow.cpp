@@ -322,12 +322,12 @@ void Window::RegisterClassAndCreateWindow()
   }
 
   RECT winSize(
-    m_stOptions.rect.x,
-    m_stOptions.rect.y,
-    m_stOptions.rect.x + m_stOptions.rect.w,
-    m_stOptions.rect.y + m_stOptions.rect.h);
+    m_stOptions.windowRectangle.x,
+    m_stOptions.windowRectangle.y,
+    m_stOptions.windowRectangle.x + m_stOptions.windowRectangle.w,
+    m_stOptions.windowRectangle.y + m_stOptions.windowRectangle.h);
 
-  if (DxsFailed(AdjustWindowRect(&winSize, m_stOptions.dwStyle, false)))
+  if (DxsFailed(AdjustWindowRect(&winSize, m_stOptions.windowsStyle, false)))
   {
     DxsThrowWindows(DxsT("Client area adjustment failed"));
   }
@@ -338,10 +338,10 @@ void Window::RegisterClassAndCreateWindow()
   m_stWindowRect.h = winSize.bottom - winSize.top;
 
   m_hWnd = CreateWindowEx(
-    m_stOptions.dwExStyle,                  // dwExStyle
+    m_stOptions.windowsExStyle,             // dwExStyle
     m_sClassName.c_str(),                   // lpClassName
     GetTitle().c_str(),                     // lpWindowName
-    m_stOptions.dwStyle,                    // dwStyle
+    m_stOptions.windowsStyle,               // dwStyle
     m_stWindowRect.x, m_stWindowRect.y,     // x, y
     m_stWindowRect.w, m_stWindowRect.h,     // width, height
     nullptr,                                // hWndParent
@@ -352,7 +352,7 @@ void Window::RegisterClassAndCreateWindow()
 
   if (m_hWnd != nullptr)
   {
-    m_pGraphics = make_unique<Graphics>(m_hWnd, m_stOptions.isGraphicsDebugEnabled);
+    m_pGraphics = make_unique<Graphics>(m_hWnd);
 
     MutexLock lock(_mutGlobalData);
     _handle2WindowMap[m_hWnd] = this;
@@ -410,8 +410,9 @@ LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 //- 
 LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  if (m_stOptions.isWindowsMessagesDebugEnabled)
+#if defined(DxsDebugBuild) && DxsWindowsMessagesDebugEnabled == DxsTRUE
     WinDebug::PrintWindowsMessage(msg, wParam, lParam);
+#endif
 
   switch (msg)
   {
@@ -484,8 +485,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cKeyboard.SetKeyStatus(k, s);
 
-    if (m_stOptions.isKeyboardDebugEnabled)
+#if defined(DxsDebugBuild) && DxsKeyboardDebugEnabled == DxsTRUE
       WinDebug::PrintKeyStatus(k, s);
+#endif
   }
   break;
   
@@ -497,8 +499,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cKeyboard.SetKeyStatus(k, s);
 
-    if (m_stOptions.isKeyboardDebugEnabled)
+#if defined(DxsDebugBuild) && DxsKeyboardDebugEnabled == DxsTRUE
       WinDebug::PrintKeyStatus(k, s);
+#endif
   }
   break;
 
@@ -508,8 +511,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cKeyboard.InsertChar(c);
 
-    if (m_stOptions.isKeyboardDebugEnabled)
+#if defined(DxsDebugBuild) && DxsKeyboardDebugEnabled == DxsTRUE
       WinDebug::PrintCharReceived(c);
+#endif
   }
   break;
 
@@ -535,8 +539,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
       m_cMouse.SetCaptured(false);
     }
 
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientPosition(pt);
+#endif
   }
   break;
 
@@ -550,8 +555,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cMouse.SetButtonStatus(MouseButton::Left, ButtonStatus::Pressed, pt);
 
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, ButtonStatus::Pressed, pt);
+#endif
   }
   break;
   case WM_MBUTTONDOWN:
@@ -562,8 +568,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cMouse.SetButtonStatus(MouseButton::Middle, ButtonStatus::Pressed, pt);
 
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, ButtonStatus::Pressed, pt);
+#endif
   }
   break;
   case WM_RBUTTONDOWN:
@@ -574,8 +581,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cMouse.SetButtonStatus(MouseButton::Right, ButtonStatus::Pressed, pt);
     
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, ButtonStatus::Pressed, pt);
+#endif
   }
   break;
 
@@ -589,8 +597,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cMouse.SetButtonStatus(MouseButton::Left, ButtonStatus::Released, pt);
     
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Left, ButtonStatus::Released, pt);
+#endif
   }
   break;
   case WM_MBUTTONUP:
@@ -601,8 +610,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     
     m_cMouse.SetButtonStatus(MouseButton::Middle, ButtonStatus::Released, pt);
 
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Middle, ButtonStatus::Released, pt);
+#endif
   }
   break;
   case WM_RBUTTONUP:
@@ -613,8 +623,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cMouse.SetButtonStatus(MouseButton::Right, ButtonStatus::Released, pt);
     
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseClientButtonStatus(MouseButton::Right, ButtonStatus::Released, pt);
+#endif
   }
   break;
 
@@ -630,8 +641,9 @@ LRESULT Window::OnWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
     m_cMouse.SetScrollStatus(delta, pt);
 
-    if (m_stOptions.isMouseDebugEnabled)
+#if defined(DxsDebugBuild) && DxsMouseDebugEnabled == DxsTRUE
       WinDebug::PrintMouseWheelStatus(delta, pt);
+#endif
   }
   break;
 

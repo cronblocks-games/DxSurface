@@ -10,7 +10,7 @@ namespace CB::DxSurface {
 
   class Graphics {
   public:
-    Graphics(HWND, bool isDebugEnabled, float clrR = 0.96, float clrG = 0.92, float clrB = 0.96, float clrA = 1.0);
+    Graphics(HWND, float clrR = 0.96, float clrG = 0.92, float clrB = 0.96, float clrA = 1.0);
     ~Graphics() = default;
 
     Graphics(const Graphics&) = delete;
@@ -28,7 +28,9 @@ namespace CB::DxSurface {
     PtrCom<DxRenderTargetView> GetRenderTargetView();
 
   private:
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
     PtrUnique<DxgiDebugInterface> m_pDebugIface;
+#endif
 
     PtrCom<DxDevice> m_pDevice;
     PtrCom<DxDeviceContext> m_pDeviceContext;

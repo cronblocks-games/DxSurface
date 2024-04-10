@@ -7,10 +7,6 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
-  m_stOptions.isGraphicsDebugEnabled = true;
-  m_stOptions.isWindowsMessagesDebugEnabled = false;
-  m_stOptions.isKeyboardDebugEnabled = false;
-  m_stOptions.isMouseDebugEnabled = false;
   m_stOptions.icon = Resources::LoadIconResource(SystemIcon::Note, 32, 32);
   m_stOptions.iconSmall = Resources::LoadIconResource(SystemIcon::Note, 16, 16);
   m_stOptions.cursor = Resources::LoadCursorResource(SystemCursor::Hand);
@@ -72,25 +68,23 @@ Ptr<Window> DxSurface::CreateNewWindow(const TString& title, int x, int y)
 {
   WindowCreationOptions op = m_stOptions;
   op.title = title;
-  op.rect.x = x;
-  op.rect.y = y;
+  op.windowRectangle.x = x;
+  op.windowRectangle.y = y;
 
   return CreateNewWindow(op);
 }
 Ptr<Window> DxSurface::CreateNewWindow(
   const TString& title,
   int x, int y, int width, int height,
-  bool isPrimary,
-  bool graphicsDebugEnabled)
+  bool isPrimary)
 {
   WindowCreationOptions op = m_stOptions;
   op.title = title;
-  op.rect.x = x;
-  op.rect.y = y;
-  op.rect.w = width;
-  op.rect.h = height;
+  op.windowRectangle.x = x;
+  op.windowRectangle.y = y;
+  op.windowRectangle.w = width;
+  op.windowRectangle.h = height;
   op.isPrimary = isPrimary;
-  op.isGraphicsDebugEnabled = graphicsDebugEnabled;
 
   return CreateNewWindow(op);
 }

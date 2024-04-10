@@ -3,6 +3,29 @@
 
 
 
+#if defined(NDEBUG) || defined(_NDEBUG)
+     /* Release version */
+#    define DxsReleaseBuild
+#    undef  DxsDebugBuild
+#else
+     /* Debug version */
+#    define DxsDebugBuild
+#    undef  DxsReleaseBuild
+#endif
+
+
+#define DxsTRUE                            1
+#define DxsFALSE                           0
+
+#ifdef DxsDebugBuild
+     /* Enabling/disabling debug traces */
+#    define DxsGraphicsDebugEnabled          DxsTRUE
+#    define DxsKeyboardDebugEnabled          DxsFALSE
+#    define DxsMouseDebugEnabled             DxsFALSE
+#    define DxsWindowsMessagesDebugEnabled   DxsFALSE
+#endif
+
+
 #ifndef DxsT
 #  if defined(_UNICODE) || defined(UNICODE)
 #    define DxsT(str_literal) L##str_literal

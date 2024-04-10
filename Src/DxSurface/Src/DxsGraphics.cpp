@@ -7,24 +7,26 @@ using namespace CB::DxSurface;
 using namespace std;
 
 
-#if defined(NDEBUG) || defined(_NDEBUG)
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
 
 /* Debug version(s) */
-#  define DxCall(call,fail_msg) {   \
-            HRESULT hr = call;      \
-            if (hr != S_OK) {       \
-              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
-            }}
-
-#else
-
-/* Release version(s) */
+#  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
 #  define DxCall(call,ndbg_fail_msg) {                           \
             if (m_pDebugIface) { m_pDebugIface->Mark(); }        \
             HRESULT hr = call;                                   \
             if (hr != S_OK) {                                    \
               if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); } \
               else { DxsThrowGraphicsHr(ndbg_fail_msg, hr); }    \
+            }}
+
+#else
+
+/* Release version(s) */
+#  define DxDeviceCreationFlags 0
+#  define DxCall(call,fail_msg) {   \
+            HRESULT hr = call;      \
+            if (hr != S_OK) {       \
+              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
             }}
 
 #endif
@@ -38,12 +40,11 @@ static DxFeatureLevel prefFeatureLevels[] = {
 static unsigned int prefFeatureLevelsCount = sizeof(prefFeatureLevels) / sizeof(DxFeatureLevel);
 
 
-Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float clrB, float clrA)
+Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
 {
-  if (isDebugEnabled)
-  {
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
     m_pDebugIface = make_unique<DxgiDebugInterface>();
-  }
+#endif
 
   SetClearColor(clrR, clrG, clrB, clrA);
 
@@ -69,7 +70,7 @@ Graphics::Graphics(HWND hWnd, bool isDebugEnabled, float clrR, float clrG, float
       nullptr,                  // pAdapter
       D3D_DRIVER_TYPE_HARDWARE, // DriverType
       nullptr,                  // Software
-      isDebugEnabled ? D3D11_CREATE_DEVICE_DEBUG : 0, // Flags
+      DxDeviceCreationFlags,    // Flags
       (D3D_FEATURE_LEVEL*)prefFeatureLevels, prefFeatureLevelsCount, // pFeatureLevels, FeatureLevels
       D3D11_SDK_VERSION,        // SDKVersion
       &scd,                     // pSwapChainDesc
@@ -116,7 +117,9 @@ void Graphics::StartFrame()
 }
 void Graphics::EndFrame()
 {
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
   if (m_pDebugIface) { m_pDebugIface->Mark(); }
+#endif
 
   HRESULT hr = m_pSwapChain->Present(1, 0);
 
@@ -126,7 +129,11 @@ void Graphics::EndFrame()
   }
   else if (hr != S_OK)
   {
+#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
     if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); }
     else { DxsThrowGraphicsHr(DxsT("Failure in presenting frame"), hr); }
+#else
+    DxsThrowGraphicsHr(DxsT("Failure in presenting frame"), hr);
+#endif
   }
 }
