@@ -1,38 +1,11 @@
 #include "pch.hpp"
 #include "DxsGraphics.hpp"
 
-#include <d3dcompiler.h>
-
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
 
 using namespace CB::DxSurface;
 using namespace std;
-
-
-#if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-
-/* Debug version(s) */
-#  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
-#  define DxCall(call,ndbg_fail_msg) {                           \
-            if (m_pDebugIface) { m_pDebugIface->Mark(); }        \
-            HRESULT hr = call;                                   \
-            if (hr != S_OK) {                                    \
-              if (m_pDebugIface) { DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr); } \
-              else { DxsThrowGraphicsHr(ndbg_fail_msg, hr); }    \
-            }}
-
-#else
-
-/* Release version(s) */
-#  define DxDeviceCreationFlags 0
-#  define DxCall(call,fail_msg) {   \
-            HRESULT hr = call;      \
-            if (hr != S_OK) {       \
-              DxsThrowGraphicsHr(fail_msg DxsT(" Build debug version with debug flag enabled for more information."), hr); \
-            }}
-
-#endif
 
 
 static DxFeatureLevel prefFeatureLevels[] = {

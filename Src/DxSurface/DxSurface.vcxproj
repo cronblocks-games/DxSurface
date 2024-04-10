@@ -183,6 +183,7 @@
     <ClInclude Include="Inc\DxsWinApi.hpp" />
     <ClInclude Include="Inc\DxsWindow.hpp" />
     <ClInclude Include="Inc\DxsDxgiDebugInterface.hpp" />
+    <ClInclude Include="Src\InternalInc\DxMacros.hpp" />
     <ClInclude Include="Src\InternalInc\WinDebug.hpp" />
     <ClInclude Include="Src\InternalInc\pch.hpp" />
   </ItemGroup>
