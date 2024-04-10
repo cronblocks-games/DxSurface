@@ -178,70 +178,70 @@ ClientRect Window::GetClientRect() const
 
 void Window::SetIcon(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.icon = m_stOptions.iconSmall = Resources::LoadIconResource(si, prefWidth, prefHeight, loadFlags);
+  m_stOptions.icon = m_stOptions.iconSmall = Resources::GetIcon(si, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HICON, (LONG_PTR)((HICON)*m_stOptions.icon));
   SetClassLongPtrA(m_hWnd, GCLP_HICONSM, (LONG_PTR)((HICON)*m_stOptions.iconSmall));
 }
 void Window::SetIcon(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
 {
-  m_stOptions.icon = m_stOptions.iconSmall = Resources::LoadIconResource(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+  m_stOptions.icon = m_stOptions.iconSmall = Resources::GetIcon(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
   SetClassLongPtrA(m_hWnd, GCLP_HICON, (LONG_PTR)((HICON)*m_stOptions.icon));
   SetClassLongPtrA(m_hWnd, GCLP_HICONSM, (LONG_PTR)((HICON)*m_stOptions.iconSmall));
 }
 void Window::SetIcon(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.icon = m_stOptions.iconSmall = Resources::LoadIconResource(filepath, prefWidth, prefHeight, loadFlags);
+  m_stOptions.icon = m_stOptions.iconSmall = Resources::GetIcon(filepath, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HICON, (LONG_PTR)((HICON)*m_stOptions.icon));
   SetClassLongPtrA(m_hWnd, GCLP_HICONSM, (LONG_PTR)((HICON)*m_stOptions.iconSmall));
 }
 
 void Window::SetIconLarge(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.icon = Resources::LoadIconResource(si, prefWidth, prefHeight, loadFlags);
+  m_stOptions.icon = Resources::GetIcon(si, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HICON, (LONG_PTR)((HICON)*m_stOptions.icon));
 }
 void Window::SetIconLarge(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
 {
-  m_stOptions.icon = Resources::LoadIconResource(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+  m_stOptions.icon = Resources::GetIcon(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
   SetClassLongPtrA(m_hWnd, GCLP_HICON, (LONG_PTR)((HICON)*m_stOptions.icon));
 }
 void Window::SetIconLarge(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.icon = Resources::LoadIconResource(filepath, prefWidth, prefHeight, loadFlags);
+  m_stOptions.icon = Resources::GetIcon(filepath, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HICON, (LONG_PTR)((HICON)*m_stOptions.icon));
 }
 
 void Window::SetIconSmall(SystemIcon si, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.iconSmall = Resources::LoadIconResource(si, prefWidth, prefHeight, loadFlags);
+  m_stOptions.iconSmall = Resources::GetIcon(si, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HICONSM, (LONG_PTR)((HICON)*m_stOptions.iconSmall));
 }
 void Window::SetIconSmall(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
 {
-  m_stOptions.iconSmall = Resources::LoadIconResource(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+  m_stOptions.iconSmall = Resources::GetIcon(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
   SetClassLongPtrA(m_hWnd, GCLP_HICONSM, (LONG_PTR)((HICON)*m_stOptions.iconSmall));
 }
 void Window::SetIconSmall(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.iconSmall = Resources::LoadIconResource(filepath, prefWidth, prefHeight, loadFlags);
+  m_stOptions.iconSmall = Resources::GetIcon(filepath, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HICONSM, (LONG_PTR)((HICON)*m_stOptions.iconSmall));
 }
 
 void Window::SetCursor(SystemCursor sc, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.cursor = Resources::LoadCursorResource(sc, prefWidth, prefHeight, loadFlags);
+  m_stOptions.cursor = Resources::GetCursor(sc, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HCURSOR, (LONG_PTR)((HCURSOR)*m_stOptions.cursor));
   ::SetCursor(*m_stOptions.cursor);
 }
 void Window::SetCursor(unsigned int resourceId, int prefWidth, int prefHeight, UINT loadFlags, HINSTANCE hInstance)
 {
-  m_stOptions.cursor = Resources::LoadCursorResource(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
+  m_stOptions.cursor = Resources::GetCursor(resourceId, prefWidth, prefHeight, loadFlags, hInstance);
   SetClassLongPtrA(m_hWnd, GCLP_HCURSOR, (LONG_PTR)((HCURSOR)*m_stOptions.cursor));
   ::SetCursor(*m_stOptions.cursor);
 }
 void Window::SetCursor(const TString& filepath, int prefWidth, int prefHeight, UINT loadFlags)
 {
-  m_stOptions.cursor = Resources::LoadCursorResource(filepath, prefWidth, prefHeight, loadFlags);
+  m_stOptions.cursor = Resources::GetCursor(filepath, prefWidth, prefHeight, loadFlags);
   SetClassLongPtrA(m_hWnd, GCLP_HCURSOR, (LONG_PTR)((HCURSOR)*m_stOptions.cursor));
   ::SetCursor(*m_stOptions.cursor);
 }

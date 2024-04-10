@@ -7,9 +7,9 @@ using namespace CB::DxSurface;
 DxSurface::DxSurface(HINSTANCE hInstance) noexcept
 {
   m_hInstance = hInstance;
-  m_stOptions.icon = Resources::LoadIconResource(SystemIcon::Note, 32, 32);
-  m_stOptions.iconSmall = Resources::LoadIconResource(SystemIcon::Note, 16, 16);
-  m_stOptions.cursor = Resources::LoadCursorResource(SystemCursor::Hand);
+  m_stOptions.icon = Resources::GetIcon(SystemIcon::Note, 32, 32);
+  m_stOptions.iconSmall = Resources::GetIcon(SystemIcon::Note, 16, 16);
+  m_stOptions.cursor = Resources::GetCursor(SystemCursor::Hand);
 }
 DxSurface::DxSurface(const WindowCreationOptions& options, HINSTANCE hInstance) noexcept
 {
