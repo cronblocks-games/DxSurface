@@ -1,7 +1,8 @@
 #include "pch.hpp"
 #include "DxsGraphics.hpp"
 
-#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "D3D11.lib")
+#pragma comment(lib, "D3DCompiler.lib")
 
 using namespace CB::DxSurface;
 using namespace std;
