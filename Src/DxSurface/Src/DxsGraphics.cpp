@@ -1,6 +1,8 @@
 #include "pch.hpp"
 #include "DxsGraphics.hpp"
 
+#include <d3dcompiler.h>
+
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
 
