@@ -125,7 +125,7 @@ void Graphics::SetVertexShaderFromCso(const TString& filename)
   ss << filename;
 
   DxCall(
-    //- WARNING: This API can be used in Windows Store apps but those apps can't be submitted to the Windows Store
+    //- WARNING: Can be used in Windows Store apps but the apps can't be submitted to Windows Store
     D3DReadFileToBlob(ss.str().c_str(), &blob),
     DxsT("Cannot read Vertex Shader data from the given CSO file"));
 
