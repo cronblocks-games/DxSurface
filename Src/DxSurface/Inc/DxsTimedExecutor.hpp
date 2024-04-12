@@ -81,7 +81,7 @@ namespace CB::DxSurface {
     {
       if (classPtr == nullptr)
       {
-        DxsThrow((name + DxsT(" - TimedExecutor<ClassT> - Invalid or nullptr for activated class provided")).c_str());
+        DxsThrow((name + DxsT(" - TimedExecutor<ClassT> - NULL pointer provided for the activated class")).c_str());
       }
 
       m_pClassPtr = classPtr;
