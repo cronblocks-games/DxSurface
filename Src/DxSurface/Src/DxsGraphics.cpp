@@ -124,10 +124,15 @@ void Graphics::SetVertexShaderFromCso(const TString& filename)
   wstringstream ss;
   ss << filename;
 
-  DxCall(D3DReadFileToBlob(ss.str().c_str(), &blob));
+  DxCall(
+    D3DReadFileToBlob(ss.str().c_str(), &blob),
+    DxsT("Cannot read Vertex Shader data from the given CSO file"));
+
   DxCall(
     m_pDevice->CreateVertexShader(
-      blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pVertexShader));
+      blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pVertexShader),
+    DxsT("Cannot create Vertex Shader from the read data of CSO file"));
+
   m_pDeviceContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 }
 
