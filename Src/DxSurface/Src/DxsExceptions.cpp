@@ -74,7 +74,7 @@ TString& Exception::Message() const
 
   ss
     << "Exception:" << endl
-    << "    -- " << m_sProvidedMessage << endl << endl
+    << ExceptionMessageLinePrefix << m_sProvidedMessage << endl << endl
     << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
     << "Line: " << m_iLineNumber << endl
     << "Ver: " << hex << DxsVersion
@@ -135,13 +135,13 @@ TString& WindowsException::Message() const
 
   ss
     << (m_isGraphicsException ? "Graphics" : "Windows") << " Exception:" << endl
-    << "    -- " << m_sProvidedMessage << endl << endl;
+    << ExceptionMessageLinePrefix << m_sProvidedMessage << endl << endl;
 
   if (!m_isGraphicsException || m_isValidGraphicsHR)
   {
     ss
       << "HRESULT: " << m_hr << endl
-      << "    -- ";
+      << ExceptionMessageLinePrefix;
 
     TCharPtr winMessage = nullptr;
     DWORD winMessageLen = FormatMessage(

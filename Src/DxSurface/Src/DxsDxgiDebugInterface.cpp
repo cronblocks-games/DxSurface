@@ -71,7 +71,7 @@ TString DxgiDebugInterface::GetMessages() const
 
 				if (i < currCount - 1)
 				{
-					ss << endl << endl;
+					ss << endl << ExceptionMessageLinePrefix;
 				}
 			}
 			else

@@ -4,6 +4,10 @@
 
 #include "DxsSettings.hpp"
 
+
+#define ExceptionMessageLinePrefix       "=>    "
+
+
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
 
 /* Debug version(s) */
