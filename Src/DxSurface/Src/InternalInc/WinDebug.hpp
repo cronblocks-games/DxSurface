@@ -6,8 +6,7 @@
 
 namespace CB::DxSurface {
 
-  // Allows printing specifically formatted messages to the attached
-  // debug console.
+  // Allows printing specifically formatted messages to an attached debug console.
   class WinDebug {
   public:
     // Prints given Windows API 'msg' like WM_* as string to the attached debug console.
