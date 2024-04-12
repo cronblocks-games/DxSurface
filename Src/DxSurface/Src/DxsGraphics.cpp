@@ -54,18 +54,18 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
       &m_pDevice,               // ppDevice
       reinterpret_cast<D3D_FEATURE_LEVEL*>(&m_eFeatureLevel), // pFeatureLevel (created device's feature level)
       &m_pDeviceContext         // ppImmediateContext
-    ), DxsT("Device and swap chain creation failed."));
+    ), DxsT("Device and swap chain creation failed"));
 
   PtrCom<DxResource> backBuffer;
   DxCall(
     m_pSwapChain->GetBuffer(
       0, __uuidof(DxResource), &backBuffer  // Buffer, REFIID, ppSurface
-    ), DxsT("Failed getting back buffer from swap chain."));
+    ), DxsT("Failed getting back buffer from swap chain"));
 
   DxCall(
     m_pDevice->CreateRenderTargetView(
       backBuffer.Get(), nullptr, &m_pRenderTargetView  // pResource, pDesc, ppRTView
-    ), DxsT("Failed creating Render Target View."));
+    ), DxsT("Failed creating Render Target View"));
 }
 
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
