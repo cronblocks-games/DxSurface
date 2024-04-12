@@ -10,6 +10,12 @@ using namespace CB::DxSurface;
 // Exception
 // -----------------------------------------------------------------------------
 
+#define ExceptionLocationAndVersion  \
+    "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl << \
+    "Line: " << m_iLineNumber << endl << \
+    "Ver: " << hex << DxsVersion << \
+   " (" << DxsVersionString << ") - " << DxsVersionReleaseDateString
+
 static const char* start_of_str(const char* line, const char* str)
 {
   const char* match = strstr(line, str);
@@ -75,11 +81,7 @@ TString& Exception::Message() const
   ss
     << "Exception:" << endl
     << ExceptionMessageLinePrefix << m_sProvidedMessage << endl << endl
-    << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
-    << "Line: " << m_iLineNumber << endl
-    << "Ver: " << hex << DxsVersion
-    << " (" << DxsVersionString << ") - "
-    << DxsVersionReleaseDateString;
+    << ExceptionLocationAndVersion;
 
   m_sFinalMessage = ss.str();
   return m_sFinalMessage;
@@ -161,12 +163,7 @@ TString& WindowsException::Message() const
     LocalFree(winMessage);
   }
 
-  ss
-    << "File: " << start_of_str(m_sFileName.c_str(), "Src\\DxSurface\\Src") << endl
-    << "Line: " << m_iLineNumber << endl
-    << "Ver: " << hex << DxsVersion
-    << " (" << DxsVersionString << ") - "
-    << DxsVersionReleaseDateString;
+  ss << ExceptionLocationAndVersion;
 
   m_sFinalMessage = ss.str();
   return m_sFinalMessage;
