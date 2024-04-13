@@ -136,6 +136,25 @@ void Graphics::SetVertexShaderFromCso(const TString& filename)
 
   m_pDeviceContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 }
+void Graphics::SetPixelShaderFromCso(const TString& filename)
+{
+  PtrCom<DxBlob> blob;
+
+  wstringstream ss;
+  ss << filename;
+
+  DxCall(
+    //- WARNING: Can be used in Windows Store apps but the apps can't be submitted to Windows Store
+    D3DReadFileToBlob(ss.str().c_str(), &blob),
+    DxsT("Cannot read Pixel Shader data from the given CSO file"));
+
+  DxCall(
+    m_pDevice->CreatePixelShader(
+      blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pPixelShader),
+    DxsT("Cannot create Pixel Shader from the CSO file data"));
+
+  m_pDeviceContext->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
+}
 
 
 

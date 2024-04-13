@@ -28,6 +28,7 @@ namespace CB::DxSurface {
     PtrCom<DxRenderTargetView> GetRenderTargetView();
 
     void SetVertexShaderFromCso(const TString& filename);
+    void SetPixelShaderFromCso(const TString& filename);
 
   private:
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
@@ -39,6 +40,7 @@ namespace CB::DxSurface {
     PtrCom<DxSwapChain> m_pSwapChain;
     PtrCom<DxRenderTargetView> m_pRenderTargetView;
     PtrCom<DxVertexShader> m_pVertexShader;
+    PtrCom<DxPixelShader> m_pPixelShader;
     DxFeatureLevel m_eFeatureLevel;
 
     float m_aClearColor[4];
