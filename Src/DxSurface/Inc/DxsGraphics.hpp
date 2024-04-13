@@ -27,6 +27,10 @@ namespace CB::DxSurface {
     PtrCom<DxSwapChain> GetSwapChain();
     PtrCom<DxRenderTargetView> GetRenderTargetView();
 
+    unsigned long long GetTotalFrames();
+    float GetAverageFPS();
+    float GetFPS();
+
     void SetVertexShaderFromCso(const TString& filename);
     void SetPixelShaderFromCso(const TString& filename);
 
