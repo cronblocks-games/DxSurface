@@ -66,6 +66,7 @@ namespace CB::DxSurface {
   using Atomic = std::atomic<T>;
 
   using Clock = std::chrono::high_resolution_clock;
+  using Time = Clock;
   using TimePoint = std::chrono::time_point<Clock>;
   using TimeDurationMilli = std::chrono::duration<double, std::milli>;
   using TimeDurationSec = std::chrono::duration<double>;
