@@ -17,6 +17,8 @@ static unsigned int prefFeatureLevelsCount = sizeof(prefFeatureLevels) / sizeof(
 
 
 Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
+  : m_ullFramesCountTotal(0), m_ullFramesCountFps(0),
+  m_tpTotalT0(Time::now()), m_tpFpsT0(Time::now()), m_fFps(0.0f)
 {
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
     m_pDebugIface = make_unique<DxgiDebugInterface>();

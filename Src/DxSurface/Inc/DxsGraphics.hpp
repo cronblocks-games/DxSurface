@@ -43,6 +43,7 @@ namespace CB::DxSurface {
     PtrCom<DxPixelShader> m_pPixelShader;
     DxFeatureLevel m_eFeatureLevel;
 
+    unsigned long long m_ullFramesCountTotal, m_ullFramesCountFps; TimePoint m_tpTotalT0, m_tpFpsT0; float m_fFps;
     float m_aClearColor[4];
 
     void StartFrame();
