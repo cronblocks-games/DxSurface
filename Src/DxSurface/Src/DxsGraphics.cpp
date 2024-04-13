@@ -98,6 +98,7 @@ void Graphics::_UpdateFrameCount()
   if (m_ullFramesCountTotal == 0)
   {
     m_tpTotalT0 = Time::now();
+    m_tpFpsT0 = Time::now();
   }
 
   double sec = TimeDurationSec(Time::now() - m_tpFpsT0).count();
