@@ -46,6 +46,13 @@ void GameRenderingRunning(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, doubl
     if (m.GetButtonStatus(MouseButton::Right) == ButtonStatus::Pressed) s << "R";
     w.SetTitle(s.str());
   }
+
+  if (k.GetKeyStatus(KeyCode::F) == KeyStatus::Pressed)
+  {
+    wstringstream s;
+    s << "T/Frames = " << gfx.GetTotalFrames() << ",  AvgFPS = " << gfx.GetAverageFPS() << ",  FPS = " << gfx.GetFPS() << "";
+    w.SetTitle(s.str());
+  }
 }
 void GameRenderingPaused(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, double deltaTimeSec)
 {
