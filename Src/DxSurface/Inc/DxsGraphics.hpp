@@ -39,6 +39,7 @@ namespace CB::DxSurface {
     PtrCom<DxDeviceContext> m_pDeviceContext;
     PtrCom<DxSwapChain> m_pSwapChain;
     PtrCom<DxRenderTargetView> m_pRenderTargetView;
+    PtrCom<DxDepthStencilView> m_pDepthStencilView;
     PtrCom<DxVertexShader> m_pVertexShader;
     PtrCom<DxPixelShader> m_pPixelShader;
     DxFeatureLevel m_eFeatureLevel;
