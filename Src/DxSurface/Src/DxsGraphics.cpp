@@ -66,11 +66,6 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
     m_pDevice->CreateRenderTargetView(
       backBuffer.Get(), nullptr, &m_pRenderTargetView  // pResource, pDesc, ppRTView
     ), DxsT("Failed creating Render Target View"));
-
-  DxCall(
-    m_pDevice->CreateDepthStencilView(
-      backBuffer.Get(), nullptr, &m_pDepthStencilView  // pResource, pDesc, ppDepthStencilView
-    ), DxsT("Failed creating Depth Stencil View"));
 }
 
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
@@ -91,12 +86,10 @@ PtrCom<DxDevice>           Graphics::GetDevice()           { return m_pDevice;  
 PtrCom<DxDeviceContext>    Graphics::GetDeviceContext()    { return m_pDeviceContext;    }
 PtrCom<DxSwapChain>        Graphics::GetSwapChain()        { return m_pSwapChain;        }
 PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
-PtrCom<DxDepthStencilView> Graphics::GetDepthStencilView() { return m_pDepthStencilView; }
 
 void Graphics::StartFrame()
 {
   m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView.Get(), m_aClearColor);
-  m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 void Graphics::EndFrame()
 {
