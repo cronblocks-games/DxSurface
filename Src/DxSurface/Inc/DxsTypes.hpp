@@ -43,6 +43,7 @@ namespace CB::DxSurface {
   using DxVertexShader = ID3D11VertexShader;
   using DxPixelShader = ID3D11PixelShader;
   using DxRenderTargetView = ID3D11RenderTargetView;
+  using DxDepthStencilView = ID3D11DepthStencilView;
   using DxResource = ID3D11Resource;
   using DxBlob = ID3DBlob;
   using DxDXGIInfoQueue = IDXGIInfoQueue;
