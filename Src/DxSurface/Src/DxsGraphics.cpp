@@ -86,6 +86,7 @@ PtrCom<DxDevice>           Graphics::GetDevice()           { return m_pDevice;  
 PtrCom<DxDeviceContext>    Graphics::GetDeviceContext()    { return m_pDeviceContext;    }
 PtrCom<DxSwapChain>        Graphics::GetSwapChain()        { return m_pSwapChain;        }
 PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
+PtrCom<DxDepthStencilView> Graphics::GetDepthStencilView() { return m_pDepthStencilView; }
 
 void Graphics::StartFrame()
 {

@@ -26,6 +26,7 @@ namespace CB::DxSurface {
     PtrCom<DxDeviceContext> GetDeviceContext();
     PtrCom<DxSwapChain> GetSwapChain();
     PtrCom<DxRenderTargetView> GetRenderTargetView();
+    PtrCom<DxDepthStencilView> GetDepthStencilView();
 
     void SetVertexShaderFromCso(const TString& filename);
     void SetPixelShaderFromCso(const TString& filename);
