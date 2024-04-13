@@ -89,8 +89,31 @@ PtrCom<DxDeviceContext>    Graphics::GetDeviceContext()    { return m_pDeviceCon
 PtrCom<DxSwapChain>        Graphics::GetSwapChain()        { return m_pSwapChain;        }
 PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTargetView; }
 
+void Graphics::_UpdateFrameCount()
+{
+  if (m_ullFramesCountTotal == 0)
+  {
+    m_tpTotalT0 = Time::now();
+  }
+
+  double sec = TimeDurationSec(Time::now() - m_tpFpsT0).count();
+  if (sec >= 1.0)
+  {
+    m_fFps = (float)(m_ullFramesCountFps / sec);
+    m_ullFramesCountFps = 0;
+    m_tpFpsT0 = Time::now();
+  }
+  else
+  {
+    m_ullFramesCountFps++;
+  }
+
+  m_ullFramesCountTotal++;
+}
+
 void Graphics::StartFrame()
 {
+  _UpdateFrameCount();
   m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView.Get(), m_aClearColor);
 }
 void Graphics::EndFrame()
