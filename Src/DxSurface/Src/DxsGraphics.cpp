@@ -96,7 +96,10 @@ float Graphics::GetCurrentFPS() { return m_fFps; }
 void Graphics::_UpdateFrameCount()
 {
   m_ullFramesCountTotal++;
+  m_ullFramesCountFps++;
 
+  if (m_ullFramesCountTotal % 4 == 0)
+  {
   double sec = TimeDurationSec(Time::now() - m_tpFpsT0).count();
 
   if (sec >= 1.0)
@@ -105,7 +108,8 @@ void Graphics::_UpdateFrameCount()
     m_ullFramesCountFps = 0;
     m_tpFpsT0 = Time::now();
   }
-  else
+  }
+}
   {
     m_ullFramesCountFps++;
   }
