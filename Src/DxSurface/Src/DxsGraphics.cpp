@@ -72,6 +72,11 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
   _SetDefaultPipeline();
 }
 
+void Graphics::_SetDefaultPipeline()
+{
+
+}
+
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
 {
   m_aClearColor[0] = clrR;
@@ -111,11 +116,6 @@ void Graphics::_UpdateFrameCount()
       m_tpFpsT0 = Time::now();
     }
   }
-}
-
-void Graphics::_SetDefaultPipeline()
-{
-
 }
 
 void Graphics::StartFrame()
