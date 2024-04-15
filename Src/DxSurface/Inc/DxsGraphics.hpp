@@ -61,6 +61,8 @@ namespace CB::DxSurface {
     /* ---------------------------------------------------------------- */
     //- Invoked from `StartFrame` - Updating frames' count and FPS
     void _UpdateFrameCount();
+    //- Invoked from `ctor` - Setting-up a default pipeline
+    void _SetDefaultPipeline();
 
   }; //- class Graphics
 

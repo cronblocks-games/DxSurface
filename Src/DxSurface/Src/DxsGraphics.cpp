@@ -68,6 +68,8 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
     m_pDevice->CreateRenderTargetView(
       backBuffer.Get(), nullptr, &m_pRenderTargetView  // pResource, pDesc, ppRTView
     ), DxsT("Failed creating Render Target View"));
+
+  _SetDefaultPipeline();
 }
 
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
@@ -100,19 +102,20 @@ void Graphics::_UpdateFrameCount()
 
   if (m_ullFramesCountTotal % 4 == 0)
   {
-  double sec = TimeDurationSec(Time::now() - m_tpFpsT0).count();
+    double sec = TimeDurationSec(Time::now() - m_tpFpsT0).count();
 
-  if (sec >= 1.0)
-  {
-    m_fFps = (float)(m_ullFramesCountFps / sec);
-    m_ullFramesCountFps = 0;
-    m_tpFpsT0 = Time::now();
-  }
+    if (sec >= 1.0)
+    {
+      m_fFps = (float)(m_ullFramesCountFps / sec);
+      m_ullFramesCountFps = 0;
+      m_tpFpsT0 = Time::now();
+    }
   }
 }
-  {
-    m_ullFramesCountFps++;
-  }
+
+void Graphics::_SetDefaultPipeline()
+{
+
 }
 
 void Graphics::StartFrame()
