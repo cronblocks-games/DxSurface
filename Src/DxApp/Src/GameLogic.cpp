@@ -50,7 +50,7 @@ void GameRenderingRunning(Window& w, Graphics& gfx, Keyboard& k, Mouse& m, doubl
   if (k.GetKeyStatus(KeyCode::F) == KeyStatus::Pressed)
   {
     wstringstream s;
-    s << "T/Frames = " << gfx.GetTotalFrames() << ",  AvgFPS = " << gfx.GetAverageFPS() << ",  FPS = " << gfx.GetFPS() << "";
+    s << "T/Frames = " << gfx.GetTotalFrames() << ",  AvgFPS = " << gfx.GetAverageFPS() << ",  FPS = " << gfx.GetCurrentFPS() << "";
     w.SetTitle(s.str());
   }
 }

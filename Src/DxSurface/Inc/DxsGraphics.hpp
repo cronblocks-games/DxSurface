@@ -29,7 +29,7 @@ namespace CB::DxSurface {
 
     unsigned long long GetTotalFrames();
     float GetAverageFPS();
-    float GetFPS();
+    float GetCurrentFPS();
 
     void SetVertexShaderFromCso(const TString& filename);
     void SetPixelShaderFromCso(const TString& filename);

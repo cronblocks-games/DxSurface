@@ -91,7 +91,7 @@ PtrCom<DxRenderTargetView> Graphics::GetRenderTargetView() { return m_pRenderTar
 
 unsigned long long Graphics::GetTotalFrames() { return m_ullFramesCountTotal; }
 float Graphics::GetAverageFPS() { return (float)(GetTotalFrames() / TimeDurationSec(Time::now() - m_tpTotalT0).count()); }
-float Graphics::GetFPS() { return m_fFps; }
+float Graphics::GetCurrentFPS() { return m_fFps; }
 
 void Graphics::_UpdateFrameCount()
 {
