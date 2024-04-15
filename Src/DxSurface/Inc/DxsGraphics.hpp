@@ -59,7 +59,7 @@ namespace CB::DxSurface {
     /* ---------------------------------------------------------------- */
     /* Internal handling                                                */
     /* ---------------------------------------------------------------- */
-    //- Invoked from `StartFrame`
+    //- Invoked from `StartFrame` - Updating frames' count and FPS
     void _UpdateFrameCount();
 
   }; //- class Graphics
