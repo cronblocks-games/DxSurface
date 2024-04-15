@@ -282,8 +282,7 @@ void Window::SetCallbacks(const WindowCallbacks& callbacks)
 
 //------------------------------------------------------------------------
 //- 
-//-   Windows class registration, creation, deletion and
-//- message processing.
+//- Windows class registration, creation, deletion and message processing.
 //- 
 //------------------------------------------------------------------------
 static Mutex _mutGlobalData;
@@ -393,7 +392,7 @@ void Window::UnRegisterClassAndDestroyWindow()
 }
 
 //- 
-//- Universal Windows' messages handler
+//- Global Windows' messages handler
 //- 
 LRESULT WINAPI Window::WindowsMessageProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -667,7 +666,7 @@ void Window::ProcessWindowsMessagesQueue()
 
 //------------------------------------------------------------------------
 //- 
-//- Window events
+//- Window event callbacks
 //- 
 //------------------------------------------------------------------------
 void Window::OnWindowPositionChangedInternal()
@@ -696,7 +695,7 @@ void Window::OnWindowSizeChangedInternal()
 
 //------------------------------------------------------------------------
 //- 
-//- Rendering thread
+//- Thread Callbacks - Rendering
 //- 
 //------------------------------------------------------------------------
 void Window::OnRenderingStateInitInternal()
@@ -795,7 +794,7 @@ void Window::OnRenderingStateChangedInternal(ExecutionState last, ExecutionState
 
 //------------------------------------------------------------------------
 //- 
-//- Processing thread
+//- Thread Callbacks - Processing
 //- 
 //------------------------------------------------------------------------
 void Window::OnProcessingStateInitInternal()
