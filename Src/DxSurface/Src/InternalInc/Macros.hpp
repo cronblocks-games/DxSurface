@@ -15,14 +15,12 @@
 //- Debug version(s)
 //-------------------------------
 #  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
-
-   // Should already have "DxgiDebugInterface *m_pDebugIface" defined in scope.
 #  define DxCall(call,ndbg_fail_msg) {                                        \
             m_pDebugIface->Mark();                                            \
             HRESULT hr = call;                                                \
             if (hr != S_OK) {                                                 \
               DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr);   \
-            }}
+            }} /* Should already have "DxgiDebugInterface *m_pDebugIface" defined in scope. */
 
 #else
 //-------------------------------
