@@ -15,7 +15,7 @@
 //- Debug version(s)
 //-------------------------------
 #  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
-#  define DxCall(func_call,ndbg_fail_msg) {                                   \
+#  define DxCall(func_call,ignored_fail_msg) {                                \
             m_pDebugIface->Mark();                                            \
             HRESULT hr = func_call;                                           \
             if (hr != S_OK) {                                                 \
