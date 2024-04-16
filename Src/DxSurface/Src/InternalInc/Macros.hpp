@@ -7,11 +7,13 @@
 
 #define ExceptionMessageLinePrefix       "=>    "
 
-
+/* ---------------------------------------------------------- */
+/* Graphics calls & debugging                                 */
+/* ---------------------------------------------------------- */
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-/* ---------------------------------------------------------- */
-/* Debug version(s)                                           */
-/* ---------------------------------------------------------- */
+//-------------------------------
+//- Debug version(s)
+//-------------------------------
 #  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
 
    // Should already have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined.
@@ -23,12 +25,10 @@
             }}
 
 #else
-/* ---------------------------------------------------------- */
-/* Release version(s)                                         */
-/* ---------------------------------------------------------- */
+//-------------------------------
+//- Release version(s)
+//-------------------------------
 #  define DxDeviceCreationFlags 0
-
-   // Should already have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined.
 #  define DxCall(call,fail_msg) {   \
             HRESULT hr = call;      \
             if (hr != S_OK) {       \
