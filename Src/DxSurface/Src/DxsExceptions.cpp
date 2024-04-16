@@ -135,9 +135,7 @@ TString& WindowsException::Message() const
   stringstream ss;
 #endif
 
-  ss
-    << (m_isGraphicsException ? "Graphics" : "Windows") << " Exception:" << endl
-    << ExceptionMessageLinePrefix << m_sProvidedMessage << endl << endl;
+  ss << (m_isGraphicsException ? "Graphics" : "Windows") << " Exception:" << endl << endl;
 
   if (!m_isGraphicsException || m_isValidGraphicsHR)
   {
@@ -163,7 +161,10 @@ TString& WindowsException::Message() const
     LocalFree(winMessage);
   }
 
-  ss << ExceptionLocationAndVersion;
+  ss
+    << "Message:" << endl
+    << ExceptionMessageLinePrefix << m_sProvidedMessage << endl << endl
+    << ExceptionLocationAndVersion;
 
   m_sFinalMessage = ss.str();
   return m_sFinalMessage;
