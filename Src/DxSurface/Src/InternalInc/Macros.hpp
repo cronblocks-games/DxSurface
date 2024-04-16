@@ -32,7 +32,7 @@
 #  define DxCall(call,fail_msg) {   \
             HRESULT hr = call;      \
             if (hr != S_OK) {       \
-              DxsThrowGraphicsHr(fail_msg DxsT(". Switch to debug build with 'DxsGraphicsDebugEnabled' set to 'DxsTRUE' in the Settings to get detailed information."), hr); \
+              DxsThrowGraphicsHr(fail_msg DxsT(". Switch to debug build having 'DxsGraphicsDebugEnabled' set to 'DxsTRUE' in DxsSettings.hpp to get detailed information."), hr); \
             }}
 
 #endif
