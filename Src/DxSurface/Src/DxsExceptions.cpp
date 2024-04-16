@@ -162,7 +162,7 @@ TString& WindowsException::Message() const
   }
 
   ss
-    << "Message:" << endl
+    << "Message(s):" << endl
     << ExceptionMessageLinePrefix << m_sProvidedMessage << endl << endl
     << ExceptionLocationAndVersion;
 
