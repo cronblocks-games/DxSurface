@@ -39,11 +39,11 @@
 /* Default shaders                                            */
 /* ---------------------------------------------------------- */
 #if DxsDefaultVertexShaderEnabled == DxsTRUE
-#  define DefaultVertexShader ""
+#  define DefaultVertexShader DxsT("")
 #endif
 
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
-#  define DefaultPixelShader ""
+#  define DefaultPixelShader DxsT("")
 #endif
 
 
