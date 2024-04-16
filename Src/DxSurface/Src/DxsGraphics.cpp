@@ -188,6 +188,15 @@ void Graphics::SetPixelShaderFromCso(const TString& filename)
   m_pDeviceContext->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 }
 
+void Graphics::SetVertexShaderFromText(const TString& shaderText)
+{
+
+}
+void Graphics::SetPixelShaderFromText(const TString& shaderText)
+{
+
+}
+
 
 
 
