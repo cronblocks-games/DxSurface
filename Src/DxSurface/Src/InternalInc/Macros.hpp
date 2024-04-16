@@ -9,9 +9,9 @@
 
 
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-
-/* Debug version(s) */
-
+/* ---------------------------------------------------------- */
+/* Debug version(s)                                           */
+/* ---------------------------------------------------------- */
 #  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
 
    // Should have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined within
@@ -24,9 +24,9 @@
             }}
 
 #else
-
-/* Release version(s) */
-
+/* ---------------------------------------------------------- */
+/* Release version(s)                                         */
+/* ---------------------------------------------------------- */
 #  define DxDeviceCreationFlags 0
 
    // Should have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined within
