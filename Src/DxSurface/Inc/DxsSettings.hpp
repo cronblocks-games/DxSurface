@@ -41,6 +41,9 @@
 #    define DxsWindowsMessagesDebugEnabled   DxsFALSE
 #endif
 
+#define DxsDefaultVertexShaderEnabled        DxsTRUE
+#define DxsDefaultPixelShaderEnabled         DxsTRUE
+
 /* -------------------------------------------------------------------------- */
 /* Unicode / multibyte helper                                                 */
 /* -------------------------------------------------------------------------- */
