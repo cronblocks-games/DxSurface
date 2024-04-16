@@ -15,9 +15,9 @@
 //- Debug version(s)
 //-------------------------------
 #  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
-#  define DxCall(call,ndbg_fail_msg) {                                        \
+#  define DxCall(func_call,ndbg_fail_msg) {                                   \
             m_pDebugIface->Mark();                                            \
-            HRESULT hr = call;                                                \
+            HRESULT hr = func_call;                                           \
             if (hr != S_OK) {                                                 \
               DxsThrowGraphicsHr(m_pDebugIface->GetMessages().c_str(), hr);   \
             }} /* Should already have "DxgiDebugInterface *m_pDebugIface" defined in scope. */
@@ -27,9 +27,9 @@
 //- Release version(s)
 //-------------------------------
 #  define DxDeviceCreationFlags 0
-#  define DxCall(call,fail_msg) {   \
-            HRESULT hr = call;      \
-            if (hr != S_OK) {       \
+#  define DxCall(func_call,fail_msg) {   \
+            HRESULT hr = func_call;      \
+            if (hr != S_OK) {            \
               DxsThrowGraphicsHr(fail_msg DxsT(". Switch to debug build having 'DxsGraphicsDebugEnabled' set to 'DxsTRUE' in DxsSettings.hpp to get detailed information."), hr); \
             }}
 
