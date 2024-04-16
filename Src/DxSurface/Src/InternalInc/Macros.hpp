@@ -14,8 +14,7 @@
 /* ---------------------------------------------------------- */
 #  define DxDeviceCreationFlags D3D11_CREATE_DEVICE_DEBUG
 
-   // Should have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined within
-   // the invocation context.
+   // Should already have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined.
 #  define DxCall(call,ndbg_fail_msg) {                                        \
             m_pDebugIface->Mark();                                            \
             HRESULT hr = call;                                                \
@@ -29,8 +28,7 @@
 /* ---------------------------------------------------------- */
 #  define DxDeviceCreationFlags 0
 
-   // Should have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined within
-   // the invocation context.
+   // Should already have "PtrUnique<DxgiDebugInterface> m_pDebugIface" defined.
 #  define DxCall(call,fail_msg) {   \
             HRESULT hr = call;      \
             if (hr != S_OK) {       \
