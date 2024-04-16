@@ -37,5 +37,16 @@
 
 #endif
 
+/* ---------------------------------------------------------- */
+/* Default shaders                                            */
+/* ---------------------------------------------------------- */
+#if DxsDefaultVertexShaderEnabled == DxsTRUE
+#  define DefaultVertexShader ""
+#endif
+
+#if DxsDefaultPixelShaderEnabled == DxsTRUE
+#  define DefaultPixelShader ""
+#endif
+
 
 #endif
