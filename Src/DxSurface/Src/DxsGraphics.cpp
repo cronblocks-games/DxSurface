@@ -74,7 +74,12 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
 
 void Graphics::_SetDefaultPipeline()
 {
-
+#if DxsDefaultVertexShaderEnabled == DxsTRUE
+  SetVertexShaderFromText(DefaultVertexShader);
+#endif
+#if DxsDefaultPixelShaderEnabled == DxsTRUE
+  SetPixelShaderFromText(DefaultPixelShader);
+#endif
 }
 
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
