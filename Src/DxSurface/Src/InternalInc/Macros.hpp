@@ -5,7 +5,7 @@
 #include "DxsSettings.hpp"
 
 
-#define ExceptionMessageLinePrefix       "=>    "
+#define ExceptionMessageLinePrefix       "[+]    "
 
 /* ---------------------------------------------------------- */
 /* Graphics calls & debugging                                 */
