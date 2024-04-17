@@ -45,7 +45,7 @@
 #define DxsDefaultPixelShaderEnabled         DxsTRUE
 
 /* -------------------------------------------------------------------------- */
-/* Unicode / multibyte helpers                                                */
+/* Text helpers                                                               */
 /* -------------------------------------------------------------------------- */
 #ifndef DxsT
 #  ifdef DxsUnicodeBuild
@@ -55,8 +55,12 @@
 #  endif
 #endif
 
+#ifndef DxsEolT
+#  define DxsEolT DxsT("\r\n")
+#endif
+
 #ifndef DxsLineT
-#  define DxsLineT(str_literal) DxsT(str_literal) DxsT("\r\n")
+#  define DxsLineT(str_literal) DxsT(str_literal) DxsEolT
 #endif
 
 /* -------------------------------------------------------------------------- */
