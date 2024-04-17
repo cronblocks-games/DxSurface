@@ -39,28 +39,29 @@
 /* Default shaders                                            */
 /* ---------------------------------------------------------- */
 #if DxsDefaultVertexShaderEnabled == DxsTRUE
-#  define DefaultVertexShader \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n")
+#     define DefaultVertexShader \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n")
 #endif
 
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
-#  define DefaultPixelShader \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n") \
-            DxsT("\r\n")
+#     define DefaultPixelShader \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n") \
+               DxsT("\r\n")
 #endif
 
 
