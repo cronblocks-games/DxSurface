@@ -39,11 +39,28 @@
 /* Default shaders                                            */
 /* ---------------------------------------------------------- */
 #if DxsDefaultVertexShaderEnabled == DxsTRUE
-#  define DefaultVertexShader DxsT("")
+#  define DefaultVertexShader \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n")
 #endif
 
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
-#  define DefaultPixelShader DxsT("")
+#  define DefaultPixelShader \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n") \
+            DxsT("\r\n")
 #endif
 
 
