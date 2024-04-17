@@ -40,28 +40,28 @@
 /* ---------------------------------------------------------- */
 #if DxsDefaultVertexShaderEnabled == DxsTRUE
 #     define DefaultVertexShader \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n")
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("")
 #endif
 
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
 #     define DefaultPixelShader \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n") \
-               DxsT("\r\n")
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("") \
+               DxsLineT("")
 #endif
 
 
