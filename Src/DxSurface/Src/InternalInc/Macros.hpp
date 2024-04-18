@@ -40,15 +40,10 @@
 /* ---------------------------------------------------------- */
 #if DxsDefaultVertexShaderEnabled == DxsTRUE
 #     define DefaultVertexShader \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("")
+               DxsLineT("float4 main(float3 pos : Position) : SV_Position") \
+               DxsLineT("{") \
+               DxsLineT("  return float4(pos.x, pos.y, pos.z, 1.0);") \
+               DxsLineT("}")
 #endif
 
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
