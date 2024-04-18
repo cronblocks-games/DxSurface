@@ -26,6 +26,8 @@ namespace CB::DxSurface {
   using TCharPtr = char*;
 #endif
 
+  using String = std::string;
+
   template <typename T>
   using PtrShared = std::shared_ptr<T>;
   template <typename T>
