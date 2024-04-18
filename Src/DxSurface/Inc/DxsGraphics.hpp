@@ -34,8 +34,8 @@ namespace CB::DxSurface {
     void SetVertexShaderFromCso(const TString& filename);
     void SetPixelShaderFromCso(const TString& filename);
 
-    void SetVertexShaderFromText(const std::string& shaderText);
-    void SetPixelShaderFromText(const std::string& shaderText);
+    void SetVertexShaderFromText(const String& shaderText);
+    void SetPixelShaderFromText(const String& shaderText);
 
   private:
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
