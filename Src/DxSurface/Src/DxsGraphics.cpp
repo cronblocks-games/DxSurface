@@ -74,6 +74,9 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
 
 void Graphics::_SetDefaultPipeline()
 {
+  // Info on Pipeline:
+  //   https://learn.microsoft.com/en-us/windows-hardware/drivers/display/pipelines-for-direct3d-version-11
+
 #if DxsDefaultVertexShaderEnabled == DxsTRUE
   SetVertexShaderFromText(DefaultVertexShader);
 #endif
