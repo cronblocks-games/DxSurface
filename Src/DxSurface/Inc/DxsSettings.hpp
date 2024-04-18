@@ -53,8 +53,8 @@
 #  define DxsT(str_literal) str_literal
 #endif
 
-#define DxsEolT DxsT("\r\n")
-#define DxsLineT(str_literal) DxsT(str_literal) DxsEolT
+#define DxsEolT                       DxsT("\r\n")
+#define DxsLineT(str_literal)         DxsT(str_literal)  DxsEolT
 
 /* -------------------------------------------------------------------------- */
 /* Version                                                                    */
