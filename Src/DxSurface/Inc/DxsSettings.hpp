@@ -47,21 +47,14 @@
 /* -------------------------------------------------------------------------- */
 /* Text helpers                                                               */
 /* -------------------------------------------------------------------------- */
-#ifndef DxsT
-#  ifdef DxsUnicodeBuild
-#    define DxsT(str_literal) L##str_literal
-#  else
-#    define DxsT(str_literal) str_literal
-#  endif
+#ifdef DxsUnicodeBuild
+#  define DxsT(str_literal) L##str_literal
+#else
+#  define DxsT(str_literal) str_literal
 #endif
 
-#ifndef DxsEolT
-#  define DxsEolT DxsT("\r\n")
-#endif
-
-#ifndef DxsLineT
-#  define DxsLineT(str_literal) DxsT(str_literal) DxsEolT
-#endif
+#define DxsEolT DxsT("\r\n")
+#define DxsLineT(str_literal) DxsT(str_literal) DxsEolT
 
 /* -------------------------------------------------------------------------- */
 /* Version                                                                    */
