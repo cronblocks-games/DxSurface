@@ -14,6 +14,7 @@
 
 namespace CB::DxSurface {
 
+  using String = std::string;
 #ifdef DxsUnicodeBuild
   using TString = std::wstring;
   using TChar = wchar_t;
@@ -25,8 +26,6 @@ namespace CB::DxSurface {
   using TCCharPtr = const char*;
   using TCharPtr = char*;
 #endif
-
-  using String = std::string;
 
   template <typename T>
   using PtrShared = std::shared_ptr<T>;
