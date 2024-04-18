@@ -34,8 +34,8 @@ namespace CB::DxSurface {
     void SetVertexShaderFromCso(const TString& filename);
     void SetPixelShaderFromCso(const TString& filename);
 
-    void SetVertexShaderFromText(const String& shaderText);
-    void SetPixelShaderFromText(const String& shaderText);
+    void SetVertexShaderFromText(const String& shaderText, const String& entryPoint = "main");
+    void SetPixelShaderFromText(const String& shaderText, const String& entryPoint = "main");
 
   private:
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
@@ -66,6 +66,8 @@ namespace CB::DxSurface {
     void _UpdateFrameCount();
     //- Invoked from `ctor` - Setting-up a default pipeline
     void _SetDefaultPipeline();
+    //- Target types during shader compilation
+    String _GetShaderTargetType(DxShaderType);
 
   }; //- class Graphics
 

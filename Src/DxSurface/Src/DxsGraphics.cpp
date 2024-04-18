@@ -195,13 +195,91 @@ void Graphics::SetPixelShaderFromCso(const TString& filename)
   m_pDeviceContext->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 }
 
-void Graphics::SetVertexShaderFromText(const String& shaderText)
+// Provides Shader Target Type as specified at
+//   https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/specifying-compiler-targets
+// 
+String Graphics::_GetShaderTargetType(DxShaderType st)
 {
+  switch (st)
+  {
+  case DxShaderType::VertexShader:
+    switch (m_eFeatureLevel)
+    {
+      case DxFeatureLevel::_11_1:
+      case DxFeatureLevel::_11_0: return "vs_5_0";
+      case DxFeatureLevel::_10_1: return "vs_4_1";
+      case DxFeatureLevel::_10_0: return "vs_4_0";
+      case DxFeatureLevel::_9_3:  return "vs_4_0_level_9_3";
+      case DxFeatureLevel::_9_2:
+      case DxFeatureLevel::_9_1:  return "vs_4_0_level_9_1";
+    };
+    break;
 
+  case DxShaderType::PixelShader:
+    switch (m_eFeatureLevel)
+    {
+      case DxFeatureLevel::_11_1:
+      case DxFeatureLevel::_11_0: return "ps_5_0";
+      case DxFeatureLevel::_10_1: return "ps_4_1";
+      case DxFeatureLevel::_10_0: return "ps_4_0";
+      case DxFeatureLevel::_9_3:  return "ps_4_0_level_9_3";
+      case DxFeatureLevel::_9_2:
+      case DxFeatureLevel::_9_1:  return "ps_4_0_level_9_1";
+    };
+    break;
+  }
+
+  DxsThrowGraphics(DxsT("Shader target type is not defined against the given shader and feature level."));
 }
-void Graphics::SetPixelShaderFromText(const String& shaderText)
+void Graphics::SetVertexShaderFromText(const String& shaderText, const String& entryPoint)
 {
+  PtrCom<DxBlob> blob;
 
+  DxCall(D3DCompile(
+    shaderText.c_str(),  // pSrcData
+    shaderText.length(), // SrcDataSize
+    nullptr,             // LPCSTR pSourceName
+    nullptr,             // const D3D_SHADER_MACRO * pDefines
+    nullptr,             // ID3DInclude * pInclude
+    entryPoint.c_str(),  // pEntrypoint
+    _GetShaderTargetType(DxShaderType::VertexShader).c_str(), // pTarget
+    0,                   // Flags1
+    0,                   // Flags2
+    &blob,               // ID3DBlob **ppCode
+    nullptr              // ID3DBlob **ppErrorMsgs
+    ));
+
+  DxCall(
+    m_pDevice->CreateVertexShader(
+      blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pVertexShader),
+    DxsT("Cannot create Vertex Shader from the given text data"));
+
+  m_pDeviceContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
+}
+void Graphics::SetPixelShaderFromText(const String& shaderText, const String& entryPoint)
+{
+  PtrCom<DxBlob> blob;
+
+  DxCall(D3DCompile(
+    shaderText.c_str(),  // pSrcData
+    shaderText.length(), // SrcDataSize
+    nullptr,             // LPCSTR pSourceName
+    nullptr,             // const D3D_SHADER_MACRO * pDefines
+    nullptr,             // ID3DInclude * pInclude
+    entryPoint.c_str(),  // pEntrypoint
+    _GetShaderTargetType(DxShaderType::PixelShader).c_str(), // pTarget
+    0,                   // Flags1
+    0,                   // Flags2
+    &blob,               // ID3DBlob **ppCode
+    nullptr              // ID3DBlob **ppErrorMsgs
+  ));
+
+  DxCall(
+    m_pDevice->CreatePixelShader(
+      blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &m_pPixelShader),
+    DxsT("Cannot create Pixel Shader from the given text data"));
+
+  m_pDeviceContext->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 }
 
 
