@@ -60,6 +60,10 @@ namespace CB::DxSurface {
     _9_2  = D3D_FEATURE_LEVEL_9_2,
     _9_1  = D3D_FEATURE_LEVEL_9_1
   };
+  enum class DxShaderType
+  {
+    VertexShader, PixelShader
+  };
 
   using Thread = std::thread;
   using Mutex = std::mutex;
