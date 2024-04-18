@@ -80,6 +80,8 @@ void Graphics::_SetDefaultPipeline()
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
   SetPixelShaderFromText(DefaultPixelShader);
 #endif
+
+  m_pDeviceContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), nullptr);
 }
 
 void Graphics::SetClearColor(float clrR, float clrG, float clrB, float clrA)
