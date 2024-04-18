@@ -21,7 +21,7 @@ namespace CB::DxSurface {
   using TCCharPtr = const wchar_t*;
   using TCharPtr = wchar_t*;
 #else
-  using TString = std::string;
+  using TString = String;
   using TChar = char;
   using TCCharPtr = const char*;
   using TCharPtr = char*;
