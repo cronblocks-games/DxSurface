@@ -15,8 +15,10 @@
 namespace CB::DxSurface {
 
   using String = std::string;
+  using WString = std::wstring;
+
 #ifdef DxsUnicodeBuild
-  using TString = std::wstring;
+  using TString = WString;
   using TChar = wchar_t;
   using TCCharPtr = const wchar_t*;
   using TCharPtr = wchar_t*;
