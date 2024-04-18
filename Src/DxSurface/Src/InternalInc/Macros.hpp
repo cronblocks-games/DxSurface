@@ -48,15 +48,10 @@
 
 #if DxsDefaultPixelShaderEnabled == DxsTRUE
 #     define DefaultPixelShader \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("") \
-               DxsLineT("")
+               DxsLineT("float4 main() : SV_Target") \
+               DxsLineT("{") \
+               DxsLineT("  return float4(1.0, 1.0, 1.0, 1.0);") \
+               DxsLineT("}")
 #endif
 
 
