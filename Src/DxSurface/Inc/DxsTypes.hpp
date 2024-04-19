@@ -308,32 +308,10 @@ namespace CB::DxSurface {
     UNDEFINED_001 = 0x3A, UNDEFINED_002 = 0x3B, UNDEFINED_003 = 0x3C,      // 0x3A-0x40 - Undefined
     UNDEFINED_004 = 0x3D, UNDEFINED_005 = 0x3E, UNDEFINED_006 = 0x3F,      // 
     UNDEFINED_007 = 0x40,                                                  // 
-    A = 0x41,                       // 0x41 - A key
-    B = 0x42,                       // 0x42 - B key
-    C = 0x43,                       // 0x43 - C key
-    D = 0x44,                       // 0x44 - D key
-    E = 0x45,                       // 0x45 - E key
-    F = 0x46,                       // 0x46 - F key
-    G = 0x47,                       // 0x47 - G key
-    H = 0x48,                       // 0x48 - H key
-    I = 0x49,                       // 0x49 - I key
-    J = 0x4A,                       // 0x4A - J key
-    K = 0x4B,                       // 0x4B - K key
-    L = 0x4C,                       // 0x4C - L key
-    M = 0x4D,                       // 0x4D - M key
-    N = 0x4E,                       // 0x4E - N key
-    O = 0x4F,                       // 0x4F - O key
-    P = 0x50,                       // 0x50 - P key
-    Q = 0x51,                       // 0x51 - Q key
-    R = 0x52,                       // 0x52 - R key
-    S = 0x53,                       // 0x53 - S key
-    T = 0x54,                       // 0x54 - T key
-    U = 0x55,                       // 0x55 - U key
-    V = 0x56,                       // 0x56 - V key
-    W = 0x57,                       // 0x57 - W key
-    X = 0x58,                       // 0x58 - X key
-    Y = 0x59,                       // 0x59 - Y key
-    Z = 0x5A,                       // 0x5A - Z key
+    A = 0x41, B = 0x42, C = 0x43, D = 0x44, E = 0x45, F = 0x46, G = 0x47,  // 0x41~0x5A - A-Z keys
+    H = 0x48, I = 0x49, J = 0x4A, K = 0x4B, L = 0x4C, M = 0x4D, N = 0x4E,  // 
+    O = 0x4F, P = 0x50, Q = 0x51, R = 0x52, S = 0x53, T = 0x54, U = 0x55,  // 
+    V = 0x56, W = 0x57, X = 0x58, Y = 0x59, Z = 0x5A,                      // 
     WinLeft = VK_LWIN,              // 0x5B - Left Windows key
     WinRight = VK_RWIN,             // 0x5C - Right Windows key
     Applications = VK_APPS,         // 0x5D - Applications key
