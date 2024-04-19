@@ -163,8 +163,8 @@ void Graphics::SetVertexShaderFromCso(const TString& filename)
 {
   PtrCom<DxBlob> blob;
 
-  wstringstream ss;
-  ss << filename;
+  WStringStream ss;
+  ss << filename.c_str();
 
   DxCall(
     //- WARNING: Can be used in Windows Store apps but the apps can't be submitted to Windows Store
@@ -182,8 +182,8 @@ void Graphics::SetPixelShaderFromCso(const TString& filename)
 {
   PtrCom<DxBlob> blob;
 
-  wstringstream ss;
-  ss << filename;
+  WStringStream ss;
+  ss << filename.c_str();
 
   DxCall(
     //- WARNING: Can be used in Windows Store apps but the apps can't be submitted to Windows Store
