@@ -253,13 +253,11 @@ namespace CB::DxSurface {
     RESERVED_001 = 0x07,            // 0x07 - Reserved
     BackSpace = VK_BACK,            // 0x08 - BACKSPACE key
     Tab = VK_TAB,                   // 0x09 - TAB key
-    RESERVED_002 = 0x0A,            // 0x0A - Reserved
-    RESERVED_003 = 0x0B,            // 0x0B - Reserved
+    RESERVED_002 = 0x0A, RESERVED_003 = 0x0B,     // 0x0A,0x0B - Reserved
     Clear = VK_CLEAR,               // 0x0C - CLEAR key
     Enter = VK_RETURN,              // 0x0D - ENTER key
     Return = Enter,                 // 
-    UNASSIGNED_001 = 0x0E,          // 0x0E - Unassigned
-    UNASSIGNED_002 = 0x0F,          // 0x0F - Unassigned
+    UNASSIGNED_001 = 0x0E, UNASSIGNED_002 = 0x0F, // 0x0E,0x0F - Unassigned
     Shift = VK_SHIFT,               // 0x10 - SHIFT key
     Control = VK_CONTROL,           // 0x11 - CTRL key
     Ctrl = Control,                 // 
