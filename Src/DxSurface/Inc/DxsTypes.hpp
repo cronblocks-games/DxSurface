@@ -346,15 +346,9 @@ namespace CB::DxSurface {
     OEM_Specific_003 = 0x94,        // 
     OEM_Specific_004 = 0x95,        // 
     OEM_Specific_005 = 0x96,        // 
-    UNASSIGNED_003 = 0x97,          // 0x97-0x9F - Unassigned
-    UNASSIGNED_004 = 0x98,          // 
-    UNASSIGNED_005 = 0x99,          // 
-    UNASSIGNED_006 = 0x9A,          // 
-    UNASSIGNED_007 = 0x9B,          // 
-    UNASSIGNED_008 = 0x9C,          // 
-    UNASSIGNED_009 = 0x9D,          // 
-    UNASSIGNED_010 = 0x9E,          // 
-    UNASSIGNED_011 = 0x9F,          // 
+    UNASSIGNED_003 = 0x97, UNASSIGNED_004 = 0x98, UNASSIGNED_005 = 0x99,   // 0x97-0x9F - Unassigned
+    UNASSIGNED_006 = 0x9A, UNASSIGNED_007 = 0x9B, UNASSIGNED_008 = 0x9C,   // 
+    UNASSIGNED_009 = 0x9D, UNASSIGNED_010 = 0x9E, UNASSIGNED_011 = 0x9F,   // 
     ShiftLeft = VK_LSHIFT,          // 0xA0 - Left SHIFT key
     ShiftRight = VK_RSHIFT,         // 0xA1 - Right SHIFT key
     ControlLeft = VK_LCONTROL,      // 0xA2 - Left CONTROL key
