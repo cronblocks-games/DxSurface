@@ -9,9 +9,9 @@ using namespace std;
 
 
 static DxFeatureLevel prefFeatureLevels[] = {
-    DxFeatureLevel::_11_1,  DxFeatureLevel::_11_0,
-    DxFeatureLevel::_10_1,  DxFeatureLevel::_10_0,
-    DxFeatureLevel::_9_3,   DxFeatureLevel::_9_2,  DxFeatureLevel::_9_1
+  DxFeatureLevel::_11_1,  DxFeatureLevel::_11_0,
+  DxFeatureLevel::_10_1,  DxFeatureLevel::_10_0,
+  DxFeatureLevel::_9_3,   DxFeatureLevel::_9_2,  DxFeatureLevel::_9_1
 };
 static unsigned int prefFeatureLevelsCount = sizeof(prefFeatureLevels) / sizeof(DxFeatureLevel);
 
@@ -21,7 +21,7 @@ Graphics::Graphics(HWND hWnd, float clrR, float clrG, float clrB, float clrA)
   m_tpTotalT0(Time::now()), m_tpFpsT0(Time::now()), m_fFps(0.0f)
 {
 #if defined(DxsDebugBuild) && DxsGraphicsDebugEnabled == DxsTRUE
-    m_pDebugIface = make_unique<DxgiDebugInterface>();
+  m_pDebugIface = make_unique<DxgiDebugInterface>();
 #endif
 
   SetClearColor(clrR, clrG, clrB, clrA);
