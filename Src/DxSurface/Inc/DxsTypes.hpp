@@ -497,7 +497,7 @@ namespace CB::DxSurface {
     IME_Process = VK_PROCESSKEY,                     // 0xE5 - IME PROCESS key
     OEM_Specific_009 = 0xE6,                         // 0xE6 - OEM specific
     Packet = VK_PACKET,                              // 0xE7 - Used to pass Unicode characters as if they were keystrokes
-    UNASSIGNED_012 = 0xE8,                         // 0xE8 - Unassigned
+    UNASSIGNED_012 = 0xE8,                           // 0xE8 - Unassigned
     OEM_Specific_010 = 0xE9,                         // 0xE9-0xF5 - OEM specific
     OEM_Specific_011 = 0xEA,                         // 
     OEM_Specific_012 = 0xEB,                         // 
