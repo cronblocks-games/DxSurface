@@ -295,26 +295,16 @@ namespace CB::DxSurface {
     Delete = VK_DELETE,             // 0x2E - DEL key
     Del = Delete,                   // 
     Help = VK_HELP,                 // 0x2F - HELP key
-    Num0 = 0x30,                    // 0x30 - 0 key
-    Digit0 = Num0,                  // 
-    Num1 = 0x31,                    // 0x31 - 1 key
-    Digit1 = Num1,                  // 
-    Num2 = 0x32,                    // 0x32 - 2 key
-    Digit2 = Num2,                  // 
-    Num3 = 0x33,                    // 0x33 - 3 key
-    Digit3 = Num3,                  // 
-    Num4 = 0x34,                    // 0x34 - 4 key
-    Digit4 = Num4,                  // 
-    Num5 = 0x35,                    // 0x35 - 5 key
-    Digit5 = Num5,                  // 
-    Num6 = 0x36,                    // 0x36 - 6 key
-    Digit6 = Num6,                  // 
-    Num7 = 0x37,                    // 0x37 - 7 key
-    Digit7 = Num7,                  // 
-    Num8 = 0x38,                    // 0x38 - 8 key
-    Digit8 = Num8,                  // 
-    Num9 = 0x39,                    // 0x39 - 9 key
-    Digit9 = Num9,                  // 
+    Num0 = 0x30, Digit0 = Num0,     // 0x30 - 0 key
+    Num1 = 0x31, Digit1 = Num1,     // 0x31 - 1 key
+    Num2 = 0x32, Digit2 = Num2,     // 0x32 - 2 key
+    Num3 = 0x33, Digit3 = Num3,     // 0x33 - 3 key
+    Num4 = 0x34, Digit4 = Num4,     // 0x34 - 4 key
+    Num5 = 0x35, Digit5 = Num5,     // 0x35 - 5 key
+    Num6 = 0x36, Digit6 = Num6,     // 0x36 - 6 key
+    Num7 = 0x37, Digit7 = Num7,     // 0x37 - 7 key
+    Num8 = 0x38, Digit8 = Num8,     // 0x38 - 8 key
+    Num9 = 0x39, Digit9 = Num9,     // 0x39 - 9 key
     UNDEFINED_001 = 0x3A,           // 0x3A-0x40 - Undefined
     UNDEFINED_002 = 0x3B,           // 
     UNDEFINED_003 = 0x3C,           // 
