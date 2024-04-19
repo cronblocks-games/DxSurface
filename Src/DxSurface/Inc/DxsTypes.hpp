@@ -337,14 +337,8 @@ namespace CB::DxSurface {
     F13 = VK_F13, F14 = VK_F14, F15 = VK_F15, F16 = VK_F16,  // 0x7C~0x7F - F13~F16 keys
     F17 = VK_F17, F18 = VK_F18, F19 = VK_F19, F20 = VK_F20,  // 0x80~0x83 - F17~F20 keys
     F21 = VK_F21, F22 = VK_F22, F23 = VK_F23, F24 = VK_F24,  // 0x84~0x87 - F21~F24 keys
-    RESERVED_005 = 0x88,            // 0x88-0x8F - Reserved
-    RESERVED_006 = 0x89,            // 
-    RESERVED_007 = 0x8A,            // 
-    RESERVED_008 = 0x8B,            // 
-    RESERVED_009 = 0x8C,            // 
-    RESERVED_010 = 0x8D,            // 
-    RESERVED_011 = 0x8E,            // 
-    RESERVED_012 = 0x8F,            // 
+    RESERVED_005 = 0x88, RESERVED_006 = 0x89, RESERVED_007 = 0x8A, RESERVED_008 = 0x8B, // 0x88-0x8F - Reserved
+    RESERVED_009 = 0x8C, RESERVED_010 = 0x8D, RESERVED_011 = 0x8E, RESERVED_012 = 0x8F, // 
     NumLock = VK_NUMLOCK,           // 0x90 - NUM LOCK key
     ScrollLock = VK_SCROLL,         // 0x91 - SCROLL LOCK key
     OEM_Specific_001 = 0x92,        // 0x92-0x96 - OEM specific
