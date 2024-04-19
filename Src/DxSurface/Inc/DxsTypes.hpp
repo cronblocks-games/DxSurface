@@ -3,6 +3,7 @@
 
 #include <atomic>
 #include <string>
+#include <sstream>
 #include <mutex>
 #include <memory>
 #include <vector>
@@ -16,14 +17,18 @@ namespace CB::DxSurface {
 
   using String = std::string;
   using WString = std::wstring;
+  using StringStream = std::stringstream;
+  using WStringStream = std::wstringstream;
 
 #ifdef DxsUnicodeBuild
   using TString = WString;
+  using TStringStream = WStringStream;
   using TChar = wchar_t;
   using TCCharPtr = const wchar_t*;
   using TCharPtr = wchar_t*;
 #else
   using TString = String;
+  using TStringStream = StringStream;
   using TChar = char;
   using TCCharPtr = const char*;
   using TCharPtr = char*;
