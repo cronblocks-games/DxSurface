@@ -72,11 +72,7 @@ Exception& Exception::operator=(Exception&& o) noexcept
 
 TString& Exception::Message() const
 {
-#ifdef DxsUnicodeBuild
-  wstringstream ss;
-#else
-  stringstream ss;
-#endif
+  TStringStream ss;
 
   ss
     << "Exception:" << endl
@@ -129,11 +125,7 @@ WindowsException& WindowsException::operator=(WindowsException&& o) noexcept
 
 TString& WindowsException::Message() const
 {
-#ifdef DxsUnicodeBuild
-  wstringstream ss;
-#else
-  stringstream ss;
-#endif
+  TStringStream ss;
 
   ss << (m_isGraphicsException ? "Graphics" : "Windows") << " Exception:" << endl << endl;
 
