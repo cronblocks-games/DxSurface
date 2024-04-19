@@ -482,11 +482,7 @@ static KMap _keyCodesMap(
 
 void WinDebug::PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-#ifdef DxsUnicodeBuild
-	wstringstream ss, tmpss;
-#else
-	stringstream ss, tmpss;
-#endif
+  TStringStream ss, tmpss;
 
 	MMap::const_iterator i = _winMessagesMap.find(msg);
 
@@ -511,11 +507,7 @@ void WinDebug::PrintWindowsMessage(UINT msg, WPARAM wParam, LPARAM lParam)
 
 void WinDebug::PrintKeyStatus(KeyCode key, KeyStatus status)
 {
-#ifdef DxsUnicodeBuild
-	wstringstream ss;
-#else
-	stringstream ss;
-#endif
+  TStringStream ss;
 
 	KMap::const_iterator i = _keyCodesMap.find(key);
 
@@ -539,11 +531,7 @@ void WinDebug::PrintKeyStatus(KeyCode key, KeyStatus status)
 
 void WinDebug::PrintCharReceived(TChar ch)
 {
-#ifdef DxsUnicodeBuild
-  wstringstream ss;
-#else
-  stringstream ss;
-#endif
+  TStringStream ss;
 
   ss << "Keyboard: Char '" << ch << "'" << endl;
 
@@ -552,11 +540,7 @@ void WinDebug::PrintCharReceived(TChar ch)
 
 void WinDebug::PrintMouseClientPosition(POINT pt)
 {
-#ifdef DxsUnicodeBuild
-  wstringstream ss;
-#else
-  stringstream ss;
-#endif
+  TStringStream ss;
 
   ss << "Mouse: (Client - " << pt.x << ", " << pt.y << ")" << endl;
 
@@ -565,11 +549,7 @@ void WinDebug::PrintMouseClientPosition(POINT pt)
 
 void WinDebug::PrintMouseClientButtonStatus(MouseButton b, ButtonStatus s, POINT pt)
 {
-#ifdef DxsUnicodeBuild
-  wstringstream ss;
-#else
-  stringstream ss;
-#endif
+  TStringStream ss;
 
   ss << "Mouse: ";
 
@@ -597,11 +577,7 @@ void WinDebug::PrintMouseClientButtonStatus(MouseButton b, ButtonStatus s, POINT
 
 void WinDebug::PrintMouseWheelStatus(short delta, POINT pt)
 {
-#ifdef DxsUnicodeBuild
-  wstringstream ss;
-#else
-  stringstream ss;
-#endif
+  TStringStream ss;
 
   ss << "Mouse: Wheel " << delta << " (" << pt.x << ", " << pt.y << ")" << endl;
 
