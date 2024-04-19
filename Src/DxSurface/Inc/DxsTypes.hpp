@@ -317,16 +317,10 @@ namespace CB::DxSurface {
     Applications = VK_APPS,         // 0x5D - Applications key
     RESERVED_004 = 0x5E,            // 0x5E - Reserved
     Sleep = VK_SLEEP,               // 0x5F - Computer Sleep key
-    NumPad0 = VK_NUMPAD0,           // 0x60 - Numeric keypad 0 key
-    NumPad1 = VK_NUMPAD1,           // 0x61 - Numeric keypad 1 key
-    NumPad2 = VK_NUMPAD2,           // 0x62 - Numeric keypad 2 key
-    NumPad3 = VK_NUMPAD3,           // 0x63 - Numeric keypad 3 key
-    NumPad4 = VK_NUMPAD4,           // 0x64 - Numeric keypad 4 key
-    NumPad5 = VK_NUMPAD5,           // 0x65 - Numeric keypad 5 key
-    NumPad6 = VK_NUMPAD6,           // 0x66 - Numeric keypad 6 key
-    NumPad7 = VK_NUMPAD7,           // 0x67 - Numeric keypad 7 key
-    NumPad8 = VK_NUMPAD8,           // 0x68 - Numeric keypad 8 key
-    NumPad9 = VK_NUMPAD9,           // 0x69 - Numeric keypad 9 key
+    NumPad0 = VK_NUMPAD0, NumPad1 = VK_NUMPAD1, NumPad2 = VK_NUMPAD2,      // 0x60,0x61,0x62 - Numeric keypad 0,1,2 keys
+    NumPad3 = VK_NUMPAD3, NumPad4 = VK_NUMPAD4, NumPad5 = VK_NUMPAD5,      // 0x63,0x64,0x65 - Numeric keypad 3,4,5 keys
+    NumPad6 = VK_NUMPAD6, NumPad7 = VK_NUMPAD7, NumPad8 = VK_NUMPAD8,      // 0x66,0x67,0x68 - Numeric keypad 6,7,8 keys
+    NumPad9 = VK_NUMPAD9,                                                  // 0x69           - Numeric keypad 9 key
     Asterisk = VK_MULTIPLY,         // 0x6A - Multiply key
     Multiply = Asterisk,            // 
     Plus = VK_ADD,                  // 0x6B - Add key
