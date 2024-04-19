@@ -384,32 +384,13 @@ namespace CB::DxSurface {
     OEM_Period = VK_OEM_PERIOD,                      // 0xBE - For any country / region, the . key
     OEM_K2 = VK_OEM_2,                               // 0xBF - Used for miscellaneous characters; For the US standard keyboard  /?  key
     OEM_K3 = VK_OEM_3,                               // 0xC0 - Used for miscellaneous characters; For the US standard keyboard  `~  key
-    RESERVED_015 = 0xC1,                             // 0xC1-0xDA - Reserved
-    RESERVED_016 = 0xC2,                             // 
-    RESERVED_017 = 0xC3,                             // 
-    RESERVED_018 = 0xC4,                             // 
-    RESERVED_019 = 0xC5,                             // 
-    RESERVED_020 = 0xC6,                             // 
-    RESERVED_021 = 0xC7,                             // 
-    RESERVED_022 = 0xC8,                             // 
-    RESERVED_023 = 0xC9,                             // 
-    RESERVED_024 = 0xCA,                             // 
-    RESERVED_025 = 0xCB,                             // 
-    RESERVED_026 = 0xCC,                             // 
-    RESERVED_027 = 0xCD,                             // 
-    RESERVED_028 = 0xCE,                             // 
-    RESERVED_029 = 0xCF,                             // 
-    RESERVED_030 = 0xD0,                             // 
-    RESERVED_031 = 0xD1,                             // 
-    RESERVED_032 = 0xD2,                             // 
-    RESERVED_033 = 0xD3,                             // 
-    RESERVED_034 = 0xD4,                             // 
-    RESERVED_035 = 0xD5,                             // 
-    RESERVED_036 = 0xD6,                             // 
-    RESERVED_037 = 0xD7,                             // 
-    RESERVED_038 = 0xD8,                             // 
-    RESERVED_039 = 0xD9,                             // 
-    RESERVED_040 = 0xDA,                             // 
+    RESERVED_015 = 0xC1, RESERVED_016 = 0xC2, RESERVED_017 = 0xC3, RESERVED_018 = 0xC4, // 0xC1-0xDA - Reserved
+    RESERVED_019 = 0xC5, RESERVED_020 = 0xC6, RESERVED_021 = 0xC7, RESERVED_022 = 0xC8, // 
+    RESERVED_023 = 0xC9, RESERVED_024 = 0xCA, RESERVED_025 = 0xCB, RESERVED_026 = 0xCC, // 
+    RESERVED_027 = 0xCD, RESERVED_028 = 0xCE, RESERVED_029 = 0xCF, RESERVED_030 = 0xD0, // 
+    RESERVED_031 = 0xD1, RESERVED_032 = 0xD2, RESERVED_033 = 0xD3, RESERVED_034 = 0xD4, // 
+    RESERVED_035 = 0xD5, RESERVED_036 = 0xD6, RESERVED_037 = 0xD7, RESERVED_038 = 0xD8, // 
+    RESERVED_039 = 0xD9, RESERVED_040 = 0xDA,                                           // 
     OEM_K4 = VK_OEM_4,                               // 0xDB - Used for miscellaneous characters; For the US standard keyboard  [{   key
     OEM_K5 = VK_OEM_5,                               // 0xDC - Used for miscellaneous characters; For the US standard keyboard  \\|  key
     OEM_K6 = VK_OEM_6,                               // 0xDD - Used for miscellaneous characters; For the US standard keyboard  ]}   key
