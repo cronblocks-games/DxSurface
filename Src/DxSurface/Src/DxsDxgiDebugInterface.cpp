@@ -43,11 +43,7 @@ TString DxgiDebugInterface::GetMessages() const
 {
 	if (m_pInfoQueue)
 	{
-#ifdef DxsUnicodeBuild
-		wstringstream ss;
-#else
-		stringstream ss;
-#endif
+		TStringStream ss;
 
 		HRESULT hr = 0;
 		SIZE_T msgLen = 0;
