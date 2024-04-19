@@ -331,30 +331,12 @@ namespace CB::DxSurface {
     DecimalPoint = VK_DECIMAL,      // 0x6E - Decimal key
     ForwardSlash = VK_DIVIDE,       // 0x6F - Divide key
     Divide = ForwardSlash,          // 
-    F1 = VK_F1,                     // 0x70 - F1 key
-    F2 = VK_F2,                     // 0x71 - F2 key
-    F3 = VK_F3,                     // 0x72 - F3 key
-    F4 = VK_F4,                     // 0x73 - F4 key
-    F5 = VK_F5,                     // 0x74 - F5 key
-    F6 = VK_F6,                     // 0x75 - F6 key
-    F7 = VK_F7,                     // 0x76 - F7 key
-    F8 = VK_F8,                     // 0x77 - F8 key
-    F9 = VK_F9,                     // 0x78 - F9 key
-    F10 = VK_F10,                   // 0x79 - F10 key
-    F11 = VK_F11,                   // 0x7A - F11 key
-    F12 = VK_F12,                   // 0x7B - F12 key
-    F13 = VK_F13,                   // 0x7C - F13 key
-    F14 = VK_F14,                   // 0x7D - F14 key
-    F15 = VK_F15,                   // 0x7E - F15 key
-    F16 = VK_F16,                   // 0x7F - F16 key
-    F17 = VK_F17,                   // 0x80 - F17 key
-    F18 = VK_F18,                   // 0x81 - F18 key
-    F19 = VK_F19,                   // 0x82 - F19 key
-    F20 = VK_F20,                   // 0x83 - F20 key
-    F21 = VK_F21,                   // 0x84 - F21 key
-    F22 = VK_F22,                   // 0x85 - F22 key
-    F23 = VK_F23,                   // 0x86 - F23 key
-    F24 = VK_F24,                   // 0x87 - F24 key
+    F1  = VK_F1,  F2  = VK_F2,  F3  = VK_F3,  F4  = VK_F4,   // 0x70~0x73 - F1~F4 keys
+    F5  = VK_F5,  F6  = VK_F6,  F7  = VK_F7,  F8  = VK_F8,   // 0x74~0x77 - F5~F8 keys
+    F9  = VK_F9,  F10 = VK_F10, F11 = VK_F11, F12 = VK_F12,  // 0x78~0x7B - F9~F12 keys
+    F13 = VK_F13, F14 = VK_F14, F15 = VK_F15, F16 = VK_F16,  // 0x7C~0x7F - F13~F16 keys
+    F17 = VK_F17, F18 = VK_F18, F19 = VK_F19, F20 = VK_F20,  // 0x80~0x83 - F17~F20 keys
+    F21 = VK_F21, F22 = VK_F22, F23 = VK_F23, F24 = VK_F24,  // 0x84~0x87 - F21~F24 keys
     RESERVED_005 = 0x88,            // 0x88-0x8F - Reserved
     RESERVED_006 = 0x89,            // 
     RESERVED_007 = 0x8A,            // 
