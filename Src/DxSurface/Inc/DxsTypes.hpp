@@ -305,13 +305,9 @@ namespace CB::DxSurface {
     Num7 = 0x37, Digit7 = Num7,     // 0x37 - 7 key
     Num8 = 0x38, Digit8 = Num8,     // 0x38 - 8 key
     Num9 = 0x39, Digit9 = Num9,     // 0x39 - 9 key
-    UNDEFINED_001 = 0x3A,           // 0x3A-0x40 - Undefined
-    UNDEFINED_002 = 0x3B,           // 
-    UNDEFINED_003 = 0x3C,           // 
-    UNDEFINED_004 = 0x3D,           // 
-    UNDEFINED_005 = 0x3E,           // 
-    UNDEFINED_006 = 0x3F,           // 
-    UNDEFINED_007 = 0x40,           // 
+    UNDEFINED_001 = 0x3A, UNDEFINED_002 = 0x3B, UNDEFINED_003 = 0x3C,          // 0x3A-0x40 - Undefined
+    UNDEFINED_004 = 0x3D, UNDEFINED_005 = 0x3E, UNDEFINED_006 = 0x3F,          // 
+    UNDEFINED_007 = 0x40,                                                      // 
     A = 0x41,                       // 0x41 - A key
     B = 0x42,                       // 0x42 - B key
     C = 0x43,                       // 0x43 - C key
