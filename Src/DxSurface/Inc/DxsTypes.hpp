@@ -21,18 +21,17 @@ namespace CB::DxSurface {
   using WStringStream = std::wstringstream;
 
 #ifdef DxsUnicodeBuild
+  using TChar = wchar_t;
   using TString = WString;
   using TStringStream = WStringStream;
-  using TChar = wchar_t;
-  using TCCharPtr = const wchar_t*;
-  using TCharPtr = wchar_t*;
 #else
+  using TChar = char;
   using TString = String;
   using TStringStream = StringStream;
-  using TChar = char;
-  using TCCharPtr = const char*;
-  using TCharPtr = char*;
 #endif
+
+  using TCCharPtr = const TChar*;
+  using TCharPtr = TChar*;
 
   template <typename T>
   using PtrShared = std::shared_ptr<T>;
