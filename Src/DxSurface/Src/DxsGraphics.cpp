@@ -250,7 +250,7 @@ void Graphics::SetVertexShaderFromText(const String& shaderText, const String& e
     0,                   // Flags2
     &blob,               // ID3DBlob **ppCode
     nullptr              // ID3DBlob **ppErrorMsgs
-    ));
+    ), DxsT("Cannot compile Vertex Shader from the given text data"));
 
   DxCall(
     m_pDevice->CreateVertexShader(
@@ -275,7 +275,7 @@ void Graphics::SetPixelShaderFromText(const String& shaderText, const String& en
     0,                   // Flags2
     &blob,               // ID3DBlob **ppCode
     nullptr              // ID3DBlob **ppErrorMsgs
-  ));
+    ), DxsT("Cannot compile Pixel Shader from the given text data"));
 
   DxCall(
     m_pDevice->CreatePixelShader(
