@@ -26,10 +26,13 @@
    //- Release version(s)
    //-----------------------------
 #  define DxDeviceCreationFlags 0
-#  define DxCall(func_call,fail_msg) {   \
-            HRESULT hr = func_call;      \
-            if (hr != S_OK) {            \
-              DxsThrowGraphicsHr(fail_msg DxsT(". Switch to debug build having 'DxsGraphicsDebugEnabled' set to 'DxsTRUE' in DxsSettings.hpp to get detailed information."), hr); \
+#  define DxCall(func_call,fail_msg) {     \
+            HRESULT hr = func_call;        \
+            if (hr != S_OK) {              \
+              DxsThrowGraphicsHr(fail_msg  \
+                DxsT(". Switch to debug build with 'DxsGraphicsDebugEnabled' flag set to 'DxsTRUE'") \
+                DxsT(" in the DxsSettings.hpp to get a detailed information.") \
+                , hr);                     \
             }}
 #endif
 
