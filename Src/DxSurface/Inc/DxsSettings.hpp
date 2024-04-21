@@ -53,26 +53,26 @@
 #  define DxsT(str_literal) str_literal
 #endif
 
-#define DxsEol                        "\r\n"
-#define DxsEolT                       DxsT(DxsEol)
-#define DxsLine(str_literal)          str_literal  DxsEol
-#define DxsLineT(str_literal)         DxsT(str_literal)  DxsEolT
+#define DxsEol                               "\r\n"
+#define DxsEolT                              DxsT(DxsEol)
+#define DxsLine(str_literal)                 str_literal  DxsEol
+#define DxsLineT(str_literal)                DxsT(str_literal)  DxsEolT
 
 /* -------------------------------------------------------------------------- */
 /* Version                                                                    */
 /* -------------------------------------------------------------------------- */
-#define DxsVersion                        0x00'00'00'00ul
-#define DxsVersionString                  DxsT("0.0.0.0" __DxsVersionSuffix)
-#define DxsVersionReleaseDateString       DxsT("FEB/21/2024")
+#define DxsVersion                           0x00'00'00'00ul
+#define DxsVersionString                     DxsT("0.0.0.0" __DxsVersionSuffix)
+#define DxsVersionReleaseDateString          DxsT("FEB/21/2024")
 
 /* -------------------------------------------------------------------------- */
 /* Timing                                                                     */
 /* -------------------------------------------------------------------------- */
-#define DxsDefaultThreadRefreshRateHz     30
-#define DxsTimingModelSleep               0 /* Allow sleep when execution iteration completes earlier than time limit */
-#define DxsTimingModelNoSleep             1 /* Run iteration loops as fast as underlying processor allows */
+#define DxsDefaultThreadRefreshRateHz        30
+#define DxsTimingModelSleep                  0   /* Allow sleep when execution iteration completes earlier than time limit */
+#define DxsTimingModelNoSleep                1   /* Run iteration loops as fast as underlying processor allows */
 #ifndef DxsTimingModel
-#  define DxsTimingModel  DxsTimingModelSleep
+#  define DxsTimingModel                     DxsTimingModelSleep
 #endif
 
 
