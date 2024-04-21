@@ -16,7 +16,7 @@
 #    undef  DxsReleaseBuild
 #endif
 
-#if defined(_UNICODE) || defined(UNICODE)
+#if defined(UNICODE) || defined(_UNICODE)
      /* Unicode version */
 #    define DxsUnicodeBuild
 #    undef  DxsMultiByteBuild
