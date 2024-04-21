@@ -7,25 +7,25 @@
 /* Build configuration                                                        */
 /* -------------------------------------------------------------------------- */
 #if defined(NDEBUG) || defined(_NDEBUG)
-     /* Release version */
-#    define DxsReleaseBuild
-#    undef  DxsDebugBuild
+   /* Release version */
+#  define DxsReleaseBuild
+#  undef  DxsDebugBuild
 #else
-     /* Debug version */
-#    define DxsDebugBuild
-#    undef  DxsReleaseBuild
+   /* Debug version */
+#  define DxsDebugBuild
+#  undef  DxsReleaseBuild
 #endif
 
 #if defined(UNICODE) || defined(_UNICODE)
-     /* Unicode version */
-#    define DxsUnicodeBuild
-#    undef  DxsMultiByteBuild
-#    define __DxsVersionSuffix  "_UC"
+   /* Unicode version */
+#  define DxsUnicodeBuild
+#  undef  DxsMultiByteBuild
+#  define __DxsVersionSuffix  "_UC"
 #else
-     /* Multi-byte version */
-#    define DxsMultiByteBuild
-#    undef  DxsUnicodeBuild
-#    define __DxsVersionSuffix  "_MB"
+   /* Multi-byte version */
+#  define DxsMultiByteBuild
+#  undef  DxsUnicodeBuild
+#  define __DxsVersionSuffix  "_MB"
 #endif
 
 /* -------------------------------------------------------------------------- */
@@ -35,10 +35,10 @@
 #define DxsFALSE    0
 
 #ifdef DxsDebugBuild
-#    define DxsGraphicsDebugEnabled          DxsTRUE
-#    define DxsKeyboardDebugEnabled          DxsFALSE
-#    define DxsMouseDebugEnabled             DxsFALSE
-#    define DxsWindowsMessagesDebugEnabled   DxsFALSE
+#  define DxsGraphicsDebugEnabled            DxsTRUE
+#  define DxsKeyboardDebugEnabled            DxsFALSE
+#  define DxsMouseDebugEnabled               DxsFALSE
+#  define DxsWindowsMessagesDebugEnabled     DxsFALSE
 #endif
 
 #define DxsDefaultVertexShaderEnabled        DxsTRUE
