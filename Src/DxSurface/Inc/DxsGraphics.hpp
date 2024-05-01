@@ -64,9 +64,9 @@ namespace CB::DxSurface {
     /* ---------------------------------------------------------------- */
     //- Invoked from `StartFrame` - Updating frames' count and FPS
     void _UpdateFrameCount();
-    //- Invoked from `ctor` - Setting-up a default pipeline
+    //- Invoked from `ctor` - Setting-up the default pipeline
     void _SetDefaultPipeline();
-    //- Target types during shader compilation
+    //- Providing target types during shader compilation
     String _GetShaderTargetType(DxShaderType);
 
   }; //- class Graphics
